@@ -1,6 +1,8 @@
 #!/bin/bash
 # fuzion/aimtux
 
+
+# ghetto but did i ask
 if [ $1 = "u" ] || [ $2 = "u" ] ; then
   bash uninject.sh
 fi

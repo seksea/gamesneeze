@@ -8,11 +8,9 @@ static constexpr auto relativeToAbsolute(std::uintptr_t address) noexcept
 
 int Hooks::PollEvent(SDL_Event* event) {
     const auto result = pollEvent(event);
-
     if (Menu::initialised) {
         Menu::onPollEvent(event, result);
     }
-
     return result;
 }
 
@@ -21,6 +19,7 @@ void Hooks::SwapWindow(SDL_Window* window) {
     swapWindow(window);
 }
 
+/* Initialise SDL hooks */
 bool Hooks::initSDL() {
     Log::log(" initialising SDL Hooks...");
     const auto libSDL = dlopen("libSDL2-2.0.so.0", RTLD_LAZY | RTLD_NOLOAD);
@@ -52,11 +51,12 @@ bool Hooks::initSDL() {
     return true;
 }
 
+/* Unload SDL hooks */
 bool Hooks::unloadSDL() {
     Log::log("unloading OpenGL Hooks...");
-    *reinterpret_cast<decltype(pollEvent)*>(swapWindowAddr) = pollEvent;
     *reinterpret_cast<decltype(swapWindow)*>(swapWindowAddr) = swapWindow;
-    if (*reinterpret_cast<decltype(swapWindow)*>(swapWindowAddr)!=swapWindow || *reinterpret_cast<decltype(pollEvent)*>(swapWindowAddr)!=pollEvent) {
+    *reinterpret_cast<decltype(pollEvent)*>(pollEventAddr) = pollEvent;
+    if (*reinterpret_cast<decltype(swapWindow)*>(swapWindowAddr)!=swapWindow || *reinterpret_cast<decltype(pollEvent)*>(pollEventAddr)!=pollEvent) {
         Log::err("Failed to unload SDL hooks!");
         return false;
     }
