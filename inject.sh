@@ -9,6 +9,10 @@ if [ $1 = "b" ] || [ $2 = "b" ] ; then
   bash build.sh
 fi
 
+if [ $1 = "bd" ] || [ $2 = "bd" ] ; then
+  bash build.sh d
+fi
+
 echo "injecting"
 
 csgo_pid=$(pidof csgo_linux64)
