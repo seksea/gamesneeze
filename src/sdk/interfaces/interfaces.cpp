@@ -1,15 +1,15 @@
 #include "../../includes.hpp"
 
-bool interfaces::init() {
-    log::log("initialising interfaces...");
+bool Interfaces::init() {
+    Log::log("initialising interfaces...");
 
-    log::log("initialised interfaces...");
+    Log::log("initialised interfaces...");
     return true;
 }
 
-bool interfaces::unload() {
-    log::log("unloading interfaces...");
+bool Interfaces::unload() {
+    Log::log("unloading interfaces...");
 
-    log::log("unloaded interfaces!");
+    Log::log("unloaded interfaces!");
     return true;
 }

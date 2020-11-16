@@ -1,15 +1,15 @@
 #include "../../includes.hpp"
 
-bool hooks::init() {
-    log::log("initialising hooks...");
-
-    log::log("initialised hooks...");
+bool Hooks::init() {
+    Log::log("initialising hooks...");
+    initSDL();
+    Log::log("initialised hooks...");
     return true;
 }
 
-bool hooks::unload() {
-    log::log("unloading hooks...");
-
-    log::log("unloaded hooks!");
+bool Hooks::unload() {
+    Log::log("unloading hooks...");
+    unloadSDL();
+    Log::log("unloaded hooks!");
     return true;
 }

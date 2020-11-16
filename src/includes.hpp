@@ -1,6 +1,10 @@
+#pragma once
+
 #include <iostream>
 #include <thread>
 #include <string>
+#include <dlfcn.h>
+#include <SDL2/SDL.h>
 
 #include "utils/utils.hpp"
 #include "sdk/interfaces/interfaces.hpp"

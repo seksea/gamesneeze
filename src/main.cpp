@@ -13,19 +13,36 @@ Powered by...
  \_____/_|_| |_|\__,_/_/\_\      |_.__/ \__,_|___/\___|
 ========================================================
 )";
-    log::log("initialising...");
+    Log::log("initialising...");
     
     /* Initialise interfaces */
-    if (!interfaces::init()) {
-        log::err("Failed to initialise interfaces!");
+    if (!Interfaces::init()) {
+        Log::err("Failed to initialise interfaces!");
     }
 
     /* Initialise hooks */
-    if (!hooks::init()) {
-        log::err("Failed to initialise hooks!");
+    if (!Hooks::init()) {
+        Log::err("Failed to initialise hooks!");
     }
 
-    log::log("initialised!");
+    Log::log("initialised!");
+}
+
+/* Called on uninject */
+void __attribute__((destructor)) Unload() {
+    Log::log("uninjecting...");
+
+    /* Unload hooks */
+    if (!Hooks::unload()) {
+        Log::err("Failed to unload hooks!");
+    }
+
+    /* Unload interfaces */
+    if (!Interfaces::unload()) {
+        Log::err("Failed to unload interfaces!");
+    }
+
+    Log::log("uninjected!\n");
 }
 
 /* Called when injected */
@@ -33,21 +50,4 @@ void __attribute__((constructor)) Main() {
 	std::thread mainThread(MainThread);
     
 	mainThread.detach();
-}
-
-/* Called on uninject */
-void __attribute__((destructor)) Unload() {
-    log::log("uninjecting...");
-
-    /* Unload hooks */
-    if (!hooks::unload()) {
-        log::err("Failed to unload hooks!");
-    }
-
-    /* Unload interfaces */
-    if (!interfaces::unload()) {
-        log::err("Failed to unload interfaces!");
-    }
-
-    log::log("uninjected!\n");
 }
