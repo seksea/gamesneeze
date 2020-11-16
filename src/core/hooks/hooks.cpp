@@ -1,5 +1,4 @@
 #include "../../includes.hpp"
-#include "subhook/subhook.h"
 
 bool hooks::init() {
     log::log("initialising hooks...");
