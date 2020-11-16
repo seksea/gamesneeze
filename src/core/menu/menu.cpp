@@ -5,19 +5,24 @@
 #include "imgui/imgui_impl_sdl.h"
 #include "imgui/imgui_impl_opengl3.h"
 
+void Menu::onPollEvent(SDL_Event* event, const int result) {
+    if (result && ImGui_ImplSDL2_ProcessEvent(event) && Menu::open) {
+        event->type = 0;
+    }
+}
+
 void Menu::onSwapWindow(SDL_Window* window) {
-    static bool init = false;
-    if (!init) {
+    if (!initialised) {
         gl3wInit();
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
         ImGui::StyleColorsDark();
         ImGui_ImplOpenGL3_Init("#version 100");
-        init = true;
+        initialised = true;
     }
 
     ImGui_ImplOpenGL3_NewFrame();
-    
+
     ImGuiIO& io = ImGui::GetIO();
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
