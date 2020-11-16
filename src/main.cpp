@@ -2,7 +2,8 @@
 
 /* Thread to initialise everything in */
 void MainThread() {
-    std::cout << R"(
+    try {
+        std::cout << R"(
 
 Powered by...
   _     _                         _                    
@@ -13,19 +14,23 @@ Powered by...
  \_____/_|_| |_|\__,_/_/\_\      |_.__/ \__,_|___/\___|
 ========================================================
 )";
-    Log::log("initialising...");
-    
-    /* Initialise interfaces */
-    if (!Interfaces::init()) {
-        Log::err("Failed to initialise interfaces!");
-    }
+        Log::log("initialising...");
+        
+        /* Initialise interfaces */
+        if (!Interfaces::init()) {
+            Log::err("Failed to initialise interfaces!");
+        }
 
-    /* Initialise hooks */
-    if (!Hooks::init()) {
-        Log::err("Failed to initialise hooks!");
-    }
+        /* Initialise hooks */
+        if (!Hooks::init()) {
+            Log::err("Failed to initialise hooks!");
+        }
 
-    Log::log("initialised!");
+        Log::log("initialised!");
+    }
+    catch(const std::exception& e) {
+        Log::err(e.what());
+    }
 }
 
 /* Called on uninject */
