@@ -1,6 +1,22 @@
-#include <iostream>
+#include "includes.hpp"
 
-void __attribute__((constructor)) DllEntryPoint()
-{
-    std::cout << "Injected!\n";
+/* Thread to initialise everything in */
+void MainThread() {
+    std::cout << "Initialising...\n";
+
+    std::cout << "Initialised!\n";
+}
+
+/* Called when injected */
+void __attribute__((constructor)) Main() {
+	std::thread mainThread(MainThread);
+    
+	mainThread.detach();
+}
+
+/* Called on uninject */
+void __attribute__((destructor)) Unload() {
+    std::cout << "Uninjecting...\n";
+
+    std::cout << "Uninjected!\n\n";
 }
