@@ -1,4 +1,4 @@
-namespace hooks {
+namespace interfaces {
     bool init();
     bool unload();
 }
