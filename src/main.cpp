@@ -15,10 +15,12 @@ Powered by...
 )";
     log::log("initialising...");
     
+    /* Initialise interfaces */
     if (!interfaces::init()) {
         log::err("Failed to initialise interfaces!");
     }
 
+    /* Initialise hooks */
     if (!hooks::init()) {
         log::err("Failed to initialise hooks!");
     }
@@ -37,8 +39,14 @@ void __attribute__((constructor)) Main() {
 void __attribute__((destructor)) Unload() {
     log::log("uninjecting...");
 
+    /* Unload hooks */
     if (!hooks::unload()) {
         log::err("Failed to unload hooks!");
+    }
+
+    /* Unload interfaces */
+    if (!interfaces::unload()) {
+        log::err("Failed to unload interfaces!");
     }
 
     log::log("uninjected!\n");
