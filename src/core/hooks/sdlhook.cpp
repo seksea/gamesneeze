@@ -21,26 +21,44 @@ void Hooks::SwapWindow(SDL_Window* window) {
     swapWindow(window);
 }
 
-void Hooks::initSDL() {
+bool Hooks::initSDL() {
     Log::log(" initialising SDL Hooks...");
     const auto libSDL = dlopen("libSDL2-2.0.so.0", RTLD_LAZY | RTLD_NOLOAD);
 
     swapWindowAddr = relativeToAbsolute<uintptr_t>(uintptr_t(dlsym(libSDL, "SDL_GL_SwapWindow")) + 3);
-    swapWindow = *reinterpret_cast<decltype(swapWindow)*>(swapWindowAddr);
-    *reinterpret_cast<decltype(SwapWindow)**>(swapWindowAddr) = SwapWindow;
+    if (swapWindowAddr) {
+        swapWindow = *reinterpret_cast<decltype(swapWindow)*>(swapWindowAddr);
+        *reinterpret_cast<decltype(SwapWindow)**>(swapWindowAddr) = SwapWindow;
+    }
+    else {
+        Log::err("Failed to initialise SwapWindow hook!");
+        return false;
+    }
 
-    Log::log(std::string("  swapwindow >> ") + std::to_string(swapWindowAddr));
+    Log::log(std::string("  swapwindow      | ") + std::to_string(swapWindowAddr));
 
     pollEventAddr = relativeToAbsolute<uintptr_t>(uintptr_t(dlsym(libSDL, "SDL_PollEvent")) + 3);
-    pollEvent = *reinterpret_cast<decltype(pollEvent)*>(pollEventAddr);
-    *reinterpret_cast<decltype(PollEvent)**>(pollEventAddr) = PollEvent;
+    if (pollEventAddr) {
+        pollEvent = *reinterpret_cast<decltype(pollEvent)*>(pollEventAddr);
+        *reinterpret_cast<decltype(PollEvent)**>(pollEventAddr) = PollEvent;
+    }
+    else {
+        Log::err("Failed to initialise PollEvent hook!");
+        return false;
+    }
 
-    Log::log(std::string("  pollevent >> ") + std::to_string(pollEventAddr));
+    Log::log(std::string("  pollevent       | ") + std::to_string(pollEventAddr));
     Log::log(" initialised SDL Hooks!");
+    return true;
 }
 
-void Hooks::unloadSDL() {
+bool Hooks::unloadSDL() {
     Log::log("unloading OpenGL Hooks...");
     *reinterpret_cast<decltype(pollEvent)*>(swapWindowAddr) = pollEvent;
     *reinterpret_cast<decltype(swapWindow)*>(swapWindowAddr) = swapWindow;
+    if (*reinterpret_cast<decltype(swapWindow)*>(swapWindowAddr)!=swapWindow || *reinterpret_cast<decltype(pollEvent)*>(swapWindowAddr)!=pollEvent) {
+        Log::err("Failed to unload SDL hooks!");
+        return false;
+    }
+    return true;
 }

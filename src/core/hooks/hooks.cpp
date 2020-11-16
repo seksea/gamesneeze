@@ -2,14 +2,22 @@
 
 bool Hooks::init() {
     Log::log("initialising hooks...");
-    initSDL();
+    if (!initSDL()) {
+        Log::err("Failed to initialise SDL hooks!");
+        return false;
+    }
     Log::log("initialised hooks...");
     return true;
 }
 
 bool Hooks::unload() {
     Log::log("unloading hooks...");
-    unloadSDL();
+
+    if (!unloadSDL()) {
+        Log::err("Failed to unload SDL hooks!");
+        return false;
+    }
+    
     Log::log("unloaded hooks!");
     return true;
 }
