@@ -1,3 +1,6 @@
+#!/bin/bash
+# fuzion/aimtux
+
 echo "uninjecting"
 
 csgo_pid=$(pidof csgo_linux64)

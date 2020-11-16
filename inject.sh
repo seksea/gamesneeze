@@ -1,3 +1,4 @@
+#!/bin/bash
 # fuzion/aimtux
 
 if [ $1 = "u" ] || [ $2 = "u" ] ; then
