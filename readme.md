@@ -27,3 +27,6 @@ sudo ./build.sh
 - [ ] Game Interfaces
 - [ ] Game Classes
 - [ ] Game Hooks
+
+![Current Menu](/res/currentMenu.png)
+![Console Output](/res/consoleOutput.png)
