@@ -1,4 +1,10 @@
-#!/bin/sh
+#!/bin/bash
+# gdb injector (inspired by fuzion's)
+
+bash uninject.sh
+
+echo "======================="
+echo "building..."
 
 mkdir build
 cd build
@@ -10,3 +16,10 @@ fi
 make -j $(nproc --all)
 cp liblinuxBase.so /usr/lib/libthrift_c_glib.so
 cd ..
+
+read -p "Inject? (y/n)" -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  bash inject.sh
+fi

@@ -1,24 +1,14 @@
 #!/bin/bash
-# fuzion/aimtux
+# gdb injector (inspired by fuzion's)
 
-
-# ghetto but did i ask
-if [ $1 = "u" ] || [ $2 = "u" ] ; then
-  bash uninject.sh
-fi
-
-if [ $1 = "b" ] || [ $2 = "b" ] ; then
-  bash build.sh
-fi
-
-if [ $1 = "bd" ] || [ $2 = "bd" ] ; then
-  bash build.sh d
-fi
-
-echo "injecting"
+echo "======================="
+echo "injecting..."
 
 csgo_pid=$(pidof csgo_linux64)
 echo "csgo pid: $csgo_pid"
+
+sudo rm -rf /tmp/dumps
+sudo mkdir --mode=000 /tmp/dumps
 
 sudo killall -19 steam
 sudo killall -19 steamwebhelper

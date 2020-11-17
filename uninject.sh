@@ -1,7 +1,8 @@
 #!/bin/bash
 # fuzion/aimtux
 
-echo "uninjecting"
+echo "======================="
+echo "uninjecting..."
 
 csgo_pid=$(pidof csgo_linux64)
 echo "csgo pid: $csgo_pid"
@@ -20,7 +21,7 @@ if grep -q "libthrift_c_glib.so" /proc/"$csgo_pid"/maps; then
     -ex "detach" \
     -ex "quit"
 else
-  echo "nothing to unload"
+  echo "nothing to uninject"
   exit 0
 fi
 
