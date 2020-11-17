@@ -1,6 +1,6 @@
 <p align="center">
-  <img src="/res/logo.png" alt="MIT License">
-  <a><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License"></a>
+  <img src="/res/logo.png" alt="gamesneeze-linux">
+  <a href="/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License"></a>
   <a><img src="https://img.shields.io/badge/OS-Linux-green.svg" alt="Linux"></a>
   <a><img src="https://img.shields.io/badge/Cheat-CS:GO-green.svg" alt="CS:GO cheat"></a>
   <a><img src="https://img.shields.io/badge/State-Unfinished-red.svg" alt="Unfinished"></a>
