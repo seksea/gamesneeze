@@ -1,10 +1,5 @@
 #include "../../includes.hpp"
 
-#include "imgui/imgui.h"
-#include "imgui/GL/gl3w.h"
-#include "imgui/imgui_impl_sdl.h"
-#include "imgui/imgui_impl_opengl3.h"
-
 void Menu::onPollEvent(SDL_Event* event, const int result) {
     if (result && ImGui_ImplSDL2_ProcessEvent(event) && Menu::open) {
         event->type = 0;
@@ -29,10 +24,16 @@ void Menu::onSwapWindow(SDL_Window* window) {
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
     io.DisplaySize = ImVec2((float)w, (float)h);
+
     ImGui::NewFrame();
 
+    Menu::drawOverlay(ImGui::GetBackgroundDrawList());
     if (Menu::open) {
+        io.MouseDrawCursor = true;
         Menu::drawMenu();
+    }
+    else {
+        io.MouseDrawCursor = false;
     }
 
 
@@ -45,10 +46,28 @@ void Menu::onSwapWindow(SDL_Window* window) {
 }
 
 void Menu::drawMenu() {
-    ImGui::SetNextWindowSize(ImVec2{500, 400});
-    ImGui::Begin("Gamesnooze lincuck edition", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
-    ImGui::Text("Gamesnooze lincuck edition");
+    ImGui::SetNextWindowSize(ImVec2{500, 600});
+    ImGui::Begin("linux-base", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
+    ImGui::Text("linux-base");
     ImGui::Separator();
-    ImGui::Text("pog");
+    if (ImGui::BeginTabBar("mainTabs")) {
+        if(ImGui::BeginTabItem("Legit")) {
+            ImGui::Text("Legit");
+            ImGui::EndTabItem();
+        }
+        if(ImGui::BeginTabItem("Rage")) {
+            ImGui::Text("Rage");
+            ImGui::EndTabItem();
+        }
+        if(ImGui::BeginTabItem("Visuals")) {
+            ImGui::Text("Visuals");
+            ImGui::EndTabItem();
+        }
+        if(ImGui::BeginTabItem("Misc")) {
+            ImGui::Text("Misc");
+            ImGui::EndTabItem();
+        }
+    ImGui::EndTabBar();
+    }
     ImGui::End();
 }

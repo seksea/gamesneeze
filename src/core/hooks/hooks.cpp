@@ -1,5 +1,6 @@
 #include "../../includes.hpp"
 
+/* Create hooks */
 bool Hooks::init() {
     Log::log("initialising hooks...");
     if (!initSDL()) {
@@ -10,6 +11,7 @@ bool Hooks::init() {
     return true;
 }
 
+/* Unload hooks */
 bool Hooks::unload() {
     Log::log("unloading hooks...");
 

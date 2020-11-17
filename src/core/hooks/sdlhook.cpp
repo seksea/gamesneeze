@@ -12,6 +12,7 @@ int Hooks::PollEvent(SDL_Event* event) {
         Menu::onPollEvent(event, result);
     }
     return result;
+    return 1;
 }
 
 void Hooks::SwapWindow(SDL_Window* window) {

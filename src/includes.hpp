@@ -6,6 +6,11 @@
 #include <dlfcn.h>
 #include <SDL2/SDL.h>
 
+#include "core/menu/imgui/imgui.h"
+#include "core/menu/imgui/GL/gl3w.h"
+#include "core/menu/imgui/imgui_impl_sdl.h"
+#include "core/menu/imgui/imgui_impl_opengl3.h"
+
 #include "utils/utils.hpp"
 #include "sdk/interfaces/interfaces.hpp"
 #include "core/features/features.hpp"
