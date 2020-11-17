@@ -5,6 +5,7 @@
   <a><img src="https://img.shields.io/badge/Cheat-CS:GO-green.svg" alt="CS:GO cheat"></a>
   <a><img src="https://img.shields.io/badge/State-Unfinished-red.svg" alt="Unfinished"></a>
   <a><img src="https://img.shields.io/badge/Detection-Unknown-yellow.svg" alt="Detection: Unknown"></a>
+  <a href="https://gitter.im/gamesneeze/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link"><img src="https://img.shields.io/badge/Chat-Gitter-green.svg" alt="Gitter"></a>
 </p>
 
 An open source cheat for Counter-Strike: Global Offensive on linux.
