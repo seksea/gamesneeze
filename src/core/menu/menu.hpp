@@ -1,6 +1,7 @@
 namespace Menu {
     inline bool open = true;
     inline bool initialised = false;
+    inline int tabSelected = 0;
 
     void drawMenu();
     void drawOverlay(ImDrawList* drawList);
