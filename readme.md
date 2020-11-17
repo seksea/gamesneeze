@@ -20,5 +20,10 @@ git clone https://github.com/seksea/gamesneeze
 cd gamesneeze
 chmod +x build.sh
 sudo ./build.sh
-# (build.sh will ask if you want to inject after it's built, use ./inject.sh for just injecting on its own)
+# (build.sh will uninject before it's built and ask if you want to inject after it's built, use ./inject.sh for just injecting on its own)
 ```
+
+## Todo
+- [ ] Game Interfaces
+- [ ] Game Classes
+- [ ] Game Hooks
