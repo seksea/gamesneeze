@@ -24,6 +24,10 @@ sudo ./build.sh
 # (build.sh will uninject before it's built and ask if you want to inject after it's built, use ./inject.sh for just injecting on its own)
 ```
 
+## Found a bug/want to add something?
+- [Create a pull request](https://github.com/seksea/gamesneeze/issues/new) ([tutorial](https://github.com/yangsu/pull-request-tutorial))
+- [Report a bug](https://github.com/seksea/gamesneeze/issues/new)
+
 ## Todo
 - [ ] Game Interfaces
 - [ ] Game Classes
