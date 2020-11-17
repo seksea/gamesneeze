@@ -47,8 +47,8 @@ void Menu::onSwapWindow(SDL_Window* window) {
 
 void Menu::drawMenu() {
     ImGui::SetNextWindowSize(ImVec2{500, 600});
-    ImGui::Begin("linux-base", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
-    ImGui::Text("linux-base");
+    ImGui::Begin("gamesneeze-linux", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
+    ImGui::Text("gamesneeze-linux");
     ImGui::Separator();
     if (ImGui::BeginTabBar("mainTabs")) {
         if(ImGui::BeginTabItem("Legit")) {
