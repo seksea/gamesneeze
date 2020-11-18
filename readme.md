@@ -52,7 +52,7 @@ public:
   // etc...
 }
 ```
-- Namespaces start with capital letter
+- Namespaces start with capital letter:
 ```cpp
 namespace Log {};
 namespace Hooks {};
