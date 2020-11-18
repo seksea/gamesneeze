@@ -1,12 +1,13 @@
 #pragma once
 #include <dlfcn.h>
 
+#include "ivengineclient.hpp"
+
 namespace Interfaces {
     bool init();
     bool unload();
 
-
-    
+    inline IVEngineClient* engine;
 
     typedef void* (*InstantiateInterfaceFn)();
     // https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/tier1/interface.h#L72
@@ -21,10 +22,11 @@ namespace Interfaces {
     T* getInterface(const char* file, const char* name) {
 	    void* lib = dlopen(file, RTLD_NOLOAD | RTLD_NOW | RTLD_LOCAL);
         if (lib) {
+            // https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/tier1/interface.cpp#L46
             InterfaceReg* interfaceReg = *reinterpret_cast<InterfaceReg**>(dlsym(lib, "s_pInterfaceRegs"));
             dlclose(lib);
 
-            // loop through interfaceReg
+            // loop through each interface in interfaceReg
             for (InterfaceReg* cur = interfaceReg; cur; cur = cur->m_pNext) {
                 // If current interface equals input name without the 3 version numbers so if an interface version changes we dont have to care
                 if (strstr(cur->m_pName, name) && strlen(cur->m_pName)-3 == strlen(name)) {

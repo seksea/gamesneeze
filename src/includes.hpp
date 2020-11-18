@@ -5,6 +5,7 @@
 #include <string>
 #include <dlfcn.h>
 #include <SDL2/SDL.h>
+#include <cstdint>
 
 #include "core/menu/imgui/imgui.h"
 #include "core/menu/imgui/GL/gl3w.h"
