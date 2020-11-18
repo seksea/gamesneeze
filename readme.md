@@ -38,7 +38,5 @@ sudo ./build.sh
 - [ ] Ragebot
 
 ## Screenshots
-Menu
 ![Current Menu](/res/currentMenu.png)
-Log output
 ![Console Output](/res/consoleOutput.png)
