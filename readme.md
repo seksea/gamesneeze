@@ -25,7 +25,7 @@ sudo ./build.sh
 ```
 
 ## Found a bug/want to add something?
-- [Create a pull request](https://github.com/seksea/gamesneeze/issues/new) ([tutorial](https://github.com/yangsu/pull-request-tutorial))
+- [Create a pull request](https://github.com/seksea/gamesneeze/compare) ([tutorial](https://github.com/yangsu/pull-request-tutorial))
 - [Report a bug](https://github.com/seksea/gamesneeze/issues/new)
 
 ## Todo
