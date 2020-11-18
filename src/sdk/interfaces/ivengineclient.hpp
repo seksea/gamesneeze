@@ -59,13 +59,13 @@ public:
 	}
 
     // Returns true if the player is fully connected and active in game (i.e, not still loading)
-	bool IsInGame(){
+	bool IsInGame() {
 		typedef bool (*Fn)(void*);
 		return getVirtualFunc<Fn>(this, 26)(this);
 	}
 
     // Returns true if the player is connected, but not necessarily active in game (could still be loading)
-	bool IsConnected(){
+	bool IsConnected() {
 		typedef bool (*Fn)(void*);
 		return getVirtualFunc<Fn>(this, 27)(this);
 	}
@@ -74,8 +74,7 @@ public:
 	// And then executes the command string immediately (vs ClientCmd() which executes in the next frame)
 	//
 	// Note: this is NOT checked against the FCVAR_CLIENTCMD_CAN_EXECUTE vars.
-	void ExecuteClientCmd(const char* szCmdString)
-	{
+	void ExecuteClientCmd(const char* szCmdString) {
 		typedef void (*Fn)(void*, const char*);
 		return getVirtualFunc<Fn>(this, 108)(this, szCmdString);
 	}
