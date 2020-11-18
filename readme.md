@@ -21,7 +21,7 @@ git clone https://github.com/seksea/gamesneeze
 cd gamesneeze
 chmod +x build.sh
 sudo ./build.sh
-# (build.sh will uninject before it's built and ask if you want to inject after it's built, use ./inject.sh for just injecting on its own)
+# (build.sh will uninject before it's built and ask if you want to inject without building, use ./inject.sh for just injecting on its own)
 ```
 
 ## Found a bug/want to add something?
@@ -30,8 +30,15 @@ sudo ./build.sh
 
 ## Todo
 - [ ] Game Interfaces
-- [ ] Game Classes
 - [ ] Game Hooks
+- [ ] Game Classes
+- [ ] Visual/Misc Features
+- [ ] Prediction
+- [ ] Legitbot
+- [ ] Ragebot
 
+## Screenshots
+Menu
 ![Current Menu](/res/currentMenu.png)
+Log output
 ![Console Output](/res/consoleOutput.png)
