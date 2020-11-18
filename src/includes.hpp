@@ -13,7 +13,7 @@
 #include "core/menu/imgui/imgui_impl_opengl3.h"
 
 #include "utils/utils.hpp"
-#include "sdk/interfaces/interfaces.hpp"
+#include "sdk/sdk.hpp"
 #include "core/features/features.hpp"
 #include "core/hooks/hooks.hpp"
 #include "core/menu/menu.hpp"
