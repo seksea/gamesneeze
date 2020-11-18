@@ -29,13 +29,37 @@ sudo ./build.sh
 - [Report a bug](https://github.com/seksea/gamesneeze/issues/new)
 
 ## Todo
-- [ ] Game Interfaces
+- [x] Start Game Interfaces
+- [ ] Add bunch of interfaces
 - [ ] Game Hooks
 - [ ] Game Classes
 - [ ] Visual/Misc Features
 - [ ] Prediction
 - [ ] Legitbot
 - [ ] Ragebot
+
+## Code style
+- Interfaces layed out like this (all typed as in the [2015 src leak](https://github.com/perilouswithadollarsign/cstrike15_src)):
+```cpp
+// https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/cdll_int.h#L194
+class IVEngineClient {
+public:
+  // Gets the dimensions of the game window
+  void GetScreenSize(int& width, int& height) {
+	  typedef void (*Fn)(void*, int&, int&);
+	  return getVirtualFunc<Fn>(this, 5)(this, width, height);
+  }
+  // etc...
+}
+```
+- Namespaces start with capital letter
+```cpp
+namespace Log {};
+namespace Hooks {};
+//etc...
+```
+- lowerCamelCase for everything except stuff ripped from source sdk
+- filenames all lowercase
 
 ## Screenshots
 ![Current Menu](/res/currentMenu.png)
