@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.11.0)
-project(linuxBase)
+project(gamesneeze)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_FLAGS_DEBUG "-Wall -ggdb -fpermissive -DDEBUG")
@@ -13,5 +13,5 @@ list(APPEND SOURCES "${CMAKE_SOURCE_DIR}/src/core/menu/imgui/GL/gl3w.c")
 include_directories(/usr/local/include)
 link_directories(/usr/local/lib)
 
-add_library(linuxBase SHARED ${SOURCES})
-target_link_libraries(linuxBase SDL2 GL)
+add_library(gamesneeze SHARED ${SOURCES})
+target_link_libraries(gamesneeze SDL2 GL)
