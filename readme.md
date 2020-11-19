@@ -19,10 +19,17 @@ An open source cheat for Counter-Strike: Global Offensive on linux.
 ```
 git clone https://github.com/seksea/gamesneeze
 cd gamesneeze
-chmod +x build.sh
-sudo ./build.sh
-# (build.sh will uninject before it's built and ask if you want to inject without building, use ./inject.sh for just injecting on its own)
+chmod +x toolbox.sh
+sudo ./toolbox.sh -u -b -l # unload cheat if currently injected, build and then load, use -h for help
 ```
+
+## Basic toolbox.sh usage
+| Argument          | Description                           |
+| ----------------- | ------------------------------------- |
+| -u (--unload)     | Unload the cheat from CS:GO if loaded |
+| -l (--load)       | Load/inject the cheat via gdb         |
+| -b (--build)      | Build to the build/ dir               |
+| -h (--help)       | Show help                             |
 
 ## Found a bug/want to add something?
 - [Create a pull request](https://github.com/seksea/gamesneeze/compare) ([tutorial](https://github.com/yangsu/pull-request-tutorial))
