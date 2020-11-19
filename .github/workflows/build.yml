@@ -26,7 +26,7 @@ jobs:
         run: mkdir build; cd build
 
       - name: Install SDL2
-        run: apt update; apt install libsdl2-dev
+        run: sudo apt update; sudo apt install libsdl2-dev
 
       - name: Cmake
         run: cmake -D CMAKE_BUILD_TYPE=Release
