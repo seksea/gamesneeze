@@ -1,13 +1,20 @@
 #pragma once
 #include <dlfcn.h>
 
+
+#include "ibaseclientdll.hpp"
 #include "ivengineclient.hpp"
+
+#include "iclientmode.hpp"
 
 namespace Interfaces {
     bool init();
     bool unload();
 
+    inline IBaseClientDLL* client;
     inline IVEngineClient* engine;
+
+    inline IClientMode* clientMode;
 
     typedef void* (*InstantiateInterfaceFn)();
     // https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/tier1/interface.h#L72

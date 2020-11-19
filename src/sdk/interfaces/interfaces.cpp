@@ -3,7 +3,8 @@
 bool Interfaces::init() {
     Log::log("initialising interfaces...");
 
-    IVEngineClient* engine = getInterface<IVEngineClient>("./bin/linux64/engine_client.so", "VEngineClient");
+    client = getInterface<IBaseClientDLL>("./bin/linux64/client_client.so", "VClient");
+    engine = getInterface<IVEngineClient>("./bin/linux64/engine_client.so", "VEngineClient");
 
     Log::log("initialised interfaces...");
     return true;
