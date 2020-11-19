@@ -30,6 +30,7 @@ sudo ./toolbox.sh -u -b -l # unload cheat if currently injected, build and then 
 | -l (--load)       | Load/inject the cheat via gdb         |
 | -b (--build)      | Build to the build/ dir               |
 | -h (--help)       | Show help                             |
+
 All args are executed in the order they are written in, for example, "-u -b -l" would unload the cheat, build it, and then load it back into csgo.
 
 
