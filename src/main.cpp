@@ -52,4 +52,6 @@ void __attribute__((constructor)) Main() {
 	std::thread mainThread(MainThread);
     
 	mainThread.detach();
+
+    return 0;
 }
