@@ -22,6 +22,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: ./build.sh
+      - name: Create build directory
+        run: |
+mkdir build
+cd build
+
+      - name: Cmake
+        run: cmake -D CMAKE_BUILD_TYPE=Release
+
+      - name: Make
+        run: make -j $(nproc --all)
+
