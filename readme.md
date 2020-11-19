@@ -39,7 +39,7 @@ sudo ./build.sh
 - [ ] Ragebot
 
 ## Code style
-- Interfaces layed out like this (func names, arg names and comments typed as in the [2015 src leak](https://github.com/perilouswithadollarsign/cstrike15_src)):
+- Interfaces layed out like this (func names, arg names and comments typed as in the [2015 leak](https://github.com/perilouswithadollarsign/cstrike15_src) or the [source sdk](https://github.com/ValveSoftware/source-sdk-2013)):
 ```cpp
 // https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/cdll_int.h#L194
 class IVEngineClient {
