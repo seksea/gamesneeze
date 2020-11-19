@@ -37,12 +37,12 @@ namespace Interfaces {
             for (InterfaceReg* cur = interfaceReg; cur; cur = cur->m_pNext) {
                 // If current interface equals input name without the 3 version numbers so if an interface version changes we dont have to care
                 if (strstr(cur->m_pName, name) && strlen(cur->m_pName)-3 == strlen(name)) {
-                    Log::log(std::string("Found interface ") + name + " (" + cur->m_pName + ")");
+                    Log::log(std::string(" ") + name + "(" + cur->m_pName + ") " + std::to_string((uintptr_t)cur));
                     return reinterpret_cast<T*>(cur->m_CreateFn());
                 }
             }
         }
-        Log::err(std::string("Failed to find interface ") + name + " -> " + file);
+        Log::err(std::string(" Failed to find interface ") + name + " -> " + file);
         dlclose(lib);
         return nullptr;
     }

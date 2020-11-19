@@ -22,7 +22,7 @@ void Hooks::SwapWindow(SDL_Window* window) {
 
 /* Initialise SDL hooks */
 bool Hooks::initSDL() {
-    Log::log(" initialising SDL Hooks...");
+    Log::log(" Initialising SDL Hooks...");
     const auto libSDL = dlopen("libSDL2-2.0.so.0", RTLD_LAZY | RTLD_NOLOAD);
 
     swapWindowAddr = relativeToAbsolute<uintptr_t>(uintptr_t(dlsym(libSDL, "SDL_GL_SwapWindow")) + 3);
@@ -35,7 +35,7 @@ bool Hooks::initSDL() {
         return false;
     }
 
-    Log::log(std::string("  swapwindow      | ") + std::to_string(swapWindowAddr));
+    Log::log(std::string("  SwapWindow      | ") + std::to_string(swapWindowAddr));
 
     pollEventAddr = relativeToAbsolute<uintptr_t>(uintptr_t(dlsym(libSDL, "SDL_PollEvent")) + 3);
     if (pollEventAddr) {
@@ -47,14 +47,14 @@ bool Hooks::initSDL() {
         return false;
     }
 
-    Log::log(std::string("  pollevent       | ") + std::to_string(pollEventAddr));
-    Log::log(" initialised SDL Hooks!");
+    Log::log(std::string("  PollEvent       | ") + std::to_string(pollEventAddr));
+    Log::log(" Initialised SDL Hooks!");
     return true;
 }
 
 /* Unload SDL hooks */
 bool Hooks::unloadSDL() {
-    Log::log("unloading OpenGL Hooks...");
+    Log::log("Unloading OpenGL Hooks...");
     *reinterpret_cast<decltype(swapWindow)*>(swapWindowAddr) = swapWindow;
     *reinterpret_cast<decltype(pollEvent)*>(pollEventAddr) = pollEvent;
     if (*reinterpret_cast<decltype(swapWindow)*>(swapWindowAddr)!=swapWindow || *reinterpret_cast<decltype(pollEvent)*>(pollEventAddr)!=pollEvent) {
