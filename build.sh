@@ -14,7 +14,7 @@ else
   cmake -D CMAKE_BUILD_TYPE=Release ..
 fi
 make -j $(nproc --all)
-cp liblinuxBase.so /usr/lib/libthrift_c_glib.so
+cp libgamesneeze.so /usr/lib/libthrift_c_glib.so
 cd ..
 
 read -p "Inject? (y/n)" -n 1 -r
