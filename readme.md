@@ -72,5 +72,5 @@ namespace Hooks {};
 - filenames all lowercase
 
 ## Screenshots
-![Current Menu](/res/currentMenu.png)
-![Console Output](/res/consoleOutput.png)
+![Current Menu](https://imgur.com/E65seLC.png)
+![Console Output](https://imgur.com/Thx7pWU.png)
