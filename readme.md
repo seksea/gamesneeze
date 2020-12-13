@@ -40,12 +40,12 @@ All args are executed in the order they are written in, for example, "-u -b -l" 
 - [Report a bug](https://github.com/seksea/gamesneeze/issues/new)
 
 ## Todo
-- [x] Start Game Interfaces
-- [ ] Add bunch of interfaces
+- [x] Game Interfaces
 - [x] Game Hooks
+- [ ] Config System
 - [ ] Visual/Misc Features
-- [ ] Prediction
 - [ ] Legitbot
+- [ ] Prediction
 - [ ] Ragebot
 
 ## Code style
