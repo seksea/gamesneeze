@@ -1,4 +1,5 @@
 #pragma once
+#include "../../includes.hpp"
 
 namespace Hooks {
     bool init();
