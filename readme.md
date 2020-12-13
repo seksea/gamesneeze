@@ -12,6 +12,7 @@ An open source cheat for Counter-Strike: Global Offensive on linux.
 
 ## Current Features
 - Basic GDB injector
+- Example CreateMove Hook
 - SwapWindow & PollEvent Hooked
 - ImGui
 
