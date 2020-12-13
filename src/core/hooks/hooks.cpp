@@ -10,9 +10,8 @@ bool Hooks::init() {
         return false;
     }
 
-    Log::log(" Initialising CreateMove...");
+    Log::log(" Hooking CreateMove...");
     CreateMove::original = (CreateMove::func)VMT::hook(Interfaces::clientMode, (void*)CreateMove::hook, 25);
-    Log::log(" Initialised CreateMove!");
 
     Log::log("Initialised hooks!");
     return true;
