@@ -1,4 +1,6 @@
 #include "../../includes.hpp"
+#include "hooks.hpp"
+#include "vmt.hpp"
 
 /* Create hooks */
 bool Hooks::init() {
@@ -7,7 +9,12 @@ bool Hooks::init() {
         Log::err("Failed to initialise SDL hooks!");
         return false;
     }
-    Log::log("Initialised hooks...");
+
+    Log::log(" Initialising CreateMove...");
+    CreateMove::original = (CreateMove::func)VMT::hook(Interfaces::clientMode, (void*)CreateMove::hook, 25);
+    Log::log(" Initialised CreateMove!");
+
+    Log::log("Initialised hooks!");
     return true;
 }
 

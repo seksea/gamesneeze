@@ -73,4 +73,4 @@ namespace Hooks {};
 
 ## Screenshots
 ![Current Menu](https://imgur.com/E65seLC.png)
-![Console Output](https://imgur.com/Thx7pWU.png)
+![Console Output](res/console.png)
