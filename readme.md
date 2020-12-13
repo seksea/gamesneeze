@@ -68,8 +68,21 @@ namespace Log {};
 namespace Hooks {};
 //etc...
 ```
-- lowerCamelCase for everything except stuff ripped from source sdk
-- filenames all lowercase
+- lowerCamelCase for everything except stuff ripped from source sdk:
+```cpp
+class InterfaceReg {
+public:
+    InstantiateInterfaceFn m_CreateFn;
+    const char* m_pName;
+    InterfaceReg* m_pNext;
+};
+```
+- filenames all lowercase:
+```
+createmove.cpp
+ibaseclientdll.hpp
+hooks.hpp
+```
 
 ## Screenshots
 ![Current Menu](https://imgur.com/E65seLC.png)
