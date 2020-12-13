@@ -4,6 +4,7 @@
 
 #include "ibaseclientdll.hpp"
 #include "ivengineclient.hpp"
+#include "ipanel.hpp"
 
 #include "iclientmode.hpp"
 
@@ -13,6 +14,7 @@ namespace Interfaces {
 
     inline IBaseClientDLL* client;
     inline IVEngineClient* engine;
+    inline IPanel* panel;
 
     inline IClientMode* clientMode;
 

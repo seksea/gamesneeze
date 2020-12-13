@@ -88,7 +88,7 @@ void Menu::onSwapWindow(SDL_Window* window) {
 
     Menu::drawOverlay(ImGui::GetBackgroundDrawList());
     if (Menu::open) {
-        io.MouseDrawCursor = true;
+        io.MouseDrawCursor = true; // find workaround at some point because ugly
         Menu::drawMenu();
     }
     else {

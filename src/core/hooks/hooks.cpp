@@ -13,6 +13,9 @@ bool Hooks::init() {
     Log::log(" Hooking CreateMove...");
     CreateMove::original = (CreateMove::func)VMT::hook(Interfaces::clientMode, (void*)CreateMove::hook, 25);
 
+    Log::log(" Hooking PaintTraverse...");
+    PaintTraverse::original = (PaintTraverse::func)VMT::hook(Interfaces::panel, (void*)PaintTraverse::hook, 42);
+
     Log::log("Initialised hooks!");
     return true;
 }

@@ -10,6 +10,11 @@ namespace Hooks {
         inline func original;
         bool hook(void* thisptr, float flInputSampleTime, CUserCmd* cmd);
     }
+    namespace PaintTraverse {
+        using func = void(*)(void* thisptr, unsigned int vguiPanel, bool forceRepaint, bool allowForce);
+        inline func original;
+        void hook(void* thisptr, unsigned int vguiPanel, bool forceRepaint, bool allowForce);
+    }
 
     /* SDL HOOKS */
     bool initSDL();
