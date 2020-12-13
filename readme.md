@@ -41,8 +41,7 @@ All args are executed in the order they are written in, for example, "-u -b -l" 
 ## Todo
 - [x] Start Game Interfaces
 - [ ] Add bunch of interfaces
-- [ ] Game Hooks
-- [ ] Game Classes
+- [x] Game Hooks
 - [ ] Visual/Misc Features
 - [ ] Prediction
 - [ ] Legitbot
