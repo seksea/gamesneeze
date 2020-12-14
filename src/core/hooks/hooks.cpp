@@ -9,7 +9,7 @@
 /* Create hooks */
 bool Hooks::init() {
     Log::log("Initialising hooks...");
-    if (!initSDL()) {
+    if (!SDL::initSDL()) {
         Log::err("Failed to initialise SDL hooks!");
         return false;
     }
@@ -28,7 +28,7 @@ bool Hooks::init() {
 bool Hooks::unload() {
     Log::log("Unloading hooks...");
 
-    if (!unloadSDL()) {
+    if (!SDL::unloadSDL()) {
         Log::err("Failed to unload SDL hooks!");
         return false;
     }

@@ -6,7 +6,7 @@ static constexpr auto relativeToAbsolute(std::uintptr_t address) noexcept
     return (T)(address + 4 + *reinterpret_cast<std::int32_t*>(address));
 }
 
-int Hooks::PollEvent(SDL_Event* event) {
+int Hooks::SDL::PollEvent(SDL_Event* event) {
     const auto result = pollEvent(event);
     if (Menu::initialised) {
         Menu::onPollEvent(event, result);
@@ -15,13 +15,13 @@ int Hooks::PollEvent(SDL_Event* event) {
     return 1;
 }
 
-void Hooks::SwapWindow(SDL_Window* window) {
+void Hooks::SDL::SwapWindow(SDL_Window* window) {
     Menu::onSwapWindow(window);
     swapWindow(window);
 }
 
 /* Initialise SDL hooks */
-bool Hooks::initSDL() {
+bool Hooks::SDL::initSDL() {
     Log::log(" Initialising SDL Hooks...");
     const auto libSDL = dlopen("libSDL2-2.0.so.0", RTLD_LAZY | RTLD_NOLOAD);
 
@@ -53,7 +53,7 @@ bool Hooks::initSDL() {
 }
 
 /* Unload SDL hooks */
-bool Hooks::unloadSDL() {
+bool Hooks::SDL::unloadSDL() {
     Log::log("Unloading OpenGL Hooks...");
     *reinterpret_cast<decltype(swapWindow)*>(swapWindowAddr) = swapWindow;
     *reinterpret_cast<decltype(pollEvent)*>(pollEventAddr) = pollEvent;
