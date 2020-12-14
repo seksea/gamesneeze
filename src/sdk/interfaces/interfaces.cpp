@@ -15,6 +15,10 @@ bool Interfaces::init() {
     clientMode = getClientMode();
     Log::log(std::string(" ClientMode ") + std::to_string((uintptr_t)clientMode));
 
+    uintptr_t HudUpdate = reinterpret_cast<uintptr_t>(getVTable(client)[11]);
+	globals = *reinterpret_cast<CGlobalVars**>(getAbsoluteAddress(HudUpdate + 13, 3, 7));
+    Log::log(std::string(" Globals ") + std::to_string((uintptr_t)globals));
+
     Log::log("Initialised interfaces!");
     return true;
 }

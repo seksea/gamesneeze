@@ -7,6 +7,7 @@
 #include "ipanel.hpp"
 
 #include "iclientmode.hpp"
+#include "globalvars.hpp"
 
 namespace Interfaces {
     bool init();
@@ -17,6 +18,7 @@ namespace Interfaces {
     inline IPanel* panel;
 
     inline IClientMode* clientMode;
+    inline CGlobalVars* globals;
 
     typedef void* (*InstantiateInterfaceFn)();
     // https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/tier1/interface.h#L72
