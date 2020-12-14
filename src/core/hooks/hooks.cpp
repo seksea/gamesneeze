@@ -1,6 +1,7 @@
 #include "../../includes.hpp"
 #include "hooks.hpp"
 #include "vmt.hpp"
+#include <unistd.h>
 
 /* Create hooks */
 bool Hooks::init() {
@@ -36,6 +37,9 @@ bool Hooks::unload() {
     Log::log(" Unhooking PaintTraverse...");
     VMT::hook(Interfaces::panel, (void*)PaintTraverse::original, 42);
     
+    /* Wait 2 secs so you dont uninject while a hook is still running */
+    usleep(2000000);
+
     Log::log("Unloaded hooks!");
     return true;
 }
