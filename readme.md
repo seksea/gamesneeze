@@ -11,10 +11,21 @@
 An open source cheat for Counter-Strike: Global Offensive on linux.
 
 ## Current Features
+### Interfaces
+- Interfaces::client
+- Interfaces::engine
+- Interfaces::panel
+- Interfaces::clientMode
+- Interfaces::globals
+### Hooks
+- CreateMove
+- PaintTraverse
+- SwapWindow
+- PollEvent
+### Others
 - Basic GDB injector
-- Example CreateMove Hook
-- SwapWindow & PollEvent Hooked
-- ImGui
+- ImGui menu
+
 
 ## How to use
 ```
