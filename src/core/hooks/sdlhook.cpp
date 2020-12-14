@@ -54,7 +54,7 @@ bool Hooks::SDL::initSDL() {
 
 /* Unload SDL hooks */
 bool Hooks::SDL::unloadSDL() {
-    Log::log("Unloading OpenGL Hooks...");
+    Log::log("Unloading SDL Hooks...");
     *reinterpret_cast<decltype(swapWindow)*>(swapWindowAddr) = swapWindow;
     *reinterpret_cast<decltype(pollEvent)*>(pollEventAddr) = pollEvent;
     if (*reinterpret_cast<decltype(swapWindow)*>(swapWindowAddr)!=swapWindow || *reinterpret_cast<decltype(pollEvent)*>(pollEventAddr)!=pollEvent) {
