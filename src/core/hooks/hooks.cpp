@@ -28,6 +28,13 @@ bool Hooks::unload() {
         Log::err("Failed to unload SDL hooks!");
         return false;
     }
+
+    /* hook with original to do bigrain unhooking */
+    Log::log(" Unhooking CreateMove...");
+    VMT::hook(Interfaces::clientMode, (void*)CreateMove::original, 25);
+
+    Log::log(" Unhooking PaintTraverse...");
+    VMT::hook(Interfaces::panel, (void*)PaintTraverse::original, 42);
     
     Log::log("Unloaded hooks!");
     return true;
