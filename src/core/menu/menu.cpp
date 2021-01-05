@@ -1,4 +1,5 @@
 #include "../../includes.hpp"
+#include "imgui/imgui.h"
 #include <filesystem>
 
 void style() {
@@ -176,8 +177,20 @@ void Menu::drawMenu() {
     ImGui::Begin("gamesneeze-linux", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 4));
     ImGui::Text("game"); ImGui::SameLine(); ImGui::PopStyleVar(); 
+    if (ImGui::IsItemClicked()) {
+        system("xdg-open https://discord.gg/SCHsWHFJMb");
+    }
+    if (ImGui::IsItemHovered()) {
+        ImGui::SetTooltip("Click for discord!");
+    }
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(90, 5)); 
     ImGui::TextColored(ImColor(108, 195, 18, 255), "sneeze");
+    if (ImGui::IsItemClicked()) {
+        system("xdg-open https://discord.gg/SCHsWHFJMb");
+    }
+    if (ImGui::IsItemHovered()) {
+        ImGui::SetTooltip("Click for discord!");
+    }
     ImGui::SameLine(); 
     ImGui::PopStyleVar();
 
