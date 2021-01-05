@@ -178,7 +178,7 @@ void Menu::drawMenu() {
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 4));
     ImGui::Text("game"); ImGui::SameLine(); ImGui::PopStyleVar(); 
     if (ImGui::IsItemClicked()) {
-        system("xdg-open https://discord.gg/SCHsWHFJMb");
+        system("xdg-open https://discord.gg/SCHsWHFJMb"); //if it works it works lmao
     }
     if (ImGui::IsItemHovered()) {
         ImGui::SetTooltip("Click for discord!");
@@ -186,7 +186,7 @@ void Menu::drawMenu() {
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(90, 5)); 
     ImGui::TextColored(ImColor(108, 195, 18, 255), "sneeze");
     if (ImGui::IsItemClicked()) {
-        system("xdg-open https://discord.gg/SCHsWHFJMb");
+        system("xdg-open https://discord.gg/SCHsWHFJMb"); //if it works it works lmao
     }
     if (ImGui::IsItemHovered()) {
         ImGui::SetTooltip("Click for discord!");
