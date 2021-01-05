@@ -95,6 +95,9 @@ void Menu::onSwapWindow(SDL_Window* window) {
         if (devWindow) {
             drawDevWindow();
         }
+        if (demoWindow) {
+            ImGui::ShowDemoWindow();
+        }
     }
     else {
         io.MouseDrawCursor = false;
@@ -114,6 +117,8 @@ void Menu::drawDevWindow() {
     ImGui::Begin("devwindow", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
     ImGui::Text("developer");
     ImGui::Separator();
+
+    ImGui::Checkbox("Demo window", &demoWindow);
 
     if (ImGui::Button("Dump Interfaces (console)")) {
         Log::log("Dumping interfaces...");
@@ -223,7 +228,13 @@ void Menu::drawMenu() {
             ImGui::Text("Visuals"); break;
         }
         case 3: {
+            ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(400, 4));
             ImGui::Text("Misc");
+            ImGui::SameLine();ImGui::PopStyleVar(); 
+            ImGui::TextDisabled("Credits!");
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("sekc (ofcourse)\nAll other contributors on GitHub (sadly none as of right now ;'( )\nand ocornut for his great ImGui UI framework");
+
             static char victim[128] = "";
             ImGui::InputText("Victim's name", victim, IM_ARRAYSIZE(victim));
             static char message[128] = "";

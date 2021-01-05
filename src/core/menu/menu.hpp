@@ -4,6 +4,7 @@ namespace Menu {
     inline int tabSelected = 0;
 
     inline bool devWindow = false;
+    inline bool demoWindow = false;
 
     void drawMenu();
     void drawDevWindow();
