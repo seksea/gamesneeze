@@ -1,4 +1,5 @@
 #include "../../includes.hpp"
+#include <filesystem>
 
 void style() {
     ImVec4* colors = ImGui::GetStyle().Colors;
@@ -90,6 +91,9 @@ void Menu::onSwapWindow(SDL_Window* window) {
     if (Menu::open) {
         io.MouseDrawCursor = true; // TODO: find workaround at some point because ugly
         Menu::drawMenu();
+        if (devWindow) {
+            drawDevWindow();
+        }
     }
     else {
         io.MouseDrawCursor = false;
@@ -102,6 +106,68 @@ void Menu::onSwapWindow(SDL_Window* window) {
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+void Menu::drawDevWindow() {
+    ImGui::SetNextWindowSize(ImVec2{500, 700});
+    ImGui::Begin("devwindow", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
+    ImGui::Text("developer");
+    ImGui::Separator();
+
+    if (ImGui::Button("Dump Interfaces (console)")) {
+        Log::log("Dumping interfaces...");
+
+        for (const auto & entry : std::filesystem::directory_iterator("./bin/linux64/")) {
+            if (entry.path().extension().string() == ".so") {
+                if (strstr(entry.path().c_str(), "_client")) {
+                    if (!strstr(entry.path().c_str(), "lib")) { // bit of a hack but we move
+                        Interfaces::dumpInterfaces(entry.path().c_str());
+                    }
+                }
+            }
+        }
+        for (const auto & entry : std::filesystem::directory_iterator("./csgo/bin/linux64/")) {
+            if (entry.path().extension().string() == ".so") {
+                if (strstr(entry.path().c_str(), "_client")) {
+                    if (!strstr(entry.path().c_str(), "lib")) { // bit of a hack but we move
+                        Interfaces::dumpInterfaces(entry.path().c_str());
+                    }
+                }
+            }
+        }
+        Log::log("Dumped interfaces!");
+    }
+
+    if (ImGui::TreeNode("Interfaces")) {
+        if (ImGui::TreeNode("Globals")) {
+            ImGui::Text((std::string("realtime: ") + std::to_string(Interfaces::globals->realtime)).c_str());
+            ImGui::Text((std::string("framecount: ") + std::to_string(Interfaces::globals->framecount)).c_str());
+            ImGui::Text((std::string("absoluteframetime: ") + std::to_string(Interfaces::globals->absoluteframetime)).c_str());
+            ImGui::Text((std::string("absoluteframestarttimestddev: ") + std::to_string(Interfaces::globals->absoluteframestarttimestddev)).c_str());
+            ImGui::Text((std::string("curtime: ") + std::to_string(Interfaces::globals->curtime)).c_str());
+            ImGui::Text((std::string("frametime: ") + std::to_string(Interfaces::globals->frametime)).c_str());
+            ImGui::Text((std::string("maxClients: ") + std::to_string(Interfaces::globals->maxClients)).c_str());
+            ImGui::Text((std::string("tickcount: ") + std::to_string(Interfaces::globals->tickcount)).c_str());
+            ImGui::Text((std::string("interval_per_tick: ") + std::to_string(Interfaces::globals->interval_per_tick)).c_str());
+            ImGui::Text((std::string("interpolation_amount: ") + std::to_string(Interfaces::globals->interpolation_amount)).c_str());
+            ImGui::Text((std::string("simTicksThisFrame: ") + std::to_string(Interfaces::globals->simTicksThisFrame)).c_str());
+            ImGui::Text((std::string("network_protocol: ") + std::to_string(Interfaces::globals->network_protocol)).c_str());
+            ImGui::Text((std::string("m_bClient: ") + std::to_string(Interfaces::globals->m_bClient)).c_str());
+            ImGui::Text((std::string("m_bRemoteClient: ") + std::to_string(Interfaces::globals->m_bRemoteClient)).c_str());
+            ImGui::TreePop();
+        }
+        if (ImGui::TreeNode("Engine Client")) {
+            int windowW, windowH;
+            Interfaces::engine->GetScreenSize(windowW, windowH);
+            ImGui::Text((std::string("GetScreenSize: ") + std::to_string(windowW) + std::string("x") + std::to_string(windowH)).c_str());
+            ImGui::Text((std::string("IsInGame: ") + std::to_string(Interfaces::engine->IsInGame())).c_str());
+            ImGui::Text((std::string("IsConnected: ") + std::to_string(Interfaces::engine->IsConnected())).c_str());
+            ImGui::TreePop();
+        }
+        ImGui::TreePop();
+    }
+
+    ImGui::End();
 }
 
 void Menu::drawMenu() {
@@ -144,7 +210,9 @@ void Menu::drawMenu() {
             ImGui::Text("Visuals"); break;
         }
         case 3: {
-            ImGui::Text("Misc"); break;
+            ImGui::Text("Misc");
+            ImGui::Checkbox("Developer window", &devWindow);
+            break;
         }
     }
 
