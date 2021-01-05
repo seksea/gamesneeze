@@ -123,7 +123,7 @@ void Menu::drawDevWindow() {
     if (ImGui::Button("Dump Interfaces (console)")) {
         Log::log("Dumping interfaces...");
 
-        for (const auto & entry : std::filesystem::directory_iterator("./bin/linux64/")) {
+        for (const auto & entry : std::experimental::filesystem::directory_iterator("./bin/linux64/")) {
             if (entry.path().extension().string() == ".so") {
                 if (strstr(entry.path().c_str(), "_client")) {
                     if (!strstr(entry.path().c_str(), "lib")) { // bit of a hack but we move
@@ -132,7 +132,7 @@ void Menu::drawDevWindow() {
                 }
             }
         }
-        for (const auto & entry : std::filesystem::directory_iterator("./csgo/bin/linux64/")) {
+        for (const auto & entry : std::experimental::filesystem::directory_iterator("./csgo/bin/linux64/")) {
             if (entry.path().extension().string() == ".so") {
                 if (strstr(entry.path().c_str(), "_client")) {
                     if (!strstr(entry.path().c_str(), "lib")) { // bit of a hack but we move
