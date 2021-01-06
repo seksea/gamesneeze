@@ -97,5 +97,5 @@ hooks.hpp
 ```
 
 ## Screenshots
-![Current Menu](https://imgur.com/E65seLC.png)
+![Current Menu](res/menu.png)
 ![Console Output](res/console.png)

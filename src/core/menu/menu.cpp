@@ -1,6 +1,6 @@
 #include "../../includes.hpp"
 #include "imgui/imgui.h"
-#include <experimental/filesystem>
+#include <filesystem>
 
 void style() {
     ImVec4* colors = ImGui::GetStyle().Colors;
@@ -123,7 +123,7 @@ void Menu::drawDevWindow() {
     if (ImGui::Button("Dump Interfaces (console)")) {
         Log::log("Dumping interfaces...");
 
-        for (const auto & entry : std::experimental::filesystem::directory_iterator("./bin/linux64/")) {
+        for (const auto & entry : std::filesystem::directory_iterator("./bin/linux64/")) {
             if (entry.path().extension().string() == ".so") {
                 if (strstr(entry.path().c_str(), "_client")) {
                     if (!strstr(entry.path().c_str(), "lib")) { // bit of a hack but we move
@@ -132,7 +132,7 @@ void Menu::drawDevWindow() {
                 }
             }
         }
-        for (const auto & entry : std::experimental::filesystem::directory_iterator("./csgo/bin/linux64/")) {
+        for (const auto & entry : std::filesystem::directory_iterator("./csgo/bin/linux64/")) {
             if (entry.path().extension().string() == ".so") {
                 if (strstr(entry.path().c_str(), "_client")) {
                     if (!strstr(entry.path().c_str(), "lib")) { // bit of a hack but we move
@@ -178,7 +178,7 @@ void Menu::drawDevWindow() {
 
 void Menu::drawMenu() {
     style();
-    ImGui::SetNextWindowSize(ImVec2{500, 600});
+    ImGui::SetNextWindowSize(ImVec2{900, 600});
     ImGui::Begin("gamesneeze-linux", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 4));
     ImGui::Text("game"); ImGui::SameLine(); ImGui::PopStyleVar(); 
@@ -188,7 +188,7 @@ void Menu::drawMenu() {
     if (ImGui::IsItemHovered()) {
         ImGui::SetTooltip("Click for discord!");
     }
-    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(90, 5)); 
+    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(490, 5)); 
     ImGui::TextColored(ImColor(108, 195, 18, 255), "sneeze");
     if (ImGui::IsItemClicked()) {
         system("xdg-open https://discord.gg/SCHsWHFJMb"); //if it works it works lmao
@@ -228,42 +228,65 @@ void Menu::drawMenu() {
             ImGui::Text("Visuals"); break;
         }
         case 3: {
-            ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(400, 4));
+            ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(1000, 4));
             ImGui::Text("Misc");
             ImGui::SameLine();ImGui::PopStyleVar(); 
             ImGui::TextDisabled("Credits!");
             if (ImGui::IsItemHovered())
                 ImGui::SetTooltip("sekc (ofcourse)\nAll other contributors on GitHub (sadly none as of right now ;'( )\nand ocornut for his great ImGui UI framework");
 
-            static char victim[128] = "";
-            ImGui::InputText("Victim's name", victim, IM_ARRAYSIZE(victim));
-            static char message[128] = "";
-            ImGui::InputText("Message##tbox", message, IM_ARRAYSIZE(message));
-            static char skinName[128] = "★ M9 Bayonet | Doppler";
-            ImGui::InputText("Skin/Weapon##tbox", skinName, IM_ARRAYSIZE(skinName));
-            ImGui::Text("Send fake: ");
-            ImGui::SameLine();
-            if (ImGui::Button("Message##btn")) {
-                Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  ") + victim + ": " + message + "\"").c_str());
-            }
-            ImGui::SameLine();
-            if (ImGui::Button("VAC")) {
-                Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  ") + victim + " has been permanently banned from official CS:GO servers.\"").c_str());
-            }
-            ImGui::SameLine();
-            if (ImGui::Button("Kick")) {
-                Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  Player ") + victim + " left the game (Kicked from the session)\"").c_str());
-            }
-            ImGui::SameLine();
-            if (ImGui::Button("Unbox")) {
-                Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  \x0B") + victim + " has opened a container and found: " + skinName + "\"").c_str());
-            }
-            ImGui::SameLine();
-            ImGui::TextDisabled("?");
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Sends a fake message into the chat via a radio message that uses\nchars to create a newline and change colours (pastebin.com/pZvCnGaC),\nyou can do this legit too via the 'playerchatwheel . \"\"' command!\n\nOnly works if you are alive and only teammates can see the message :(");
+            ImGui::BeginChild("Trolling", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 260), true); {
+                ImGui::Text("Trolling");
+                ImGui::Separator();
+                ImGui::Text("Radio Exploit");
+                static char victim[128] = "";
+                ImGui::InputText("Victim's name", victim, IM_ARRAYSIZE(victim));
+                static char message[128] = "";
+                ImGui::InputText("Message##tbox", message, IM_ARRAYSIZE(message));
+                static char skinName[128] = "★ M9 Bayonet | Doppler";
+                ImGui::InputText("Skin/Weapon##tbox", skinName, IM_ARRAYSIZE(skinName));
+                ImGui::Text("Send fake: ");
+                ImGui::SameLine();
+                if (ImGui::Button("Message##btn")) {
+                    Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  ") + victim + ": " + message + "\"").c_str());
+                }
+                ImGui::SameLine();
+                if (ImGui::Button("VAC")) {
+                    Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  ") + victim + " has been permanently banned from official CS:GO servers.\"").c_str());
+                }
+                ImGui::SameLine();
+                if (ImGui::Button("Kick")) {
+                    Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  Player ") + victim + " left the game (Kicked from the session)\"").c_str());
+                }
+                ImGui::SameLine();
+                if (ImGui::Button("Unbox")) {
+                    Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  \x0B") + victim + " has opened a container and found: " + skinName + "\"").c_str());
+                }
+                ImGui::SameLine();
+                ImGui::TextDisabled("?");
+                if (ImGui::IsItemHovered())
+                    ImGui::SetTooltip("Sends a fake message into the chat via a radio message that uses\nchars to create a newline and change colours (pastebin.com/pZvCnGaC),\nyou can do this legit too via the 'playerchatwheel . \"\"' command!\n\nOnly works if you are alive and only teammates can see the message :(");
 
-            ImGui::Checkbox("Developer window", &devWindow);
+                ImGui::EndChild();
+            }
+            ImGui::SameLine();
+            ImGui::BeginChild("Config", ImVec2(0, 260), true); {
+                ImGui::Text("Config");
+                ImGui::Separator();
+                ImGui::EndChild();
+            }
+            ImGui::BeginChild("Movement", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.35f, 260), true); {
+                ImGui::Text("Movement");
+                ImGui::Separator();
+                ImGui::EndChild();
+            }
+            ImGui::SameLine();
+            ImGui::BeginChild("Misc", ImVec2(0, 260), true); {
+                ImGui::Text("Misc");
+                ImGui::Separator();
+                ImGui::Checkbox("Developer window", &devWindow);
+                ImGui::EndChild();
+            }
             break;
         }
     }
