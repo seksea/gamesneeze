@@ -1,5 +1,6 @@
-
+#pragma once
 // Interfaces
 #include "interfaces/interfaces.hpp"
-#include "vector.h"
+#include "classes/vector.h"
+#include "classes/player.hpp"
 #include "netvars.hpp"

@@ -172,9 +172,8 @@ void Menu::drawDevWindow() {
     }
     if (ImGui::TreeNode("Netvar testing")) {
         if (ImGui::TreeNode("LocalPlayer")) {
-            uintptr_t health = Netvar::getNetvarOffset("DT_BasePlayer", "m_iHealth");
-            uintptr_t localplayer = (uintptr_t)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetLocalPlayer());
-            ImGui::Text((std::string("m_iHealth: ") + std::to_string(*(int*)(localplayer+health))).c_str());
+            player* localplayer = (player*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetLocalPlayer());
+            ImGui::Text((std::string("m_iHealth: ") + std::to_string(localplayer->health())).c_str());
             ImGui::TreePop();
         }
         ImGui::TreePop();

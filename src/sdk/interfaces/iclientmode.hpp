@@ -1,5 +1,5 @@
 #pragma once
-#include "../vector.h"
+#include "../classes/vector.h"
 
 struct CUserCmd
 {
