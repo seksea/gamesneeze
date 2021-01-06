@@ -124,36 +124,43 @@ void Menu::drawDevWindow() {
 
     if (ImGui::TreeNode("Interfaces")) {
         if (ImGui::TreeNode("Globals")) {
-            ImGui::Text((std::string("realtime: ") + std::to_string(Interfaces::globals->realtime)).c_str());
-            ImGui::Text((std::string("framecount: ") + std::to_string(Interfaces::globals->framecount)).c_str());
-            ImGui::Text((std::string("absoluteframetime: ") + std::to_string(Interfaces::globals->absoluteframetime)).c_str());
-            ImGui::Text((std::string("absoluteframestarttimestddev: ") + std::to_string(Interfaces::globals->absoluteframestarttimestddev)).c_str());
-            ImGui::Text((std::string("curtime: ") + std::to_string(Interfaces::globals->curtime)).c_str());
-            ImGui::Text((std::string("frametime: ") + std::to_string(Interfaces::globals->frametime)).c_str());
-            ImGui::Text((std::string("maxClients: ") + std::to_string(Interfaces::globals->maxClients)).c_str());
-            ImGui::Text((std::string("tickcount: ") + std::to_string(Interfaces::globals->tickcount)).c_str());
-            ImGui::Text((std::string("interval_per_tick: ") + std::to_string(Interfaces::globals->interval_per_tick)).c_str());
-            ImGui::Text((std::string("interpolation_amount: ") + std::to_string(Interfaces::globals->interpolation_amount)).c_str());
-            ImGui::Text((std::string("simTicksThisFrame: ") + std::to_string(Interfaces::globals->simTicksThisFrame)).c_str());
-            ImGui::Text((std::string("network_protocol: ") + std::to_string(Interfaces::globals->network_protocol)).c_str());
-            ImGui::Text((std::string("m_bClient: ") + std::to_string(Interfaces::globals->m_bClient)).c_str());
-            ImGui::Text((std::string("m_bRemoteClient: ") + std::to_string(Interfaces::globals->m_bRemoteClient)).c_str());
+            ImGui::Text("realtime: %f", Interfaces::globals->realtime);
+            ImGui::Text("framecount: %d", Interfaces::globals->framecount);
+            ImGui::Text("absoluteframetime: %f", Interfaces::globals->absoluteframetime);
+            ImGui::Text("absoluteframestarttimestddev: %f", Interfaces::globals->absoluteframestarttimestddev);
+            ImGui::Text("curtime: %f", Interfaces::globals->curtime);
+            ImGui::Text("frametime: %f", Interfaces::globals->frametime);
+            ImGui::Text("maxClients: %d", Interfaces::globals->maxClients);
+            ImGui::Text("tickcount: %d", Interfaces::globals->tickcount);
+            ImGui::Text("interval_per_tick: %f", Interfaces::globals->interval_per_tick);
+            ImGui::Text("interpolation_amount: %f", Interfaces::globals->interpolation_amount);
+            ImGui::Text("simTicksThisFrame: %d", Interfaces::globals->simTicksThisFrame);
+            ImGui::Text("network_protocol: %d", Interfaces::globals->network_protocol);
+            ImGui::Text("m_bClient: %d", Interfaces::globals->m_bClient);
+            ImGui::Text("m_bRemoteClient: %d", Interfaces::globals->m_bRemoteClient);
             ImGui::TreePop();
         }
         if (ImGui::TreeNode("Engine Client")) {
             int windowW, windowH;
             Interfaces::engine->GetScreenSize(windowW, windowH);
-            ImGui::Text((std::string("GetScreenSize: ") + std::to_string(windowW) + std::string("x") + std::to_string(windowH)).c_str());
-            ImGui::Text((std::string("IsInGame: ") + std::to_string(Interfaces::engine->IsInGame())).c_str());
-            ImGui::Text((std::string("IsConnected: ") + std::to_string(Interfaces::engine->IsConnected())).c_str());
+            ImGui::Text("GetScreenSize: %dx%d", windowW, windowH);
+            ImGui::Text("IsInGame: %d", Interfaces::engine->IsInGame());
+            ImGui::Text("IsConnected: %d",Interfaces::engine->IsConnected());
             ImGui::TreePop();
         }
         ImGui::TreePop();
     }
     if (ImGui::TreeNode("Netvar testing")) {
         if (ImGui::TreeNode("LocalPlayer")) {
-            player* localplayer = (player*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetLocalPlayer());
-            ImGui::Text((std::string("m_iHealth: ") + std::to_string(localplayer->health())).c_str());
+            if (Interfaces::engine->IsInGame()) {
+                player* localplayer = (player*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetLocalPlayer());
+                ImGui::Text("dormant: %d", localplayer->dormant());
+                ImGui::Text("isPlayer: %d", localplayer->isPlayer());
+                ImGui::Text("DT_BasePlayer m_iHealth: %d", localplayer->health());
+                ImGui::Text("DT_CSPlayer m_fFlags: %d", localplayer->flags());
+                ImGui::Text("DT_BaseEntity m_bSpotted: %d", localplayer->spotted());
+                ImGui::Text("DT_BasePlayer m_vecOrigin: %f %f %f", localplayer->origin().x, localplayer->origin().y, localplayer->origin().y);
+            }
             ImGui::TreePop();
         }
         ImGui::TreePop();
