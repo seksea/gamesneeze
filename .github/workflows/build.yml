@@ -26,10 +26,10 @@ jobs:
         run: mkdir build; cd build
 
       - name: Install SDL2
-        run: sudo apt update; sudo apt upgrade; sudo apt install cmake g++ libsdl2-dev zlib1g-dev patchelf libglfw3-dev
+        run: sudo apt update; sudo apt install libsdl2-dev
 
       - name: Cmake
-        run: cmake -D CMAKE_BUILD_TYPE=Release
+        run: g++ --version; cmake -D CMAKE_BUILD_TYPE=Release
 
       - name: Make
         run: make -j $(nproc --all)
