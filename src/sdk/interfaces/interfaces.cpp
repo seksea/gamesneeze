@@ -9,6 +9,7 @@ bool Interfaces::init() {
     client = getInterface<IBaseClientDLL>("./csgo/bin/linux64/client_client.so", "VClient");
     engine = getInterface<IVEngineClient>("./bin/linux64/engine_client.so", "VEngineClient");
     panel = getInterface<IPanel>("./bin/linux64/vgui2_client.so", "VGUI_Panel");
+    entityList = getInterface<IClientEntityList>("./csgo/bin/linux64/client_client.so", "VClientEntityList");
 
     /* Get IClientMode */
     uintptr_t HudProcessInput = reinterpret_cast<uintptr_t>(getVTable(client)[10]);

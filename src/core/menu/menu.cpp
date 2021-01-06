@@ -1,6 +1,8 @@
 #include "../../includes.hpp"
 #include "imgui/imgui.h"
+#include <cstdint>
 #include <filesystem>
+#include <string>
 
 void style() {
     ImVec4* colors = ImGui::GetStyle().Colors;
@@ -168,6 +170,15 @@ void Menu::drawDevWindow() {
         }
         ImGui::TreePop();
     }
+    if (ImGui::TreeNode("Netvar testing")) {
+        if (ImGui::TreeNode("LocalPlayer")) {
+            uintptr_t health = Netvar::getNetvarOffset("DT_BasePlayer", "m_iHealth");
+            uintptr_t localplayer = (uintptr_t)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetLocalPlayer());
+            ImGui::Text((std::string("m_iHealth: ") + std::to_string(*(int*)(localplayer+health))).c_str());
+            ImGui::TreePop();
+        }
+        ImGui::TreePop();
+    }
 
     ImGui::End();
 }
@@ -245,6 +256,10 @@ void Menu::drawMenu() {
                 ImGui::SameLine();
                 if (ImGui::Button("Message##btn")) {
                     Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  ") + victim + ": " + message + "\"").c_str());
+                }
+                ImGui::SameLine();
+                if (ImGui::Button("Server")) {
+                    Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  Console: ") + message + "\"").c_str());
                 }
                 ImGui::SameLine();
                 if (ImGui::Button("VAC")) {

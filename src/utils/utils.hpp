@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 namespace Log {
     void log(std::string str);

@@ -1,10 +1,11 @@
 #pragma once
+#include <cstring>
 #include <dlfcn.h>
-
 
 #include "ibaseclientdll.hpp"
 #include "ivengineclient.hpp"
 #include "ipanel.hpp"
+#include "icliententitylist.hpp"
 
 #include "iclientmode.hpp"
 #include "globalvars.hpp"
@@ -16,6 +17,7 @@ namespace Interfaces {
     inline IBaseClientDLL* client;
     inline IVEngineClient* engine;
     inline IPanel* panel;
+    inline IClientEntityList* entityList;
 
     inline IClientMode* clientMode;
     inline CGlobalVars* globals;
