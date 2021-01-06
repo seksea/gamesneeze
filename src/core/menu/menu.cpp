@@ -122,26 +122,6 @@ void Menu::drawDevWindow() {
 
     ImGui::Checkbox("Demo window", &demoWindow);
 
-    if (ImGui::Button("Dump Interfaces (console)")) {
-        Log::log("Dumping interfaces...");
-
-        for (const auto & entry : std::filesystem::directory_iterator("./bin/linux64/")) {
-            if (entry.path().extension().string() == ".so") {
-                if (!strstr(entry.path().c_str(), "lib")) { // bit of a hack but we move
-                    Interfaces::dumpInterfaces(entry.path().c_str());
-                }
-            }
-        }
-        for (const auto & entry : std::filesystem::directory_iterator("./csgo/bin/linux64/")) {
-            if (entry.path().extension().string() == ".so") {
-                if (!strstr(entry.path().c_str(), "lib")) { // bit of a hack but we move
-                    Interfaces::dumpInterfaces(entry.path().c_str());
-                }
-            }
-        }
-        Log::log("Dumped interfaces!");
-    }
-
     if (ImGui::TreeNode("Interfaces")) {
         if (ImGui::TreeNode("Globals")) {
             ImGui::Text((std::string("realtime: ") + std::to_string(Interfaces::globals->realtime)).c_str());
@@ -232,6 +212,10 @@ void Menu::drawMenu() {
         }
         case 2: {
             ImGui::Text("Visuals"); break;
+            ImGui::BeginChild("Enemies", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 260), true); {
+
+                ImGui::EndChild();
+            }
         }
         case 3: {
             ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(800, 4));

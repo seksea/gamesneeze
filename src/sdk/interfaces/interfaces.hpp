@@ -1,6 +1,8 @@
 #pragma once
+#include <cstdint>
 #include <cstring>
 #include <dlfcn.h>
+#include <string>
 
 #include "ibaseclientdll.hpp"
 #include "ivengineclient.hpp"
@@ -30,7 +32,6 @@ namespace Interfaces {
         const char* m_pName;
         InterfaceReg* m_pNext;
     };
-
     template <typename T>
     T* getInterface(const char* file, const char* name) {
 	    void* lib = dlopen(file, RTLD_NOLOAD | RTLD_NOW | RTLD_LOCAL);
@@ -52,23 +53,5 @@ namespace Interfaces {
         Log::err(std::string(" Failed to find interface ") + name + " -> " + file);
         dlclose(lib);
         return nullptr;
-    }
-
-    inline void dumpInterfaces(const char* file) {
-	    void* lib = dlopen(file, RTLD_NOLOAD | RTLD_NOW | RTLD_LOCAL);
-        if (lib) {
-            // https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/tier1/interface.cpp#L46
-            InterfaceReg* interfaceReg = *reinterpret_cast<InterfaceReg**>(dlsym(lib, "s_pInterfaceRegs"));
-            dlclose(lib);
-
-            // loop through each interface in interfaceReg
-            for (InterfaceReg* cur = interfaceReg; cur; cur = cur->m_pNext) {
-                if ((uintptr_t)cur == 0) {
-                    return;
-                }
-                Log::log(std::string(" ") + file + " " + cur->m_pName);
-            }
-            return;
-        }
     }
 }

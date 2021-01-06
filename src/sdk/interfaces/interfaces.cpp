@@ -1,5 +1,7 @@
 #include "../../includes.hpp"
 #include "interfaces.hpp"
+#include <cstdint>
+#include <string>
 
 typedef IClientMode* (*getClientModeFunc)();
 
