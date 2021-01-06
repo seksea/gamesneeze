@@ -228,7 +228,7 @@ void Menu::drawMenu() {
             ImGui::Text("Visuals"); break;
         }
         case 3: {
-            ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(1000, 4));
+            ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(800, 4));
             ImGui::Text("Misc");
             ImGui::SameLine();ImGui::PopStyleVar(); 
             ImGui::TextDisabled("Credits!");
