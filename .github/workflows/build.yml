@@ -25,6 +25,9 @@ jobs:
       - name: Create build directory
         run: mkdir build; cd build
 
+      - name: Install GCC10
+        run: sudo add-apt-repository ppa:ubuntu-toolchain-r/test; sudo apt update; sudo apt install gcc-10
+
       - name: Install SDL2
         run: sudo apt update; sudo apt install libsdl2-dev
 
