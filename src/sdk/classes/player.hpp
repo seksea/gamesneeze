@@ -18,7 +18,7 @@ public:
 		typedef bool (*Fn)(void*);
 		return getVirtualFunc<Fn>(networkable(), 9)(networkable());
 	}
-
+	//
     NETVAR("DT_BasePlayer", "m_iHealth", health, int);
 	NETVAR("DT_CSPlayer", "m_fFlags", flags, int)
 	NETVAR("DT_BaseEntity", "m_bSpotted", spotted, bool)
