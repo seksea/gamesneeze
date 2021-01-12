@@ -2,9 +2,9 @@
 #include <string>
 
 namespace Log {
-    void log(std::string str);
-    void warn(std::string str);
-    void err(std::string str);
+    void log(const char* fmt, ...);
+    void warn(const char* fmt, ...);
+    void err(const char* fmt, ...);
 }
 
 inline uintptr_t getAbsoluteAddress(uintptr_t ptr, int offset, int size) {

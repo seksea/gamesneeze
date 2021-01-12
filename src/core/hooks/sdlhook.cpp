@@ -35,7 +35,7 @@ bool Hooks::SDL::initSDL() {
         return false;
     }
 
-    Log::log(std::string("  SwapWindow      | ") + std::to_string(swapWindowAddr));
+    Log::log("  SwapWindow      | %d", swapWindowAddr);
 
     pollEventAddr = relativeToAbsolute<uintptr_t>(uintptr_t(dlsym(libSDL, "SDL_PollEvent")) + 3);
     if (pollEventAddr) {
@@ -47,7 +47,7 @@ bool Hooks::SDL::initSDL() {
         return false;
     }
 
-    Log::log(std::string("  PollEvent       | ") + std::to_string(pollEventAddr));
+    Log::log("  PollEvent       | %d", pollEventAddr);
     Log::log(" Initialised SDL Hooks!");
     return true;
 }

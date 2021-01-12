@@ -1,16 +1,31 @@
 #include "../includes.hpp"
 
 /* print Logs in green */
-void Log::log(std::string str) {
-    std::cout << "\e[32m[LOG]" << str.c_str() << "\e[0m\n";
+void Log::log(const char* fmt, ...) {
+    va_list args;
+    va_start(args, fmt);
+    printf("\e[32m[LOG] ");
+    vprintf(fmt, args);
+    printf("\e[0m\n");
+    va_end(args);
 }
 
 /* print warns in orange */
-void Log::warn(std::string str) {
-    std::cout << "\e[33m[WARN]" << str.c_str() << "\e[0m\n";
+void Log::warn(const char* fmt, ...) {
+    va_list args;
+    va_start(args, fmt);
+    printf("\e[33m[WARN] ");
+    vprintf(fmt, args);
+    printf("\e[0m\n");
+    va_end(args);
 }
 
 /* print errors in red */
-void Log::err(std::string str) {
-    std::cout << "\e[31m[ERR]" << str.c_str() << "\e[0m\n";
+void Log::err(const char* fmt, ...) {
+    va_list args;
+    va_start(args, fmt);
+    printf("\e[31m[ERR] ");
+    vprintf(fmt, args);
+    printf("\e[0m\n");
+    va_end(args);
 }

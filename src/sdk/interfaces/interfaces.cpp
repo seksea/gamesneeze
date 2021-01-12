@@ -17,13 +17,13 @@ bool Interfaces::init() {
     uintptr_t HudProcessInput = reinterpret_cast<uintptr_t>(getVTable(client)[10]);
 	getClientModeFunc getClientMode = reinterpret_cast<getClientModeFunc>(getAbsoluteAddress(HudProcessInput + 11, 1, 5));
     clientMode = getClientMode();
-    Log::log(std::string(" ClientMode ") + std::to_string((uintptr_t)clientMode));
+    Log::log(" ClientMode %d", (uintptr_t)clientMode);
 
     /* I know globals isn't technically an interface it just fits in well here :) */
     /* Get globals */
     uintptr_t hudUpdate = reinterpret_cast<uintptr_t>(getVTable(client)[11]);
 	globals = *reinterpret_cast<CGlobalVars**>(getAbsoluteAddress(hudUpdate + 13, 3, 7));
-    Log::log(std::string(" Globals ") + std::to_string((uintptr_t)globals));
+    Log::log(" Globals %d", (uintptr_t)globals);
 
     Log::log("Initialised interfaces!");
     return true;
