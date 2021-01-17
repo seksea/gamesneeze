@@ -1,3 +1,10 @@
+#pragma once
+#include "../../includes.hpp"
+#include "imgui/imgui.h"
+#include <cstdint>
+#include <filesystem>
+#include <string>
+
 namespace Menu {
     inline bool open = true;
     inline bool initialised = false;
@@ -7,6 +14,10 @@ namespace Menu {
     inline bool demoWindow = false;
 
     void drawMenu();
+    void drawLegitTab();
+    void drawRageTab();
+    void drawVisualsTab();
+    void drawMiscTab();
     void drawDevWindow();
     void drawOverlay(ImDrawList* drawList);
     void onPollEvent(SDL_Event* event, const int result);

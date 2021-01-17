@@ -1,8 +1,4 @@
-#include "../../includes.hpp"
-#include "imgui/imgui.h"
-#include <cstdint>
-#include <filesystem>
-#include <string>
+#include "menu.hpp"
 
 void style() {
     ImVec4* colors = ImGui::GetStyle().Colors;
@@ -114,60 +110,6 @@ void Menu::onSwapWindow(SDL_Window* window) {
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void Menu::drawDevWindow() {
-    ImGui::SetNextWindowSize(ImVec2{500, 700});
-    ImGui::Begin("devwindow", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
-    ImGui::Text("developer");
-    ImGui::Separator();
-
-    ImGui::Checkbox("Demo window", &demoWindow);
-
-    if (ImGui::TreeNode("Interfaces")) {
-        if (ImGui::TreeNode("Globals")) {
-            ImGui::Text("realtime: %f", Interfaces::globals->realtime);
-            ImGui::Text("framecount: %d", Interfaces::globals->framecount);
-            ImGui::Text("absoluteframetime: %f", Interfaces::globals->absoluteframetime);
-            ImGui::Text("absoluteframestarttimestddev: %f", Interfaces::globals->absoluteframestarttimestddev);
-            ImGui::Text("curtime: %f", Interfaces::globals->curtime);
-            ImGui::Text("frametime: %f", Interfaces::globals->frametime);
-            ImGui::Text("maxClients: %d", Interfaces::globals->maxClients);
-            ImGui::Text("tickcount: %d", Interfaces::globals->tickcount);
-            ImGui::Text("interval_per_tick: %f", Interfaces::globals->interval_per_tick);
-            ImGui::Text("interpolation_amount: %f", Interfaces::globals->interpolation_amount);
-            ImGui::Text("simTicksThisFrame: %d", Interfaces::globals->simTicksThisFrame);
-            ImGui::Text("network_protocol: %d", Interfaces::globals->network_protocol);
-            ImGui::Text("m_bClient: %d", Interfaces::globals->m_bClient);
-            ImGui::Text("m_bRemoteClient: %d", Interfaces::globals->m_bRemoteClient);
-            ImGui::TreePop();
-        }
-        if (ImGui::TreeNode("Engine Client")) {
-            int windowW, windowH;
-            Interfaces::engine->GetScreenSize(windowW, windowH);
-            ImGui::Text("GetScreenSize: %dx%d", windowW, windowH);
-            ImGui::Text("IsInGame: %d", Interfaces::engine->IsInGame());
-            ImGui::Text("IsConnected: %d",Interfaces::engine->IsConnected());
-            ImGui::TreePop();
-        }
-        ImGui::TreePop();
-    }
-    if (ImGui::TreeNode("Netvar testing")) {
-        if (ImGui::TreeNode("LocalPlayer")) {
-            if (Interfaces::engine->IsInGame()) {
-                player* localplayer = (player*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetLocalPlayer());
-                ImGui::Text("dormant: %d", localplayer->dormant());
-                ImGui::Text("isPlayer: %d", localplayer->isPlayer());
-                ImGui::Text("DT_BasePlayer m_iHealth: %d", localplayer->health());
-                ImGui::Text("DT_CSPlayer m_fFlags: %d", localplayer->flags());
-                ImGui::Text("DT_BaseEntity m_bSpotted: %d", localplayer->spotted());
-                ImGui::Text("DT_BasePlayer m_vecOrigin: %f %f %f", localplayer->origin().x, localplayer->origin().y, localplayer->origin().y);
-            }
-            ImGui::TreePop();
-        }
-        ImGui::TreePop();
-    }
-
-    ImGui::End();
-}
 
 void Menu::drawMenu() {
     style();
@@ -212,82 +154,17 @@ void Menu::drawMenu() {
 
     switch(tabSelected) {
         case 0: {
-            ImGui::Text("Legit"); break;
+            Menu::drawLegitTab(); break;
         }
         case 1: {
-            ImGui::Text("Rage"); break;
+            Menu::drawRageTab(); break;
         }
         case 2: {
-            ImGui::Text("Visuals"); break;
-            ImGui::BeginChild("Enemies", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 260), true); {
-
-                ImGui::EndChild();
-            }
+            Menu::drawVisualsTab(); break;
         }
         case 3: {
             ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(800, 4));
-            ImGui::Text("Misc");
-            ImGui::SameLine();ImGui::PopStyleVar(); 
-            ImGui::TextDisabled("Credits!");
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("sekc (ofcourse)\nAll other contributors on GitHub (sadly none as of right now ;'( )\nand ocornut for his great ImGui UI framework");
-
-            ImGui::BeginChild("Trolling", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 260), true); {
-                ImGui::Text("Trolling");
-                ImGui::Separator();
-                ImGui::Text("Radio Exploit");
-                static char victim[128] = "";
-                ImGui::InputText("Victim's name", victim, IM_ARRAYSIZE(victim));
-                static char message[128] = "";
-                ImGui::InputText("Message##tbox", message, IM_ARRAYSIZE(message));
-                static char skinName[128] = "★ M9 Bayonet | Doppler";
-                ImGui::InputText("Skin/Weapon##tbox", skinName, IM_ARRAYSIZE(skinName));
-                ImGui::Text("Send fake: ");
-                ImGui::SameLine();
-                if (ImGui::Button("Message##btn")) {
-                    Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  ") + victim + " :""\x01"" " + message + "\"").c_str());
-                }
-                ImGui::SameLine();
-                if (ImGui::Button("Server")) {
-                    Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  ""\x01""Console: ") + message + "\"").c_str());
-                }
-                ImGui::SameLine();
-                if (ImGui::Button("VAC")) {
-                    Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  ""\x02""") + victim + " has been permanently banned from official CS:GO servers.\"").c_str());
-                }
-                ImGui::SameLine();
-                if (ImGui::Button("Kick")) {
-                    Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  ""\x01""Player ") + victim + " left the game (Kicked from the session)\"").c_str());
-                }
-                ImGui::SameLine();
-                if (ImGui::Button("Unbox")) {
-                    Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  ""\x0B""") + victim + """\x01"" has opened a container and found:""\x02"" " + skinName + "\"").c_str());
-                }
-                ImGui::SameLine();
-                ImGui::TextDisabled("?");
-                if (ImGui::IsItemHovered())
-                    ImGui::SetTooltip("Sends a fake message into the chat via a radio message that uses\nchars to create a newline and change colours (pastebin.com/pZvCnGaC),\nyou can do this legit too via the 'playerchatwheel . \"\"' command!\n\nOnly works if you are alive and only teammates can see the message :(");
-
-                ImGui::EndChild();
-            }
-            ImGui::SameLine();
-            ImGui::BeginChild("Config", ImVec2(0, 260), true); {
-                ImGui::Text("Config");
-                ImGui::Separator();
-                ImGui::EndChild();
-            }
-            ImGui::BeginChild("Movement", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.35f, 260), true); {
-                ImGui::Text("Movement");
-                ImGui::Separator();
-                ImGui::EndChild();
-            }
-            ImGui::SameLine();
-            ImGui::BeginChild("Misc", ImVec2(0, 260), true); {
-                ImGui::Text("Misc");
-                ImGui::Separator();
-                ImGui::Checkbox("Developer window", &devWindow);
-                ImGui::EndChild();
-            }
+            Menu::drawMiscTab();
             break;
         }
     }
