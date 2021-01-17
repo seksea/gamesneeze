@@ -20,23 +20,23 @@ void Menu::drawMiscTab() {
         ImGui::Text("Send fake: ");
         ImGui::SameLine();
         if (ImGui::Button("Message##btn")) {
-            Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  ") + victim + " :""\x01"" " + message + "\"").c_str());
+            Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer! \xe2\x80\xa8") + victim + " :""\x01"" " + message + "\"").c_str());
         }
         ImGui::SameLine();
         if (ImGui::Button("Server")) {
-            Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  ""\x01""Console: ") + message + "\"").c_str());
+            Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer! \xe2\x80\xa8""\x01""Console: ") + message + "\"").c_str());
         }
         ImGui::SameLine();
         if (ImGui::Button("VAC")) {
-            Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  ""\x02""") + victim + " has been permanently banned from official CS:GO servers.\"").c_str());
+            Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer! \xe2\x80\xa8""\x02""") + victim + " has been permanently banned from official CS:GO servers.\"").c_str());
         }
         ImGui::SameLine();
         if (ImGui::Button("Kick")) {
-            Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  ""\x01""Player ") + victim + " left the game (Kicked from the session)\"").c_str());
+            Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer! \xe2\x80\xa8""\x01""Player ") + victim + " left the game (Kicked from the session)\"").c_str());
         }
         ImGui::SameLine();
         if (ImGui::Button("Unbox")) {
-            Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer!  ""\x0B""") + victim + """\x01"" has opened a container and found:""\x02"" " + skinName + "\"").c_str());
+            Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer! \xe2\x80\xa8""\x0B""") + victim + """\x01"" has opened a container and found:""\x02"" " + skinName + "\"").c_str());
         }
         ImGui::SameLine();
         ImGui::TextDisabled("?");
