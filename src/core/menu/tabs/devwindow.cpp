@@ -36,18 +36,62 @@ void Menu::drawDevWindow() {
         }
         ImGui::TreePop();
     }
-    if (ImGui::TreeNode("Netvar testing")) {
-        if (ImGui::TreeNode("LocalPlayer")) {
-            if (Interfaces::engine->IsInGame()) {
-                player* localplayer = (player*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetLocalPlayer());
-                ImGui::Text("dormant: %d", localplayer->dormant());
-                ImGui::Text("isPlayer: %d", localplayer->isPlayer());
-                ImGui::Text("DT_BasePlayer m_iHealth: %d", localplayer->health());
-                ImGui::Text("DT_CSPlayer m_fFlags: %d", localplayer->flags());
-                ImGui::Text("DT_BaseEntity m_bSpotted: %d", localplayer->spotted());
-                ImGui::Text("DT_BasePlayer m_vecOrigin: %f %f %f", localplayer->origin().x, localplayer->origin().y, localplayer->origin().y);
+    if (ImGui::TreeNode("Players")) {
+        if (Interfaces::engine->IsInGame()) {
+            for (int i; i < Interfaces::globals->maxClients; i++) {
+                player* p = (player*)Interfaces::entityList->GetClientEntity(i);
+                if (p) {
+                    if (p->isPlayer()) {
+                        if (p->health() > 0) {
+                            if (ImGui::TreeNode(std::to_string(i).c_str(), "%d", i)) {
+                                ImGui::Text("dormant: %d", p->dormant());
+                                ImGui::Text("isPlayer: %d", p->isPlayer());
+                                if (ImGui::TreeNode(std::to_string(i+Interfaces::globals->maxClients).c_str(), "Flags")) {
+                                    int flags = p->flags();
+                                    ImGui::Text("FL_ONGROUND: %d", (flags & (1<<0)) ? 1 : 0);
+                                    ImGui::Text("FL_DUCKING: %d", (flags & (1<<1)) ? 1 : 0);
+                                    ImGui::Text("FL_ANIMDUCKING: %d", (flags & (1<<2)) ? 1 : 0);
+                                    ImGui::Text("FL_WATERJUMP: %d", (flags & (1<<3)) ? 1 : 0);
+                                    ImGui::Text("FL_ONTRAIN: %d", (flags & (1<<4)) ? 1 : 0);
+                                    ImGui::Text("FL_INTRAIN: %d", (flags & (1<<5)) ? 1 : 0);
+                                    ImGui::Text("FL_FROZEN: %d", (flags & (1<<6)) ? 1 : 0);
+                                    ImGui::Text("FL_ATCONTROLS: %d", (flags & (1<<7)) ? 1 : 0);
+                                    ImGui::Text("FL_CLIENT: %d", (flags & (1<<8)) ? 1 : 0);
+                                    ImGui::Text("FL_FAKECLIENT: %d", (flags & (1<<9)) ? 1 : 0);
+                                    ImGui::Text("FL_INWATER: %d", (flags & (1<<10)) ? 1 : 0);
+                                    ImGui::Text("FL_FLY: %d", (flags & (1<<11)) ? 1 : 0);
+                                    ImGui::Text("FL_SWIM: %d", (flags & (1<<12)) ? 1 : 0);
+                                    ImGui::Text("FL_CONVEYOR: %d", (flags & (1<<13)) ? 1 : 0);
+                                    ImGui::Text("FL_NPC: %d", (flags & (1<<14)) ? 1 : 0);
+                                    ImGui::Text("FL_GODMODE: %d", (flags & (1<<15)) ? 1 : 0);
+                                    ImGui::Text("FL_NOTARGET: %d", (flags & (1<<16)) ? 1 : 0);
+                                    ImGui::Text("FL_AIMTARGET: %d", (flags & (1<<17)) ? 1 : 0);
+                                    ImGui::Text("FL_PARTIALGROUND: %d", (flags & (1<<18)) ? 1 : 0);
+                                    ImGui::Text("FL_STATICPROP: %d", (flags & (1<<19)) ? 1 : 0);
+                                    ImGui::Text("FL_GRAPHED: %d", (flags & (1<<20)) ? 1 : 0);
+                                    ImGui::Text("FL_GRENADE: %d", (flags & (1<<21)) ? 1 : 0);
+                                    ImGui::Text("FL_STEPMOVEMENT: %d", (flags & (1<<22)) ? 1 : 0);
+                                    ImGui::Text("FL_DONTTOUCH: %d", (flags & (1<<23)) ? 1 : 0);
+                                    ImGui::Text("FL_BASEVELOCITY: %d", (flags & (1<<24)) ? 1 : 0);
+                                    ImGui::Text("FL_WORLDBRUSH: %d", (flags & (1<<25)) ? 1 : 0);
+                                    ImGui::Text("FL_OBJECT: %d", (flags & (1<<26)) ? 1 : 0);
+                                    ImGui::Text("FL_KILLME: %d", (flags & (1<<27)) ? 1 : 0);
+                                    ImGui::Text("FL_ONFIRE: %d", (flags & (1<<28)) ? 1 : 0);
+                                    ImGui::Text("FL_DISSOLVING: %d", (flags & (1<<29)) ? 1 : 0);
+                                    ImGui::Text("FL_TRANSRAGDOLL: %d", (flags & (1<<30)) ? 1 : 0);
+                                    ImGui::Text("FL_UNBLOCKABLE_BY_PLAYER: %d", (flags & (1<<31)) ? 1 : 0);
+                                    ImGui::TreePop();
+                                }
+                                ImGui::Text("DT_BasePlayer m_iHealth: %d", p->health());
+                                ImGui::Text("DT_CSPlayer m_fFlags: %d", p->flags());
+                                ImGui::Text("DT_BaseEntity m_bSpotted: %d", p->spotted());
+                                ImGui::Text("DT_BasePlayer m_vecOrigin: %f %f %f", p->origin().x, p->origin().y, p->origin().y);
+                                ImGui::TreePop();
+                            }
+                        }
+                    }
+                }
             }
-            ImGui::TreePop();
         }
         ImGui::TreePop();
     }
