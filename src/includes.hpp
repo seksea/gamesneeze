@@ -22,4 +22,5 @@ namespace Globals {
     inline VMatrix worldToScreenMatrix;
     inline int screenSizeX;
     inline int screenSizeY;
+    inline ImDrawList* drawList;
 }

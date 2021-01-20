@@ -58,7 +58,8 @@ All args are executed in the order they are written in, for example, "-u -b -l" 
 - [ ] Visual/Misc Features
 - [ ] Legitbot
 - [ ] Prediction
-- [ ] Ragebot
+- [ ] Fix bugs for a few weeks and add more small features
+- [ ] Ragebot/HvH features
 
 ## Code style
 - Interfaces layed out like this (func names, arg names and comments typed as in the [2015 leak](https://github.com/perilouswithadollarsign/cstrike15_src) or the [source sdk](https://github.com/ValveSoftware/source-sdk-2013)):
