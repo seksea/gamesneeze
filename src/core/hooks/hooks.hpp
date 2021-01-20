@@ -16,6 +16,11 @@ namespace Hooks {
         inline func original;
         void hook(void* thisptr, unsigned int vguiPanel, bool forceRepaint, bool allowForce);
     }
+    namespace Paint {
+        using func = void(*)(void* thisptr, PaintMode_t mode);
+        inline func original;
+        void hook(void* thisptr, PaintMode_t mode);
+    }
 
     /* SDL HOOKS */
     namespace SDL {

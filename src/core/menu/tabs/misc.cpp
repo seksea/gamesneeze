@@ -61,6 +61,7 @@ void Menu::drawMiscTab() {
         ImGui::Text("Misc");
         ImGui::Separator();
         ImGui::Checkbox("Developer window", &devWindow);
+        ImGui::Checkbox("Test ESP Box", &ESPBox);
         ImGui::EndChild();
     }
 }

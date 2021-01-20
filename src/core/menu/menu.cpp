@@ -82,6 +82,8 @@ void Menu::onSwapWindow(SDL_Window* window) {
     ImGuiIO& io = ImGui::GetIO();
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
+    Globals::screenSizeX = w;
+    Globals::screenSizeY = h;
     io.DisplaySize = ImVec2((float)w, (float)h);
 
     ImGui::NewFrame();

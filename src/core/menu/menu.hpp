@@ -13,6 +13,8 @@ namespace Menu {
     inline bool devWindow = false;
     inline bool demoWindow = false;
 
+    inline bool ESPBox = false;
+
     void drawMenu();
     void drawLegitTab();
     void drawRageTab();

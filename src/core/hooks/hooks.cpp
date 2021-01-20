@@ -20,6 +20,9 @@ bool Hooks::init() {
     Log::log(" Hooking PaintTraverse...");
     PaintTraverse::original = (PaintTraverse::func)VMT::hook(Interfaces::panel, (void*)PaintTraverse::hook, 42);
 
+    Log::log(" Hooking Paint...");
+    Paint::original = (Paint::func)VMT::hook(Interfaces::engineVgui, (void*)Paint::hook, 15);
+
     Log::log("Initialised hooks!");
     return true;
 }
@@ -39,6 +42,9 @@ bool Hooks::unload() {
 
     Log::log(" Unhooking PaintTraverse...");
     VMT::hook(Interfaces::panel, (void*)PaintTraverse::original, 42);
+
+    Log::log(" Unhooking Paint...");
+    VMT::hook(Interfaces::engineVgui, (void*)Paint::original, 15);
 
     Log::log("Unloaded hooks!");
     return true;

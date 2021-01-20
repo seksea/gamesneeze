@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include "../../utils/utils.hpp"
+#include "../classes/vector.h"
 
 // Engine player info, no game related infos here
 typedef struct player_info_s
@@ -68,6 +69,11 @@ public:
 	bool IsConnected() {
 		typedef bool (*Fn)(void*);
 		return getVirtualFunc<Fn>(this, 27)(this);
+	}
+
+	const VMatrix& WorldToScreenMatrix() {
+		typedef VMatrix& (*Fn)(void*);
+		return getVirtualFunc<Fn>(this, 37)(this);
 	}
 
     // Inserts szCmdString into the command buffer as if it was typed by the client to his/her console.
