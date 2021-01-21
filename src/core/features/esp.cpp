@@ -70,6 +70,15 @@ static bool getBox(player* entity, int& x, int& y, int& x2, int& y2) {
 	return true;
 }
 
+void outlinedText(ImVec2 pos, ImColor color, char* text) {
+    Globals::drawList->AddText(ImVec2(pos.x-1, pos.y), ImColor(0, 0, 0, 255), text);
+    Globals::drawList->AddText(ImVec2(pos.x+1, pos.y), ImColor(0, 0, 0, 255), text);
+    Globals::drawList->AddText(ImVec2(pos.x, pos.y-1), ImColor(0, 0, 0, 255), text);
+    Globals::drawList->AddText(ImVec2(pos.x, pos.y+1), ImColor(0, 0, 0, 255), text);
+    Globals::drawList->AddText(ImVec2(pos.x, pos.y), color, text);
+
+}
+
 void drawPlayerBox(player* p) {
     int x, y, x2, y2;
     if (getBox(p, x, y, x2, y2)) {
@@ -91,33 +100,21 @@ void drawPlayerBox(player* p) {
         }
         
         if (CONFIGBOOL("Enemy:Name")) {
-            Globals::drawList->AddText(ImVec2(x2, yOffset), ImColor(0, 0, 0, 255), info.name);
-            Globals::drawList->AddText(ImVec2(x2+2, yOffset), ImColor(0, 0, 0, 255), info.name);
-            Globals::drawList->AddText(ImVec2(x2+1, yOffset-1), ImColor(0, 0, 0, 255), info.name);
-            Globals::drawList->AddText(ImVec2(x2+1, yOffset+1), ImColor(0, 0, 0, 255), info.name);
-            Globals::drawList->AddText(ImVec2(x2+1, yOffset), ImColor(255, 255, 255, 255), info.name);
+            outlinedText(ImVec2(x2+1, yOffset), ImColor(255, 255, 255, 255), info.name);
             yOffset += 13;
         }
 
         if (CONFIGBOOL("Enemy:Health")) {
             char hpText[16];
             sprintf(hpText, "%d hp", p->health());
-            Globals::drawList->AddText(ImVec2(x2, yOffset), ImColor(0, 0, 0, 255), hpText);
-            Globals::drawList->AddText(ImVec2(x2+2, yOffset), ImColor(0, 0, 0, 255), hpText);
-            Globals::drawList->AddText(ImVec2(x2+1, yOffset-1), ImColor(0, 0, 0, 255), hpText);
-            Globals::drawList->AddText(ImVec2(x2+1, yOffset+1), ImColor(0, 0, 0, 255), hpText);
-            Globals::drawList->AddText(ImVec2(x2+1, yOffset), ImColor(255, 255, 255, 255), hpText);
+            outlinedText(ImVec2(x2+1, yOffset), ImColor(255, 255, 255, 255), hpText);
             yOffset += 13;
         }
 
         if (CONFIGBOOL("Enemy:Money")) {
             char moneyText[16];
             sprintf(moneyText, "$%d", p->money());
-            Globals::drawList->AddText(ImVec2(x2, yOffset), ImColor(0, 0, 0, 255), moneyText);
-            Globals::drawList->AddText(ImVec2(x2+2, yOffset), ImColor(0, 0, 0, 255), moneyText);
-            Globals::drawList->AddText(ImVec2(x2+1, yOffset-1), ImColor(0, 0, 0, 255), moneyText);
-            Globals::drawList->AddText(ImVec2(x2+1, yOffset+1), ImColor(0, 0, 0, 255), moneyText);
-            Globals::drawList->AddText(ImVec2(x2+1, yOffset), ImColor(30, 160, 30, 255), moneyText);
+            outlinedText(ImVec2(x2+1, yOffset), ImColor(30, 160, 30, 255), moneyText);
         }
     }
 }

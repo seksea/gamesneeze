@@ -15,7 +15,7 @@ void Menu::drawVisualsTab() {
     ImGui::Text("Visuals");
     if (ImGui::BeginTabBar("##visTabs", ImGuiTabBarFlags_None)) {
         if (ImGui::BeginTabItem("Enemies")) {
-            ImGui::BeginChild("ESP", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 240), true); {
+            ImGui::BeginChild("ESP", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
                 ImGui::Text("ESP");
                 ImGui::Separator();
                 ImGui::Checkbox("Box", &CONFIGBOOL("Enemy:Box"));
@@ -26,6 +26,11 @@ void Menu::drawVisualsTab() {
                 ImGui::Checkbox("Health", &CONFIGBOOL("Enemy:Health"));
                 ImGui::Checkbox("Health Bar", &CONFIGBOOL("Enemy:HealthBar"));
                 ImGui::Checkbox("Money", &CONFIGBOOL("Enemy:Money"));
+                ImGui::EndChild();
+            }
+            ImGui::BeginChild("Chams", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
+                ImGui::Text("Chams");
+                ImGui::Separator();
                 ImGui::EndChild();
             }
             ImGui::EndTabItem();
