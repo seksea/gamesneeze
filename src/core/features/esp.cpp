@@ -73,54 +73,64 @@ static bool getBox(player* entity, int& x, int& y, int& x2, int& y2) {
 void drawPlayerBox(player* p) {
     int x, y, x2, y2;
     if (getBox(p, x, y, x2, y2)) {
+        int yOffset = y;
         player_info_t info;
         Interfaces::engine->GetPlayerInfo(p->index(), &info);
-        Globals::drawList->AddRect(ImVec2(x, y), ImVec2(x2, y2), ImColor(255, 255, 255, 255));
-        Globals::drawList->AddRect(ImVec2(x-1, y-1), ImVec2(x2+1, y2+1), ImColor(0, 0, 0, 255));
-        Globals::drawList->AddRect(ImVec2(x+1, y+1), ImVec2(x2-1, y2-1), ImColor(0, 0, 0, 255));
 
-        Globals::drawList->AddRectFilled(ImVec2(x-6, y2-(((float)p->health()/100.f)*(y2-y))-1), 
-        ImVec2(x-2, y2+1), ImColor(0, 0, 0, 255));
-        Globals::drawList->AddRectFilled(ImVec2(x-5, y2-(((float)p->health()/100.f)*(y2-y))), 
-        ImVec2(x-3, y2), ImColor(0, 240, 0, 255));
+        if (CONFIGBOOL("Enemy:Box")) {
+            Globals::drawList->AddRect(ImVec2(x, y), ImVec2(x2, y2), CONFIGCOL("Enemy:BoxColor"));
+            Globals::drawList->AddRect(ImVec2(x-1, y-1), ImVec2(x2+1, y2+1), ImColor(0, 0, 0, 255));
+            Globals::drawList->AddRect(ImVec2(x+1, y+1), ImVec2(x2-1, y2-1), ImColor(0, 0, 0, 255));
+        }
+
+        if (CONFIGBOOL("Enemy:HealthBar")) {
+            Globals::drawList->AddRectFilled(ImVec2(x-6, y2-(((float)p->health()/100.f)*(y2-y))-1), 
+            ImVec2(x-2, y2+1), ImColor(0, 0, 0, 255));
+            Globals::drawList->AddRectFilled(ImVec2(x-5, y2-(((float)p->health()/100.f)*(y2-y))), 
+            ImVec2(x-3, y2), ImColor(0, 240, 0, 255));
+        }
         
-        Globals::drawList->AddText(ImVec2(x2, y), ImColor(0, 0, 0, 255), info.name);
-        Globals::drawList->AddText(ImVec2(x2+2, y), ImColor(0, 0, 0, 255), info.name);
-        Globals::drawList->AddText(ImVec2(x2+1, y-1), ImColor(0, 0, 0, 255), info.name);
-        Globals::drawList->AddText(ImVec2(x2+1, y+1), ImColor(0, 0, 0, 255), info.name);
-        Globals::drawList->AddText(ImVec2(x2+1, y), ImColor(255, 255, 255, 255), info.name);
+        if (CONFIGBOOL("Enemy:Name")) {
+            Globals::drawList->AddText(ImVec2(x2, yOffset), ImColor(0, 0, 0, 255), info.name);
+            Globals::drawList->AddText(ImVec2(x2+2, yOffset), ImColor(0, 0, 0, 255), info.name);
+            Globals::drawList->AddText(ImVec2(x2+1, yOffset-1), ImColor(0, 0, 0, 255), info.name);
+            Globals::drawList->AddText(ImVec2(x2+1, yOffset+1), ImColor(0, 0, 0, 255), info.name);
+            Globals::drawList->AddText(ImVec2(x2+1, yOffset), ImColor(255, 255, 255, 255), info.name);
+            yOffset += 13;
+        }
 
-        char hpText[16];
-        sprintf(hpText, "%d hp", p->health());
+        if (CONFIGBOOL("Enemy:Health")) {
+            char hpText[16];
+            sprintf(hpText, "%d hp", p->health());
+            Globals::drawList->AddText(ImVec2(x2, yOffset), ImColor(0, 0, 0, 255), hpText);
+            Globals::drawList->AddText(ImVec2(x2+2, yOffset), ImColor(0, 0, 0, 255), hpText);
+            Globals::drawList->AddText(ImVec2(x2+1, yOffset-1), ImColor(0, 0, 0, 255), hpText);
+            Globals::drawList->AddText(ImVec2(x2+1, yOffset+1), ImColor(0, 0, 0, 255), hpText);
+            Globals::drawList->AddText(ImVec2(x2+1, yOffset), ImColor(255, 255, 255, 255), hpText);
+            yOffset += 13;
+        }
 
-        Globals::drawList->AddText(ImVec2(x2, y+16), ImColor(0, 0, 0, 255), hpText);
-        Globals::drawList->AddText(ImVec2(x2+2, y+16), ImColor(0, 0, 0, 255), hpText);
-        Globals::drawList->AddText(ImVec2(x2+1, y+15), ImColor(0, 0, 0, 255), hpText);
-        Globals::drawList->AddText(ImVec2(x2+1, y+17), ImColor(0, 0, 0, 255), hpText);
-        Globals::drawList->AddText(ImVec2(x2+1, y+16), ImColor(255, 255, 255, 255), hpText);
-
-        char moneyText[16];
-        sprintf(moneyText, "$%d", p->money());
-
-        Globals::drawList->AddText(ImVec2(x2, y+32), ImColor(0, 0, 0, 255), moneyText);
-        Globals::drawList->AddText(ImVec2(x2+2, y+32), ImColor(0, 0, 0, 255), moneyText);
-        Globals::drawList->AddText(ImVec2(x2+1, y+31), ImColor(0, 0, 0, 255), moneyText);
-        Globals::drawList->AddText(ImVec2(x2+1, y+33), ImColor(0, 0, 0, 255), moneyText);
-        Globals::drawList->AddText(ImVec2(x2+1, y+32), ImColor(30, 160, 30, 255), moneyText);
+        if (CONFIGBOOL("Enemy:Money")) {
+            char moneyText[16];
+            sprintf(moneyText, "$%d", p->money());
+            Globals::drawList->AddText(ImVec2(x2, yOffset), ImColor(0, 0, 0, 255), moneyText);
+            Globals::drawList->AddText(ImVec2(x2+2, yOffset), ImColor(0, 0, 0, 255), moneyText);
+            Globals::drawList->AddText(ImVec2(x2+1, yOffset-1), ImColor(0, 0, 0, 255), moneyText);
+            Globals::drawList->AddText(ImVec2(x2+1, yOffset+1), ImColor(0, 0, 0, 255), moneyText);
+            Globals::drawList->AddText(ImVec2(x2+1, yOffset), ImColor(30, 160, 30, 255), moneyText);
+        }
     }
 }
 
 void Features::ESP::drawESP() {
-    if (Menu::ESPBox) {
-        if (Interfaces::engine->IsInGame()) {
-            for (int i; i < 64; i++) {
-                if (i != Interfaces::engine->GetLocalPlayer()) {
-                    player* p = (player*)Interfaces::entityList->GetClientEntity(i);
-                    if (p) {
-                        if (!p->dormant()) {
-                            if (p->health() > 0) {
-                                drawPlayerBox(p);
-                            }
+    if (Interfaces::engine->IsInGame()) {
+        for (int i; i < 64; i++) {
+            if (i != Interfaces::engine->GetLocalPlayer()) {
+                player* p = (player*)Interfaces::entityList->GetClientEntity(i);
+                if (p) {
+                    if (!p->dormant()) {
+                        if (p->health() > 0) {
+                            drawPlayerBox(p);
                         }
                     }
                 }

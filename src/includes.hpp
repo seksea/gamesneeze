@@ -12,6 +12,7 @@
 #include "core/menu/imgui/imgui_impl_sdl.h"
 #include "core/menu/imgui/imgui_impl_opengl3.h"
 
+#include "core/menu/config.hpp"
 #include "utils/utils.hpp"
 #include "sdk/sdk.hpp"
 #include "core/features/features.hpp"

@@ -1,4 +1,6 @@
 #include "../menu.hpp"
+#include <filesystem>
+#include "../config.hpp"
 
 void Menu::drawMiscTab() {
     ImGui::Text("Misc");
@@ -49,6 +51,12 @@ void Menu::drawMiscTab() {
     ImGui::BeginChild("Config", ImVec2(0, 260), true); {
         ImGui::Text("Config");
         ImGui::Separator();
+        if (ImGui::Button("Save")) {
+
+        };
+        if (ImGui::Button("Load")) {
+            
+        };
         ImGui::EndChild();
     }
     ImGui::BeginChild("Movement", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.35f, 260), true); {
@@ -61,7 +69,6 @@ void Menu::drawMiscTab() {
         ImGui::Text("Misc");
         ImGui::Separator();
         ImGui::Checkbox("Developer window", &devWindow);
-        ImGui::Checkbox("Test ESP Box", &ESPBox);
         ImGui::EndChild();
     }
 }
