@@ -52,10 +52,10 @@ void Menu::drawMiscTab() {
         ImGui::Text("Config");
         ImGui::Separator();
         if (ImGui::Button("Save")) {
-
+            Config::save();
         };
         if (ImGui::Button("Load")) {
-            
+            Config::load();            
         };
         ImGui::EndChild();
     }

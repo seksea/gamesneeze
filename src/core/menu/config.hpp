@@ -1,5 +1,6 @@
 #pragma once
 #include <unordered_map>
+#include <fstream>
 #include "imgui/imgui.h"
 
 #define CONFIGINT(name) Config::config.at(name).intValue
@@ -9,35 +10,41 @@
 
 #define CONFIGITEM(name, value) {name, ConfigItem(value)}
 
+enum CONFIGITEMTYPE {
+    INT,
+    BOOL,
+    STR,
+    COLOR
+};
+
 namespace Config {
-    inline void save(char* name) {
-        
-    }
-    inline void load(char* name) {
-        
-    }
 
     class ConfigItem {
         public:
         ConfigItem(int value) {
+            type = INT;
             intValue = value;
         }
         ConfigItem(bool value) {
+            type = BOOL;
             boolValue = value;
         }
         ConfigItem(char* value) {
+            type = STR;
             strValue = value;
         }
         ConfigItem(ImColor value) {
+            type = COLOR;
             colValue = value;
         }
+        CONFIGITEMTYPE type;
         int intValue = -1;
         bool boolValue = false;
         char* strValue;
         ImColor colValue = ImColor(255, 255, 255, 255);
     };
 
-    inline std::unordered_map<const char*, ConfigItem> config {
+    inline std::unordered_map<std::string, ConfigItem> config {
         // Visuals {
             // ESP {
                 CONFIGITEM("Enemy:Box", false),
@@ -71,4 +78,55 @@ namespace Config {
             // }
         // }
     };
+
+    inline void save() {
+        std::ofstream configFile;
+        configFile.open("gamesneeze.cfg");
+        for (auto i : config) {
+            switch (i.second.type) {
+                case INT: 
+                    configFile << i.second.type << "\t"<< i.first << "\t" << i.second.intValue << "\n";
+                break;
+                case BOOL: 
+                    configFile << i.second.type << "\t" << i.first << "\t" << i.second.boolValue << "\n";
+                break;
+                case STR: 
+                    configFile << i.second.type << "\t" << i.first << "\t" << i.second.strValue << "\n";
+                break;
+                case COLOR: 
+                    configFile << i.second.type << "\t" << i.first << "\t" << i.second.colValue.Value.x << "|" << i.second.colValue.Value.y << "|" << i.second.colValue.Value.z << "|" << i.second.colValue.Value.w << "\n";
+                break;
+            }
+        }
+        configFile.close();
+    }
+
+    inline void load() {
+        std::string line;
+        std::ifstream configFile;
+        configFile.open("gamesneeze.cfg");
+        while(std::getline(configFile, line)) {
+            CONFIGITEMTYPE type;
+            char name[64];
+            char value[64];
+            sscanf(line.c_str(), "%d\t%s\t%s", (int*)&type, name, value);
+            printf("type: %d\nname: %s\nvalue: %s\n\n", type, name, value);
+            switch (type) {
+                case INT:
+                    CONFIGINT(name) = atoi(value);
+                break;
+                case BOOL:
+                    CONFIGBOOL(name) = atoi(value);
+                break;
+                case STR:
+                    CONFIGSTR(name) = value;
+                break;
+                case COLOR:
+                    float r, g, b, a;
+                    sscanf(value, "%f|%f|%f|%f", (float*)&r, (float*)&g, (float*)&b, (float*)&a);
+                    CONFIGCOL(name) = ImColor(r, g, b, a);
+                break;
+            }
+        }
+    }
 }
