@@ -110,7 +110,6 @@ namespace Config {
             char name[64];
             char value[64];
             sscanf(line.c_str(), "%d\t%s\t%s", (int*)&type, name, value);
-            printf("type: %d\nname: %s\nvalue: %s\n\n", type, name, value);
             switch (type) {
                 case INT:
                     CONFIGINT(name) = atoi(value);
