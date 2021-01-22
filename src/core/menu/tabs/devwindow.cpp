@@ -82,7 +82,9 @@ void Menu::drawDevWindow() {
                                     ImGui::Text("FL_UNBLOCKABLE_BY_PLAYER: %d", (flags & (1<<31)) ? 1 : 0);
                                     ImGui::TreePop();
                                 }
+                                ImGui::Text("DT_CSPlayer m_iAccount: %d", p->money());
                                 ImGui::Text("DT_BasePlayer m_iHealth: %d", p->health());
+                                ImGui::Text("DT_BasePlayer m_iTeamNum: %d", p->team());
                                 ImGui::Text("DT_CSPlayer m_fFlags: %d", p->flags());
                                 ImGui::Text("DT_BaseEntity m_bSpotted: %d", p->spotted());
                                 ImGui::Text("DT_BasePlayer m_vecOrigin: %f %f %f", p->origin().x, p->origin().y, p->origin().y);

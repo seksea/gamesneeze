@@ -9,6 +9,9 @@
 #include "ipanel.hpp"
 #include "icliententitylist.hpp"
 #include "ienginevgui.hpp"
+#include "ivmodelrender.hpp"
+#include "imaterialsystem.hpp" // Also contains IMaterial
+#include "ivmodelinfo.hpp"
 
 #include "iclientmode.hpp"
 #include "globalvars.hpp"
@@ -22,6 +25,9 @@ namespace Interfaces {
     inline IPanel* panel;
     inline IClientEntityList* entityList;
     inline IEngineVGui* engineVgui;
+    inline IVModelRender* modelRender;
+    inline IVModelInfo* modelInfo;
+    inline IMaterialSystem* materialSystem;
 
     inline IClientMode* clientMode;
     inline CGlobalVars* globals;

@@ -34,6 +34,7 @@ public:
 	NETVAR("DT_BaseEntity", "m_Collision", collideable, ICollideable);
 	NETVAR("DT_CSPlayer", "m_iAccount", money, int);
     NETVAR("DT_BasePlayer", "m_iHealth", health, int);
+	NETVAR("DT_BaseEntity", "m_iTeamNum", team, int);
 	NETVAR("DT_CSPlayer", "m_fFlags", flags, int);
 	NETVAR("DT_BaseEntity", "m_bSpotted", spotted, bool);
 	NETVAR("DT_BasePlayer", "m_vecOrigin", origin, Vector);

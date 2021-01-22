@@ -2,5 +2,6 @@
 #include "hooks.hpp"
 
 bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* cmd) {
+    Globals::localPlayer = (player*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetLocalPlayer());
     return original(thisptr, flInputSampleTime, cmd);
 }

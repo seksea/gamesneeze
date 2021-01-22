@@ -38,17 +38,37 @@ namespace Config {
     };
 
     inline std::unordered_map<const char*, ConfigItem> config {
-        CONFIGITEM("Enemy:Box", false),
-        CONFIGITEM("Enemy:BoxColor", ImColor(197, 66, 245, 255)),
-        CONFIGITEM("Enemy:Name", false),
-        CONFIGITEM("Enemy:Health", false),
-        CONFIGITEM("Enemy:HealthBar", false),
-        CONFIGITEM("Enemy:Money", false),
-        CONFIGITEM("Team:Box", false),
-        CONFIGITEM("Team:BoxColor", ImColor(10, 161, 32, 255)),
-        CONFIGITEM("Team:Name", false),
-        CONFIGITEM("Team:Health", false),
-        CONFIGITEM("Team:HealthBar", false),
-        CONFIGITEM("Team:Money", false)
+        // Visuals {
+            // ESP {
+                CONFIGITEM("Enemy:Box", false),
+                CONFIGITEM("Enemy:BoxColor", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Enemy:Name", false),
+                CONFIGITEM("Enemy:Health", false),
+                CONFIGITEM("Enemy:HealthBar", false),
+                CONFIGITEM("Enemy:Money", false),
+                CONFIGITEM("Team:Box", false),
+                CONFIGITEM("Team:BoxColor", ImColor(10, 161, 32, 255)),
+                CONFIGITEM("Team:Name", false),
+                CONFIGITEM("Team:Health", false),
+                CONFIGITEM("Team:HealthBar", false),
+                CONFIGITEM("Team:Money", false),
+            // }
+            // Chams {
+                CONFIGITEM("Enemy:ChamsMaterial", 0),
+                CONFIGITEM("Enemy:ChamsPrimaryColor", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Enemy:IgnoreZChamsMaterial", 0),
+                CONFIGITEM("Enemy:IgnoreZChamsPrimaryColor", ImColor(197, 66, 245, 255)),
+                
+                CONFIGITEM("Team:ChamsMaterial", 0),
+                CONFIGITEM("Team:ChamsPrimaryColor", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Team:IgnoreZChamsMaterial", 0),
+                CONFIGITEM("Team:IgnoreZChamsPrimaryColor", ImColor(197, 66, 245, 255)),
+
+                CONFIGITEM("Weapon:ChamsMaterial", 0),
+                CONFIGITEM("Weapon:ChamsPrimaryColor", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Arms:ChamsMaterial", 0),
+                CONFIGITEM("Arms:ChamsPrimaryColor", ImColor(197, 66, 245, 255)),
+            // }
+        // }
     };
 }

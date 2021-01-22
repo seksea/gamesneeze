@@ -1,5 +1,6 @@
 #include "features.hpp"
 #include "../../includes.hpp"
+#include <sstream>
 
 bool worldToScreen( const Vector& origin, Vector& screen ) {
 	float w = Globals::worldToScreenMatrix[3][0] * origin.x
@@ -79,55 +80,65 @@ void outlinedText(ImVec2 pos, ImColor color, char* text) {
 
 }
 
-void drawPlayerBox(player* p) {
-    int x, y, x2, y2;
-    if (getBox(p, x, y, x2, y2)) {
-        int yOffset = y;
-        player_info_t info;
-        Interfaces::engine->GetPlayerInfo(p->index(), &info);
-
-        if (CONFIGBOOL("Enemy:Box")) {
-            Globals::drawList->AddRect(ImVec2(x, y), ImVec2(x2, y2), CONFIGCOL("Enemy:BoxColor"));
-            Globals::drawList->AddRect(ImVec2(x-1, y-1), ImVec2(x2+1, y2+1), ImColor(0, 0, 0, 255));
-            Globals::drawList->AddRect(ImVec2(x+1, y+1), ImVec2(x2-1, y2-1), ImColor(0, 0, 0, 255));
-        }
-
-        if (CONFIGBOOL("Enemy:HealthBar")) {
-            Globals::drawList->AddRectFilled(ImVec2(x-6, y2-(((float)p->health()/100.f)*(y2-y))-1), 
-            ImVec2(x-2, y2+1), ImColor(0, 0, 0, 255));
-            Globals::drawList->AddRectFilled(ImVec2(x-5, y2-(((float)p->health()/100.f)*(y2-y))), 
-            ImVec2(x-3, y2), ImColor(0, 240, 0, 255));
-        }
-        
-        if (CONFIGBOOL("Enemy:Name")) {
-            outlinedText(ImVec2(x2+1, yOffset), ImColor(255, 255, 255, 255), info.name);
-            yOffset += 13;
-        }
-
-        if (CONFIGBOOL("Enemy:Health")) {
-            char hpText[16];
-            sprintf(hpText, "%d hp", p->health());
-            outlinedText(ImVec2(x2+1, yOffset), ImColor(255, 255, 255, 255), hpText);
-            yOffset += 13;
-        }
-
-        if (CONFIGBOOL("Enemy:Money")) {
-            char moneyText[16];
-            sprintf(moneyText, "$%d", p->money());
-            outlinedText(ImVec2(x2+1, yOffset), ImColor(30, 160, 30, 255), moneyText);
-        }
+void drawPlayerBox(int x, int y, int x2, int y2, bool drawBox, ImColor color, char* rightText, int health = -1) {
+    if (drawBox) {
+        Globals::drawList->AddRect(ImVec2(x, y), ImVec2(x2, y2), color);
+        Globals::drawList->AddRect(ImVec2(x-1, y-1), ImVec2(x2+1, y2+1), ImColor(0, 0, 0, 255));
+        Globals::drawList->AddRect(ImVec2(x+1, y+1), ImVec2(x2-1, y2-1), ImColor(0, 0, 0, 255));
     }
+
+    if (health != -1) {
+        Globals::drawList->AddRectFilled(ImVec2(x-6, y2-(((float)health/100.f)*(y2-y))-1), 
+        ImVec2(x-2, y2+1), ImColor(0, 0, 0, 255));
+        Globals::drawList->AddRectFilled(ImVec2(x-5, y2-(((float)health/100.f)*(y2-y))), 
+        ImVec2(x-3, y2), ImColor(0, 240, 0, 255));
+    }
+    
+    outlinedText(ImVec2(x2+1, y), ImColor(255, 255, 255, 255), rightText);
 }
 
 void Features::ESP::drawESP() {
     if (Interfaces::engine->IsInGame()) {
         for (int i; i < 64; i++) {
-            if (i != Interfaces::engine->GetLocalPlayer()) {
-                player* p = (player*)Interfaces::entityList->GetClientEntity(i);
-                if (p) {
-                    if (!p->dormant()) {
-                        if (p->health() > 0) {
-                            drawPlayerBox(p);
+            if (Globals::localPlayer) {
+                if (i != Interfaces::engine->GetLocalPlayer()) {
+                    player* p = (player*)Interfaces::entityList->GetClientEntity(i);
+                    if (p) {
+                        if (!p->dormant()) {
+                            if (p->health() > 0) {
+                                int x, y, x2, y2;
+                                if (getBox(p, x, y, x2, y2)) {
+                                    player_info_t info;
+                                    Interfaces::engine->GetPlayerInfo(p->index(), &info);
+
+                                    if (p->team() != Globals::localPlayer->team()) {
+                                        std::stringstream rightText;
+                                        if (CONFIGBOOL("Enemy:Name"))
+                                            rightText << info.name << "\n";
+                                        if (CONFIGBOOL("Enemy:Health"))
+                                            rightText << p->health() << "hp\n";
+                                        if (CONFIGBOOL("Enemy:Money"))
+                                            rightText << "$" << p->money() << "\n";
+                                        
+                                        drawPlayerBox(x, y, x2, y2, CONFIGBOOL("Enemy:Box"), 
+                                                    CONFIGCOL("Enemy:BoxColor"), (char*)rightText.str().c_str(), 
+                                                    CONFIGBOOL("Enemy:HealthBar") ? p->health() : -1);
+                                    }
+                                    if (p->team() == Globals::localPlayer->team()) {
+                                        std::stringstream rightText;
+                                        if (CONFIGBOOL("Team:Name"))
+                                            rightText << info.name << "\n";
+                                        if (CONFIGBOOL("Team:Health"))
+                                            rightText << p->health() << "hp\n";
+                                        if (CONFIGBOOL("Team:Money"))
+                                            rightText << "$" << p->money() << "\n";
+                                        
+                                        drawPlayerBox(x, y, x2, y2, CONFIGBOOL("Team:Box"), 
+                                                    CONFIGCOL("Team:BoxColor"), (char*)rightText.str().c_str(), 
+                                                    CONFIGBOOL("Team:HealthBar") ? p->health() : -1);
+                                    }
+                                }
+                            }
                         }
                     }
                 }

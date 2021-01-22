@@ -23,6 +23,9 @@ bool Hooks::init() {
     Log::log(" Hooking Paint...");
     Paint::original = (Paint::func)VMT::hook(Interfaces::engineVgui, (void*)Paint::hook, 15);
 
+    Log::log(" Hooking DME...");
+    DrawModelExecute::original = (DrawModelExecute::func)VMT::hook(Interfaces::modelRender, (void*)DrawModelExecute::hook, 21);
+
     Log::log("Initialised hooks!");
     return true;
 }
@@ -45,6 +48,9 @@ bool Hooks::unload() {
 
     Log::log(" Unhooking Paint...");
     VMT::hook(Interfaces::engineVgui, (void*)Paint::original, 15);
+
+    Log::log(" Unhooking DME...");
+    VMT::hook(Interfaces::modelRender, (void*)DrawModelExecute::original, 21);
 
     Log::log("Unloaded hooks!");
     return true;
