@@ -23,6 +23,10 @@ An open source cheat for Counter-Strike: Global Offensive on linux.
 - PaintTraverse
 - SwapWindow
 - PollEvent
+### Features
+- Chams
+- ESP
+- Radio fake ban/fake chat
 ### Others
 - Basic GDB injector
 - ImGui menu
@@ -100,3 +104,4 @@ hooks.hpp
 ## Screenshots
 ![Current Menu](res/menu.png)
 ![Console Output](res/console.png)
+![Choms Output](res/chams.png)
