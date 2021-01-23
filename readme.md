@@ -65,7 +65,7 @@ All args are executed in the order they are written in, for example, "-u -b -l" 
 ## Todo
 - [x] Game Interfaces
 - [x] Game Hooks
-- [ ] Config System
+- [x] Config System
 - [ ] Visual/Misc Features
 - [ ] Legitbot
 - [ ] Prediction
