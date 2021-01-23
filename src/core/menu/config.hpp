@@ -44,7 +44,7 @@ namespace Config {
         ImColor colValue = ImColor(255, 255, 255, 255);
     };
 
-    inline std::unordered_map<std::string, ConfigItem> config {
+    inline std::unordered_map<std::string_view, ConfigItem> config {
         // Visuals {
             // ESP {
                 CONFIGITEM("Enemy:Box", false),
