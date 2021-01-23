@@ -70,6 +70,19 @@ public:
 		typedef bool (*Fn)(void*);
 		return getVirtualFunc<Fn>(this, 27)(this);
 	}
+	
+	// uses this check, modern compilers shouldn't allow for this to be nullptr
+	// but we are working with memory so there is infact still a possibility that it may slip checks for initialization
+	// somehow and ret garbage
+	// these should just be easier to call at need
+	bool IsInGameAndConnected() {
+		return IsInGame() && IsConnected() && this;
+	}
+	
+        bool IsInGameOrConnected() {
+		return (IsInGame() || IsConnected()) && this;
+	}
+
 
 	const VMatrix& WorldToScreenMatrix() {
 		typedef VMatrix& (*Fn)(void*);
