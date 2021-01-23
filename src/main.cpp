@@ -1,7 +1,7 @@
 #include "includes.hpp"
 
 /* initialise everything in */
-void mainThread() {
+void MainThread() {
     try {
         std::cout << " \n\
 Powered by...\n\
@@ -49,6 +49,8 @@ void __attribute__((destructor)) Unload() {
 
 /* Called when injected */
 int __attribute__((constructor)) Main() {
-    mainThread();
+	std::thread mainThread(MainThread);
+    
+	mainThread.detach();
     return 0;
 }
