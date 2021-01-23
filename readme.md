@@ -62,16 +62,7 @@ All args are executed in the order they are written in, for example, "-u -b -l" 
 - [Create a pull request](https://github.com/seksea/gamesneeze/compare) ([tutorial](https://github.com/yangsu/pull-request-tutorial))
 - [Report a bug](https://github.com/seksea/gamesneeze/issues/new)
 
-## Todo
-- [x] Game Interfaces
-- [x] Game Hooks
-- [x] Config System
-- [ ] Visual/Misc Features
-- [ ] Legitbot
-- [ ] Prediction
-- [ ] Fix bugs for a few weeks and add more small features
-- [ ] Redo toolbox.sh bc it's ugly
-- [ ] Ragebot/HvH features
+## [Todo](https://github.com/seksea/gamesneeze/projects/1)
 
 ## Code style
 - Interfaces layed out like this (func names, arg names and comments typed as in the [2015 leak](https://github.com/perilouswithadollarsign/cstrike15_src) or the [source sdk](https://github.com/ValveSoftware/source-sdk-2013)):
