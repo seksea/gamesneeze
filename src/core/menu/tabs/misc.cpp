@@ -22,23 +22,33 @@ void Menu::drawMiscTab() {
         ImGui::Text("Send fake: ");
         ImGui::SameLine();
         if (ImGui::Button("Message##btn")) {
-            Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer! \xe2\x80\xa8") + victim + " :""\x01"" " + message + "\"").c_str());
+            char radioMessage[128];
+            snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8%s :\x01 %s\"", victim, message);
+            Interfaces::engine->ExecuteClientCmd(radioMessage);
         }
         ImGui::SameLine();
         if (ImGui::Button("Server")) {
-            Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer! \xe2\x80\xa8""\x01""Console: ") + message + "\"").c_str());
+            char radioMessage[128];
+            snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8""\x01""Console: %s\"", message);
+            Interfaces::engine->ExecuteClientCmd(radioMessage);
         }
         ImGui::SameLine();
         if (ImGui::Button("VAC")) {
-            Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer! \xe2\x80\xa8""\x02""") + victim + " has been permanently banned from official CS:GO servers.\"").c_str());
+            char radioMessage[128];
+            snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8""\x02""%s has been permanently banned from official CS:GO servers.\"", victim);
+            Interfaces::engine->ExecuteClientCmd(radioMessage);
         }
         ImGui::SameLine();
         if (ImGui::Button("Kick")) {
-            Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer! \xe2\x80\xa8""\x01""Player ") + victim + " left the game (Kicked from the session)\"").c_str());
+            char radioMessage[128];
+            snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8""\x01""Player %s left the game (Kicked from the session)\"", victim);
+            Interfaces::engine->ExecuteClientCmd(radioMessage);
         }
         ImGui::SameLine();
         if (ImGui::Button("Unbox")) {
-            Interfaces::engine->ExecuteClientCmd((std::string("playerchatwheel . \"Cheer! \xe2\x80\xa8""\x0B""") + victim + """\x01"" has opened a container and found:""\x02"" " + skinName + "\"").c_str());
+            char radioMessage[128];
+            snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8""\x0B""%s \x01 has opened a container and found: \x02%s\"", victim, skinName);
+            Interfaces::engine->ExecuteClientCmd(radioMessage);
         }
         ImGui::SameLine();
         ImGui::TextDisabled("?");

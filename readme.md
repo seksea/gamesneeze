@@ -70,6 +70,7 @@ All args are executed in the order they are written in, for example, "-u -b -l" 
 - [ ] Legitbot
 - [ ] Prediction
 - [ ] Fix bugs for a few weeks and add more small features
+- [ ] Redo toolbox.sh bc it's ugly
 - [ ] Ragebot/HvH features
 
 ## Code style
