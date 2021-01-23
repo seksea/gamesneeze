@@ -53,12 +53,12 @@ namespace Interfaces {
                 // If current interface equals input name without the 3 version numbers so if an interface version changes we dont have to care
                 if (strstr(cur->m_pName, name) && strlen(cur->m_pName)-3 == strlen(name)) {
                     T* iface = reinterpret_cast<T*>(cur->m_CreateFn());
-                    Log::log("%s (%s) %d", name, cur->m_pName, (uintptr_t)iface);
+                    Log::log(LOG, "%s (%s) %d", name, cur->m_pName, (uintptr_t)iface);
                     return iface;
                 }
             }
         }
-        Log::err(" Failed to find interface %s in %s", name, file);
+        Log::log(ERR, " Failed to find interface %s in %s", name, file);
         dlclose(lib);
         return nullptr;
     }

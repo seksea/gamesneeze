@@ -1,10 +1,13 @@
 #pragma once
 #include <string>
 
+enum logLevel {
+    LOG,
+    WARN,
+    ERR
+};
 namespace Log {
-    void log(const char* fmt, ...);
-    void warn(const char* fmt, ...);
-    void err(const char* fmt, ...);
+    void log(logLevel level, const char* fmt, ...);
 }
 
 inline uintptr_t getAbsoluteAddress(uintptr_t ptr, int offset, int size) {

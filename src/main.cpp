@@ -11,40 +11,40 @@ Powered by...\n\
   \\__, |\\__,_|_| |_| |_|\\___|\e[32m|___/_| |_|\\___|\\___/___\\___|\e[0m \n\
   |___/ \n\
 ===========================================================\n";
-        Log::log("Initialising...");
+        Log::log(LOG, "Initialising...");
         
         /* Initialise interfaces */
         if (!Interfaces::init()) {
-            Log::err("Failed to initialise interfaces!");
+            Log::log(ERR, "Failed to initialise interfaces!");
         }
 
         /* Initialise hooks */
         if (!Hooks::init()) {
-            Log::err("Failed to initialise hooks!");
+            Log::log(ERR, "Failed to initialise hooks!");
         }
 
-        Log::log("Initialised!");
+        Log::log(LOG, "Initialised!");
     }
     catch(const std::exception& e) {
-        Log::err(e.what());
+        Log::log(ERR, e.what());
     }
 }
 
 /* Called on uninject */
 void __attribute__((destructor)) Unload() {
-    Log::log("Uninjecting...");
+    Log::log(LOG, "Uninjecting...");
 
     /* Unload hooks */
     if (!Hooks::unload()) {
-        Log::err("Failed to unload hooks!");
+        Log::log(ERR, "Failed to unload hooks!");
     }
 
     /* Unload interfaces */
     if (!Interfaces::unload()) {
-        Log::err("Failed to unload interfaces!");
+        Log::log(ERR, "Failed to unload interfaces!");
     }
 
-    Log::log("Uninjected!\n");
+    Log::log(LOG, "Uninjected!\n");
 }
 
 /* Called when injected */

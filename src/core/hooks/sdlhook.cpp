@@ -22,7 +22,7 @@ void Hooks::SDL::SwapWindow(SDL_Window* window) {
 
 /* Initialise SDL hooks */
 bool Hooks::SDL::initSDL() {
-    Log::log(" Initialising SDL Hooks...");
+    Log::log(LOG, " Initialising SDL Hooks...");
     const auto libSDL = dlopen("libSDL2-2.0.so.0", RTLD_LAZY | RTLD_NOLOAD);
 
     swapWindowAddr = relativeToAbsolute<uintptr_t>(uintptr_t(dlsym(libSDL, "SDL_GL_SwapWindow")) + 2);
@@ -31,11 +31,11 @@ bool Hooks::SDL::initSDL() {
         *reinterpret_cast<decltype(SwapWindow)**>(swapWindowAddr) = SwapWindow;
     }
     else {
-        Log::err("Failed to initialise SwapWindow hook!");
+        Log::log(ERR, "Failed to initialise SwapWindow hook!");
         return false;
     }
 
-    Log::log("  SwapWindow      | %d", swapWindowAddr);
+    Log::log(LOG, "  SwapWindow      | %d", swapWindowAddr);
 
     pollEventAddr = relativeToAbsolute<uintptr_t>(uintptr_t(dlsym(libSDL, "SDL_PollEvent")) + 2);
     if (pollEventAddr) {
@@ -43,22 +43,22 @@ bool Hooks::SDL::initSDL() {
         *reinterpret_cast<decltype(PollEvent)**>(pollEventAddr) = PollEvent;
     }
     else {
-        Log::err("Failed to initialise PollEvent hook!");
+        Log::log(ERR, "Failed to initialise PollEvent hook!");
         return false;
     }
 
-    Log::log("  PollEvent       | %d", pollEventAddr);
-    Log::log(" Initialised SDL Hooks!");
+    Log::log(LOG, "  PollEvent       | %d", pollEventAddr);
+    Log::log(LOG, " Initialised SDL Hooks!");
     return true;
 }
 
 /* Unload SDL hooks */
 bool Hooks::SDL::unloadSDL() {
-    Log::log("Unloading SDL Hooks...");
+    Log::log(LOG, "Unloading SDL Hooks...");
     *reinterpret_cast<decltype(swapWindow)*>(swapWindowAddr) = swapWindow;
     *reinterpret_cast<decltype(pollEvent)*>(pollEventAddr) = pollEvent;
     if (*reinterpret_cast<decltype(swapWindow)*>(swapWindowAddr)!=swapWindow || *reinterpret_cast<decltype(pollEvent)*>(pollEventAddr)!=pollEvent) {
-        Log::err("Failed to unload SDL hooks!");
+        Log::log(ERR, "Failed to unload SDL hooks!");
         return false;
     }
     return true;
