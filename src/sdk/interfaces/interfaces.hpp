@@ -48,12 +48,12 @@ namespace Interfaces {
             InterfaceReg* interfaceReg = *reinterpret_cast<InterfaceReg**>(dlsym(lib, "s_pInterfaceRegs"));
             dlclose(lib);
 
-            // loop through each interface in interfaceReg
+            // loop through each interface in interfaceReg linked list
             for (InterfaceReg* cur = interfaceReg; cur; cur = cur->m_pNext) {
                 // If current interface equals input name without the 3 version numbers so if an interface version changes we dont have to care
                 if (strstr(cur->m_pName, name) && strlen(cur->m_pName)-3 == strlen(name)) {
                     T* iface = reinterpret_cast<T*>(cur->m_CreateFn());
-                    Log::log(LOG, "%s (%s) %d", name, cur->m_pName, (uintptr_t)iface);
+                    Log::log(LOG, "%s (%s) %x", name, cur->m_pName, (uintptr_t)iface);
                     return iface;
                 }
             }
