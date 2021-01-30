@@ -77,6 +77,10 @@ namespace Config {
                 CONFIGITEM("Arms:ChamsPrimaryColor", ImColor(197, 66, 245, 255)),
             // }
         // }
+        // Misc {
+            CONFIGITEM("Misc:RankReveal", false),
+
+        // }
     };
 
     inline void save() {

@@ -79,6 +79,7 @@ void Menu::drawMiscTab() {
         ImGui::Text("Misc");
         ImGui::Separator();
         ImGui::Checkbox("Developer window", &devWindow);
+        ImGui::Checkbox("Rank Revealer", &CONFIGBOOL("Misc:RankReveal"));
         ImGui::EndChild();
     }
 }

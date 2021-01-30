@@ -72,7 +72,14 @@ class IBaseClientDLL {
 public:
 	// Request a pointer to the list of client datatable classes
     ClientClass* GetAllClasses() {
-		typedef ClientClass* (* oGetAllClasses)(void*);
-		return getVirtualFunc<oGetAllClasses>(this, 8)(this);
+		typedef ClientClass* (*Fn)(void*);
+		return getVirtualFunc<Fn>(this, 8)(this);
+	}
+
+	// The engine has received the specified user message, this code is used to dispatch the message handler
+    bool DispatchUserMessage(int msg_type, int a, int b, void* msg_data) {
+		
+		typedef bool (*Fn)(void*, int, int, int, void*);
+		return getVirtualFunc<Fn>(this, 38)(this, msg_type, a, b, msg_data);
 	}
 };
