@@ -10,4 +10,7 @@ namespace Features {
     namespace RankReveal {
         void rankReveal(); // CM
     }
+    namespace WorldColorModulate {
+        void updateColorModulation();
+    }
 }

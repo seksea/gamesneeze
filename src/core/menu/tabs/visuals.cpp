@@ -35,7 +35,7 @@ void Menu::drawVisualsTab() {
         }
 
         if (ImGui::BeginTabItem("Teammates")) {
-            ImGui::BeginChild("ESP", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 240), true); {
+            ImGui::BeginChild("ESP", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
                 ImGui::Text("ESP");
                 ImGui::Separator();
                 ImGui::Checkbox("Box", &CONFIGBOOL("Team:Box"));
@@ -76,6 +76,17 @@ void Menu::drawVisualsTab() {
                 ImGui::Combo("##WeaponMaterial", &CONFIGINT("Weapon:ChamsMaterial"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
                 ImGui::SameLine();
                 ImGui::ColorEdit4("Weapon Chams Primary Color", (float*)&CONFIGCOL("Weapon:ChamsPrimaryColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+
+                ImGui::EndChild();
+            }
+            ImGui::BeginChild("World", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
+                ImGui::Text("World");
+                ImGui::Separator();
+                if (
+                  ImGui::ColorEdit4("World Colour Modulation", (float*)&CONFIGCOL("World:WorldColorModulation"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_PickerHueWheel) || 
+                  ImGui::Button("Update Colour Modulation")) {
+                    Features::WorldColorModulate::updateColorModulation();
+                }
 
                 ImGui::EndChild();
             }

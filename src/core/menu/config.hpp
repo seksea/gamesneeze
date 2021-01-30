@@ -76,6 +76,10 @@ namespace Config {
                 CONFIGITEM("Arms:ChamsMaterial", 0),
                 CONFIGITEM("Arms:ChamsPrimaryColor", ImColor(197, 66, 245, 255)),
             // }
+            // World {
+                CONFIGITEM("World:WorldColorModulation", ImColor(255, 255, 255, 255)),
+                CONFIGITEM("World:PropColorModulation", ImColor(255, 255, 255, 255)),
+            // }
         // }
         // Misc {
             CONFIGITEM("Misc:RankReveal", false),
