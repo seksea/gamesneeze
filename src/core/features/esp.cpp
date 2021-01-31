@@ -21,7 +21,7 @@ bool worldToScreen( const Vector& origin, Vector& screen ) {
 	return true;
 }
 
-static bool getBox(player* entity, int& x, int& y, int& x2, int& y2) {
+static bool getBox(Entity* entity, int& x, int& y, int& x2, int& y2) {
 	Vector vOrigin, min, max;
 	Vector flb, brt, blb, frt, frb, brb, blt, flt; // think of these as Front-Left-Bottom/Front-Left-Top... Etc.
 
@@ -102,7 +102,7 @@ void Features::ESP::drawESP() {
         for (int i; i < 64; i++) {
             if (Globals::localPlayer) {
                 if (i != Interfaces::engine->GetLocalPlayer()) {
-                    player* p = (player*)Interfaces::entityList->GetClientEntity(i);
+                    Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
                     if (p) {
                         if (!p->dormant()) {
                             if (p->health() > 0) {

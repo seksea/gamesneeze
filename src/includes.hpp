@@ -25,5 +25,5 @@ namespace Globals {
     inline int screenSizeY;
     inline ImDrawList* drawList;
 
-    inline player* localPlayer;
+    inline Player* localPlayer;
 }

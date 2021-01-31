@@ -39,7 +39,7 @@ void Menu::drawDevWindow() {
     if (ImGui::TreeNode("Players")) {
         if (Interfaces::engine->IsInGame()) {
             for (int i; i < Interfaces::globals->maxClients; i++) {
-                player* p = (player*)Interfaces::entityList->GetClientEntity(i);
+                Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
                 if (p) {
                     if (p->isPlayer()) {
                         if (p->health() > 0) {

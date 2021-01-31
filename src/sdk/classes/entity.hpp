@@ -10,15 +10,10 @@ public:
 	virtual const Vector& OBBMaxs() const;
 };
 
-class player {
+class Entity {
 public:
 	void* networkable() {
 		return reinterpret_cast<void*>(uintptr_t(this) + 16);
-	}
-
-	bool isPlayer() {
-		typedef bool (*Fn)(void*);
-		return getVirtualFunc<Fn>(this, 157)(this);
 	}
 
 	bool dormant() {
@@ -31,11 +26,25 @@ public:
 		return getVirtualFunc<Fn>(networkable(), 10)(networkable());
 	}
 
+	const Vector& origin()
+	{
+		typedef const Vector& (*Fn)(void*);
+		return getVirtualFunc<Fn>(this, 12)(this);
+	}
+
+	bool isPlayer() {
+		typedef bool (*Fn)(void*);
+		return getVirtualFunc<Fn>(this, 157)(this);
+	}
+
 	NETVAR("DT_BaseEntity", "m_Collision", collideable, ICollideable);
+	NETVAR("DT_BaseEntity", "m_iTeamNum", team, int);
+	NETVAR("DT_BaseEntity", "m_bSpotted", spotted, bool);
+};
+
+class Player : public Entity {
+public:
 	NETVAR("DT_CSPlayer", "m_iAccount", money, int);
     NETVAR("DT_BasePlayer", "m_iHealth", health, int);
-	NETVAR("DT_BaseEntity", "m_iTeamNum", team, int);
 	NETVAR("DT_CSPlayer", "m_fFlags", flags, int);
-	NETVAR("DT_BaseEntity", "m_bSpotted", spotted, bool);
-	NETVAR("DT_BasePlayer", "m_vecOrigin", origin, Vector);
 };
