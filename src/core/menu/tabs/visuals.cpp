@@ -79,6 +79,33 @@ void Menu::drawVisualsTab() {
 
                 ImGui::EndChild();
             }
+            ImGui::SameLine();
+            ImGui::BeginChild("Items", ImVec2(0, 263), true); {
+                ImGui::Text("Items");
+                ImGui::Separator();
+                ImGui::Checkbox("Weapon Box", &CONFIGBOOL("Weapon:Box"));
+                ImGui::ColorEdit4("Weapon Box Color", (float*)&CONFIGCOL("Weapon:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::Checkbox("Weapon Label", &CONFIGBOOL("Weapon:Name"));
+                ImGui::Separator();
+
+                ImGui::Checkbox("Planted C4 Box", &CONFIGBOOL("PlantedC4:Box"));
+                ImGui::ColorEdit4("Planted C4 Box Color", (float*)&CONFIGCOL("PlantedC4:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::Checkbox("Planted C4 Label", &CONFIGBOOL("PlantedC4:Name"));
+                ImGui::Separator();
+                
+                ImGui::Checkbox("Chicken Box", &CONFIGBOOL("Chicken:Box"));
+                ImGui::ColorEdit4("Chicken Box Color", (float*)&CONFIGCOL("Chicken:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::Checkbox("Chicken Label", &CONFIGBOOL("Chicken:Name"));
+                ImGui::Separator();
+                
+                ImGui::Checkbox("Fish Box", &CONFIGBOOL("Fish:Box"));
+                ImGui::ColorEdit4("Fish Box Color", (float*)&CONFIGCOL("Fish:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::Checkbox("Fish Label", &CONFIGBOOL("Fish:Name"));
+                ImGui::Separator();
+
+                ImGui::Checkbox("ESP Quite literally everything", &CONFIGBOOL("Debug:EspAll"));
+                ImGui::EndChild();
+            }
             ImGui::BeginChild("World", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
                 ImGui::Text("World");
                 ImGui::Separator();
@@ -88,13 +115,6 @@ void Menu::drawVisualsTab() {
                     Features::WorldColorModulate::updateColorModulation();
                 }
 
-                ImGui::Checkbox("Weapon Box", &CONFIGBOOL("Weapon:Box"));
-                ImGui::ColorEdit4("Weapon Box Color", (float*)&CONFIGCOL("Weapon:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                ImGui::Checkbox("Weapon Name", &CONFIGBOOL("Weapon:Name"));
-
-                ImGui::Checkbox("Planted C4 Box", &CONFIGBOOL("PlantedC4:Box"));
-                ImGui::ColorEdit4("Planted C4 Box Color", (float*)&CONFIGCOL("PlantedC4:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                ImGui::Checkbox("Planted C4 Name", &CONFIGBOOL("PlantedC4:Name"));
 
                 ImGui::EndChild();
             }

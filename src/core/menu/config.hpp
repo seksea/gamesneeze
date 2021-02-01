@@ -86,6 +86,16 @@ namespace Config {
                 CONFIGITEM("PlantedC4:Box", false),
                 CONFIGITEM("PlantedC4:BoxColor", ImColor(255, 255, 255, 255)),
                 CONFIGITEM("PlantedC4:Name", false),
+
+                CONFIGITEM("Chicken:Box", false),
+                CONFIGITEM("Chicken:BoxColor", ImColor(255, 255, 255, 255)),
+                CONFIGITEM("Chicken:Name", false),
+
+                CONFIGITEM("Fish:Box", false),
+                CONFIGITEM("Fish:BoxColor", ImColor(255, 255, 255, 255)),
+                CONFIGITEM("Fish:Name", false),
+
+                CONFIGITEM("Debug:EspAll", false),
             // }
         // }
         // Misc {

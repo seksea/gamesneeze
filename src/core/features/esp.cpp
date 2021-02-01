@@ -179,6 +179,23 @@ void Features::ESP::drawESP() {
                             snprintf(label, 32, "Planted C4\n%.3f", ((PlantedC4*)ent)->time() - Interfaces::globals->curtime);
                             drawGenericEnt(ent, CONFIGBOOL("PlantedC4:Box"), CONFIGCOL("PlantedC4:BoxColor"), CONFIGBOOL("PlantedC4:Name") ? label : "");
                         }
+                        
+                        /* Chicken ESP */
+                        if (clientClass->m_ClassID == EClassIds::CChicken) {
+                            drawGenericEnt(ent, CONFIGBOOL("Chicken:Box"), CONFIGCOL("Chicken:BoxColor"), CONFIGBOOL("Chicken:Name") ? "Chicken" : "");
+                        }
+
+                        /* Fish ESP */
+                        if (clientClass->m_ClassID == EClassIds::CFish) {
+                            drawGenericEnt(ent, CONFIGBOOL("Fish:Box"), CONFIGCOL("Fish:BoxColor"), CONFIGBOOL("Fish:Name") ? "Fish" : "");
+                        }
+
+                        /* Debug ESP Everything*/
+                        if (CONFIGBOOL("Debug:EspAll")) {
+                            char label[128] = "";
+                            snprintf(label, 128, "%d\n%s", clientClass->m_ClassID, clientClass->m_pNetworkName);
+                            drawGenericEnt(ent, true, ImColor(255, 255, 255, 255), label);
+                        }
                     }
                 }
             }
