@@ -10,7 +10,7 @@
 bool Hooks::init() {
     Log::log(LOG, "Initialising hooks...");
     if (!SDL::initSDL()) {
-        Log::log(ERR, "Failed to initialise SDL hooks!");
+        Log::log(ERR, " Failed to initialise SDL hooks!");
         return false;
     }
 

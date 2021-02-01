@@ -22,7 +22,7 @@ void Hooks::SDL::SwapWindow(SDL_Window* window) {
 
 /* Initialise SDL hooks */
 bool Hooks::SDL::initSDL() {
-    Log::log(LOG, " Initialising SDL Hooks...");
+    Log::log(LOG, " Hooking SDL Hooks...");
     const auto libSDL = dlopen("libSDL2-2.0.so.0", RTLD_LAZY | RTLD_NOLOAD);
 
     swapWindowAddr = relativeToAbsolute<uintptr_t>(uintptr_t(dlsym(libSDL, "SDL_GL_SwapWindow")) + 2);
@@ -48,7 +48,7 @@ bool Hooks::SDL::initSDL() {
     }
 
     Log::log(LOG, "  PollEvent       | %x", pollEventAddr);
-    Log::log(LOG, " Initialised SDL Hooks!");
+    Log::log(LOG, " Hooked SDL Hooks!");
     return true;
 }
 

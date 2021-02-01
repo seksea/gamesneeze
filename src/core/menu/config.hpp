@@ -78,7 +78,14 @@ namespace Config {
             // }
             // World {
                 CONFIGITEM("World:WorldColorModulation", ImColor(255, 255, 255, 255)),
-                CONFIGITEM("World:PropColorModulation", ImColor(255, 255, 255, 255)),
+
+                CONFIGITEM("Weapon:Box", false),
+                CONFIGITEM("Weapon:BoxColor", ImColor(255, 255, 255, 255)),
+                CONFIGITEM("Weapon:Name", false),
+
+                CONFIGITEM("PlantedC4:Box", false),
+                CONFIGITEM("PlantedC4:BoxColor", ImColor(255, 255, 255, 255)),
+                CONFIGITEM("PlantedC4:Name", false),
             // }
         // }
         // Misc {

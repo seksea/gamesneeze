@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include "../classids.hpp"
 
 struct RecvProp;
 
@@ -64,7 +65,7 @@ public:
 	char* m_pNetworkName;
 	RecvTable *m_pRecvTable;
 	ClientClass* m_pNext;
-	int m_ClassID;
+	EClassIds m_ClassID;
 };
 
 // https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/cdll_int.h#L577

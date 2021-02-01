@@ -8,4 +8,8 @@ public:
 		typedef uintptr_t (*Fn)(void*, int);
 		return getVirtualFunc<Fn>(this, 3)(this, entnum);
 	}
+	int GetHighestEntityIndex() {
+		typedef int (*Fn)(void*);
+		return getVirtualFunc<Fn>(this, 6)(this);
+	}
 };

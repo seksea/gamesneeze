@@ -26,6 +26,10 @@ void Menu::drawDevWindow() {
             ImGui::Text("m_bRemoteClient: %d", Interfaces::globals->m_bRemoteClient);
             ImGui::TreePop();
         }
+        if (ImGui::TreeNode("EntityList")) {
+            ImGui::Text("GetHighestEntityIndex: %d", Interfaces::entityList->GetHighestEntityIndex());
+            ImGui::TreePop();
+        }
         if (ImGui::TreeNode("Engine Client")) {
             int windowW, windowH;
             Interfaces::engine->GetScreenSize(windowW, windowH);

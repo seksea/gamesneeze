@@ -80,7 +80,7 @@ void outlinedText(ImVec2 pos, ImColor color, char* text) {
 
 }
 
-void drawPlayerBox(int x, int y, int x2, int y2, bool drawBox, ImColor color, char* rightText, int health = -1) {
+void drawBox(int x, int y, int x2, int y2, bool drawBox, ImColor color, char* rightText, int health = -1) {
     if (drawBox) {
         Globals::drawList->AddRect(ImVec2(x, y), ImVec2(x2, y2), color);
         Globals::drawList->AddRect(ImVec2(x-1, y-1), ImVec2(x2+1, y2+1), ImColor(0, 0, 0, 255));
@@ -97,48 +97,87 @@ void drawPlayerBox(int x, int y, int x2, int y2, bool drawBox, ImColor color, ch
     outlinedText(ImVec2(x2+1, y), ImColor(255, 255, 255, 255), rightText);
 }
 
+void drawPlayer(Player* p) {
+    if (!p->dormant()) {
+        if (p->health() > 0) {
+            int x, y, x2, y2;
+            if (getBox(p, x, y, x2, y2)) {
+                player_info_t info;
+                Interfaces::engine->GetPlayerInfo(p->index(), &info);
+
+                if (p->team() != Globals::localPlayer->team()) {
+                    std::stringstream rightText;
+                    if (CONFIGBOOL("Enemy:Name"))
+                        rightText << info.name << "\n";
+                    if (CONFIGBOOL("Enemy:Health"))
+                        rightText << p->health() << "hp\n";
+                    if (CONFIGBOOL("Enemy:Money"))
+                        rightText << "$" << p->money() << "\n";
+                    
+                    drawBox(x, y, x2, y2, CONFIGBOOL("Enemy:Box"), 
+                                CONFIGCOL("Enemy:BoxColor"), (char*)rightText.str().c_str(), 
+                                CONFIGBOOL("Enemy:HealthBar") ? p->health() : -1);
+                }
+                if (p->team() == Globals::localPlayer->team()) {
+                    std::stringstream rightText;
+                    if (CONFIGBOOL("Team:Name"))
+                        rightText << info.name << "\n";
+                    if (CONFIGBOOL("Team:Health"))
+                        rightText << p->health() << "hp\n";
+                    if (CONFIGBOOL("Team:Money"))
+                        rightText << "$" << p->money() << "\n";
+                    
+                    drawBox(x, y, x2, y2, CONFIGBOOL("Team:Box"), 
+                                CONFIGCOL("Team:BoxColor"), (char*)rightText.str().c_str(), 
+                                CONFIGBOOL("Team:HealthBar") ? p->health() : -1);
+                }
+            }
+        }
+    }
+}
+
+void drawGenericEnt(Entity* ent, bool box, ImColor color, const char* label) {
+    int x, y, x2, y2;
+    if (getBox(ent, x, y, x2, y2)) {
+        drawBox(x, y, x2, y2, box, color, (char*)label, -1);
+    }
+}
+
 void Features::ESP::drawESP() {
     if (Interfaces::engine->IsInGame()) {
-        for (int i; i < 64; i++) {
+        int highest = Interfaces::entityList->GetHighestEntityIndex();
+        for (int i; i < highest; i++) {
             if (Globals::localPlayer) {
                 if (i != Interfaces::engine->GetLocalPlayer()) {
-                    Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
-                    if (p) {
-                        if (!p->dormant()) {
-                            if (p->health() > 0) {
-                                int x, y, x2, y2;
-                                if (getBox(p, x, y, x2, y2)) {
-                                    player_info_t info;
-                                    Interfaces::engine->GetPlayerInfo(p->index(), &info);
+                    Entity* ent = (Entity*)Interfaces::entityList->GetClientEntity(i);
+                    if (ent) {
+                        ClientClass* clientClass = ent->clientClass();
 
-                                    if (p->team() != Globals::localPlayer->team()) {
-                                        std::stringstream rightText;
-                                        if (CONFIGBOOL("Enemy:Name"))
-                                            rightText << info.name << "\n";
-                                        if (CONFIGBOOL("Enemy:Health"))
-                                            rightText << p->health() << "hp\n";
-                                        if (CONFIGBOOL("Enemy:Money"))
-                                            rightText << "$" << p->money() << "\n";
-                                        
-                                        drawPlayerBox(x, y, x2, y2, CONFIGBOOL("Enemy:Box"), 
-                                                    CONFIGCOL("Enemy:BoxColor"), (char*)rightText.str().c_str(), 
-                                                    CONFIGBOOL("Enemy:HealthBar") ? p->health() : -1);
-                                    }
-                                    if (p->team() == Globals::localPlayer->team()) {
-                                        std::stringstream rightText;
-                                        if (CONFIGBOOL("Team:Name"))
-                                            rightText << info.name << "\n";
-                                        if (CONFIGBOOL("Team:Health"))
-                                            rightText << p->health() << "hp\n";
-                                        if (CONFIGBOOL("Team:Money"))
-                                            rightText << "$" << p->money() << "\n";
-                                        
-                                        drawPlayerBox(x, y, x2, y2, CONFIGBOOL("Team:Box"), 
-                                                    CONFIGCOL("Team:BoxColor"), (char*)rightText.str().c_str(), 
-                                                    CONFIGBOOL("Team:HealthBar") ? p->health() : -1);
-                                    }
+                        /* Player ESP */
+                        if (clientClass->m_ClassID == EClassIds::CCSPlayer) {
+                            drawPlayer((Player*)ent);
+                        }
+
+                        /* Weapon ESP */
+                        if ((clientClass->m_ClassID != EClassIds::CBaseWeaponWorldModel && strstr(clientClass->m_pNetworkName, "Weapon")) || clientClass->m_ClassID == EClassIds::CDEagle || clientClass->m_ClassID == EClassIds::CAK47) {
+                            if (((Weapon*)ent)->owner() == -1) {
+                                try {
+                                    drawGenericEnt(ent, CONFIGBOOL("Weapon:Box"), CONFIGCOL("Weapon:BoxColor"), CONFIGBOOL("Weapon:Name") ? itemIndexMap.at(((Weapon*)ent)->itemIndex()) : "");
+                                }
+                                catch(const std::exception & e) {
+                                    Log::log(WARN, "itemDefinitionIndex %d not found!", ((Weapon*)ent)->itemIndex());
                                 }
                             }
+                        }
+                        if (clientClass->m_ClassID == EClassIds::CC4) {
+                            drawGenericEnt(ent, CONFIGBOOL("Weapon:Box"), CONFIGCOL("Weapon:BoxColor"), CONFIGBOOL("Weapon:Name") ? "C4" : "");
+                        }
+
+                        /* Planted C4 ESP */
+                        if (clientClass->m_ClassID == EClassIds::CPlantedC4) {
+                            char label[32] = "";
+                            snprintf(label, 32, "Planted C4\n%.3f", ((PlantedC4*)ent)->time() - Interfaces::globals->curtime);
+                            drawGenericEnt(ent, CONFIGBOOL("PlantedC4:Box"), CONFIGCOL("PlantedC4:BoxColor"), CONFIGBOOL("PlantedC4:Name") ? label : "");
                         }
                     }
                 }

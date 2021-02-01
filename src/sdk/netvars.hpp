@@ -12,7 +12,16 @@ namespace Netvar {
         /* Player */
         {std::make_pair("DT_CSPlayer", "m_iAccount"), 0},
         {std::make_pair("DT_BasePlayer", "m_iHealth"), 0},
-        {std::make_pair("DT_CSPlayer", "m_fFlags"), 0}
+        {std::make_pair("DT_CSPlayer", "m_fFlags"), 0},
+
+        /* Item */
+        {std::make_pair("DT_BaseAttributableItem", "m_iItemDefinitionIndex"), 0},
+
+        /* Weapon */
+        {std::make_pair("DT_BaseCombatWeapon", "m_hOwner"), 0},
+
+        /* Bomb */
+        {std::make_pair("DT_PlantedC4", "m_flC4Blow"), 0},
     };
     bool init();
 }

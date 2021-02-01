@@ -88,6 +88,14 @@ void Menu::drawVisualsTab() {
                     Features::WorldColorModulate::updateColorModulation();
                 }
 
+                ImGui::Checkbox("Weapon Box", &CONFIGBOOL("Weapon:Box"));
+                ImGui::ColorEdit4("Weapon Box Color", (float*)&CONFIGCOL("Weapon:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::Checkbox("Weapon Name", &CONFIGBOOL("Weapon:Name"));
+
+                ImGui::Checkbox("Planted C4 Box", &CONFIGBOOL("PlantedC4:Box"));
+                ImGui::ColorEdit4("Planted C4 Box Color", (float*)&CONFIGCOL("PlantedC4:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::Checkbox("Planted C4 Name", &CONFIGBOOL("PlantedC4:Name"));
+
                 ImGui::EndChild();
             }
             ImGui::EndTabItem();

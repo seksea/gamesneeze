@@ -16,6 +16,11 @@ public:
 		return reinterpret_cast<void*>(uintptr_t(this) + 16);
 	}
 
+	ClientClass* clientClass() {
+		typedef ClientClass*(*Fn)(void*);
+		return getVirtualFunc<Fn>(networkable(), 2)(networkable());
+	}
+
 	bool dormant() {
 		typedef bool(*Fn)(void*);
 		return getVirtualFunc<Fn>(networkable(), 9)(networkable());
@@ -47,4 +52,19 @@ public:
 	NETVAR("DT_CSPlayer", "m_iAccount", money, int);
     NETVAR("DT_BasePlayer", "m_iHealth", health, int);
 	NETVAR("DT_CSPlayer", "m_fFlags", flags, int);
+};
+
+class Item : public Entity{
+public:
+	NETVAR("DT_BaseAttributableItem", "m_iItemDefinitionIndex", itemIndex, ItemIndex);
+};
+
+class Weapon : public Item {
+public:
+	NETVAR("DT_BaseCombatWeapon", "m_hOwner", owner, int);
+};
+
+class PlantedC4 : public Item {
+public:
+	NETVAR("DT_PlantedC4", "m_flC4Blow", time, float);
 };
