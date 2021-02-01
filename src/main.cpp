@@ -18,6 +18,11 @@ Powered by...\n\
             Log::log(ERR, "Failed to initialise interfaces!");
         }
 
+        /* Initialise netvars/offsets */
+        if (!Netvar::init()) {
+            Log::log(ERR, "Failed to initialise netvars!");
+        }
+
         /* Initialise hooks */
         if (!Hooks::init()) {
             Log::log(ERR, "Failed to initialise hooks!");
