@@ -33,6 +33,11 @@ An open source cheat for Counter-Strike: Global Offensive on linux.
 ### Features
 - Chams
 - ESP
+- Weapon ESP
+- Chicken/Fish ESP
+- World Colour Modulation
+- Recoil Crosshair
+- Rank Revealer
 - Radio fake ban/fake chat
 ### Others
 - Basic GDB injector
