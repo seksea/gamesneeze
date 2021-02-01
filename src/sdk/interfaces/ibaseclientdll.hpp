@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "../classids.hpp"
+#include "../definitions.hpp"
 
 struct RecvProp;
 
