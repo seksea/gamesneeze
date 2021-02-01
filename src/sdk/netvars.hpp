@@ -13,6 +13,8 @@ namespace Netvar {
         {std::make_pair("DT_CSPlayer", "m_iAccount"), 0},
         {std::make_pair("DT_BasePlayer", "m_iHealth"), 0},
         {std::make_pair("DT_CSPlayer", "m_fFlags"), 0},
+        {std::make_pair("DT_BasePlayer", "m_aimPunchAngle"), 0},
+        {std::make_pair("DT_CSPlayer", "m_hActiveWeapon"), 0},
 
         /* Item */
         {std::make_pair("DT_BaseAttributableItem", "m_iItemDefinitionIndex"), 0},
@@ -27,4 +29,4 @@ namespace Netvar {
 }
 
 #define GETNETVAROFFSET(table, prop) Netvar::offsets.at({table, prop})
-#define NETVAR( table, prop, func, type ) type& func() {return *reinterpret_cast<type*>(uintptr_t(this) + GETNETVAROFFSET(table, prop));}
+#define NETVAR( table, prop, func, type ) type& func() {return *reinterpret_cast<type*>(uintptr_t(this) + GETNETVAROFFSET(table, prop));}; type* func##_ptr() {return reinterpret_cast<type*>(uintptr_t(this) + GETNETVAROFFSET(table, prop));}

@@ -170,7 +170,9 @@ void Features::ESP::drawESP() {
                             }
                         }
                         if (clientClass->m_ClassID == EClassIds::CC4) {
-                            drawGenericEnt(ent, CONFIGBOOL("Weapon:Box"), CONFIGCOL("Weapon:BoxColor"), CONFIGBOOL("Weapon:Name") ? "C4" : "");
+                            if (((Weapon*)ent)->owner() == -1) {
+                                drawGenericEnt(ent, CONFIGBOOL("Weapon:Box"), CONFIGCOL("Weapon:BoxColor"), CONFIGBOOL("Weapon:Name") ? "C4" : "");
+                            }
                         }
 
                         /* Planted C4 ESP */

@@ -10,6 +10,9 @@ namespace Features {
     namespace RankReveal {
         void rankReveal(); // CM
     }
+    namespace RecoilCrosshair {
+        void drawCrosshair();
+    }
     namespace WorldColorModulate {
         void updateColorModulation();
     }

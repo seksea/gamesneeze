@@ -11,4 +11,5 @@ void Menu::drawOverlay(ImDrawList* drawList) {
     Globals::drawList->AddText(ImVec2(3, 3), ImColor(255, 255, 255, 255), watermarkText);
 
     Features::ESP::drawESP();
+    Features::RecoilCrosshair::drawCrosshair();
 }

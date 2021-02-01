@@ -77,10 +77,11 @@ void Menu::drawVisualsTab() {
                 ImGui::SameLine();
                 ImGui::ColorEdit4("Weapon Chams Primary Color", (float*)&CONFIGCOL("Weapon:ChamsPrimaryColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
 
+                ImGui::Checkbox("Recoil Crosshair", &CONFIGBOOL("World:SpreadCrosshair"));
                 ImGui::EndChild();
             }
             ImGui::SameLine();
-            ImGui::BeginChild("Items", ImVec2(0, 263), true); {
+            ImGui::BeginChild("Items", ImVec2(0, 253), true); {
                 ImGui::Text("Items");
                 ImGui::Separator();
                 ImGui::Checkbox("Weapon Box", &CONFIGBOOL("Weapon:Box"));
@@ -114,6 +115,7 @@ void Menu::drawVisualsTab() {
                   ImGui::Button("Update Colour Modulation")) {
                     Features::WorldColorModulate::updateColorModulation();
                 }
+                ImGui::SliderInt("NightMode", &CONFIGINT("World:NightMode"), 0, 100);
 
 
                 ImGui::EndChild();

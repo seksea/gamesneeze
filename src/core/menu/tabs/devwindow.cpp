@@ -9,6 +9,20 @@ void Menu::drawDevWindow() {
     ImGui::Checkbox("Demo window", &demoWindow);
 
     if (ImGui::TreeNode("Interfaces")) {
+        if (ImGui::TreeNode("Engine")) {
+            int windowW, windowH;
+            Interfaces::engine->GetScreenSize(windowW, windowH);
+            ImGui::Text("GetScreenSize: %dx%d", windowW, windowH);
+            ImGui::Text("IsInGame: %d", Interfaces::engine->IsInGame());
+            ImGui::Text("IsConnected: %d",Interfaces::engine->IsConnected());
+            ImGui::Text("GetLocalPlayer: %d",Interfaces::engine->GetLocalPlayer());
+            ImGui::Text("GetMaxClients: %d",Interfaces::engine->GetMaxClients());
+            ImGui::TreePop();
+        }
+        if (ImGui::TreeNode("EntityList")) {
+            ImGui::Text("GetHighestEntityIndex: %d", Interfaces::entityList->GetHighestEntityIndex());
+            ImGui::TreePop();
+        }
         if (ImGui::TreeNode("Globals")) {
             ImGui::Text("realtime: %f", Interfaces::globals->realtime);
             ImGui::Text("framecount: %d", Interfaces::globals->framecount);
@@ -26,28 +40,18 @@ void Menu::drawDevWindow() {
             ImGui::Text("m_bRemoteClient: %d", Interfaces::globals->m_bRemoteClient);
             ImGui::TreePop();
         }
-        if (ImGui::TreeNode("EntityList")) {
-            ImGui::Text("GetHighestEntityIndex: %d", Interfaces::entityList->GetHighestEntityIndex());
-            ImGui::TreePop();
-        }
-        if (ImGui::TreeNode("Engine Client")) {
-            int windowW, windowH;
-            Interfaces::engine->GetScreenSize(windowW, windowH);
-            ImGui::Text("GetScreenSize: %dx%d", windowW, windowH);
-            ImGui::Text("IsInGame: %d", Interfaces::engine->IsInGame());
-            ImGui::Text("IsConnected: %d",Interfaces::engine->IsConnected());
-            ImGui::TreePop();
-        }
         ImGui::TreePop();
     }
-    if (ImGui::TreeNode("Players")) {
+    if (ImGui::TreeNode("Entities")) {
         if (Interfaces::engine->IsInGame()) {
-            for (int i; i < Interfaces::globals->maxClients; i++) {
-                Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
-                if (p) {
-                    if (p->isPlayer()) {
+            int highest = Interfaces::entityList->GetHighestEntityIndex();
+            for (int i; i < highest; i++) {
+                Entity* ent = (Entity*)Interfaces::entityList->GetClientEntity(i);
+                if (ent) {
+                    if (ent->isPlayer()) {
+                        Player* p = (Player*)ent;
                         if (p->health() > 0) {
-                            if (ImGui::TreeNode(std::to_string(i).c_str(), "%d", i)) {
+                            if (ImGui::TreeNode(std::to_string(i).c_str(), "PLAYER: %d", i)) {
                                 ImGui::Text("dormant: %d", p->dormant());
                                 ImGui::Text("isPlayer: %d", p->isPlayer());
                                 if (ImGui::TreeNode(std::to_string(i+Interfaces::globals->maxClients).c_str(), "Flags")) {
@@ -91,10 +95,16 @@ void Menu::drawDevWindow() {
                                 ImGui::Text("DT_BasePlayer m_iTeamNum: %d", p->team());
                                 ImGui::Text("DT_CSPlayer m_fFlags: %d", p->flags());
                                 ImGui::Text("DT_BaseEntity m_bSpotted: %d", p->spotted());
-                                ImGui::Text("DT_BasePlayer m_vecOrigin: %f %f %f", p->origin().x, p->origin().y, p->origin().y);
+                                ImGui::Text("origin: %f %f %f", p->origin().x, p->origin().y, p->origin().y);
                                 ImGui::TreePop();
                             }
                         }
+                    }
+                    ClientClass* clientClass = ent->clientClass();
+                    if (ImGui::TreeNode(std::to_string(i).c_str(), "%s (%d): %d", clientClass->m_pNetworkName, clientClass->m_ClassID, i)) {
+                        ImGui::Text("DT_BaseEntity m_bSpotted: %d", ent->spotted());
+                        ImGui::Text("origin: %f %f %f", ent->origin().x, ent->origin().y, ent->origin().y);
+                        ImGui::TreePop();
                     }
                 }
             }

@@ -58,7 +58,7 @@ void Menu::drawMiscTab() {
         ImGui::EndChild();
     }
     ImGui::SameLine();
-    ImGui::BeginChild("Config", ImVec2(0, 263), true); {
+    ImGui::BeginChild("Config", ImVec2(0, 260), true); {
         ImGui::Text("Config");
         ImGui::Separator();
         if (ImGui::Button("Save")) {

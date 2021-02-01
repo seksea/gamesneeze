@@ -52,6 +52,8 @@ public:
 	NETVAR("DT_CSPlayer", "m_iAccount", money, int);
     NETVAR("DT_BasePlayer", "m_iHealth", health, int);
 	NETVAR("DT_CSPlayer", "m_fFlags", flags, int);
+	NETVAR("DT_BasePlayer", "m_aimPunchAngle", aimPunch, QAngle);
+	NETVAR("DT_CSPlayer", "m_hActiveWeapon", activeWeapon, void*);
 };
 
 class Item : public Entity{
@@ -62,6 +64,16 @@ public:
 class Weapon : public Item {
 public:
 	NETVAR("DT_BaseCombatWeapon", "m_hOwner", owner, int);
+
+	float GetSpread() {
+		typedef float (*Fn)(void*);
+		return getVirtualFunc<Fn>(this, 520)(this);
+	}
+	
+	float GetInaccuracy() {
+		typedef float (*Fn)(void*);
+		return getVirtualFunc<Fn>(this, 550)(this);
+	}
 };
 
 class PlantedC4 : public Item {
