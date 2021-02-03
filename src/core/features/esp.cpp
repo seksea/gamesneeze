@@ -143,7 +143,7 @@ void drawGenericEnt(Entity* ent, bool box, ImColor color, const char* label) {
     }
 }
 
-void Features::ESP::drawESP() {
+void Features::ESP::draw() {
     if (Interfaces::engine->IsInGame()) {
         int highest = Interfaces::entityList->GetHighestEntityIndex();
         for (int i; i < highest; i++) {

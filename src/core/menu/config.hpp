@@ -79,7 +79,6 @@ namespace Config {
             // World {
                 CONFIGITEM("World:SpreadCrosshair", false),
                 CONFIGITEM("World:WorldColorModulation", ImColor(255, 255, 255, 255)),
-                CONFIGITEM("World:NightMode", 0),
 
                 CONFIGITEM("Weapon:Box", false),
                 CONFIGITEM("Weapon:BoxColor", ImColor(255, 255, 255, 255)),
@@ -102,6 +101,7 @@ namespace Config {
         // }
         // Misc {
             CONFIGITEM("Misc:RankReveal", false),
+            CONFIGITEM("Misc:Clantag", false),
 
         // }
     };

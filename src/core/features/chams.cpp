@@ -113,7 +113,7 @@ void chamWeapon(void* thisptr, void* ctx, const DrawModelState_t &state, const M
     Interfaces::modelRender->ForcedMaterialOverride(0);
 }
 
-void Features::Chams::doChams(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld) {
+void Features::Chams::drawModelExecute(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld) {
     createMaterials();
 
 	const char* modelName = Interfaces::modelInfo->GetModelName(pInfo.pModel);

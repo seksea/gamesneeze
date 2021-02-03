@@ -1,19 +1,23 @@
+#pragma once
 #include "../../includes.hpp"
 
 namespace Features {
     namespace ESP {
-        void drawESP();
+        void draw();
     }
     namespace Chams {
-        void doChams(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld); // DME
+        void drawModelExecute(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld); // DME
     }
     namespace RankReveal {
-        void rankReveal(); // CM
+        void createMove(); // CM
     }
     namespace RecoilCrosshair {
-        void drawCrosshair();
+        void draw();
     }
     namespace WorldColorModulate {
         void updateColorModulation();
+    }
+    namespace ClantagChanger {
+        void frameStageNotify(FrameStage frame);
     }
 }

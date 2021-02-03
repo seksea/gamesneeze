@@ -28,5 +28,10 @@ namespace Netvar {
     bool init();
 }
 
+namespace Offsets {
+    typedef void (*SendClantag) (const char*, const char*);
+    inline SendClantag sendClantag;
+}
+
 #define GETNETVAROFFSET(table, prop) Netvar::offsets.at({table, prop})
 #define NETVAR( table, prop, func, type ) type& func() {return *reinterpret_cast<type*>(uintptr_t(this) + GETNETVAROFFSET(table, prop));}; type* func##_ptr() {return reinterpret_cast<type*>(uintptr_t(this) + GETNETVAROFFSET(table, prop));}

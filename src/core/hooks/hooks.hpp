@@ -25,7 +25,11 @@ namespace Hooks {
         using func = void(*)(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld);
         inline func original;
         void hook(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld);
-
+    }
+    namespace FrameStageNotify {
+        using func = void(*)(void* thisptr, FrameStage frame);
+        inline func original;
+        void hook(void* thisptr, FrameStage frame);
     }
 
     /* SDL HOOKS */

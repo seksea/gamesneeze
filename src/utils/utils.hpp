@@ -1,5 +1,6 @@
 #pragma once
-#include <string>
+#include <string.h>
+#include <link.h>
 
 enum logLevel {
     LOG,
@@ -21,4 +22,8 @@ inline void**& getVTable(void* c, size_t offset = 0) {
 template <typename T>
 inline T getVirtualFunc(void* c, size_t i, size_t offset = 0) {
     return reinterpret_cast<T>(getVTable(c, offset)[i]);
+}
+
+namespace PatternScan {
+    uintptr_t patternScan(const char* moduleName, unsigned char* bMask, const char* szMask);
 }

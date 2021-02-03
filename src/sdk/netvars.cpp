@@ -39,9 +39,32 @@ bool Netvar::init() {
         Log::log(LOG, " %s %s | %x", nvar.first.first.data(), nvar.first.second.data(), nvar.second);
     }
 
-    Log::log(LOG, "Testing offsets by getting m_iHealth from DT_BasePlayer (%x)", GETNETVAROFFSET("DT_BasePlayer", "m_iHealth"));
+    Log::log(LOG, "Testing netvars by getting m_iHealth from DT_BasePlayer (%x)", GETNETVAROFFSET("DT_BasePlayer", "m_iHealth"));
     if (GETNETVAROFFSET("DT_BasePlayer", "m_iHealth") != 0x138) {
         Log::log(WARN, "When getting m_iHealth from DT_BasePlayer the value isnt as expected, this could mean there is a problem in getting netvars or the game has just updated.");
     }
+
+    Log::log(LOG, "Initialising offsets");
+
+    Offsets::sendClantag = (Offsets::SendClantag)PatternScan::patternScan("engine_client.so", 
+        (unsigned char*)    "\x55\x48\x89\xE5\x41\x55\x49\x89\xFD\x41\x54\xBF\x48\x00\x00\x00\x49\x89\xF4\x53\x48\x83\xEC\x08\xE8"
+                            "\x00\x00\x00\x00"
+                            "\x48\x8D\x35"
+                            "\x00\x00\x00\x00"
+                            "\x48\x89\xC7\x48\x89\xC3\xE8"
+                            "\x00\x00\x00\x00"
+                            "\x48\x8D\x35"
+                            "\x00\x00\x00\x00"
+                            "\x4C\x89\xEA", 
+                            "xxxxxxxxxxxxxxxxxxxxxxxxx"
+                            "????"
+                            "xxx"
+                            "????"
+                            "xxxxxxx"
+                            "????"
+                            "xxx"
+                            "????"
+                            "xxx");
+
     return true;
 }

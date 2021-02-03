@@ -26,6 +26,9 @@ bool Hooks::init() {
     Log::log(LOG, " Hooking DME...");
     DrawModelExecute::original = (DrawModelExecute::func)VMT::hook(Interfaces::modelRender, (void*)DrawModelExecute::hook, 21);
 
+    Log::log(LOG, " Hooking FSN...");
+    FrameStageNotify::original = (FrameStageNotify::func)VMT::hook(Interfaces::client, (void*)FrameStageNotify::hook, 37);
+
     Log::log(LOG, "Initialised hooks!");
     return true;
 }
@@ -51,6 +54,9 @@ bool Hooks::unload() {
 
     Log::log(LOG, " Unhooking DME...");
     VMT::hook(Interfaces::modelRender, (void*)DrawModelExecute::original, 21);
+
+    Log::log(LOG, " Unhooking FSN...");
+    VMT::hook(Interfaces::client, (void*)FrameStageNotify::original, 37);
 
     Log::log(LOG, "Unloaded hooks!");
     return true;

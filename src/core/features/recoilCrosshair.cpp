@@ -1,7 +1,7 @@
 #include "features.hpp"
 #include "../../includes.hpp"
 
-void Features::RecoilCrosshair::drawCrosshair() {
+void Features::RecoilCrosshair::draw() {
     if (CONFIGBOOL("World:SpreadCrosshair")) {
         if (Globals::localPlayer) {
             if (Interfaces::engine->IsInGame()) {
