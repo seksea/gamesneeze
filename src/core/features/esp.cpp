@@ -159,7 +159,7 @@ void Features::ESP::draw() {
                         }
 
                         /* Weapon ESP */
-                        if ((clientClass->m_ClassID != EClassIds::CBaseWeaponWorldModel && strstr(clientClass->m_pNetworkName, "Weapon")) || clientClass->m_ClassID == EClassIds::CDEagle || clientClass->m_ClassID == EClassIds::CAK47) {
+                        if ((clientClass->m_ClassID != EClassIds::CBaseWeaponWorldModel && strstr(clientClass->m_pNetworkName, "Weapon")) || clientClass->m_ClassID == EClassIds::CDEagle || clientClass->m_ClassID == EClassIds::CC4 || clientClass->m_ClassID == EClassIds::CAK47) {
                             if (((Weapon*)ent)->owner() == -1) {
                                 try {
                                     drawGenericEnt(ent, CONFIGBOOL("Weapon:Box"), CONFIGCOL("Weapon:BoxColor"), CONFIGBOOL("Weapon:Name") ? itemIndexMap.at(((Weapon*)ent)->itemIndex()) : "");
@@ -167,11 +167,6 @@ void Features::ESP::draw() {
                                 catch(const std::exception & e) {
                                     Log::log(WARN, "itemDefinitionIndex %d not found!", ((Weapon*)ent)->itemIndex());
                                 }
-                            }
-                        }
-                        if (clientClass->m_ClassID == EClassIds::CC4) {
-                            if (((Weapon*)ent)->owner() == -1) {
-                                drawGenericEnt(ent, CONFIGBOOL("Weapon:Box"), CONFIGCOL("Weapon:BoxColor"), CONFIGBOOL("Weapon:Name") ? "C4" : "");
                             }
                         }
 

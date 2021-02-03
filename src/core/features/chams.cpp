@@ -17,100 +17,70 @@ void createMaterials() {
     }
 }
 
-void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld) {
-    static IMaterial* ignoreZMaterial;
+void cham(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld, ImColor color, int mat, bool ignoreZ) {
     static IMaterial* material;
+    switch(mat) {
+        case 0: Hooks::DrawModelExecute::original(thisptr, ctx, state, pInfo, pCustomBoneToWorld); return;
+        case 1: material = shadedMaterial;  break;
+        case 2: material = flatMaterial;  break;
+        case 3: material = pulseMaterial; break;
+        case 4: material = energyBallMaterial; break;
+    }
+    material->SetMaterialVarFlag(MATERIAL_VAR_IGNOREZ, ignoreZ);
+    material->AlphaModulate(color.Value.w);
+    material->ColorModulate(color.Value.x, color.Value.y, color.Value.z);
+    Interfaces::modelRender->ForcedMaterialOverride(material);
+    Hooks::DrawModelExecute::original(thisptr, ctx, state, pInfo, pCustomBoneToWorld);
+    Interfaces::modelRender->ForcedMaterialOverride(0);
+}
+
+void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld) {
     Player* p = (Player*)Interfaces::entityList->GetClientEntity(pInfo.entity_index);
     if (Globals::localPlayer) {
-        bool ignoreZChams;
-        ImColor primaryColour;
-        ImColor primaryIgnoreZColour;
-
-        if (p->team() != Globals::localPlayer->team()) {
-            primaryColour = CONFIGCOL("Enemy:ChamsPrimaryColor");
-            primaryIgnoreZColour = CONFIGCOL("Enemy:IgnoreZChamsPrimaryColor");
-            ignoreZChams = CONFIGINT("Enemy:IgnoreZChamsMaterial") != 0;
-            switch(CONFIGINT("Enemy:IgnoreZChamsMaterial")) {
-                case 1: ignoreZMaterial = shadedMaterial;  break;
-                case 2: ignoreZMaterial = flatMaterial;  break;
-                case 3: ignoreZMaterial = pulseMaterial; break;
-                case 4: ignoreZMaterial = energyBallMaterial; break;
+        if (p->health() > 0) {
+            if (p->team() != Globals::localPlayer->team()) {
+                /* Visible Enemy */
+                cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Enemy:ChamsColor"), CONFIGINT("Enemy:ChamsMaterial"), false);
+                /* Visible Enemy Overlay */
+                if (CONFIGINT("Enemy:ChamsOverlayMaterial")) {
+                    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Enemy:ChamsOverlayColor"), CONFIGINT("Enemy:ChamsOverlayMaterial"), false);
+                }
+                if (CONFIGINT("Enemy:IgnoreZChamsMaterial")) {
+                    /* Ignorez Enemy */
+                    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Enemy:IgnoreZChamsColor"), CONFIGINT("Enemy:IgnoreZChamsMaterial"), true);
+                }
             }
-            switch(CONFIGINT("Enemy:ChamsMaterial")) { // Visible
-                case 0: Hooks::DrawModelExecute::original(thisptr, ctx, state, pInfo, pCustomBoneToWorld); return;
-                case 1: material = shadedMaterial;  break;
-                case 2: material = flatMaterial;  break;
-                case 3: material = pulseMaterial; break;
-                case 4: material = energyBallMaterial; break;
-            }
-        }
-        else {
-            primaryColour = CONFIGCOL("Team:ChamsPrimaryColor");
-            primaryIgnoreZColour = CONFIGCOL("Team:IgnoreZChamsPrimaryColor");
-            ignoreZChams = CONFIGINT("Team:IgnoreZChamsMaterial") != 0;
-            switch(CONFIGINT("Team:IgnoreZChamsMaterial")) {
-                case 1: ignoreZMaterial = shadedMaterial;  break;
-                case 2: ignoreZMaterial = flatMaterial;  break;
-                case 3: ignoreZMaterial = pulseMaterial; break;
-                case 4: ignoreZMaterial = energyBallMaterial; break;
-            }
-            switch(CONFIGINT("Team:ChamsMaterial")) { // Visible
-                case 0: Hooks::DrawModelExecute::original(thisptr, ctx, state, pInfo, pCustomBoneToWorld); return;
-                case 1: material = shadedMaterial;  break;
-                case 2: material = flatMaterial;  break;
-                case 3: material = pulseMaterial; break;
-                case 4: material = energyBallMaterial; break;
+            else {
+                /* Visible Teammate */
+                cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Team:ChamsColor"), CONFIGINT("Team:ChamsMaterial"), false);
+                /* Visible Teammate Overlay */
+                if (CONFIGINT("Team:ChamsOverlayMaterial")) {
+                    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Team:ChamsOverlayColor"), CONFIGINT("Team:ChamsOverlayMaterial"), false);
+                }
+                cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Team:ChamsColor"), CONFIGINT("Team:ChamsMaterial"), false);
+                if (CONFIGINT("Team:IgnoreZChamsMaterial")) {
+                    /* Visible Teammate */
+                    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Team:IgnoreZChamsColor"), CONFIGINT("Team:IgnoreZChamsMaterial"), true);
+                }
             }
         }
-        if(ignoreZChams) { // IgnoreZ
-            ignoreZMaterial->SetMaterialVarFlag(MATERIAL_VAR_IGNOREZ, true);
-            ignoreZMaterial->AlphaModulate(primaryIgnoreZColour.Value.w);
-            ignoreZMaterial->ColorModulate(primaryIgnoreZColour.Value.x, primaryIgnoreZColour.Value.y, primaryIgnoreZColour.Value.z);
-            Interfaces::modelRender->ForcedMaterialOverride(ignoreZMaterial);
-            Hooks::DrawModelExecute::original(thisptr, ctx, state, pInfo, pCustomBoneToWorld);
-            Interfaces::modelRender->ForcedMaterialOverride(0);
-        }
-        material->SetMaterialVarFlag(MATERIAL_VAR_IGNOREZ, false);
-        material->AlphaModulate(primaryColour.Value.w);
-        material->ColorModulate(primaryColour.Value.x, primaryColour.Value.y, primaryColour.Value.z);
-        Interfaces::modelRender->ForcedMaterialOverride(material);
-        Hooks::DrawModelExecute::original(thisptr, ctx, state, pInfo, pCustomBoneToWorld);
-        Interfaces::modelRender->ForcedMaterialOverride(0);
     }
 }
 
 void chamArms(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld) {
-    static IMaterial* material;
-    switch(CONFIGINT("Arms:ChamsMaterial")) { // Visible
-        case 0: Hooks::DrawModelExecute::original(thisptr, ctx, state, pInfo, pCustomBoneToWorld); return;
-        case 1: material = shadedMaterial;  break;
-        case 2: material = flatMaterial;  break;
-        case 3: material = pulseMaterial; break;
-        case 4: material = energyBallMaterial; break;
+    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Arms:ChamsColor"), CONFIGINT("Arms:ChamsMaterial"), false);
+    /* Arms Overlay */
+    if (CONFIGINT("Arms:ChamsOverlayMaterial")) {
+        cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Arms:ChamsOverlayColor"), CONFIGINT("Arms:ChamsOverlayMaterial"), false);
     }
-    material->SetMaterialVarFlag(MATERIAL_VAR_IGNOREZ, false);
-    material->AlphaModulate(CONFIGCOL("Arms:ChamsPrimaryColor").Value.w);
-    material->ColorModulate(CONFIGCOL("Arms:ChamsPrimaryColor").Value.x, CONFIGCOL("Arms:ChamsPrimaryColor").Value.y, CONFIGCOL("Arms:ChamsPrimaryColor").Value.z);
-    Interfaces::modelRender->ForcedMaterialOverride(material);
-    Hooks::DrawModelExecute::original(thisptr, ctx, state, pInfo, pCustomBoneToWorld);
-    Interfaces::modelRender->ForcedMaterialOverride(0);
 }
 
 void chamWeapon(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld) {
-    static IMaterial* material;
-    switch(CONFIGINT("Weapon:ChamsMaterial")) { // Visible
-        case 0: Hooks::DrawModelExecute::original(thisptr, ctx, state, pInfo, pCustomBoneToWorld); return;
-        case 1: material = shadedMaterial;  break;
-        case 2: material = flatMaterial;  break;
-        case 3: material = pulseMaterial; break;
-        case 4: material = energyBallMaterial; break;
+    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Weapon:ChamsColor"), CONFIGINT("Weapon:ChamsMaterial"), false);
+    /* Weapon Overlay */
+    if (CONFIGINT("Weapon:ChamsOverlayMaterial")) {
+        cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Weapon:ChamsOverlayColor"), CONFIGINT("Weapon:ChamsOverlayMaterial"), false);
     }
-    material->SetMaterialVarFlag(MATERIAL_VAR_IGNOREZ, false);
-    material->AlphaModulate(CONFIGCOL("Weapon:ChamsPrimaryColor").Value.w);
-    material->ColorModulate(CONFIGCOL("Weapon:ChamsPrimaryColor").Value.x, CONFIGCOL("Weapon:ChamsPrimaryColor").Value.y, CONFIGCOL("Weapon:ChamsPrimaryColor").Value.z);
-    Interfaces::modelRender->ForcedMaterialOverride(material);
-    Hooks::DrawModelExecute::original(thisptr, ctx, state, pInfo, pCustomBoneToWorld);
-    Interfaces::modelRender->ForcedMaterialOverride(0);
 }
 
 void Features::Chams::drawModelExecute(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld) {

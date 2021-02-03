@@ -21,15 +21,22 @@ void Menu::drawVisualsTab() {
                 ImGui::Text("Chams");
                 ImGui::Separator();
                 ImGui::Text("Visible");
+                ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.4f);
                 ImGui::Combo("##VisMaterial", &CONFIGINT("Enemy:ChamsMaterial"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
                 ImGui::SameLine();
-                ImGui::ColorEdit4("Chams Primary Color", (float*)&CONFIGCOL("Enemy:ChamsPrimaryColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::ColorEdit4("##Chams Primary Color", (float*)&CONFIGCOL("Enemy:ChamsColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::SameLine();
+                ImGui::Combo("##VisOverlayMaterial", &CONFIGINT("Enemy:ChamsOverlayMaterial"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
+                ImGui::SameLine();
+                ImGui::ColorEdit4("##ChamsOverlayColor", (float*)&CONFIGCOL("Enemy:ChamsOverlayColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                 
+                ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.9f);
                 ImGui::Text("Ignore Z");
                 ImGui::Combo("##IZMaterial", &CONFIGINT("Enemy:IgnoreZChamsMaterial"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
                 ImGui::SameLine();
-                ImGui::ColorEdit4("IgnoreZ Chams Primary Color", (float*)&CONFIGCOL("Enemy:IgnoreZChamsPrimaryColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::ColorEdit4("IgnoreZ Chams Primary Color", (float*)&CONFIGCOL("Enemy:IgnoreZChamsColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                 ImGui::EndChild();
+                ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.65f);
             }
             ImGui::EndTabItem();
         }
@@ -50,15 +57,22 @@ void Menu::drawVisualsTab() {
                 ImGui::Text("Chams");
                 ImGui::Separator();
                 ImGui::Text("Visible");
+                ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.4f);
                 ImGui::Combo("##VisMaterial", &CONFIGINT("Team:ChamsMaterial"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
                 ImGui::SameLine();
-                ImGui::ColorEdit4("Chams Primary Color", (float*)&CONFIGCOL("Team:ChamsPrimaryColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::ColorEdit4("##Chams Primary Color", (float*)&CONFIGCOL("Team:ChamsColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::SameLine();
+                ImGui::Combo("##VisOverlayMaterial", &CONFIGINT("Team:ChamsOverlayMaterial"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
+                ImGui::SameLine();
+                ImGui::ColorEdit4("##ChamsOverlayColor", (float*)&CONFIGCOL("Team:ChamsOverlayColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                 
+                ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.9f);
                 ImGui::Text("Ignore Z");
                 ImGui::Combo("##IZMaterial", &CONFIGINT("Team:IgnoreZChamsMaterial"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
                 ImGui::SameLine();
-                ImGui::ColorEdit4("IgnoreZ Chams Primary Color", (float*)&CONFIGCOL("Team:IgnoreZChamsPrimaryColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::ColorEdit4("IgnoreZ Chams Primary Color", (float*)&CONFIGCOL("Team:IgnoreZChamsColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                 ImGui::EndChild();
+                ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.65f);
             }
             ImGui::EndTabItem();
         }
@@ -68,14 +82,24 @@ void Menu::drawVisualsTab() {
                 ImGui::Text("Local Player");
                 ImGui::Separator();
                 ImGui::Text("Arm Chams");
+                ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.4f);
                 ImGui::Combo("##ArmMaterial", &CONFIGINT("Arms:ChamsMaterial"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
                 ImGui::SameLine();
-                ImGui::ColorEdit4("Arm Chams Primary Color", (float*)&CONFIGCOL("Arms:ChamsPrimaryColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::ColorEdit4("##Arm Chams Primary Color", (float*)&CONFIGCOL("Arms:ChamsColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::SameLine();
+                ImGui::Combo("##ArmOverlayMaterial", &CONFIGINT("Arms:ChamsOverlayMaterial"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
+                ImGui::SameLine();
+                ImGui::ColorEdit4("##ArmOverlayColor", (float*)&CONFIGCOL("Arms:ChamsOverlayColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
 
                 ImGui::Text("Weapon Chams");
                 ImGui::Combo("##WeaponMaterial", &CONFIGINT("Weapon:ChamsMaterial"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
                 ImGui::SameLine();
-                ImGui::ColorEdit4("Weapon Chams Primary Color", (float*)&CONFIGCOL("Weapon:ChamsPrimaryColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::ColorEdit4("##Weapon Chams Primary Color", (float*)&CONFIGCOL("Weapon:ChamsColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::SameLine();
+                ImGui::Combo("##WeaponOverlayMaterial", &CONFIGINT("Weapon:ChamsOverlayMaterial"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
+                ImGui::SameLine();
+                ImGui::ColorEdit4("##WeaponOverlayColor", (float*)&CONFIGCOL("Weapon:ChamsOverlayColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.65f);
 
                 ImGui::Checkbox("Recoil Crosshair", &CONFIGBOOL("World:SpreadCrosshair"));
                 ImGui::EndChild();

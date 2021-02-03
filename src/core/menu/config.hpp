@@ -62,19 +62,27 @@ namespace Config {
             // }
             // Chams {
                 CONFIGITEM("Enemy:ChamsMaterial", 0),
-                CONFIGITEM("Enemy:ChamsPrimaryColor", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Enemy:ChamsColor", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Enemy:ChamsOverlayMaterial", 0),
+                CONFIGITEM("Enemy:ChamsOverlayColor", ImColor(197, 66, 245, 255)),
                 CONFIGITEM("Enemy:IgnoreZChamsMaterial", 0),
-                CONFIGITEM("Enemy:IgnoreZChamsPrimaryColor", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Enemy:IgnoreZChamsColor", ImColor(197, 66, 245, 255)),
                 
                 CONFIGITEM("Team:ChamsMaterial", 0),
-                CONFIGITEM("Team:ChamsPrimaryColor", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Team:ChamsColor", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Team:ChamsOverlayMaterial", 0),
+                CONFIGITEM("Team:ChamsOverlayColor", ImColor(197, 66, 245, 255)),
                 CONFIGITEM("Team:IgnoreZChamsMaterial", 0),
-                CONFIGITEM("Team:IgnoreZChamsPrimaryColor", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Team:IgnoreZChamsColor", ImColor(197, 66, 245, 255)),
 
                 CONFIGITEM("Weapon:ChamsMaterial", 0),
-                CONFIGITEM("Weapon:ChamsPrimaryColor", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Weapon:ChamsColor", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Weapon:ChamsOverlayMaterial", 0),
+                CONFIGITEM("Weapon:ChamsOverlayColor", ImColor(197, 66, 245, 255)),
                 CONFIGITEM("Arms:ChamsMaterial", 0),
-                CONFIGITEM("Arms:ChamsPrimaryColor", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Arms:ChamsColor", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Arms:ChamsOverlayMaterial", 0),
+                CONFIGITEM("Arms:ChamsOverlayColor", ImColor(197, 66, 245, 255)),
             // }
             // World {
                 CONFIGITEM("World:SpreadCrosshair", false),
