@@ -1,6 +1,6 @@
 #include "../menu.hpp"
 
-const char* chamsMaterials[] = {"None", "Shaded", "Flat", "Screen Pulse", "Energy Ball"};
+const char* chamsMaterials[] = {"None", "Shaded", "Flat", "Screen Pulse", "Energy Ball", "Glow", "Plastic", "Darude"};
 
 void Menu::drawVisualsTab() {
     ImGui::Text("Visuals");

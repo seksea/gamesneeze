@@ -47,10 +47,24 @@ enum MaterialVarFlags_t
 	// flags should to into the flag enum in imaterialinternal.h
 };
 
+class IMaterialVar {
+public:
+
+    void SetVecValue(float x, float y, float z) {
+		typedef void (*Fn)(void*, float, float, float);
+		return getVirtualFunc<Fn>(this, 11)(this, x, y, z);
+    }
+};
+
 class IMaterial {
 public:
 	virtual const char*	GetName();
 	virtual const char*	GetTextureGroupName();
+
+	IMaterialVar* FindVar(const char *varName, bool *found, bool complain = true) {
+		typedef IMaterialVar* (*Fn)(void*, const char*, bool*, bool);
+		return getVirtualFunc<Fn>(this, 11)(this, varName, found, complain);
+	}
 
 	void AlphaModulate(float alpha) {
 		typedef void (*Fn)(void*, float);
