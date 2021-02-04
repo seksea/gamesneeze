@@ -84,6 +84,7 @@ void Menu::drawMiscTab() {
         ImGui::InputText("##clantag-tbox", clantag, IM_ARRAYSIZE(clantag));
         ImGui::SameLine();
         ImGui::Checkbox("Clantag", &CONFIGBOOL("Misc>Misc>Clantag"));
+        ImGui::Checkbox("Spectators", &CONFIGBOOL("Misc>Misc>Spectators"));
         ImGui::EndChild();
     }
 }

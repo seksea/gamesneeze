@@ -54,6 +54,7 @@ public:
 	NETVAR("DT_CSPlayer", "m_fFlags", flags, int);
 	NETVAR("DT_BasePlayer", "m_aimPunchAngle", aimPunch, QAngle);
 	NETVAR("DT_CSPlayer", "m_hActiveWeapon", activeWeapon, void*);
+	NETVAR("DT_CSPlayer", "m_hObserverTarget", observerTarget, Player*);
 };
 
 class Item : public Entity{
