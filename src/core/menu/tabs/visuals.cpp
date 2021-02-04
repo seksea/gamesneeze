@@ -9,11 +9,11 @@ void Menu::drawVisualsTab() {
             ImGui::BeginChild("ESP", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
                 ImGui::Text("ESP");
                 ImGui::Separator();
-                ImGui::Checkbox("Box", &CONFIGBOOL("Enemy:Box"));
                 if (CONFIGBOOL("Enemy:Box")) {
                     ImGui::SameLine();
                     ImGui::ColorEdit4("Box Color", (float*)&CONFIGCOL("Enemy:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                 }
+                ImGui::Checkbox("Box", &CONFIGBOOL("Enemy:Box"));
                 ImGui::Checkbox("Name", &CONFIGBOOL("Enemy:Name"));
                 ImGui::Checkbox("Health", &CONFIGBOOL("Enemy:Health"));
                 ImGui::Checkbox("Health Bar", &CONFIGBOOL("Enemy:HealthBar"));
@@ -49,11 +49,12 @@ void Menu::drawVisualsTab() {
             ImGui::BeginChild("ESP", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
                 ImGui::Text("ESP");
                 ImGui::Separator();
-                ImGui::Checkbox("Box", &CONFIGBOOL("Team:Box"));
                 if (CONFIGBOOL("Team:Box")) {
                     ImGui::SameLine();
                     ImGui::ColorEdit4("Box Color", (float*)&CONFIGCOL("Team:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                 }
+                ImGui::Checkbox("Box", &CONFIGBOOL("Team:Box"));
+
                 ImGui::Checkbox("Name", &CONFIGBOOL("Team:Name"));
                 ImGui::Checkbox("Health", &CONFIGBOOL("Team:Health"));
                 ImGui::Checkbox("Health Bar", &CONFIGBOOL("Team:HealthBar"));
@@ -124,35 +125,32 @@ void Menu::drawVisualsTab() {
             ImGui::BeginChild("Items", ImVec2(0, 253), true); {
                 ImGui::Text("Items");
                 ImGui::Separator();
-                ImGui::Checkbox("Weapon Box", &CONFIGBOOL("Weapon:Box"));
                 if (CONFIGBOOL("Weapon:Box")) {
                     ImGui::SameLine();
                     ImGui::ColorEdit4("Weapon Box Color", (float*)&CONFIGCOL("Weapon:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                 }
+                ImGui::Checkbox("Weapon Box", &CONFIGBOOL("Weapon:Box"));
                 ImGui::Checkbox("Weapon Label", &CONFIGBOOL("Weapon:Name"));
                 ImGui::Separator();
-
-                ImGui::Checkbox("Planted C4 Box", &CONFIGBOOL("PlantedC4:Box"));
                 if (CONFIGBOOL("PlantedC4:Box")) {
                     ImGui::SameLine();
                     ImGui::ColorEdit4("Planted C4 Box Color", (float*)&CONFIGCOL("PlantedC4:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                 }
+                ImGui::Checkbox("Planted C4 Box", &CONFIGBOOL("PlantedC4:Box"));
                 ImGui::Checkbox("Planted C4 Label", &CONFIGBOOL("PlantedC4:Name"));
                 ImGui::Separator();
-                
-                ImGui::Checkbox("Chicken Box", &CONFIGBOOL("Chicken:Box"));
                 if (CONFIGBOOL("Chicken:Box")) {
                     ImGui::SameLine();
                     ImGui::ColorEdit4("Chicken Box Color", (float*)&CONFIGCOL("Chicken:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                 }
+                ImGui::Checkbox("Chicken Box", &CONFIGBOOL("Chicken:Box"));
                 ImGui::Checkbox("Chicken Label", &CONFIGBOOL("Chicken:Name"));
                 ImGui::Separator();
-                
-                ImGui::Checkbox("Fish Box", &CONFIGBOOL("Fish:Box"));
                 if (CONFIGBOOL("Fish:Box")) {
                     ImGui::SameLine();
                     ImGui::ColorEdit4("Fish Box Color", (float*)&CONFIGCOL("Fish:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                 }
+                ImGui::Checkbox("Fish Box", &CONFIGBOOL("Fish:Box"));
                 ImGui::Checkbox("Fish Label", &CONFIGBOOL("Fish:Name"));
                 ImGui::Separator();
 
