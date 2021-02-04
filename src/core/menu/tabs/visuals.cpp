@@ -9,8 +9,10 @@ void Menu::drawVisualsTab() {
             ImGui::BeginChild("ESP", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
                 ImGui::Text("ESP");
                 ImGui::Separator();
+                ImGui::ColorEdit4("##Box Color", (float*)&CONFIGCOL("Enemy:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::SameLine();
                 ImGui::Checkbox("Box", &CONFIGBOOL("Enemy:Box"));
-                ImGui::ColorEdit4("Box Color", (float*)&CONFIGCOL("Enemy:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::Checkbox("Only When Dead", &CONFIGBOOL("Enemy:DeadESP"));
                 ImGui::Checkbox("Name", &CONFIGBOOL("Enemy:Name"));
                 ImGui::Checkbox("Health", &CONFIGBOOL("Enemy:Health"));
                 ImGui::Checkbox("Health Bar", &CONFIGBOOL("Enemy:HealthBar"));
@@ -45,8 +47,10 @@ void Menu::drawVisualsTab() {
             ImGui::BeginChild("ESP", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
                 ImGui::Text("ESP");
                 ImGui::Separator();
+                ImGui::ColorEdit4("##Box Color", (float*)&CONFIGCOL("Team:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::SameLine();
                 ImGui::Checkbox("Box", &CONFIGBOOL("Team:Box"));
-                ImGui::ColorEdit4("Box Color", (float*)&CONFIGCOL("Team:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::Checkbox("Only When Dead", &CONFIGBOOL("Team:DeadESP"));
                 ImGui::Checkbox("Name", &CONFIGBOOL("Team:Name"));
                 ImGui::Checkbox("Health", &CONFIGBOOL("Team:Health"));
                 ImGui::Checkbox("Health Bar", &CONFIGBOOL("Team:HealthBar"));

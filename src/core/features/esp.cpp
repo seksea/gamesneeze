@@ -106,30 +106,34 @@ void drawPlayer(Player* p) {
                 Interfaces::engine->GetPlayerInfo(p->index(), &info);
 
                 if (p->team() != Globals::localPlayer->team()) {
-                    std::stringstream rightText;
-                    if (CONFIGBOOL("Enemy:Name"))
-                        rightText << info.name << "\n";
-                    if (CONFIGBOOL("Enemy:Health"))
-                        rightText << p->health() << "hp\n";
-                    if (CONFIGBOOL("Enemy:Money"))
-                        rightText << "$" << p->money() << "\n";
-                    
-                    drawBox(x, y, x2, y2, CONFIGBOOL("Enemy:Box"), 
-                                CONFIGCOL("Enemy:BoxColor"), (char*)rightText.str().c_str(), 
-                                CONFIGBOOL("Enemy:HealthBar") ? p->health() : -1);
+                    if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Enemy:DeadESP")) || !CONFIGBOOL("Enemy:DeadESP")) {
+                        std::stringstream rightText;
+                        if (CONFIGBOOL("Enemy:Name"))
+                            rightText << info.name << "\n";
+                        if (CONFIGBOOL("Enemy:Health"))
+                            rightText << p->health() << "hp\n";
+                        if (CONFIGBOOL("Enemy:Money"))
+                            rightText << "$" << p->money() << "\n";
+                        
+                        drawBox(x, y, x2, y2, CONFIGBOOL("Enemy:Box"), 
+                                    CONFIGCOL("Enemy:BoxColor"), (char*)rightText.str().c_str(), 
+                                    CONFIGBOOL("Enemy:HealthBar") ? p->health() : -1);
+                    }
                 }
                 if (p->team() == Globals::localPlayer->team()) {
-                    std::stringstream rightText;
-                    if (CONFIGBOOL("Team:Name"))
-                        rightText << info.name << "\n";
-                    if (CONFIGBOOL("Team:Health"))
-                        rightText << p->health() << "hp\n";
-                    if (CONFIGBOOL("Team:Money"))
-                        rightText << "$" << p->money() << "\n";
-                    
-                    drawBox(x, y, x2, y2, CONFIGBOOL("Team:Box"), 
-                                CONFIGCOL("Team:BoxColor"), (char*)rightText.str().c_str(), 
-                                CONFIGBOOL("Team:HealthBar") ? p->health() : -1);
+                    if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Team:DeadESP")) || !CONFIGBOOL("Team:DeadESP")) {
+                        std::stringstream rightText;
+                        if (CONFIGBOOL("Team:Name"))
+                            rightText << info.name << "\n";
+                        if (CONFIGBOOL("Team:Health"))
+                            rightText << p->health() << "hp\n";
+                        if (CONFIGBOOL("Team:Money"))
+                            rightText << "$" << p->money() << "\n";
+                        
+                        drawBox(x, y, x2, y2, CONFIGBOOL("Team:Box"), 
+                                    CONFIGCOL("Team:BoxColor"), (char*)rightText.str().c_str(), 
+                                    CONFIGBOOL("Team:HealthBar") ? p->health() : -1);
+                    }
                 }
             }
         }
