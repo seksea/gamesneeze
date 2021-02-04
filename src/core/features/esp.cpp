@@ -106,33 +106,33 @@ void drawPlayer(Player* p) {
                 Interfaces::engine->GetPlayerInfo(p->index(), &info);
 
                 if (p->team() != Globals::localPlayer->team()) {
-                    if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Enemy:DeadESP")) || !CONFIGBOOL("Enemy:DeadESP")) {
+                    if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Visuals>Enemies>ESP>Only When Dead")) || !CONFIGBOOL("Visuals>Enemies>ESP>Only When Dead")) {
                         std::stringstream rightText;
-                        if (CONFIGBOOL("Enemy:Name"))
+                        if (CONFIGBOOL("Visuals>Enemies>ESP>Name"))
                             rightText << info.name << "\n";
-                        if (CONFIGBOOL("Enemy:Health"))
+                        if (CONFIGBOOL("Visuals>Enemies>ESP>Health"))
                             rightText << p->health() << "hp\n";
-                        if (CONFIGBOOL("Enemy:Money"))
+                        if (CONFIGBOOL("Visuals>Enemies>ESP>Money"))
                             rightText << "$" << p->money() << "\n";
                         
-                        drawBox(x, y, x2, y2, CONFIGBOOL("Enemy:Box"), 
-                                    CONFIGCOL("Enemy:BoxColor"), (char*)rightText.str().c_str(), 
-                                    CONFIGBOOL("Enemy:HealthBar") ? p->health() : -1);
+                        drawBox(x, y, x2, y2, CONFIGBOOL("Visuals>Enemies>ESP>Box"), 
+                                    CONFIGCOL("Visuals>Enemies>ESP>Box Color"), (char*)rightText.str().c_str(), 
+                                    CONFIGBOOL("Visuals>Enemies>ESP>Health Bar") ? p->health() : -1);
                     }
                 }
                 if (p->team() == Globals::localPlayer->team()) {
-                    if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Team:DeadESP")) || !CONFIGBOOL("Team:DeadESP")) {
+                    if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Visuals>Teammates>ESP>Only When Dead")) || !CONFIGBOOL("Visuals>Teammates>ESP>Only When Dead")) {
                         std::stringstream rightText;
-                        if (CONFIGBOOL("Team:Name"))
+                        if (CONFIGBOOL("Visuals>Teammates>ESP>Name"))
                             rightText << info.name << "\n";
-                        if (CONFIGBOOL("Team:Health"))
+                        if (CONFIGBOOL("Visuals>Teammates>ESP>Health"))
                             rightText << p->health() << "hp\n";
-                        if (CONFIGBOOL("Team:Money"))
+                        if (CONFIGBOOL("Visuals>Teammates>ESP>Money"))
                             rightText << "$" << p->money() << "\n";
                         
-                        drawBox(x, y, x2, y2, CONFIGBOOL("Team:Box"), 
-                                    CONFIGCOL("Team:BoxColor"), (char*)rightText.str().c_str(), 
-                                    CONFIGBOOL("Team:HealthBar") ? p->health() : -1);
+                        drawBox(x, y, x2, y2, CONFIGBOOL("Visuals>Teammates>ESP>Box"), 
+                                    CONFIGCOL("Visuals>Teammates>ESP>Box Color"), (char*)rightText.str().c_str(), 
+                                    CONFIGBOOL("Visuals>Teammates>ESP>Health Bar") ? p->health() : -1);
                     }
                 }
             }
@@ -166,7 +166,7 @@ void Features::ESP::draw() {
                         if ((clientClass->m_ClassID != EClassIds::CBaseWeaponWorldModel && strstr(clientClass->m_pNetworkName, "Weapon")) || clientClass->m_ClassID == EClassIds::CDEagle || clientClass->m_ClassID == EClassIds::CC4 || clientClass->m_ClassID == EClassIds::CAK47) {
                             if (((Weapon*)ent)->owner() == -1) {
                                 try {
-                                    drawGenericEnt(ent, CONFIGBOOL("Weapon:Box"), CONFIGCOL("Weapon:BoxColor"), CONFIGBOOL("Weapon:Name") ? itemIndexMap.at(((Weapon*)ent)->itemIndex()) : "");
+                                    drawGenericEnt(ent, CONFIGBOOL("Visuals>World>Items>Weapon Box"), CONFIGCOL("Visuals>World>Items>Weapon Box Color"), CONFIGBOOL("Visuals>World>Items>Weapon Label") ? itemIndexMap.at(((Weapon*)ent)->itemIndex()) : "");
                                 }
                                 catch(const std::exception & e) {
                                     Log::log(WARN, "itemDefinitionIndex %d not found!", ((Weapon*)ent)->itemIndex());
@@ -178,21 +178,21 @@ void Features::ESP::draw() {
                         if (clientClass->m_ClassID == EClassIds::CPlantedC4) {
                             char label[32] = "";
                             snprintf(label, 32, "Planted C4\n%.3f", ((PlantedC4*)ent)->time() - Interfaces::globals->curtime);
-                            drawGenericEnt(ent, CONFIGBOOL("PlantedC4:Box"), CONFIGCOL("PlantedC4:BoxColor"), CONFIGBOOL("PlantedC4:Name") ? label : "");
+                            drawGenericEnt(ent, CONFIGBOOL("Visuals>World>Items>Planted C4 Box"), CONFIGCOL("Visuals>World>Items>Planted C4 Box Color"), CONFIGBOOL("Visuals>World>Items>Planted C4 Label") ? label : "");
                         }
                         
                         /* Chicken ESP */
                         if (clientClass->m_ClassID == EClassIds::CChicken) {
-                            drawGenericEnt(ent, CONFIGBOOL("Chicken:Box"), CONFIGCOL("Chicken:BoxColor"), CONFIGBOOL("Chicken:Name") ? "Chicken" : "");
+                            drawGenericEnt(ent, CONFIGBOOL("Visuals>World>Items>Chicken Box"), CONFIGCOL("Visuals>World>Items>Chicken Box Color"), CONFIGBOOL("Visuals>World>Items>Chicken Label") ? "Chicken" : "");
                         }
 
                         /* Fish ESP */
                         if (clientClass->m_ClassID == EClassIds::CFish) {
-                            drawGenericEnt(ent, CONFIGBOOL("Fish:Box"), CONFIGCOL("Fish:BoxColor"), CONFIGBOOL("Fish:Name") ? "Fish" : "");
+                            drawGenericEnt(ent, CONFIGBOOL("Visuals>World>Items>Fish Box"), CONFIGCOL("Visuals>World>Items>Fish Box Color"), CONFIGBOOL("Visuals>World>Items>Fish Label") ? "Fish" : "");
                         }
 
                         /* Debug ESP Everything*/
-                        if (CONFIGBOOL("Debug:EspAll")) {
+                        if (CONFIGBOOL("Visuals>World>Items>ESP Quite literally everything")) {
                             char label[128] = "";
                             snprintf(label, 128, "%d\n%s", clientClass->m_ClassID, clientClass->m_pNetworkName);
                             drawGenericEnt(ent, true, ImColor(255, 255, 255, 255), label);

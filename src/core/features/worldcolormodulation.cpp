@@ -5,8 +5,8 @@ void Features::WorldColorModulate::updateColorModulation() {
         IMaterial* material = Interfaces::materialSystem->GetMaterial(i);
         if (material) {
             if(strstr(material->GetTextureGroupName(), "World")) {
-                material->AlphaModulate(CONFIGCOL("World:WorldColorModulation").Value.w);
-                material->ColorModulate(CONFIGCOL("World:WorldColorModulation").Value.x, CONFIGCOL("World:WorldColorModulation").Value.y, CONFIGCOL("World:WorldColorModulation").Value.z);
+                material->AlphaModulate(CONFIGCOL("Visuals>World>World>World Color Modulation").Value.w);
+                material->ColorModulate(CONFIGCOL("Visuals>World>World>World Color Modulation").Value.x, CONFIGCOL("Visuals>World>World>World Color Modulation").Value.y, CONFIGCOL("Visuals>World>World>World Color Modulation").Value.z);
             }
         }
     }

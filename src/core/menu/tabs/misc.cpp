@@ -79,11 +79,11 @@ void Menu::drawMiscTab() {
         ImGui::Text("Misc");
         ImGui::Separator();
         ImGui::Checkbox("Developer window", &devWindow);
-        ImGui::Checkbox("Rank Revealer", &CONFIGBOOL("Misc:RankReveal"));
+        ImGui::Checkbox("Rank Revealer", &CONFIGBOOL("Misc>Misc>Rank Revealer"));
 
         ImGui::InputText("##clantag-tbox", clantag, IM_ARRAYSIZE(clantag));
         ImGui::SameLine();
-        ImGui::Checkbox("Clantag", &CONFIGBOOL("Misc:Clantag"));
+        ImGui::Checkbox("Clantag", &CONFIGBOOL("Misc>Misc>Clantag"));
         ImGui::EndChild();
     }
 }

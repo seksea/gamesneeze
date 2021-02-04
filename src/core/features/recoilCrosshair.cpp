@@ -2,7 +2,7 @@
 #include "../../includes.hpp"
 
 void Features::RecoilCrosshair::draw() {
-    if (CONFIGBOOL("World:SpreadCrosshair") || CONFIGBOOL("World:RecoilCrosshair") ) {
+    if (CONFIGBOOL("Visuals>World>Local Player>Spread Crosshair") || CONFIGBOOL("Visuals>World>Local Player>Recoil Crosshair") ) {
         if (Globals::localPlayer) {
             if (Interfaces::engine->IsInGame()) {
                 if (Globals::localPlayer->health() > 0) {
@@ -15,18 +15,18 @@ void Features::RecoilCrosshair::draw() {
                             int dx = Globals::screenSizeX / 90; // swap 90 with fov in future
                             int dy = Globals::screenSizeY / 90; // swap 90 with fov in future
                             QAngle punchAngle = Globals::localPlayer->aimPunch();
-                            if (CONFIGBOOL("World:RecoilCrosshair")) {
+                            if (CONFIGBOOL("Visuals>World>Local Player>Recoil Crosshair")) {
                                 rad = 5;
                                 x = (int)(x - (dx * punchAngle.y));
                                 y = (int)(y + (dy * punchAngle.x));
                             }
-                            if (CONFIGBOOL("World:SpreadCrosshair")) {
+                            if (CONFIGBOOL("Visuals>World>Local Player>Spread Crosshair")) {
                                 rad = ((weapon->GetSpread() + weapon->GetInaccuracy()) * Globals::screenSizeY) / 1.5f;
                             }
 
                             //drawing
-                            Globals::drawList->AddCircleFilled(ImVec2(x, y), rad, CONFIGCOL("World:SpreadCrosshairColor"));
-                            Globals::drawList->AddCircle(ImVec2(x, y), rad, CONFIGCOL("World:SpreadCrosshairBorderColor"));
+                            Globals::drawList->AddCircleFilled(ImVec2(x, y), rad, CONFIGCOL("Visuals>World>Local Player>Crosshair Color"));
+                            Globals::drawList->AddCircle(ImVec2(x, y), rad, CONFIGCOL("Visuals>World>Local Player>Crosshair Border Color"));
                         }
                     }
                 }
