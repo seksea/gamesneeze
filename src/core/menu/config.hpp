@@ -86,6 +86,9 @@ namespace Config {
             // }
             // World {
                 CONFIGITEM("World:SpreadCrosshair", false),
+                CONFIGITEM("World:SpreadCrosshairColor", ImColor(0, 0, 0, 100)),
+                CONFIGITEM("World:SpreadCrosshairBorderColor", ImColor(200, 200, 200, 100)),
+
                 CONFIGITEM("World:WorldColorModulation", ImColor(255, 255, 255, 255)),
 
                 CONFIGITEM("Weapon:Box", false),

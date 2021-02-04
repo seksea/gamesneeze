@@ -101,7 +101,11 @@ void Menu::drawVisualsTab() {
                 ImGui::ColorEdit4("##WeaponOverlayColor", (float*)&CONFIGCOL("Weapon:ChamsOverlayColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                 ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.65f);
 
-                ImGui::Checkbox("Recoil Crosshair", &CONFIGBOOL("World:SpreadCrosshair"));
+                ImGui::ColorEdit4("##CrosshairColour", (float*)&CONFIGCOL("World:SpreadCrosshairColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::SameLine();
+                ImGui::ColorEdit4("##CrosshairBorderColour", (float*)&CONFIGCOL("World:SpreadCrosshairBorderColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::SameLine();
+                ImGui::Checkbox("Spread/Recoil Crosshair", &CONFIGBOOL("World:SpreadCrosshair"));
                 ImGui::EndChild();
             }
             ImGui::SameLine();
