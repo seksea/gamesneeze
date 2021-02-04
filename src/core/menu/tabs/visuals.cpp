@@ -10,7 +10,10 @@ void Menu::drawVisualsTab() {
                 ImGui::Text("ESP");
                 ImGui::Separator();
                 ImGui::Checkbox("Box", &CONFIGBOOL("Enemy:Box"));
-                ImGui::ColorEdit4("Box Color", (float*)&CONFIGCOL("Enemy:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                if (CONFIGBOOL("Enemy:Box")) {
+                    ImGui::SameLine();
+                    ImGui::ColorEdit4("Box Color", (float*)&CONFIGCOL("Enemy:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                }
                 ImGui::Checkbox("Name", &CONFIGBOOL("Enemy:Name"));
                 ImGui::Checkbox("Health", &CONFIGBOOL("Enemy:Health"));
                 ImGui::Checkbox("Health Bar", &CONFIGBOOL("Enemy:HealthBar"));
@@ -31,7 +34,7 @@ void Menu::drawVisualsTab() {
                 ImGui::ColorEdit4("##ChamsOverlayColor", (float*)&CONFIGCOL("Enemy:ChamsOverlayColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                 
                 ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.9f);
-                ImGui::Text("Ignore Z");
+                ImGui::Text("Occluded");
                 ImGui::Combo("##IZMaterial", &CONFIGINT("Enemy:IgnoreZChamsMaterial"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
                 ImGui::SameLine();
                 ImGui::ColorEdit4("IgnoreZ Chams Primary Color", (float*)&CONFIGCOL("Enemy:IgnoreZChamsColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
@@ -46,7 +49,10 @@ void Menu::drawVisualsTab() {
                 ImGui::Text("ESP");
                 ImGui::Separator();
                 ImGui::Checkbox("Box", &CONFIGBOOL("Team:Box"));
-                ImGui::ColorEdit4("Box Color", (float*)&CONFIGCOL("Team:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                if (CONFIGBOOL("Team:Box")) {
+                    ImGui::SameLine();
+                    ImGui::ColorEdit4("Box Color", (float*)&CONFIGCOL("Team:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                }
                 ImGui::Checkbox("Name", &CONFIGBOOL("Team:Name"));
                 ImGui::Checkbox("Health", &CONFIGBOOL("Team:Health"));
                 ImGui::Checkbox("Health Bar", &CONFIGBOOL("Team:HealthBar"));
@@ -67,7 +73,7 @@ void Menu::drawVisualsTab() {
                 ImGui::ColorEdit4("##ChamsOverlayColor", (float*)&CONFIGCOL("Team:ChamsOverlayColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                 
                 ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.9f);
-                ImGui::Text("Ignore Z");
+                ImGui::Text("Occluded");
                 ImGui::Combo("##IZMaterial", &CONFIGINT("Team:IgnoreZChamsMaterial"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
                 ImGui::SameLine();
                 ImGui::ColorEdit4("IgnoreZ Chams Primary Color", (float*)&CONFIGCOL("Team:IgnoreZChamsColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
@@ -101,13 +107,15 @@ void Menu::drawVisualsTab() {
                 ImGui::ColorEdit4("##WeaponOverlayColor", (float*)&CONFIGCOL("Weapon:ChamsOverlayColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                 ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.65f);
 
-                ImGui::ColorEdit4("##CrosshairColour", (float*)&CONFIGCOL("World:SpreadCrosshairColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                ImGui::SameLine();
-                ImGui::ColorEdit4("##CrosshairBorderColour", (float*)&CONFIGCOL("World:SpreadCrosshairBorderColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                ImGui::SameLine();
                 ImGui::Checkbox("Spread Crosshair", &CONFIGBOOL("World:SpreadCrosshair"));
                 ImGui::SameLine();
                 ImGui::Checkbox("Recoil Crosshair", &CONFIGBOOL("World:RecoilCrosshair"));
+                if (CONFIGBOOL("World:SpreadCrosshair") || CONFIGBOOL("World:RecoilCrosshair")) {
+                    ImGui::SameLine();
+                    ImGui::ColorEdit4("##CrosshairColour", (float*)&CONFIGCOL("World:SpreadCrosshairColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                    ImGui::SameLine();
+                    ImGui::ColorEdit4("##CrosshairBorderColour", (float*)&CONFIGCOL("World:SpreadCrosshairBorderColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                }
                 ImGui::EndChild();
             }
             ImGui::SameLine();
@@ -115,22 +123,34 @@ void Menu::drawVisualsTab() {
                 ImGui::Text("Items");
                 ImGui::Separator();
                 ImGui::Checkbox("Weapon Box", &CONFIGBOOL("Weapon:Box"));
-                ImGui::ColorEdit4("Weapon Box Color", (float*)&CONFIGCOL("Weapon:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                if (CONFIGBOOL("Weapon:Box")) {
+                    ImGui::SameLine();
+                    ImGui::ColorEdit4("Weapon Box Color", (float*)&CONFIGCOL("Weapon:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                }
                 ImGui::Checkbox("Weapon Label", &CONFIGBOOL("Weapon:Name"));
                 ImGui::Separator();
 
                 ImGui::Checkbox("Planted C4 Box", &CONFIGBOOL("PlantedC4:Box"));
-                ImGui::ColorEdit4("Planted C4 Box Color", (float*)&CONFIGCOL("PlantedC4:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                if (CONFIGBOOL("PlantedC4:Box")) {
+                    ImGui::SameLine();
+                    ImGui::ColorEdit4("Planted C4 Box Color", (float*)&CONFIGCOL("PlantedC4:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                }
                 ImGui::Checkbox("Planted C4 Label", &CONFIGBOOL("PlantedC4:Name"));
                 ImGui::Separator();
                 
                 ImGui::Checkbox("Chicken Box", &CONFIGBOOL("Chicken:Box"));
-                ImGui::ColorEdit4("Chicken Box Color", (float*)&CONFIGCOL("Chicken:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                if (CONFIGBOOL("Chicken:Box")) {
+                    ImGui::SameLine();
+                    ImGui::ColorEdit4("Chicken Box Color", (float*)&CONFIGCOL("Chicken:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                }
                 ImGui::Checkbox("Chicken Label", &CONFIGBOOL("Chicken:Name"));
                 ImGui::Separator();
                 
                 ImGui::Checkbox("Fish Box", &CONFIGBOOL("Fish:Box"));
-                ImGui::ColorEdit4("Fish Box Color", (float*)&CONFIGCOL("Fish:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                if (CONFIGBOOL("Fish:Box")) {
+                    ImGui::SameLine();
+                    ImGui::ColorEdit4("Fish Box Color", (float*)&CONFIGCOL("Fish:BoxColor"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                }
                 ImGui::Checkbox("Fish Label", &CONFIGBOOL("Fish:Name"));
                 ImGui::Separator();
 
