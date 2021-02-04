@@ -7,7 +7,7 @@ void Menu::drawMiscTab() {
     ImGui::SameLine();ImGui::PopStyleVar(); 
     ImGui::TextDisabled("Credits!");
     if (ImGui::IsItemHovered())
-        ImGui::SetTooltip("sekc (ofcourse)\nAll other contributors on GitHub (cristeigabriel)\nand ocornut for his great ImGui UI framework");
+        ImGui::SetTooltip("sekc (ofcourse)\nAll other contributors on GitHub (cristeigabriel & crazily)\nand ocornut for his great ImGui UI framework");
 
     ImGui::BeginChild("Trolling", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 260), true); {
         ImGui::Text("Trolling");
