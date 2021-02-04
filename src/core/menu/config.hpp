@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include <fstream>
 #include "imgui/imgui.h"
+#include "../../utils/utils.hpp"
 
 #define CONFIGINT(name) Config::config.at(name).intValue
 #define CONFIGBOOL(name) Config::config.at(name).boolValue
@@ -151,22 +152,26 @@ namespace Config {
             CONFIGITEMTYPE type;
             char name[64];
             char value[64];
-            sscanf(line.c_str(), "%d\t%s\t%s", (int*)&type, name, value);
-            switch (type) {
-                case INT:
-                    CONFIGINT(name) = atoi(value);
-                break;
-                case BOOL:
-                    CONFIGBOOL(name) = atoi(value);
-                break;
-                case STR:
-                    CONFIGSTR(name) = value;
-                break;
-                case COLOR:
-                    float r, g, b, a;
-                    sscanf(value, "%f|%f|%f|%f", (float*)&r, (float*)&g, (float*)&b, (float*)&a);
-                    CONFIGCOL(name) = ImColor(r, g, b, a);
-                break;
+            sscanf(line.c_str(), "%d\t%[^\t]\t%[^\t]", (int*)&type, name, value);
+            try {
+                switch (type) {
+                    case INT:
+                        CONFIGINT(name) = atoi(value);
+                    break;
+                    case BOOL:
+                        CONFIGBOOL(name) = atoi(value);
+                    break;
+                    case STR:
+                        CONFIGSTR(name) = value;
+                    break;
+                    case COLOR:
+                        float r, g, b, a;
+                        sscanf(value, "%f|%f|%f|%f", (float*)&r, (float*)&g, (float*)&b, (float*)&a);
+                        CONFIGCOL(name) = ImColor(r, g, b, a);
+                    break;
+                }
+            } catch (std::out_of_range& e) {
+                Log::log(ERR, "Failed to load config item %s, probably due to an out of date config, just redo the selected item and save again.", name);
             }
         }
     }
