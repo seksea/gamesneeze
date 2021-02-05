@@ -23,4 +23,7 @@ namespace Features {
     namespace Spectators {
         void draw();
     }
+    namespace PlayerList {
+        void draw();
+    }
 }

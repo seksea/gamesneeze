@@ -85,6 +85,7 @@ void Menu::drawMiscTab() {
         ImGui::SameLine();
         ImGui::Checkbox("Clantag", &CONFIGBOOL("Misc>Misc>Clantag"));
         ImGui::Checkbox("Spectators", &CONFIGBOOL("Misc>Misc>Spectators"));
+        ImGui::Checkbox("Player List", &CONFIGBOOL("Misc>Misc>Player List"));
         ImGui::EndChild();
     }
 }

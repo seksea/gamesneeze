@@ -13,4 +13,5 @@ void Menu::drawOverlay(ImDrawList* drawList) {
     Features::ESP::draw();
     Features::RecoilCrosshair::draw();
     Features::Spectators::draw();
+    Features::PlayerList::draw();
 }
