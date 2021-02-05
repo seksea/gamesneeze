@@ -53,27 +53,27 @@ void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const M
     if (Globals::localPlayer) {
         if (p->health() > 0) {
             if (p->team() != Globals::localPlayer->team()) {
+                /* Ignorez Enemy */
+                if (CONFIGINT("Visuals>Enemies>Chams>Occluded Material")) {
+                    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Enemies>Chams>Occluded Color"), CONFIGINT("Visuals>Enemies>Chams>Occluded Material"), true);
+                }
                 /* Visible Enemy */
                 cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Enemies>Chams>Visible Color"), CONFIGINT("Visuals>Enemies>Chams>Visible Material"), false);
                 /* Visible Enemy Overlay */
                 if (CONFIGINT("Visuals>Enemies>Chams>Visible Overlay Material")) {
                     cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Enemies>Chams>Visible Overlay Color"), CONFIGINT("Visuals>Enemies>Chams>Visible Overlay Material"), false);
                 }
-                /* Ignorez Enemy */
-                if (CONFIGINT("Visuals>Enemies>Chams>Occluded Material")) {
-                    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Enemies>Chams>Occluded Color"), CONFIGINT("Visuals>Enemies>Chams>Occluded Material"), true);
-                }
             }
             else {
+                /* Ignorez Teammate */
+                if (CONFIGINT("Visuals>Teammates>Chams>Occluded Material")) {
+                    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Teammates>Chams>Occluded Color"), CONFIGINT("Visuals>Teammates>Chams>Occluded Material"), true);
+                }
                 /* Visible Teammate */
                 cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Teammates>Chams>Visible Color"), CONFIGINT("Visuals>Teammates>Chams>Visible Material"), false);
                 /* Visible Teammate Overlay */
                 if (CONFIGINT("Visuals>Teammates>Chams>Visible Overlay Material")) {
                     cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Teammates>Chams>Visible Overlay Color"), CONFIGINT("Visuals>Teammates>Chams>Visible Overlay Material"), false);
-                }
-                /* Ignorez Teammate */
-                if (CONFIGINT("Visuals>Teammates>Chams>Occluded Material")) {
-                    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Teammates>Chams>Occluded Color"), CONFIGINT("Visuals>Teammates>Chams>Occluded Material"), true);
                 }
             }
         }
