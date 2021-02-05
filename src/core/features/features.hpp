@@ -9,7 +9,7 @@ namespace Features {
         void drawModelExecute(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld);
     }
     namespace RankReveal {
-        void createMove();
+        void createMove(CUserCmd* cmd);
     }
     namespace RecoilCrosshair {
         void draw();

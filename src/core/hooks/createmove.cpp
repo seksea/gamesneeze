@@ -4,7 +4,7 @@
 bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* cmd) {
     Globals::localPlayer = (Player*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetLocalPlayer());
 
-    Features::RankReveal::createMove();
+    Features::RankReveal::createMove(cmd);
     Features::AutoHop::createMove(cmd);
 
     return original(thisptr, flInputSampleTime, cmd);
