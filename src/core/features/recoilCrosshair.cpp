@@ -28,8 +28,17 @@ void Features::RecoilCrosshair::draw() {
                                 if (Globals::localPlayer->aimPunch().IsZero() && !CONFIGBOOL("Visuals>World>Local Player>Spread Crosshair"))
                                     return;
                             }
-                            Globals::drawList->AddCircleFilled(ImVec2(x, y), rad, CONFIGCOL("Visuals>World>Local Player>Crosshair Color"));
-                            Globals::drawList->AddCircle(ImVec2(x, y), rad, CONFIGCOL("Visuals>World>Local Player>Crosshair Border Color"));
+                            if (CONFIGBOOL("Visuals>World>Local Player>Recoil Crosshair") &&
+                                !CONFIGBOOL("Visuals>World>Local Player>Spread Crosshair")) {
+                                Globals::drawList->AddRectFilled(ImVec2(x - 4, y - 1), ImVec2(x + 5, y + 2), CONFIGCOL("Visuals>World>Local Player>Crosshair Border Color"));
+                                Globals::drawList->AddRectFilled(ImVec2(x - 1, y - 4), ImVec2(x + 2, y + 5), CONFIGCOL("Visuals>World>Local Player>Crosshair Border Color"));
+                                Globals::drawList->AddLine(ImVec2(x - 3, y), ImVec2(x + 4, y), CONFIGCOL("Visuals>World>Local Player>Crosshair Color"));
+                                Globals::drawList->AddLine(ImVec2(x, y + 3), ImVec2(x, y - 4), CONFIGCOL("Visuals>World>Local Player>Crosshair Color"));
+                            }
+                            else {
+                                Globals::drawList->AddCircleFilled(ImVec2(x, y), rad, CONFIGCOL("Visuals>World>Local Player>Crosshair Color"));
+                                Globals::drawList->AddCircle(ImVec2(x, y), rad, CONFIGCOL("Visuals>World>Local Player>Crosshair Border Color"));
+                            }
 
                         }
                     }
