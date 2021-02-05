@@ -80,7 +80,7 @@ void outlinedText(ImVec2 pos, ImColor color, char* text) {
 
 }
 
-void drawBox(int x, int y, int x2, int y2, bool drawBox, ImColor color, char* rightText, int health = -1) {
+void drawBox(int x, int y, int x2, int y2, bool drawBox, ImColor color, char* topText, char* rightText, int health = -1) {
     if (drawBox) {
         Globals::drawList->AddRect(ImVec2(x, y), ImVec2(x2, y2), color);
         Globals::drawList->AddRect(ImVec2(x-1, y-1), ImVec2(x2+1, y2+1), ImColor(0, 0, 0, 255));
@@ -95,6 +95,7 @@ void drawBox(int x, int y, int x2, int y2, bool drawBox, ImColor color, char* ri
     }
     
     outlinedText(ImVec2(x2+1, y), ImColor(255, 255, 255, 255), rightText);
+    outlinedText(ImVec2(x+((x2-x)/2)-(ImGui::CalcTextSize(topText).x/2), y-(ImGui::CalcTextSize(topText).y)), ImColor(255, 255, 255, 255), topText);
 }
 
 void drawPlayer(Player* p) {
@@ -108,31 +109,27 @@ void drawPlayer(Player* p) {
                 if (p->team() != Globals::localPlayer->team()) {
                     if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Visuals>Enemies>ESP>Only When Dead")) || !CONFIGBOOL("Visuals>Enemies>ESP>Only When Dead")) {
                         std::stringstream rightText;
-                        if (CONFIGBOOL("Visuals>Enemies>ESP>Name"))
-                            rightText << info.name << "\n";
                         if (CONFIGBOOL("Visuals>Enemies>ESP>Health"))
                             rightText << p->health() << "hp\n";
                         if (CONFIGBOOL("Visuals>Enemies>ESP>Money"))
                             rightText << "$" << p->money() << "\n";
                         
                         drawBox(x, y, x2, y2, CONFIGBOOL("Visuals>Enemies>ESP>Box"), 
-                                    CONFIGCOL("Visuals>Enemies>ESP>Box Color"), (char*)rightText.str().c_str(), 
-                                    CONFIGBOOL("Visuals>Enemies>ESP>Health Bar") ? p->health() : -1);
+                                    CONFIGCOL("Visuals>Enemies>ESP>Box Color"), CONFIGBOOL("Visuals>Enemies>ESP>Name") ? info.name : (char*)"", 
+                                    (char*)rightText.str().c_str(), CONFIGBOOL("Visuals>Enemies>ESP>Health Bar") ? p->health() : -1);
                     }
                 }
                 if (p->team() == Globals::localPlayer->team()) {
                     if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Visuals>Teammates>ESP>Only When Dead")) || !CONFIGBOOL("Visuals>Teammates>ESP>Only When Dead")) {
                         std::stringstream rightText;
-                        if (CONFIGBOOL("Visuals>Teammates>ESP>Name"))
-                            rightText << info.name << "\n";
                         if (CONFIGBOOL("Visuals>Teammates>ESP>Health"))
                             rightText << p->health() << "hp\n";
                         if (CONFIGBOOL("Visuals>Teammates>ESP>Money"))
                             rightText << "$" << p->money() << "\n";
                         
                         drawBox(x, y, x2, y2, CONFIGBOOL("Visuals>Teammates>ESP>Box"), 
-                                    CONFIGCOL("Visuals>Teammates>ESP>Box Color"), (char*)rightText.str().c_str(), 
-                                    CONFIGBOOL("Visuals>Teammates>ESP>Health Bar") ? p->health() : -1);
+                                    CONFIGCOL("Visuals>Teammates>ESP>Box Color"), CONFIGBOOL("Visuals>Teammates>ESP>Name") ? info.name : (char*)"", 
+                                    (char*)rightText.str().c_str(), CONFIGBOOL("Visuals>Teammates>ESP>Health Bar") ? p->health() : -1);
                     }
                 }
             }
@@ -143,7 +140,7 @@ void drawPlayer(Player* p) {
 void drawGenericEnt(Entity* ent, bool box, ImColor color, const char* label) {
     int x, y, x2, y2;
     if (getBox(ent, x, y, x2, y2)) {
-        drawBox(x, y, x2, y2, box, color, (char*)label, -1);
+        drawBox(x, y, x2, y2, box, color, (char*)label, (char*)"", -1);
     }
 }
 
