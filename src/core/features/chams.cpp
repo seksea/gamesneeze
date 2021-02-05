@@ -77,6 +77,9 @@ void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const M
                 }
             }
         }
+        else {
+            Hooks::DrawModelExecute::original(thisptr, ctx, state, pInfo, pCustomBoneToWorld);
+        }
     }
 }
 
