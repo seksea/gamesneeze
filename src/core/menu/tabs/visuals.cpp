@@ -110,14 +110,20 @@ void Menu::drawVisualsTab() {
                 ImGui::ColorEdit4("Weapon Overlay Color", (float*)&CONFIGCOL("Visuals>World>Local Player>Weapon Overlay Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                 ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.65f);
 
+                ImGui::ColorEdit4("Crosshair Color", (float*)&CONFIGCOL("Visuals>World>Local Player>Crosshair Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::SameLine();
+                ImGui::ColorEdit4("Crosshair Border Color", (float*)&CONFIGCOL("Visuals>World>Local Player>Crosshair Border Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::SameLine();
                 ImGui::Checkbox("Spread Crosshair", &CONFIGBOOL("Visuals>World>Local Player>Spread Crosshair"));
                 ImGui::SameLine();
                 ImGui::Checkbox("Recoil Crosshair", &CONFIGBOOL("Visuals>World>Local Player>Recoil Crosshair"));
+                //make sure they can't both be on at the same time
+                if (CONFIGBOOL("Visuals>World>Local Player>Recoil Crosshair") && !CONFIGBOOL("Visuals>World>Local Player>Spread Crosshair")) {
+                    ImGui::SameLine();
+                    ImGui::Checkbox("Only When Shooting", &CONFIGBOOL("Visuals>World>Local Player>Recoil Crosshair>Only When Shooting"));
+                }
                 if (CONFIGBOOL("Visuals>World>Local Player>Spread Crosshair") || CONFIGBOOL("Visuals>World>Local Player>Recoil Crosshair")) {
                     ImGui::SameLine();
-                    ImGui::ColorEdit4("Crosshair Color", (float*)&CONFIGCOL("Visuals>World>Local Player>Crosshair Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                    ImGui::SameLine();
-                    ImGui::ColorEdit4("Crosshair Border Color", (float*)&CONFIGCOL("Visuals>World>Local Player>Crosshair Border Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                 }
                 ImGui::EndChild();
             }

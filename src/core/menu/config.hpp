@@ -90,6 +90,7 @@ namespace Config {
             // World {
                 CONFIGITEM("Visuals>World>Local Player>Spread Crosshair", false),
                 CONFIGITEM("Visuals>World>Local Player>Recoil Crosshair", false),
+                CONFIGITEM("Visuals>World>Local Player>Recoil Crosshair>Only When Shooting", false),
                 CONFIGITEM("Visuals>World>Local Player>Crosshair Color", ImColor(0, 0, 0, 100)),
                 CONFIGITEM("Visuals>World>Local Player>Crosshair Border Color", ImColor(200, 200, 200, 100)),
 
