@@ -8,9 +8,7 @@ void Features::RecoilCrosshair::draw() {
             if (Interfaces::engine->IsInGame()) {
                 if (Globals::localPlayer->health() > 0) {
                     if (Globals::localPlayer->activeWeapon()) {
-                        Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity(
-                                (uintptr_t) Globals::localPlayer->activeWeapon() &
-                                0xFFF); // GetClientEntityFromHandle is being gay
+                        Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)Globals::localPlayer->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
                         if (weapon) {
                             float rad;
                             int x = Globals::screenSizeX / 2;
@@ -20,24 +18,18 @@ void Features::RecoilCrosshair::draw() {
                             QAngle punchAngle = Globals::localPlayer->aimPunch();
                             if (CONFIGBOOL("Visuals>World>Local Player>Recoil Crosshair")) {
                                 rad = 5;
-                                x = (int) (x - (dx * punchAngle.y));
-                                y = (int) (y + (dy * punchAngle.x));
+                                x = (int)(x - (dx * punchAngle.y));
+                                y = (int)(y + (dy * punchAngle.x));
                             }
                             if (CONFIGBOOL("Visuals>World>Local Player>Spread Crosshair")) {
                                 rad = ((weapon->GetSpread() + weapon->GetInaccuracy()) * Globals::screenSizeY) / 1.5f;
                             }
                             if (CONFIGBOOL("Visuals>World>Local Player>Recoil Crosshair>Only When Shooting")) {
-                                if (CONFIGBOOL("Visuals>World>Local Player>Spread Crosshair"))
-                                    goto drawing;
-                                if (Globals::localPlayer->aimPunch().IsZero())
+                                if (Globals::localPlayer->aimPunch().IsZero() && !CONFIGBOOL("Visuals>World>Local Player>Spread Crosshair"))
                                     return;
                             }
-                            drawing:
-                            //drawing
-                            Globals::drawList->AddCircleFilled(ImVec2(x, y), rad, CONFIGCOL(
-                                    "Visuals>World>Local Player>Crosshair Color"));
-                            Globals::drawList->AddCircle(ImVec2(x, y), rad, CONFIGCOL(
-                                    "Visuals>World>Local Player>Crosshair Border Color"));
+                            Globals::drawList->AddCircleFilled(ImVec2(x, y), rad, CONFIGCOL("Visuals>World>Local Player>Crosshair Color"));
+                            Globals::drawList->AddCircle(ImVec2(x, y), rad, CONFIGCOL("Visuals>World>Local Player>Crosshair Border Color"));
 
                         }
                     }
