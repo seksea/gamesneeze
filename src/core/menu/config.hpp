@@ -116,6 +116,8 @@ namespace Config {
             // }
         // }
         // Misc {
+            CONFIGITEM("Misc>Movement>Auto Hop", false),
+
             CONFIGITEM("Misc>Misc>Rank Revealer", false),
             CONFIGITEM("Misc>Misc>Clantag", false),
             CONFIGITEM("Misc>Misc>Spectators", false),

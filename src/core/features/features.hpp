@@ -6,10 +6,10 @@ namespace Features {
         void draw();
     }
     namespace Chams {
-        void drawModelExecute(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld); // DME
+        void drawModelExecute(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld);
     }
     namespace RankReveal {
-        void createMove(); // CM
+        void createMove();
     }
     namespace RecoilCrosshair {
         void draw();
@@ -25,5 +25,8 @@ namespace Features {
     }
     namespace PlayerList {
         void draw();
+    }
+    namespace AutoHop {
+        void createMove(CUserCmd* cmd);
     }
 }
