@@ -13,7 +13,7 @@ void Features::Spectators::draw() {
                         Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
                         if (p) {
                             if (!p->dormant()) {
-                                if (((uintptr_t)p->observerTarget() & 0xFFF) == Interfaces::engine->GetLocalPlayer()) {
+                                if ((int)((uintptr_t)p->observerTarget() & 0xFFF) == Interfaces::engine->GetLocalPlayer()) {
                                     player_info_t info;
                                     Interfaces::engine->GetPlayerInfo(i, &info);
                                     ImGui::Text("%s", info.name);
