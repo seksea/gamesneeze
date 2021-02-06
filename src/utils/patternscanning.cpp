@@ -66,13 +66,13 @@ uintptr_t PatternScan::patternScan(const char* moduleName, unsigned char* bMask,
     size_t memSize;
 
     if (!getLibraryInformation(moduleName, &baseAddress, &memSize)){
-        Log::log(ERR, "Could Not Get info for Module %s\n", moduleName);
+        Log::log(ERR, "Could Not Get info for Module %s", moduleName);
         return 0;
     }
 
     uintptr_t ret = findPattern(baseAddress, memSize, bMask, szMask);
     if( !ret ){
-        Log::log(ERR, "Could not find pattern %s in %s\n", szMask, moduleName);
+        Log::log(ERR, "Could not find pattern %s in %s", szMask, moduleName);
     }
     return ret;
 }

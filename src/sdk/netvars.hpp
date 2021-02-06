@@ -32,6 +32,9 @@ namespace Netvar {
 namespace Offsets {
     typedef void (*SendClantag) (const char*, const char*);
     inline SendClantag sendClantag;
+
+    typedef void (*SetPlayerReady) (const char*);
+    inline SetPlayerReady setPlayerReady;
 }
 
 #define GETNETVAROFFSET(table, prop) Netvar::offsets.at({table, prop})

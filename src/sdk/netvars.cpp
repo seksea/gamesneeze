@@ -65,6 +65,12 @@ bool Netvar::init() {
                             "xxx"
                             "????"
                             "xxx");
+    Log::log(LOG, " sendClantag | %x", Offsets::sendClantag);
+
+    Offsets::setPlayerReady = (Offsets::SetPlayerReady)PatternScan::patternScan("/client_client.so",
+		(unsigned char*)    "\x55\x48\x89\xF7\x48\x8D\x35\x00\x00\x00\x00\x48\x89\xE5\xE8\x00\x00\x00\x00\x85\xC0",
+							"xxxxxxx????xxxx????xx");
+    Log::log(LOG, " setPlayerReady | %x", Offsets::setPlayerReady);
 
     return true;
 }

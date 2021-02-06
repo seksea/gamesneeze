@@ -1,4 +1,5 @@
 #include "../../includes.hpp"
+#include "ienginesound.hpp"
 #include "interfaces.hpp"
 #include <cstdint>
 #include <string>
@@ -16,6 +17,7 @@ bool Interfaces::init() {
     modelRender = getInterface<IVModelRender>("./bin/linux64/engine_client.so", "VEngineModel");
     modelInfo = getInterface<IVModelInfo>("./bin/linux64/engine_client.so", "VModelInfoClient");
     materialSystem = getInterface<IMaterialSystem>("./bin/linux64/materialsystem_client.so", "VMaterialSystem");
+    sound = getInterface<IEngineSound>("./bin/linux64/engine_client.so", "IEngineSoundClient");
 
     /* Get IClientMode */
     uintptr_t HudProcessInput = reinterpret_cast<uintptr_t>(getVTable(client)[10]);

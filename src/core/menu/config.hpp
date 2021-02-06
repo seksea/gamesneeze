@@ -122,6 +122,7 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Clantag", false),
             CONFIGITEM("Misc>Misc>Spectators", false),
             CONFIGITEM("Misc>Misc>Player List", false),
+            CONFIGITEM("Misc>Misc>Auto Accept", false),
 
         // }
     };
