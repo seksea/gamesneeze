@@ -107,6 +107,5 @@ hooks.hpp
 ```
 
 ## Screenshots
-![Current Menu](res/menu.png)
 ![Console Output](res/console.png)
 ![Choms Output](res/chams.png)
