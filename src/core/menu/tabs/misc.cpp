@@ -85,6 +85,7 @@ void Menu::drawMiscTab() {
         ImGui::InputText("##clantag-tbox", clantag, IM_ARRAYSIZE(clantag));
         ImGui::SameLine();
         ImGui::Checkbox("Clantag", &CONFIGBOOL("Misc>Misc>Clantag"));
+        ImGui::Checkbox("Clantag Marquee", &CONFIGBOOL("Misc>Misc>Clantag Marquee"));
         ImGui::Checkbox("Spectators", &CONFIGBOOL("Misc>Misc>Spectators"));
         ImGui::Checkbox("Player List", &CONFIGBOOL("Misc>Misc>Player List"));
         ImGui::Checkbox("Auto Accept", &CONFIGBOOL("Misc>Misc>Auto Accept"));
