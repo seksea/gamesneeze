@@ -88,12 +88,26 @@ void drawBox(int x, int y, int x2, int y2, bool drawBox, ImColor color, char* to
     }
 
     if (health != -1) {
-        Globals::drawList->AddRectFilled(ImVec2(x-6, y2-(((float)health/100.f)*(y2-y))-1), 
-        ImVec2(x-2, y2+1), ImColor(0, 0, 0, 255));
-        Globals::drawList->AddRectFilled(ImVec2(x-5, y2-(((float)health/100.f)*(y2-y))), 
-        ImVec2(x-3, y2), ImColor(0, 240, 0, 255));
+        //border color
+        Globals::drawList->AddRectFilled(ImVec2(x - 6, y2 - (((float) health / 100.f) * (y2 - y)) - 1),ImVec2(x - 2, y2 + 1), ImColor(0, 0, 0, 255));
+        //bar color
+        if (CONFIGBOOL("Visuals>ESP>Health Bar>Color")) {
+            if (health > 75) {
+                Globals::drawList->AddRectFilled(ImVec2(x - 5, y2 - (((float) health / 100.f) * (y2 - y))),ImVec2(x - 3, y2), ImColor(0, 240, 0, 255));
+            }
+            if (health < 75 && health > 50) {
+                Globals::drawList->AddRectFilled(ImVec2(x - 5, y2 - (((float) health / 100.f) * (y2 - y))),ImVec2(x - 3, y2), ImColor(240, 148, 0, 255));
+            }
+            if (health < 50 && health > 25) {
+                Globals::drawList->AddRectFilled(ImVec2(x - 5, y2 - (((float) health / 100.f) * (y2 - y))),ImVec2(x - 3, y2), ImColor(240, 96, 0, 255));
+            }
+            if (health < 25) {
+                Globals::drawList->AddRectFilled(ImVec2(x - 5, y2 - (((float) health / 100.f) * (y2 - y))),ImVec2(x - 3, y2), ImColor(240, 0, 0, 255));
+            }
+        } else {
+            Globals::drawList->AddRectFilled(ImVec2(x - 5, y2 - (((float) health / 100.f) * (y2 - y))),ImVec2(x - 3, y2), ImColor(0, 240, 0, 255));
+        }
     }
-    
     outlinedText(ImVec2(x2+1, y), ImColor(255, 255, 255, 255), rightText);
     outlinedText(ImVec2(x+((x2-x)/2)-(ImGui::CalcTextSize(topText).x/2), y-(ImGui::CalcTextSize(topText).y)), ImColor(255, 255, 255, 255), topText);
 }
