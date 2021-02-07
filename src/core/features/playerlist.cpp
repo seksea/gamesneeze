@@ -8,7 +8,7 @@ void Features::PlayerList::draw() {
         ImGui::Separator();
         if (Interfaces::engine->IsInGame()) {
             if (Globals::localPlayer) {
-                ImGui::Columns(5, NULL);
+                ImGui::Columns(4, NULL);
                 ImGui::Text("Name");
                 ImGui::NextColumn();
                 ImGui::Text("Health");
@@ -16,7 +16,6 @@ void Features::PlayerList::draw() {
                 ImGui::Text("Money");
                 ImGui::NextColumn();
                 ImGui::Text("Team");
-                ImGui::NextColumn();
                 ImGui::NextColumn();
                 static Player* selectedPlayer;
                 static player_info_t selectedPlayerInfo;
@@ -28,18 +27,20 @@ void Features::PlayerList::draw() {
                         Interfaces::engine->GetPlayerInfo(i, &info);
 
                         ImGui::TextColored(p->dormant() ? ImColor(255, 100, 100, 255) : ImColor(255, 255, 255, 255), "%s", info.name);
+                        if (ImGui::IsItemClicked()) {
+                            selectedPlayer = p;
+                            selectedPlayerInfo = info;
+                            ImGui::OpenPopup("Player Popup");
+                        }
+                        if (ImGui::IsItemHovered()) {
+                            ImGui::SetTooltip("Click for player settings!");
+                        }
                         ImGui::NextColumn();
                         ImGui::Text("%d", p->health());
                         ImGui::NextColumn();
                         ImGui::Text("$%d", p->money());
                         ImGui::NextColumn();
                         ImGui::Text("%d", p->team());
-                        ImGui::NextColumn();
-                        if (ImGui::Button((std::string("Options ##") + std::to_string(p->index())).c_str())) { // Remove these ugly strings
-                            selectedPlayer = p;
-                            selectedPlayerInfo = info;
-                            ImGui::OpenPopup("Player Popup");
-                        }
                         ImGui::NextColumn();
                     }
                 }

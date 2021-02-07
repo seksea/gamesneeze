@@ -73,6 +73,7 @@ void Menu::onSwapWindow(SDL_Window* window) {
         ImGui::StyleColorsDark();
         ImGui_ImplOpenGL3_Init("#version 100");
         ImGui_ImplSDL2_InitForOpenGL(window, nullptr);
+        style();
         initialised = true;
     }
 
@@ -114,7 +115,6 @@ void Menu::onSwapWindow(SDL_Window* window) {
 
 
 void Menu::drawMenu() {
-    style();
     ImGui::SetNextWindowSize(ImVec2{900, 600});
     ImGui::Begin("gamesneeze-linux", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 4));
