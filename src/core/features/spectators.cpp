@@ -3,7 +3,7 @@
 
 void Features::Spectators::draw() {
     if (CONFIGBOOL("Misc>Misc>Spectators")) {
-        ImGui::Begin("Spectator List", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse);
+        ImGui::Begin("Spectator List", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse | (Menu::open ? 0 : ImGuiWindowFlags_NoMouseInputs));
         ImGui::Text("Spectators");
         ImGui::Separator();
         if (Interfaces::engine->IsInGame()) {
