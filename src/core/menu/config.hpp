@@ -120,6 +120,7 @@ namespace Config {
 
             CONFIGITEM("Misc>Misc>Rank Revealer", false),
             CONFIGITEM("Misc>Misc>Clantag", false),
+            CONFIGITEM("Misc>Misc>Clantag>Marquee", false),
             CONFIGITEM("Misc>Misc>Spectators", false),
             CONFIGITEM("Misc>Misc>Player List", false),
             CONFIGITEM("Misc>Misc>Auto Accept", false),

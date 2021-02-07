@@ -27,3 +27,6 @@ inline T getVirtualFunc(void* c, size_t i, size_t offset = 0) {
 namespace PatternScan {
     uintptr_t patternScan(const char* moduleName, unsigned char* bMask, const char* szMask);
 }
+namespace TextManipulation {
+    void marquee(char text[128], int size);
+}
