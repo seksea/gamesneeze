@@ -1,6 +1,7 @@
 #pragma once
 #include <string.h>
 #include <link.h>
+#include <vector>
 
 enum logLevel {
     LOG,
@@ -25,5 +26,7 @@ inline T getVirtualFunc(void* c, size_t i, size_t offset = 0) {
 }
 
 namespace PatternScan {
-    uintptr_t patternScan(const char* moduleName, unsigned char* bMask, const char* szMask);
+    std::vector<uintptr_t> findMatches(const std::string &pattern, uintptr_t addr, size_t size);
+    std::vector<uintptr_t> findMatchesInModule(const char* moduleName, const std::string &pattern);
+    uintptr_t findFirstInModule(const char* moduleName, const std::string &pattern);
 }

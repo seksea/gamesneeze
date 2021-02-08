@@ -46,35 +46,15 @@ bool Netvar::init() {
 
     Log::log(LOG, "Initialising offsets");
 
-    Offsets::sendClantag = (Offsets::SendClantag)PatternScan::patternScan("engine_client.so", 
-        (unsigned char*)    "\x55\x48\x89\xE5\x41\x55\x49\x89\xFD\x41\x54\xBF\x48\x00\x00\x00\x49\x89\xF4\x53\x48\x83\xEC\x08\xE8"
-                            "\x00\x00\x00\x00"
-                            "\x48\x8D\x35"
-                            "\x00\x00\x00\x00"
-                            "\x48\x89\xC7\x48\x89\xC3\xE8"
-                            "\x00\x00\x00\x00"
-                            "\x48\x8D\x35"
-                            "\x00\x00\x00\x00"
-                            "\x4C\x89\xEA", 
-                            "xxxxxxxxxxxxxxxxxxxxxxxxx"
-                            "????"
-                            "xxx"
-                            "????"
-                            "xxxxxxx"
-                            "????"
-                            "xxx"
-                            "????"
-                            "xxx");
+    Offsets::sendClantag = (Offsets::SendClantag)PatternScan::findFirstInModule("engine_client.so",
+            "55 48 89 E5 41 55 49 89 FD 41 54 BF 48 ? ? ? 49 89 F4 53 48 83 EC 08 E8 ? ? ? ? 48 8D 35 ? ? ? ? 48 89 C7 48 89 C3 E8 ? ? ? ? 48 8D 35 ? ? ? ? 4C 89 EA");
     Log::log(LOG, " sendClantag | %lx", Offsets::sendClantag);
 
-    Offsets::setPlayerReady = (Offsets::SetPlayerReady)PatternScan::patternScan("/client_client.so",
-		(unsigned char*)    "\x55\x48\x89\xF7\x48\x8D\x35\x00\x00\x00\x00\x48\x89\xE5\xE8\x00\x00\x00\x00\x85\xC0",
-							"xxxxxxx????xxxx????xx");
+    Offsets::setPlayerReady = (Offsets::SetPlayerReady)PatternScan::findFirstInModule("/client_client.so",
+            "55 48 89 F7 48 8D 35 ? ? ? ? 48 89 E5 E8 ? ? ? ? 85 C0");
     Log::log(LOG, " setPlayerReady | %lx", Offsets::setPlayerReady);
 
-    Offsets::radarIsHltvCheck = PatternScan::patternScan("/client_client.so",
-		(unsigned char*)      "\x84\xC0\x74\x50\x31\xF6",
-                              "xxxxxx");
+    Offsets::radarIsHltvCheck = PatternScan::findFirstInModule("/client_client.so", "84 C0 74 50 31 F6");
     Log::log(LOG, " radarIsHltvCheck | %lx", Offsets::radarIsHltvCheck);
 
     return true;
