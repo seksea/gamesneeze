@@ -54,7 +54,7 @@ namespace Config {
                 CONFIGITEM("Visuals>Enemies>ESP>Name", false),
                 CONFIGITEM("Visuals>Enemies>ESP>Health", false),
                 CONFIGITEM("Visuals>Enemies>ESP>Health Bar", false),
-                CONFIGITEM("Visuals>ESP>Health Bar>Color", false),
+                CONFIGITEM("Visuals>Enemies>ESP>Dynamic Color", false),
                 CONFIGITEM("Visuals>Enemies>ESP>Money", false),
                 CONFIGITEM("Visuals>Teammates>ESP>Box", false),
                 CONFIGITEM("Visuals>Teammates>ESP>Box Color", ImColor(10, 161, 32, 255)),
@@ -62,6 +62,7 @@ namespace Config {
                 CONFIGITEM("Visuals>Teammates>ESP>Name", false),
                 CONFIGITEM("Visuals>Teammates>ESP>Health", false),
                 CONFIGITEM("Visuals>Teammates>ESP>Health Bar", false),
+                CONFIGITEM("Visuals>Teammates>ESP>Dynamic Color", false),
                 CONFIGITEM("Visuals>Teammates>ESP>Money", false),
             // }
             // Chams {

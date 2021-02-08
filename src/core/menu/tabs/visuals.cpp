@@ -17,7 +17,10 @@ void Menu::drawVisualsTab() {
                 ImGui::Checkbox("Name", &CONFIGBOOL("Visuals>Enemies>ESP>Name"));
                 ImGui::Checkbox("Health", &CONFIGBOOL("Visuals>Enemies>ESP>Health"));
                 ImGui::Checkbox("Health Bar", &CONFIGBOOL("Visuals>Enemies>ESP>Health Bar"));
-                ImGui::Checkbox("Health Bar Color", &CONFIGBOOL("Visuals>ESP>Health Bar>Color"));
+                if(CONFIGBOOL("Visuals>Enemies>ESP>Health Bar")) {
+                    ImGui::SameLine();
+                    ImGui::Checkbox("Dynamic Color", &CONFIGBOOL("Visuals>Enemies>ESP>Dynamic Color"));
+                }
                 ImGui::Checkbox("Money", &CONFIGBOOL("Visuals>Enemies>ESP>Money"));
                 ImGui::Checkbox("Only When Dead", &CONFIGBOOL("Visuals>Enemies>ESP>Only When Dead"));
                 ImGui::EndChild();
@@ -59,7 +62,10 @@ void Menu::drawVisualsTab() {
                 ImGui::Checkbox("Name", &CONFIGBOOL("Visuals>Teammates>ESP>Name"));
                 ImGui::Checkbox("Health", &CONFIGBOOL("Visuals>Teammates>ESP>Health"));
                 ImGui::Checkbox("Health Bar", &CONFIGBOOL("Visuals>Teammates>ESP>Health Bar"));
-                ImGui::Checkbox("Health Bar Color", &CONFIGBOOL("Visuals>ESP>Health Bar>Color"));
+                if(CONFIGBOOL("Visuals>Teammates>ESP>Health Bar")) {
+                    ImGui::SameLine();
+                    ImGui::Checkbox("Dynamic Color", &CONFIGBOOL("Visuals>Teammates>ESP>Dynamic Color"));
+                }
                 ImGui::Checkbox("Money", &CONFIGBOOL("Visuals>Teammates>ESP>Money"));
                 ImGui::Checkbox("Only When Dead", &CONFIGBOOL("Visuals>Teammates>ESP>Only When Dead"));
                 ImGui::EndChild();
