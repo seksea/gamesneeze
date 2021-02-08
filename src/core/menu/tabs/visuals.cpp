@@ -16,6 +16,10 @@ void Menu::drawVisualsTab() {
                 ImGui::Checkbox("Box", &CONFIGBOOL("Visuals>Enemies>ESP>Box"));
                 ImGui::Checkbox("Name", &CONFIGBOOL("Visuals>Enemies>ESP>Name"));
                 ImGui::Checkbox("Health", &CONFIGBOOL("Visuals>Enemies>ESP>Health"));
+                if(CONFIGBOOL("Visuals>Enemies>ESP>Health Bar")) {
+                    ImGui::ColorEdit4("Health Bar Color", (float*)&CONFIGCOL("Visuals>Enemies>ESP>Health Bar Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                    ImGui::SameLine();
+                }
                 ImGui::Checkbox("Health Bar", &CONFIGBOOL("Visuals>Enemies>ESP>Health Bar"));
                 if(CONFIGBOOL("Visuals>Enemies>ESP>Health Bar")) {
                     ImGui::SameLine();
@@ -61,6 +65,10 @@ void Menu::drawVisualsTab() {
 
                 ImGui::Checkbox("Name", &CONFIGBOOL("Visuals>Teammates>ESP>Name"));
                 ImGui::Checkbox("Health", &CONFIGBOOL("Visuals>Teammates>ESP>Health"));
+                if(CONFIGBOOL("Visuals>Teammates>ESP>Health Bar")) {
+                    ImGui::ColorEdit4("Health Bar Color", (float*)&CONFIGCOL("Visuals>Teammates>ESP>Health Bar Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                    ImGui::SameLine();
+                }
                 ImGui::Checkbox("Health Bar", &CONFIGBOOL("Visuals>Teammates>ESP>Health Bar"));
                 if(CONFIGBOOL("Visuals>Teammates>ESP>Health Bar")) {
                     ImGui::SameLine();

@@ -80,7 +80,7 @@ void outlinedText(ImVec2 pos, ImColor color, char* text) {
 
 }
 
-void drawBox(int x, int y, int x2, int y2, bool drawBox, ImColor color, char* topText, char* rightText, int health = -1, bool dynamicHealthColor = false) {
+void drawBox(int x, int y, int x2, int y2, bool drawBox, ImColor color, char* topText, char* rightText, int health = -1, bool dynamicHealthColor = false, ImColor defaultHealthBarColor = ImColor(0, 240, 0, 255)) {
     if (drawBox) {
         Globals::drawList->AddRect(ImVec2(x, y), ImVec2(x2, y2), color);
         Globals::drawList->AddRect(ImVec2(x-1, y-1), ImVec2(x2+1, y2+1), ImColor(0, 0, 0, 255));
@@ -92,9 +92,9 @@ void drawBox(int x, int y, int x2, int y2, bool drawBox, ImColor color, char* to
         Globals::drawList->AddRectFilled(ImVec2(x - 6, y2 - (((float) health / 100.f) * (y2 - y)) - 1),
                                          ImVec2(x - 2, y2 + 1), ImColor(0, 0, 0, 255));
         //bar color
-        ImColor healthBarColor(0, 240, 0, 255);
+        ImColor healthBarColor = defaultHealthBarColor;
         if (dynamicHealthColor) {
-            ImGui::ColorConvertHSVtoRGB(((float)health-20)/255.f, 1.f, 1.f, healthBarColor.Value.x, healthBarColor.Value.y, healthBarColor.Value.z);
+            ImGui::ColorConvertHSVtoRGB(((float)health-20.f)/255.f, 1.f, 1.f, healthBarColor.Value.x, healthBarColor.Value.y, healthBarColor.Value.z);
         }
         Globals::drawList->AddRectFilled(ImVec2(x - 5, y2 - (((float) health / 100.f) * (y2 - y))),ImVec2(x - 3, y2), healthBarColor);
     }
@@ -120,7 +120,8 @@ void drawPlayer(Player* p) {
                         
                         drawBox(x, y, x2, y2, CONFIGBOOL("Visuals>Enemies>ESP>Box"), 
                                     CONFIGCOL("Visuals>Enemies>ESP>Box Color"), CONFIGBOOL("Visuals>Enemies>ESP>Name") ? info.name : (char*)"", 
-                                    (char*)rightText.str().c_str(), CONFIGBOOL("Visuals>Enemies>ESP>Health Bar") ? p->health() : -1, CONFIGBOOL("Visuals>Enemies>ESP>Dynamic Color"));
+                                    (char*)rightText.str().c_str(), CONFIGBOOL("Visuals>Enemies>ESP>Health Bar") ? p->health() : -1, CONFIGBOOL("Visuals>Enemies>ESP>Dynamic Color"), 
+                                    CONFIGCOL("Visuals>Enemies>ESP>Health Bar Color"));
                     }
                 }
                 if (p->team() == Globals::localPlayer->team()) {
@@ -133,7 +134,8 @@ void drawPlayer(Player* p) {
                         
                         drawBox(x, y, x2, y2, CONFIGBOOL("Visuals>Teammates>ESP>Box"), 
                                     CONFIGCOL("Visuals>Teammates>ESP>Box Color"), CONFIGBOOL("Visuals>Teammates>ESP>Name") ? info.name : (char*)"", 
-                                    (char*)rightText.str().c_str(), CONFIGBOOL("Visuals>Teammates>ESP>Health Bar") ? p->health() : -1, CONFIGBOOL("Visuals>Teammates>ESP>Dynamic Color"));
+                                    (char*)rightText.str().c_str(), CONFIGBOOL("Visuals>Teammates>ESP>Health Bar") ? p->health() : -1, CONFIGBOOL("Visuals>Teammates>ESP>Dynamic Color"), 
+                                    CONFIGCOL("Visuals>Teammates>ESP>Health Bar Color"));
                     }
                 }
             }
