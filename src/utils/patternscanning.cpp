@@ -1,17 +1,8 @@
 #include <string.h>
 #include <link.h>
-#include <vector>
+#include <iterator>
+#include <sstream>
 #include "utils.hpp"
-
-// original code by dom1n1k and Patrick at GameDeception and yoinked from Fuzion :kekw:
-bool compare(const unsigned char* pData, const unsigned char* bMask, const char* szMask)
-{
-    for (; *szMask; ++szMask, ++pData, ++bMask)
-        if (*szMask == 'x' && *pData != *bMask)
-            return false;
-
-    return (*szMask) == 0;
-}
 
 struct dlinfo_t
 {
@@ -52,27 +43,74 @@ bool getLibraryInformation(const char* library, uintptr_t* address, size_t* size
     return false;
 }
 
-uintptr_t findPattern(uintptr_t dwAddress, uintptr_t dwLen, unsigned char* bMask, const char* szMask)
-{
-    for (uintptr_t i = 0; i < dwLen; i++)
-        if (compare((unsigned char*)(dwAddress + i), bMask, szMask))
-            return (uintptr_t)(dwAddress + i);
+std::vector<std::pair<uint8_t, bool>> getPatternData(const std::string &pattern) {
+    std::istringstream iss(pattern);
+    std::vector<std::pair<uint8_t, bool>> data;
 
-    return 0;
+    for (auto &it : std::vector<std::string>{ std::istream_iterator<std::string>(iss), std::istream_iterator<std::string>() }) {
+        data.emplace_back(std::strtol(it.c_str(), nullptr, 16), it == "?" || it == "??");
+    }
+
+    return data;
 }
 
-uintptr_t PatternScan::patternScan(const char* moduleName, unsigned char* bMask, const char* szMask) {
+bool compareBytes(uintptr_t addr, const std::vector<std::pair<uint8_t, bool>> &patternData) {
+    for (size_t i = 0; i < patternData.size(); i++) {
+        const auto data = patternData.at(i);
+
+        if (data.second) {
+            continue;
+        }
+
+        if (*(uint8_t*)(addr + i) != data.first) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+std::vector<uintptr_t> PatternScan::findMatches(const std::string &pattern, uintptr_t addr, size_t size) {
+    const auto patternData = getPatternData(pattern);
+    const auto firstByte = patternData.front();
+
+    if (firstByte.second) {
+        throw std::invalid_argument(R"(First pattern byte can't be '?' or '??')");
+    }
+
+    if (size < patternData.size()) {
+        throw std::invalid_argument("Pattern size can't be greater than scan size");
+    }
+
+    std::vector<uintptr_t> data;
+
+    for (size_t i = 0; i <= size - patternData.size(); i++) {
+        if (*(uint8_t *)(addr + i) == firstByte.first && compareBytes(addr + i, patternData)) {
+            data.emplace_back(addr + i);
+        }
+    }
+
+    return data;
+}
+
+std::vector<uintptr_t> PatternScan::findMatchesInModule(const char* moduleName, const std::string &pattern) {
     uintptr_t baseAddress;
     size_t memSize;
 
     if (!getLibraryInformation(moduleName, &baseAddress, &memSize)){
         Log::log(ERR, "Could Not Get info for Module %s", moduleName);
+        return {0};
+    }
+
+    return findMatches(pattern, baseAddress, memSize);
+}
+
+uintptr_t PatternScan::findFirstInModule(const char* moduleName, const std::string &pattern) {
+    const auto matches = findMatchesInModule(moduleName, pattern);
+
+    if (matches.empty()) {
         return 0;
     }
 
-    uintptr_t ret = findPattern(baseAddress, memSize, bMask, szMask);
-    if( !ret ){
-        Log::log(ERR, "Could not find pattern %s in %s", szMask, moduleName);
-    }
-    return ret;
+    return matches.front();
 }
