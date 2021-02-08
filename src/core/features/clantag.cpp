@@ -22,7 +22,7 @@ void Features::ClantagChanger::frameStageNotify(FrameStage frame) {
             }
             if (CONFIGBOOL("Misc>Misc>Bee Movie Clantag")) {
                 if(Interfaces::globals->tickcount % 16 == 0) {
-                    memcpy(Menu::clantag, &beeMovieScript[(Interfaces::globals->tickcount % 55000)/64], 127); // mod it by 55k just as a crude way of looping when it gets to the end, doubt anyone will have it on for 300 mins anyways lmao
+                    memcpy(Menu::clantag, &beeMovieScript[(Interfaces::globals->tickcount % 55000)/16], 127); // mod it by 55k just as a crude way of looping when it gets to the end, doubt anyone will have it on for 300 mins anyways lmao
                     Menu::clantag[127] = '\0';
                 }
             }
