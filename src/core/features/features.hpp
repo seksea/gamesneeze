@@ -7,7 +7,7 @@ namespace Features {
     }
     namespace Chams {
         void drawModelExecute(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld);
-        int nigger;
+        inline int norights;
     }
     namespace RankReveal {
         void createMove(CUserCmd* cmd);
