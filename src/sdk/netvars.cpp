@@ -47,7 +47,7 @@ bool Netvar::init() {
     Log::log(LOG, "Initialising offsets");
 
     Offsets::sendClantag = (Offsets::SendClantag)PatternScan::findFirstInModule("engine_client.so",
-            "55 48 89 E5 41 55 49 89 FD 41 54 BF 48 ? ? ? 49 89 F4 53 48 83 EC 08 E8 ? ? ? ? 48 8D 35 ? ? ? ? 48 89 C7 48 89 C3 E8 ? ? ? ? 48 8D 35 ? ? ? ? 4C 89 EA");
+            "55 48 89 E5 41 55 49 89 FD 41 54 BF");
     Log::log(LOG, " sendClantag | %lx", Offsets::sendClantag);
 
     Offsets::setPlayerReady = (Offsets::SetPlayerReady)PatternScan::findFirstInModule("/client_client.so",
