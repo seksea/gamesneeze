@@ -56,7 +56,7 @@ namespace Interfaces {
                 if ((strstr(cur->m_pName, name) && strlen(cur->m_pName)-3 == strlen(name)) || 
                     (includeVersion && (strstr(cur->m_pName, name) && strlen(cur->m_pName) == strlen(name)))) {
                     T* iface = reinterpret_cast<T*>(cur->m_CreateFn());
-                    Log::log(LOG, " %s (%s) %x", name, cur->m_pName, (uintptr_t)iface);
+                    Log::log(LOG, " %s (%s) %lx", name, cur->m_pName, (uintptr_t)iface);
                     return iface;
                 }
             }

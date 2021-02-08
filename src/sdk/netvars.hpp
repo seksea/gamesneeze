@@ -35,6 +35,8 @@ namespace Offsets {
 
     typedef void (*SetPlayerReady) (const char*);
     inline SetPlayerReady setPlayerReady;
+
+    inline uintptr_t radarIsHltvCheck;
 }
 
 #define GETNETVAROFFSET(table, prop) Netvar::offsets.at({table, prop})

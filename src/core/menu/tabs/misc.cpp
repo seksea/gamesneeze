@@ -80,6 +80,7 @@ void Menu::drawMiscTab() {
         ImGui::Text("Misc");
         ImGui::Separator();
         ImGui::Checkbox("Developer window", &devWindow);
+        ImGui::Checkbox("Force square radar", &CONFIGBOOL("Misc>Misc>Force square radar"));
         ImGui::Checkbox("Rank Revealer", &CONFIGBOOL("Misc>Misc>Rank Revealer"));
 
         ImGui::InputText("##clantag-tbox", clantag, IM_ARRAYSIZE(clantag));
