@@ -37,6 +37,7 @@ An open source cheat for Counter-Strike: Global Offensive on linux.
  - Weapon ESP
  - Chicken/Fish ESP
  - World Colour Modulation
+ - Force square radar
  - Recoil Crosshair
  - Rank Revealer
  - Radio fake ban/fake chat

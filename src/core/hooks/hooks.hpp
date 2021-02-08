@@ -36,6 +36,11 @@ namespace Hooks {
         inline func original;
         void hook(void* thisptr, void*& filter, int iEntIndex, int iChannel, const char* pSoundEntry, unsigned int nSoundEntryHash, const char *pSample, float flVolume, int nSeed, void* iSoundLevel, int iFlags, int iPitch, const Vector* pOrigin, const Vector* pDirection, void* pUtlVecOrigins, bool bUpdatePositions, float soundtime, int speakerentity, void*& params);
     }
+    namespace IsHLTV {
+        using func = bool(*)(void* thisptr);
+        inline func original;
+        bool hook(void* thisptr);
+    }
 
     /* SDL HOOKS */
     namespace SDL {

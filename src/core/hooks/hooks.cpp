@@ -32,6 +32,9 @@ bool Hooks::init() {
     Log::log(LOG, " Hooking EmitSound...");
     EmitSound::original = (EmitSound::func)VMT::hook(Interfaces::sound, (void*)EmitSound::hook, 6);
 
+    Log::log(LOG, " Hooking IsHLTV...");
+    IsHLTV::original = (IsHLTV::func)VMT::hook(Interfaces::engine, (void*)IsHLTV::hook, 93);
+
     Log::log(LOG, "Initialised hooks!");
     return true;
 }
@@ -63,6 +66,9 @@ bool Hooks::unload() {
 
     Log::log(LOG, " Unhooking EmitSound...");
     VMT::hook(Interfaces::sound, (void*)EmitSound::original, 6);
+
+    Log::log(LOG, " Unhooking IsHLTV...");
+    VMT::hook(Interfaces::engine, (void*)IsHLTV::original, 93);
 
     Log::log(LOG, "Unloaded hooks!");
     return true;

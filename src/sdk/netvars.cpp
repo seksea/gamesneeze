@@ -72,5 +72,10 @@ bool Netvar::init() {
 							"xxxxxxx????xxxx????xx");
     Log::log(LOG, " setPlayerReady | %x", Offsets::setPlayerReady);
 
+    Offsets::radarIsHltvCheck = PatternScan::patternScan("/client_client.so",
+		(unsigned char*)      "\x84\xC0\x74\x50\x31\xF6",
+                              "xxxxxx");
+    Log::log(LOG, " radarIsHltvCheck | %x", Offsets::radarIsHltvCheck);
+
     return true;
 }
