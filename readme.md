@@ -11,6 +11,9 @@
 
 An open source cheat for Counter-Strike: Global Offensive on linux.
 
+## :warning: :warning: THIS IS A CHEAT FOR LINUX, IT WILL NOT INJECT IF YOU ARE ON WINDOWS, AND I'M NOT PLANNING ON PORTING ANYTIME SOON, DO NOT JOIN THE DISCORD ASKING FOR DLL :warning: :warning:
+
+
 ## Current Features
 ### Interfaces
  - Interfaces::client
@@ -41,6 +44,7 @@ An open source cheat for Counter-Strike: Global Offensive on linux.
  - Recoil Crosshair
  - Rank Revealer
  - Radio fake ban/fake chat
+ - Clantag (and pBeeMovie clantag)
 ### Others
  - Basic GDB injector
  - ImGui menu
