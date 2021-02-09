@@ -39,4 +39,7 @@ namespace Features {
     namespace Radar {
         void espPlayerLoop(Player* p);
     }
+    namespace FastDuck {
+        void createMove(CUserCmd *cmd);
+    }
 }
