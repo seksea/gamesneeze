@@ -2,6 +2,9 @@
 
 /* initialise everything in */
 void MainThread() {
+    /* if serverbrowser is not open then wait, (serverbrowser is last to be loaded) */
+    while (!dlopen("./bin/linux64/serverbrowser_client.so", RTLD_NOLOAD | RTLD_NOW))
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
     try {
         std::cout << " \n\
 Powered by...\n\
@@ -35,7 +38,8 @@ Powered by...\n\
     }
 }
 
-/* Called on uninject */
+/* Called on uninject, if you ld_preload with this, then it will call it as soon as you inject, so only have this if PRELOAD compile def is not set */
+#ifndef PRELOAD
 void __attribute__((destructor)) Unload() {
     Log::log(LOG, "Uninjecting...");
 
@@ -51,6 +55,7 @@ void __attribute__((destructor)) Unload() {
 
     Log::log(LOG, "Uninjected!\n");
 }
+#endif
 
 /* Called when injected */
 int __attribute__((constructor)) Main() {
