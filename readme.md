@@ -9,13 +9,14 @@
   <a href="https://discord.gg/SCHsWHFJMb"><img src="https://img.shields.io/badge/Chat-Discord-blue.svg" alt="Discord"></a>
 </p>
 
-An open source cheat for Counter-Strike: Global Offensive on linux.
+An open source cheat for Counter-Strike: Global Offensive on Linux.
 
-## :warning: :warning: THIS IS A CHEAT FOR LINUX, IT WILL NOT INJECT IF YOU ARE ON WINDOWS, AND I'M NOT PLANNING ON PORTING ANYTIME SOON, DO NOT JOIN THE DISCORD ASKING FOR DLL :warning: :warning:
-
+**:warning: :warning: THIS IS A CHEAT FOR LINUX, IT WILL NOT INJECT IF YOU ARE ON WINDOWS, AND I'M NOT PLANNING ON PORTING ANYTIME SOON, DO NOT JOIN THE DISCORD ASKING FOR DLL :warning: :warning:**
 
 ## Current Features
+
 ### Interfaces
+
  - Interfaces::client
  - Interfaces::engine
  - Interfaces::panel
@@ -26,7 +27,9 @@ An open source cheat for Counter-Strike: Global Offensive on linux.
  - Interfaces::modelRender
  - Interfaces::modelInfo
  - Interfaces::materialSystem
+
 ### Hooks
+
  - CreateMove
  - PaintTraverse
  - SwapWindow
@@ -34,7 +37,9 @@ An open source cheat for Counter-Strike: Global Offensive on linux.
  - DrawModelExecute
  - FrameStageNotify
  - Paint
+
 ### Features
+
  - Chams
  - ESP
  - Weapon ESP
@@ -45,12 +50,15 @@ An open source cheat for Counter-Strike: Global Offensive on linux.
  - Rank Revealer
  - Radio fake ban/fake chat
  - Clantag (and pBeeMovie clantag)
+
 ### Others
+
  - Basic GDB injector
  - ImGui menu
 
 
 ## How to use
+
 ```sh
 git clone https://github.com/seksea/gamesneeze
 cd gamesneeze
@@ -59,6 +67,7 @@ sudo ./toolbox.sh -u -b -l # unload cheat if currently injected, build and then 
 ```
 
 ## Basic toolbox.sh usage
+
 | Argument          | Description                           |
 | ----------------- | ------------------------------------- |
 | -u (--unload)     | Unload the cheat from CS:GO if loaded |
@@ -69,13 +78,14 @@ sudo ./toolbox.sh -u -b -l # unload cheat if currently injected, build and then 
 All args are executed in the order they are written in, for example, "-u -b -l" would unload the cheat, build it, and then load it back into csgo.
 
 
-## Found a bug/want to add something?
+## Found a bug / want to add something?
  - [Create a pull request](https://github.com/seksea/gamesneeze/compare) ([tutorial](https://github.com/yangsu/pull-request-tutorial))
  - [Report a bug](https://github.com/seksea/gamesneeze/issues/new)
 
 ## [Todo](https://github.com/seksea/gamesneeze/projects/1)
 
 ## Code style
+
  - Interfaces layed out like this (func names, arg names and comments typed as in the [2015 leak](https://github.com/perilouswithadollarsign/cstrike15_src) or the [source sdk](https://github.com/ValveSoftware/source-sdk-2013)):
 ```cpp
 // https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/cdll_int.h#L194
@@ -112,5 +122,7 @@ hooks.hpp
 ```
 
 ## Screenshots
+
 ![Console Output](res/console.png)
+
 ![Choms Output](res/chams.png)
