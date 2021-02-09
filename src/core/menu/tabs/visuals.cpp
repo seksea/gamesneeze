@@ -26,6 +26,7 @@ void Menu::drawVisualsTab() {
                     ImGui::Checkbox("Dynamic Color", &CONFIGBOOL("Visuals>Enemies>ESP>Dynamic Color"));
                 }
                 ImGui::Checkbox("Money", &CONFIGBOOL("Visuals>Enemies>ESP>Money"));
+                ImGui::Checkbox("Radar", &CONFIGBOOL("Visuals>Enemies>ESP>Radar"));
                 ImGui::Checkbox("Only When Dead", &CONFIGBOOL("Visuals>Enemies>ESP>Only When Dead"));
                 ImGui::EndChild();
             }
