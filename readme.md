@@ -9,9 +9,9 @@
   <a href="https://discord.gg/SCHsWHFJMb"><img src="https://img.shields.io/badge/Chat-Discord-blue.svg" alt="Discord"></a>
 </p>
 
-An open source cheat for Counter-Strike: Global Offensive on Linux.
+An open source cheat for Counter-Strike: Global Offensive on GNU/Linux.
 
-**:warning: :warning: THIS IS A CHEAT FOR LINUX, IT WILL NOT INJECT IF YOU ARE ON WINDOWS, AND I'M NOT PLANNING ON PORTING ANYTIME SOON, DO NOT JOIN THE DISCORD ASKING FOR DLL :warning: :warning:**
+**:warning: :warning: THIS IS A CHEAT FOR GNU/LINUX, IT WILL NOT INJECT IF YOU ARE ON WINDOWS, AND I'M NOT PLANNING ON PORTING ANYTIME SOON, DO NOT JOIN THE DISCORD ASKING FOR DLL :warning: :warning:**
 
 ## Current Features
 
