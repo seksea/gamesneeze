@@ -32,4 +32,7 @@ namespace Features {
     namespace AutoAccept {
         void emitSound(const char* pSoundEntry);
     }
+    namespace Radar {
+        void espPlayerLoop(Player* p);
+    }
 }

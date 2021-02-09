@@ -57,6 +57,7 @@ namespace Config {
                 CONFIGITEM("Visuals>Enemies>ESP>Health Bar", false),
                 CONFIGITEM("Visuals>Enemies>ESP>Dynamic Color", false),
                 CONFIGITEM("Visuals>Enemies>ESP>Money", false),
+                CONFIGITEM("Visuals>Enemies>ESP>Radar", false),
                 CONFIGITEM("Visuals>Teammates>ESP>Box", false),
                 CONFIGITEM("Visuals>Teammates>ESP>Box Color", ImColor(10, 161, 32, 255)),
                 CONFIGITEM("Visuals>Teammates>ESP>Only When Dead", false),
