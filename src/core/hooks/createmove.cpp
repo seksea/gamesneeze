@@ -7,5 +7,8 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
     Features::RankReveal::createMove(cmd);
     Features::AutoHop::createMove(cmd);
 
+    if (Features::AutoDefuse::shouldDefuse) {
+        cmd->buttons |= (1 << 5);
+    }
     return original(thisptr, flInputSampleTime, cmd);
 }

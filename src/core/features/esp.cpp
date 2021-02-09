@@ -102,6 +102,7 @@ void drawBox(int x, int y, int x2, int y2, bool drawBox, ImColor color, char* to
     outlinedText(ImVec2(x+((x2-x)/2)-(ImGui::CalcTextSize(topText).x/2), y-(ImGui::CalcTextSize(topText).y)), ImColor(255, 255, 255, 255), topText);
 }
 
+
 void drawPlayer(Player* p) {
     if (!p->dormant()) {
         if (p->health() > 0) {
@@ -183,6 +184,7 @@ void Features::ESP::draw() {
                             char label[32] = "";
                             snprintf(label, 32, "Planted C4\n%.3f", ((PlantedC4*)ent)->time() - Interfaces::globals->curtime);
                             drawGenericEnt(ent, CONFIGBOOL("Visuals>World>Items>Planted C4 Box"), CONFIGCOL("Visuals>World>Items>Planted C4 Box Color"), CONFIGBOOL("Visuals>World>Items>Planted C4 Label") ? label : "");
+                            AutoDefuse::onBombRender((PlantedC4*)ent);
                         }
                         
                         /* Chicken ESP */

@@ -16,6 +16,7 @@ namespace Netvar {
         {std::make_pair("DT_BasePlayer", "m_aimPunchAngle"), 0},
         {std::make_pair("DT_CSPlayer", "m_hActiveWeapon"), 0},
         {std::make_pair("DT_CSPlayer", "m_hObserverTarget"), 0},
+        {std::make_pair("DT_CSPlayer", "m_bHasDefuser"), 0},
 
         /* Item */
         {std::make_pair("DT_BaseAttributableItem", "m_iItemDefinitionIndex"), 0},

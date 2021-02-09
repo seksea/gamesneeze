@@ -131,6 +131,8 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Spectators", false),
             CONFIGITEM("Misc>Misc>Player List", false),
             CONFIGITEM("Misc>Misc>Auto Accept", false),
+            CONFIGITEM("Misc>Misc>Auto Defuse", false),
+            CONFIGITEM("Misc>Misc>Latest Defuse", false),
 
         // }
     };

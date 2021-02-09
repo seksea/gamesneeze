@@ -91,6 +91,11 @@ void Menu::drawMiscTab() {
         ImGui::Checkbox("Spectators", &CONFIGBOOL("Misc>Misc>Spectators"));
         ImGui::Checkbox("Player List", &CONFIGBOOL("Misc>Misc>Player List"));
         ImGui::Checkbox("Auto Accept", &CONFIGBOOL("Misc>Misc>Auto Accept"));
+        ImGui::Checkbox("Auto Defuse", &CONFIGBOOL("Misc>Misc>Auto Defuse"));
+        if (CONFIGBOOL("Misc>Misc>Auto Defuse")) {
+            ImGui::SameLine();
+            ImGui::Checkbox("Latest Defuse", &CONFIGBOOL("Misc>Misc>Latest Defuse"));
+        }
         ImGui::EndChild();
     }
 }
