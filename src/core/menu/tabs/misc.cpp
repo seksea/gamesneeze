@@ -96,6 +96,11 @@ void Menu::drawMiscTab() {
             ImGui::SameLine();
             ImGui::Checkbox("Latest Defuse", &CONFIGBOOL("Misc>Misc>Latest Defuse"));
         }
+        ImGui::Checkbox("Fast Duck", &CONFIGBOOL("Misc>Misc>Fast Duck"));
+        ImGui::SameLine();
+        ImGui::TextDisabled("?");
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("May cause untrusted, use at own risk!");
         ImGui::EndChild();
     }
 }

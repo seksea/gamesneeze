@@ -133,6 +133,7 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Auto Accept", false),
             CONFIGITEM("Misc>Misc>Auto Defuse", false),
             CONFIGITEM("Misc>Misc>Latest Defuse", false),
+            CONFIGITEM("Misc>Misc>Fast Duck", false),
 
         // }
     };
