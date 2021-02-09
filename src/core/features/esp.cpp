@@ -163,6 +163,7 @@ void Features::ESP::draw() {
                         /* Player ESP */
                         if (clientClass->m_ClassID == EClassIds::CCSPlayer) {
                             drawPlayer((Player*)ent);
+                            Features::Radar::espPlayerLoop((Player*)ent);
                         }
 
                         /* Weapon ESP */
