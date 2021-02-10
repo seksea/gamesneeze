@@ -50,6 +50,7 @@ An open source cheat for Counter-Strike: Global Offensive on Linux.
  - Rank Revealer
  - Radio fake ban/fake chat
  - Clantag (and pBeeMovie clantag)
+ - Simple triggerbot
 
 ### Others
 
@@ -79,10 +80,10 @@ All args are executed in the order they are written in, for example, "-u -b -l" 
 
 
 ## Found a bug / want to add something?
- - [Create a pull request](https://github.com/seksea/gamesneeze/compare) ([tutorial](https://github.com/yangsu/pull-request-tutorial))
+ - [Create a pull request](https://github.com/seksea/gamesneeze/compare) (Add yourself to the [credits](src/core/menu/tabs/misc.cpp#L10))
  - [Report a bug](https://github.com/seksea/gamesneeze/issues/new)
 
-## [Todo](https://github.com/seksea/gamesneeze/projects/1)
+## [Todo List](https://github.com/seksea/gamesneeze/projects/1)
 
 ## Code style
 
@@ -105,7 +106,14 @@ namespace Log {};
 namespace Hooks {};
 //etc...
 ```
- - lowerCamelCase for everything except stuff ripped from source sdk:
+ - classes begin with capital letters:
+ ```cpp
+class Player {
+public:
+    // etc...
+}
+ ```
+ - lowerCamelCase for everything else except stuff ripped from source sdk:
 ```cpp
 class InterfaceReg {
 public:
