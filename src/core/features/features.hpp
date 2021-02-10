@@ -42,4 +42,7 @@ namespace Features {
     namespace FastDuck {
         void createMove(CUserCmd *cmd);
     }
+    namespace Triggerbot {
+        void createMove(CUserCmd* cmd);
+    }
 }

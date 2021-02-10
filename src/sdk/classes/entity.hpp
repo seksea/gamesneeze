@@ -56,6 +56,10 @@ public:
 	NETVAR("DT_CSPlayer", "m_hActiveWeapon", activeWeapon, void*);
 	NETVAR("DT_CSPlayer", "m_hObserverTarget", observerTarget, Player*);
 	NETVAR("DT_CSPlayer", "m_bHasDefuser", defuser, bool);
+
+	int crosshair() {
+		return *reinterpret_cast<int*>((uintptr_t)defuser_ptr()+0x7c);
+	}
 };
 
 class Item : public Entity{

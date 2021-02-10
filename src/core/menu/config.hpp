@@ -46,6 +46,12 @@ namespace Config {
     };
 
     inline std::unordered_map<std::string_view, ConfigItem> config {
+        // Legit {
+            // Triggerbot {
+                CONFIGITEM("Legit>Triggerbot>Triggerbot", false),
+                CONFIGITEM("Legit>Triggerbot>Key", 0),
+            // }
+        // }
         // Visuals {
             // ESP {
                 CONFIGITEM("Visuals>Enemies>ESP>Box", false),
