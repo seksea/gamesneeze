@@ -12,27 +12,35 @@ void shiftMarquee(char* text, int size) {
     }
 }
 
+void updateClantag() {
+    if ((Interfaces::globals->tickcount % 128) > 96) {
+        Offsets::sendClantag(Menu::clantag, "ghub/seksea/gamesneeze\xe2\x80\xa8\xe2\x80\xa8\xe2\x80\xa8");
+    }
+    else {
+        Offsets::sendClantag(Menu::clantag, "gamesneeze beste\xe2\x80\xa8\xe2\x80\xa8\xe2\x80\xa8");
+    }
+}
+
 void Features::ClantagChanger::frameStageNotify(FrameStage frame) {
     if (CONFIGBOOL("Misc>Misc>Clantag")) {
         if (frame == FRAME_NET_UPDATE_POSTDATAUPDATE_END) {
             if (CONFIGBOOL("Misc>Misc>Clantag Marquee")) {
-                if(Interfaces::globals->tickcount % 64 == 0) {
+                if(Interfaces::globals->tickcount % 32 == 0) {
                     shiftMarquee((Menu::clantag), strlen(Menu::clantag));
+                    updateClantag();
                 }
             }
-            if (CONFIGBOOL("Misc>Misc>Bee Movie Clantag")) {
+            else if (CONFIGBOOL("Misc>Misc>Bee Movie Clantag")) {
                 if(Interfaces::globals->tickcount % 16 == 0) {
                     memcpy(Menu::clantag, &beeMovieScript[(Interfaces::globals->tickcount % 55000)/16], 127); // mod it by 55k just as a crude way of looping when it gets to the end, doubt anyone will have it on for 300 mins anyways lmao
                     Menu::clantag[127] = '\0';
+                    updateClantag();
                 }
             }
-            switch (Interfaces::globals->tickcount % 10) {
-                case 0:
-                    Offsets::sendClantag(Menu::clantag, "gamesneeze beste\xe2\x80\xa8\xe2\x80\xa8\xe2\x80\xa8");
-                    break;
-                case 8:
-                    Offsets::sendClantag(Menu::clantag, "ghub/seksea/gamesneeze\xe2\x80\xa8\xe2\x80\xa8\xe2\x80\xa8");
-                    break;
+            else {
+                if(Interfaces::globals->tickcount % 128 == 0) {
+                    updateClantag();
+                }
             }
         }
     }

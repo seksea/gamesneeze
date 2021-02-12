@@ -31,7 +31,7 @@ function load {
         -ex "set auto-load safe-path $(pwd)/build/:/usr/lib/" \
         -ex "attach $csgo_pid" \
         -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
-        -ex "call \$dlopen(\$(pwd)/build/$libname\", 1)" \
+        -ex "call \$dlopen(\"$(pwd)/build/$libname\", 1)" \
         -ex "detach" \
         -ex "quit"
     echo "successfully loaded!"
