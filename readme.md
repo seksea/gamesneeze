@@ -7,6 +7,7 @@
   <a><img src="https://img.shields.io/badge/Detection-Undetected-green.svg" alt="Detection: Unknown"></a>
   <a href="https://gitter.im/gamesneeze/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link"><img src="https://img.shields.io/badge/Chat-Gitter-green.svg" alt="Gitter"></a>
   <a href="https://discord.gg/SCHsWHFJMb"><img src="https://img.shields.io/badge/Chat-Discord-blue.svg" alt="Discord"></a>
+  <a href="https://www.codacy.com/gh/seksea/gamesneeze/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=seksea/gamesneeze&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/70f6318d02f2442ba898a9b483c1f547"/></a>
 </p>
 
 An open source cheat for Counter-Strike: Global Offensive on Linux.
