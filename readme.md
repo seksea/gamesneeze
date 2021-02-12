@@ -18,45 +18,45 @@ An open source cheat for Counter-Strike: Global Offensive on Linux.
 
 ### Interfaces
 
-  - Interfaces::client
-  - Interfaces::engine
-  - Interfaces::panel
-  - Interfaces::clientMode
-  - Interfaces::globals
-  - Interfaces::entityList
-  - Interfaces::engineVgui
-  - Interfaces::modelRender
-  - Interfaces::modelInfo
-  - Interfaces::materialSystem
+- Interfaces::client
+- Interfaces::engine
+- Interfaces::panel
+- Interfaces::clientMode
+- Interfaces::globals
+- Interfaces::entityList
+- Interfaces::engineVgui
+- Interfaces::modelRender
+- Interfaces::modelInfo
+- Interfaces::materialSystem
 
 ### Hooks
 
-  - CreateMove
-  - PaintTraverse
-  - SwapWindow
-  - PollEvent
-  - DrawModelExecute
-  - FrameStageNotify
-  - Paint
+- CreateMove
+- PaintTraverse
+- SwapWindow
+- PollEvent
+- DrawModelExecute
+- FrameStageNotify
+- Paint
 
 ### Features
 
-  - Chams
-  - ESP
-  - Weapon ESP
-  - Chicken/Fish ESP
-  - World Colour Modulation
-  - Force square radar
-  - Recoil Crosshair
-  - Rank Revealer
-  - Radio fake ban/fake chat
-  - Clantag (and pBeeMovie clantag)
-  - Simple triggerbot
+- Chams
+- ESP
+- Weapon ESP
+- Chicken/Fish ESP
+- World Colour Modulation
+- Force square radar
+- Recoil Crosshair
+- Rank Revealer
+- Radio fake ban/fake chat
+- Clantag (and pBeeMovie clantag)
+- Simple triggerbot
 
 ### Others
 
-  - Basic GDB injector
-  - ImGui menu
+- Basic GDB injector
+- ImGui menu
 
 ## How to use
 
@@ -80,14 +80,14 @@ All args are executed in the order they are written in, for example, "-u -b -l" 
 
 ## Found a bug / want to add something?
 
-  - [Create a pull request](https://github.com/seksea/gamesneeze/compare) (Add yourself to the [credits](src/core/menu/tabs/misc.cpp#L10))
-  - [Report a bug](https://github.com/seksea/gamesneeze/issues/new)
+- [Create a pull request](https://github.com/seksea/gamesneeze/compare) (Add yourself to the [credits](src/core/menu/tabs/misc.cpp#L10))
+- [Report a bug](https://github.com/seksea/gamesneeze/issues/new)
 
 ## [Todo List](https://github.com/seksea/gamesneeze/projects/1)
 
 ## Code style
 
-  - Interfaces layed out like this (func names, arg names and comments typed as in the [2015 leak](https://github.com/perilouswithadollarsign/cstrike15_src) or the [source sdk](https://github.com/ValveSoftware/source-sdk-2013)):
+- Interfaces layed out like this (func names, arg names and comments typed as in the [2015 leak](https://github.com/perilouswithadollarsign/cstrike15_src) or the [source sdk](https://github.com/ValveSoftware/source-sdk-2013)):
 
 ```cpp
 // https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/cdll_int.h#L194
@@ -102,7 +102,7 @@ public:
 }
 ```
 
-  - Namespaces start with capital letter:
+- Namespaces start with capital letter:
 
 ```cpp
 namespace Log {};
@@ -110,7 +110,7 @@ namespace Hooks {};
 //etc...
 ```
 
-  - classes begin with capital letters:
+- classes begin with capital letters:
 
  ```cpp
 class Player {
@@ -119,7 +119,7 @@ public:
 }
 ```
 
-  - lowerCamelCase for everything else except stuff ripped from source sdk:
+- lowerCamelCase for everything else except stuff ripped from source sdk:
 
 ```cpp
 class InterfaceReg {
@@ -130,7 +130,7 @@ public:
 };
 ```
 
-  - filenames all lowercase:
+- filenames all lowercase:
 
 ```
 createmove.cpp
