@@ -15,6 +15,8 @@ An open source cheat for Counter-Strike: Global Offensive on Linux.
 
 ## Current Features
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d3769a82a63d419fad166c49d98bd810)](https://app.codacy.com/gh/seksea/gamesneeze?utm_source=github.com&utm_medium=referral&utm_content=seksea/gamesneeze&utm_campaign=Badge_Grade)
+
 ### Interfaces
 
 - Interfaces::client
