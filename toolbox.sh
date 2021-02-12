@@ -1,13 +1,7 @@
 #!/bin/bash
 # fuzion/aimtux
 
-# name of library to inject cheat as via gdb
-libname="libmenu.so"
-libdirname="lib"
-if [ $(getconf LONG_BIT) = 64 ]; then
-    libdirname+="64"
-fi
-
+libname="libgamemode.so" # Pretend to be gamemode, change this to another lib that may be in /maps
 csgo_pid=$(pidof csgo_linux64)
 
 rm -rf /tmp/dumps
@@ -15,36 +9,29 @@ mkdir --mode=000 /tmp/dumps
 
 function unload {
     echo "unloading cheat..."
+    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
     if grep -q "$libname" "/proc/$csgo_pid/maps"; then
-        gdb -n -q -batch-silent \
-            -ex "set logging on" \
-            -ex "set logging file /dev/null" \
-            -ex "set logging redirect on" \
-            -ex "attach $csgo_pid" \
+        gdb -n -q -batch -ex "attach $csgo_pid" \
             -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
             -ex "set \$dlclose = (int(*)(void*)) dlclose" \
-            -ex "set \$library = \$dlopen(\"/usr/lib/$libname\", 6)" \
+            -ex "set \$library = \$dlopen(\"`pwd`/build/$libname\", 6)" \
             -ex "call \$dlclose(\$library)" \
             -ex "call \$dlclose(\$library)" \
             -ex "detach" \
             -ex "quit"
-        echo "unloaded!"
-    else
-        echo "nothing to unload"
     fi
+    echo "unloaded!"
 }
 
 function load {
     echo "loading cheat..."
-    cp build/libgamesneeze.so /usr/lib/$libname
-    gdb -n -q -batch-silent \
-        -ex "set logging on" \
-        -ex "set logging file /dev/null" \
-        -ex "set logging redirect on" \
-        -ex "set auto-load safe-path /usr/share/gdb/auto-load/usr/$libdirname/:/usr/$libdirname/" \
+    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+    cp build/libgamesneeze.so build/$libname
+    ./gdb -n -q -batch \
+        -ex "set auto-load safe-path `pwd`/build/:/usr/lib/" \
         -ex "attach $csgo_pid" \
         -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
-        -ex "call \$dlopen(\"/usr/lib/$libname\", 1)" \
+        -ex "call \$dlopen(\"`pwd`/build/$libname\", 1)" \
         -ex "detach" \
         -ex "quit"
     echo "successfully loaded!"
