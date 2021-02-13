@@ -52,7 +52,7 @@ public:
 
     void SetVecValue(float x, float y, float z) {
 		typedef void (*Fn)(void*, float, float, float);
-		return getVirtualFunc<Fn>(this, 11)(this, x, y, z);
+		return getVirtualFunc<Fn>(this, 12)(this, x, y, z);
     }
 };
 
