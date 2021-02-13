@@ -7,3 +7,4 @@ void Features::SkyboxChanger::frameStageNotify(FrameStage frame) {
             Offsets::setNamedSkybox(skyboxes[CONFIGINT("Visuals>World>World>Skybox")]);
         }
     }
+}
