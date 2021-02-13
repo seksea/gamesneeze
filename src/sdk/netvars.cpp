@@ -65,5 +65,9 @@ bool Netvar::init() {
             "55 48 89 E5 41 57 41 56 41 55 41 54 49 89 D4 53 48 81 EC ? ? ? ? 48 85"),
     Log::log(LOG, " loadFromBuffer | %lx", Offsets::loadFromBuffer);
 
+    Offsets::setNamedSkybox = (Offsets::SetNamedSkybox)PatternScan::findFirstInModule("engine_client.so", 
+        " 55 4C 8D 05 ? ? ? ? 48 89 E5 41");
+    Log::log(LOG, " setNamedSkybox | %lx", Offsets::setNamedSkybox);
+
     return true;
 }

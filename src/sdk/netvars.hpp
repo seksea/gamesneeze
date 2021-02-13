@@ -51,6 +51,9 @@ namespace Offsets {
     typedef void (*LoadFromBuffer)(KeyValues*, const char*, const char*, void*, const char*, void*);
     inline LoadFromBuffer loadFromBuffer;
 
+    typedef bool (*SetNamedSkybox)(const char *);
+    inline SetNamedSkybox setNamedSkybox;
+
 }
 
 #define GETNETVAROFFSET(table, prop) Netvar::offsets.at({table, prop})

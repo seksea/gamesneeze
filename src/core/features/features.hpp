@@ -27,6 +27,9 @@ namespace Features {
     namespace ClantagChanger {
         void frameStageNotify(FrameStage frame);
     }
+    namespace SkyboxChanger {
+        void frameStageNotify(FrameStage frame);
+    }
     namespace Spectators {
         void draw();
     }

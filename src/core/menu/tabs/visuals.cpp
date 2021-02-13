@@ -189,6 +189,8 @@ void Menu::drawVisualsTab() {
                     Features::WorldColorModulate::updateColorModulation();
                 }
                 ImGui::SliderInt("NightMode", &CONFIGINT("Visuals>World>World>Nightmode"), 0, 100);
+                ImGui::Text("Skybox");
+                ImGui::Combo("##Skybox", &CONFIGINT("Visuals>World>World>Skybox"), skyboxes, IM_ARRAYSIZE(skyboxes));
 
                 ImGui::EndChild();
             }

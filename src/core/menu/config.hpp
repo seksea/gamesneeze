@@ -107,6 +107,7 @@ namespace Config {
 
                 CONFIGITEM("Visuals>World>World>World Color Modulation", ImColor(255, 255, 255, 255)),
                 CONFIGITEM("Visuals>World>World>Nightmode", 0),
+                CONFIGITEM("Visuals>World>World>Skybox", 0),
 
                 CONFIGITEM("Visuals>World>Items>Weapon Box", false),
                 CONFIGITEM("Visuals>World>Items>Weapon Box Color", ImColor(255, 255, 255, 255)),
