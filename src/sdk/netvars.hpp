@@ -38,6 +38,13 @@ namespace Offsets {
     inline SetPlayerReady setPlayerReady;
 
     inline uintptr_t radarIsHltvCheck;
+
+    typedef void (*InitKeyValues)(KeyValues*, const char*);
+    inline InitKeyValues initKeyValues;
+
+    typedef void (*LoadFromBuffer)(KeyValues*, const char*, const char*, void*, const char*, void*);
+    inline LoadFromBuffer loadFromBuffer;
+
 }
 
 #define GETNETVAROFFSET(table, prop) Netvar::offsets.at({table, prop})

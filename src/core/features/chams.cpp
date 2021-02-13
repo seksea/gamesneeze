@@ -8,6 +8,16 @@ IMaterial* energyBallMaterial;
 IMaterial* glowMaterial;
 IMaterial* plasticMaterial;
 IMaterial* darudeMaterial;
+IMaterial* oilMaterial;
+
+IMaterial* createMaterial(const char* materialName, const char* materialType, const char* material) {
+	KeyValues* keyValues = new KeyValues(materialName);
+
+	Offsets::initKeyValues(keyValues, materialType);
+	Offsets::loadFromBuffer(keyValues, materialName, material, nullptr, nullptr, nullptr);
+
+	return Interfaces::materialSystem->CreateMaterial(materialName, keyValues);
+}
 
 void createMaterials() {
     static bool init;
@@ -16,9 +26,33 @@ void createMaterials() {
         flatMaterial = Interfaces::materialSystem->FindMaterial("debug/debugdrawflat", 0);
         pulseMaterial = Interfaces::materialSystem->FindMaterial("dev/screenhighlight_pulse", 0);
         energyBallMaterial = Interfaces::materialSystem->FindMaterial("effects/energyball", 0);
-        glowMaterial = Interfaces::materialSystem->FindMaterial("dev/glow_armsrace", 0);
         plasticMaterial = Interfaces::materialSystem->FindMaterial("models/inventory_items/trophy_majors/gloss", 0);
         darudeMaterial = Interfaces::materialSystem->FindMaterial("models/inventory_items/music_kit/darude_01/mp3_detail", 0);
+
+        glowMaterial = createMaterial("glow", "VertexLitGeneric", 
+        R"#("VertexLitGeneric" {
+            "$additive" "1"
+            "$envmap" "models/effects/cube_white"
+            "$envmaptint" "[1 1 1]"
+            "$envmapfresnel" "1"
+            "$envmapfresnelminmaxexp" "[0 1 2]"
+            "$alpha" "0.8"
+        })#");
+
+        oilMaterial = createMaterial("pearlescent", "VertexLitGeneric", 
+        R"#("VertexLitGeneric"
+        {
+            "$basetexture" "vgui/white_additive"
+            "$nocull" "1"
+            "$nofog" "1"
+            "$model" "1"
+            "$nocull" "0"
+            "$phong" "1"
+            "$phongboost" "0"
+            "$basemapalphaphongmask" "1"
+            "$pearlescent" "6"
+        })#");
+
         init = true;
     }
 }
@@ -34,6 +68,7 @@ void cham(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRe
         case 5: material = glowMaterial; break;
         case 6: material = plasticMaterial; break;
         case 7: material = darudeMaterial; break;
+        case 8: material = oilMaterial; break;
     }
     material->SetMaterialVarFlag(MATERIAL_VAR_IGNOREZ, ignoreZ);
     material->AlphaModulate(color.Value.w);
