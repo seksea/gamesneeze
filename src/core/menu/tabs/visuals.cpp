@@ -188,6 +188,7 @@ void Menu::drawVisualsTab() {
                   ImGui::Button("Update Color Modulation")) {
                     Features::WorldColorModulate::updateColorModulation();
                 }
+                ImGui::SliderInt("NightMode", &CONFIGINT("Visuals>World>World>Nightmode"), 0, 100);
 
                 ImGui::EndChild();
             }

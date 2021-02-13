@@ -26,6 +26,12 @@ namespace Netvar {
 
         /* Bomb */
         {std::make_pair("DT_PlantedC4", "m_flC4Blow"), 0},
+
+        /* Tonemap Controller */
+        {std::make_pair("DT_EnvTonemapController", "m_bUseCustomAutoExposureMin"), 0},
+        {std::make_pair("DT_EnvTonemapController", "m_bUseCustomAutoExposureMax"), 0},
+        {std::make_pair("DT_EnvTonemapController", "m_flCustomAutoExposureMin"), 0},
+        {std::make_pair("DT_EnvTonemapController", "m_flCustomAutoExposureMax"), 0},
     };
     bool init();
 }

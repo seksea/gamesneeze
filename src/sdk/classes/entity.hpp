@@ -86,3 +86,11 @@ class PlantedC4 : public Item {
 public:
 	NETVAR("DT_PlantedC4", "m_flC4Blow", time, float);
 };
+
+class TonemapController {
+public:
+	NETVAR("DT_EnvTonemapController", "m_bUseCustomAutoExposureMin", useExposureMin, bool);
+	NETVAR("DT_EnvTonemapController", "m_bUseCustomAutoExposureMax", useExposureMax, bool);
+	NETVAR("DT_EnvTonemapController", "m_flCustomAutoExposureMin", exposureMin, float);
+	NETVAR("DT_EnvTonemapController", "m_flCustomAutoExposureMax", exposureMax, float);
+};

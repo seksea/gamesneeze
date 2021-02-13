@@ -12,6 +12,9 @@ namespace Features {
         inline bool shouldDefuse = false;
         void onBombRender(PlantedC4* bomb);
     }
+    namespace Nightmode {
+        void onTonemapController(TonemapController* tonemapController);
+    }
     namespace RankReveal {
         void createMove(CUserCmd* cmd);
     }
