@@ -153,6 +153,7 @@ void Menu::drawMenu() {
     ImGui::PopStyleVar();
 
     ImGui::Separator();
+    ImGui::Separator();
 
     switch(tabSelected) {
         case 0: {

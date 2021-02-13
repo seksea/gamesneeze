@@ -112,31 +112,31 @@ void drawPlayer(Player* p) {
                 Interfaces::engine->GetPlayerInfo(p->index(), &info);
 
                 if (p->team() != Globals::localPlayer->team()) {
-                    if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Visuals>Enemies>ESP>Only When Dead")) || !CONFIGBOOL("Visuals>Enemies>ESP>Only When Dead")) {
+                    if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Visuals>Players>Enemies>Only When Dead")) || !CONFIGBOOL("Visuals>Players>Enemies>Only When Dead")) {
                         std::stringstream rightText;
-                        if (CONFIGBOOL("Visuals>Enemies>ESP>Health"))
+                        if (CONFIGBOOL("Visuals>Players>Enemies>Health"))
                             rightText << p->health() << "hp\n";
-                        if (CONFIGBOOL("Visuals>Enemies>ESP>Money"))
+                        if (CONFIGBOOL("Visuals>Players>Enemies>Money"))
                             rightText << "$" << p->money() << "\n";
                         
-                        drawBox(x, y, x2, y2, CONFIGBOOL("Visuals>Enemies>ESP>Box"), 
-                                    CONFIGCOL("Visuals>Enemies>ESP>Box Color"), CONFIGBOOL("Visuals>Enemies>ESP>Name") ? info.name : (char*)"", 
-                                    (char*)rightText.str().c_str(), CONFIGBOOL("Visuals>Enemies>ESP>Health Bar") ? p->health() : -1, CONFIGBOOL("Visuals>Enemies>ESP>Dynamic Color"), 
-                                    CONFIGCOL("Visuals>Enemies>ESP>Health Bar Color"));
+                        drawBox(x, y, x2, y2, CONFIGBOOL("Visuals>Players>Enemies>Box"), 
+                                    CONFIGCOL("Visuals>Players>Enemies>Box Color"), CONFIGBOOL("Visuals>Players>Enemies>Name") ? info.name : (char*)"", 
+                                    (char*)rightText.str().c_str(), CONFIGBOOL("Visuals>Players>Enemies>Health Bar") ? p->health() : -1, CONFIGBOOL("Visuals>Players>Enemies>Dynamic Color"), 
+                                    CONFIGCOL("Visuals>Players>Enemies>Health Bar Color"));
                     }
                 }
                 if (p->team() == Globals::localPlayer->team()) {
-                    if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Visuals>Teammates>ESP>Only When Dead")) || !CONFIGBOOL("Visuals>Teammates>ESP>Only When Dead")) {
+                    if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Visuals>Players>Teammates>Only When Dead")) || !CONFIGBOOL("Visuals>Players>Teammates>Only When Dead")) {
                         std::stringstream rightText;
-                        if (CONFIGBOOL("Visuals>Teammates>ESP>Health"))
+                        if (CONFIGBOOL("Visuals>Players>Teammates>Health"))
                             rightText << p->health() << "hp\n";
-                        if (CONFIGBOOL("Visuals>Teammates>ESP>Money"))
+                        if (CONFIGBOOL("Visuals>Players>Teammates>Money"))
                             rightText << "$" << p->money() << "\n";
                         
-                        drawBox(x, y, x2, y2, CONFIGBOOL("Visuals>Teammates>ESP>Box"), 
-                                    CONFIGCOL("Visuals>Teammates>ESP>Box Color"), CONFIGBOOL("Visuals>Teammates>ESP>Name") ? info.name : (char*)"", 
-                                    (char*)rightText.str().c_str(), CONFIGBOOL("Visuals>Teammates>ESP>Health Bar") ? p->health() : -1, CONFIGBOOL("Visuals>Teammates>ESP>Dynamic Color"), 
-                                    CONFIGCOL("Visuals>Teammates>ESP>Health Bar Color"));
+                        drawBox(x, y, x2, y2, CONFIGBOOL("Visuals>Players>Teammates>Box"), 
+                                    CONFIGCOL("Visuals>Players>Teammates>Box Color"), CONFIGBOOL("Visuals>Players>Teammates>Name") ? info.name : (char*)"", 
+                                    (char*)rightText.str().c_str(), CONFIGBOOL("Visuals>Players>Teammates>Health Bar") ? p->health() : -1, CONFIGBOOL("Visuals>Players>Teammates>Dynamic Color"), 
+                                    CONFIGCOL("Visuals>Players>Teammates>Health Bar Color"));
                     }
                 }
             }

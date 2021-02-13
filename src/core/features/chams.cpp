@@ -89,26 +89,26 @@ void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const M
         if (p->health() > 0) {
             if (p->team() != Globals::localPlayer->team()) {
                 /* Ignorez Enemy */
-                if (CONFIGINT("Visuals>Enemies>Chams>Occluded Material")) {
-                    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Enemies>Chams>Occluded Color"), CONFIGINT("Visuals>Enemies>Chams>Occluded Material"), true);
+                if (CONFIGINT("Visuals>Players>Enemies>Chams>Occluded Material")) {
+                    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Players>Enemies>Chams>Occluded Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Occluded Material"), true);
                 }
                 /* Visible Enemy */
-                cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Enemies>Chams>Visible Color"), CONFIGINT("Visuals>Enemies>Chams>Visible Material"), false);
+                cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Players>Enemies>Chams>Visible Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Visible Material"), false);
                 /* Visible Enemy Overlay */
-                if (CONFIGINT("Visuals>Enemies>Chams>Visible Overlay Material")) {
-                    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Enemies>Chams>Visible Overlay Color"), CONFIGINT("Visuals>Enemies>Chams>Visible Overlay Material"), false);
+                if (CONFIGINT("Visuals>Players>Enemies>Chams>Visible Overlay Material")) {
+                    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Players>Enemies>Chams>Visible Overlay Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Visible Overlay Material"), false);
                 }
             }
             else {
                 /* Ignorez Teammate */
-                if (CONFIGINT("Visuals>Teammates>Chams>Occluded Material")) {
-                    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Teammates>Chams>Occluded Color"), CONFIGINT("Visuals>Teammates>Chams>Occluded Material"), true);
+                if (CONFIGINT("Visuals>Players>Teammates>Chams>Occluded Material")) {
+                    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Players>Teammates>Chams>Occluded Color"), CONFIGINT("Visuals>Players>Teammates>Chams>Occluded Material"), true);
                 }
                 /* Visible Teammate */
-                cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Teammates>Chams>Visible Color"), CONFIGINT("Visuals>Teammates>Chams>Visible Material"), false);
+                cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Players>Teammates>Chams>Visible Color"), CONFIGINT("Visuals>Players>Teammates>Chams>Visible Material"), false);
                 /* Visible Teammate Overlay */
-                if (CONFIGINT("Visuals>Teammates>Chams>Visible Overlay Material")) {
-                    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Teammates>Chams>Visible Overlay Color"), CONFIGINT("Visuals>Teammates>Chams>Visible Overlay Material"), false);
+                if (CONFIGINT("Visuals>Players>Teammates>Chams>Visible Overlay Material")) {
+                    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Players>Teammates>Chams>Visible Overlay Color"), CONFIGINT("Visuals>Players>Teammates>Chams>Visible Overlay Material"), false);
                 }
             }
         }
@@ -119,18 +119,18 @@ void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const M
 }
 
 void chamArms(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld) {
-    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>World>Local Player>Arms Color"), CONFIGINT("Visuals>World>Local Player>Arms Material"), false);
+    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Players>LocalPlayer>Arms Color"), CONFIGINT("Visuals>Players>LocalPlayer>Arms Material"), false);
     /* Arms Overlay */
-    if (CONFIGINT("Visuals>World>Local Player>Arms Overlay Material")) {
-        cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>World>Local Player>Arms Overlay Color"), CONFIGINT("Visuals>World>Local Player>Arms Overlay Material"), false);
+    if (CONFIGINT("Visuals>Players>LocalPlayer>Arms Overlay Material")) {
+        cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Players>LocalPlayer>Arms Overlay Color"), CONFIGINT("Visuals>Players>LocalPlayer>Arms Overlay Material"), false);
     }
 }
 
 void chamWeapon(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld) {
-    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>World>Local Player>Weapon Color"), CONFIGINT("Visuals>World>Local Player>Weapon Material"), false);
+    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Players>LocalPlayer>Weapon Color"), CONFIGINT("Visuals>Players>LocalPlayer>Weapon Material"), false);
     /* Weapon Overlay */
-    if (CONFIGINT("Visuals>World>Local Player>Weapon Overlay Material")) {
-        cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>World>Local Player>Weapon Overlay Color"), CONFIGINT("Visuals>World>Local Player>Weapon Overlay Material"), false);
+    if (CONFIGINT("Visuals>Players>LocalPlayer>Weapon Overlay Material")) {
+        cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Players>LocalPlayer>Weapon Overlay Color"), CONFIGINT("Visuals>Players>LocalPlayer>Weapon Overlay Material"), false);
     }
 }
 

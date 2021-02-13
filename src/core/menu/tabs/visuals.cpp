@@ -2,150 +2,158 @@
 
 const char* chamsMaterials[] = {"None", "Shaded", "Flat", "Screen Pulse", "Energy Ball", "Glow", "Plastic", "Darude", "Oil"};
 
+void drawChamsWidget(const char* label, 
+                    int* material, ImColor* color, 
+                    int* overlayMaterial, ImColor* overlayColor,
+                    bool occluded, int* occludedMaterial, ImColor* occludedColor) {
+    char btnLabel[64];
+    snprintf(btnLabel, sizeof(btnLabel), "Chams##%s", label);
+    if (ImGui::Button(btnLabel)) {
+        ImGui::OpenPopup(btnLabel);
+    }
+    if (ImGui::BeginPopup(btnLabel)) {
+        ImGui::Text("%s Chams", label);
+        ImGui::Separator();
+        ImGui::Text("%s Chams", label);
+        ImGui::Combo("##Chams Material", material, chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
+        ImGui::SameLine();
+        ImGui::ColorEdit4("##Chams Color", (float*)color, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+
+        ImGui::Text("%s Chams Overlay", label);
+        ImGui::Combo("##Chams Overlay Material", overlayMaterial, chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
+        ImGui::SameLine();
+        ImGui::ColorEdit4("Chams Overlay Color", (float*)overlayColor, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+
+        if (occluded) {
+            ImGui::Separator();
+
+            ImGui::Text("%s Occluded Chams", label);
+            ImGui::Combo("##Occluded Chams Material", occludedMaterial, chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
+            ImGui::SameLine();
+            ImGui::ColorEdit4("Occluded Chams Color", (float*)occludedColor, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+        }
+        ImGui::EndPopup();
+    }
+}
+
 void Menu::drawVisualsTab() {
     ImGui::Text("Visuals");
-    if (ImGui::BeginTabBar("##visTabs", ImGuiTabBarFlags_None)) {
-        if (ImGui::BeginTabItem("Enemies")) {
-            ImGui::BeginChild("ESP", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
-                ImGui::Text("ESP");
+    if (ImGui::BeginTabBar("##visTabs")) {
+        if (ImGui::BeginTabItem("Players")) {
+            ImGui::BeginChild("Teammates", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.325f, ImGui::GetWindowHeight() * 0.85f), true); {
+                ImGui::Text("Teammates");
                 ImGui::Separator();
-                if (CONFIGBOOL("Visuals>Enemies>ESP>Box")) {
-                    ImGui::ColorEdit4("Box Color", (float*)&CONFIGCOL("Visuals>Enemies>ESP>Box Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                    ImGui::SameLine();
-                }
-                ImGui::Checkbox("Box", &CONFIGBOOL("Visuals>Enemies>ESP>Box"));
-                ImGui::Checkbox("Name", &CONFIGBOOL("Visuals>Enemies>ESP>Name"));
-                ImGui::Checkbox("Health", &CONFIGBOOL("Visuals>Enemies>ESP>Health"));
-                if(CONFIGBOOL("Visuals>Enemies>ESP>Health Bar")) {
-                    ImGui::ColorEdit4("Health Bar Color", (float*)&CONFIGCOL("Visuals>Enemies>ESP>Health Bar Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                    ImGui::SameLine();
-                }
-                ImGui::Checkbox("Health Bar", &CONFIGBOOL("Visuals>Enemies>ESP>Health Bar"));
-                if(CONFIGBOOL("Visuals>Enemies>ESP>Health Bar")) {
-                    ImGui::SameLine();
-                    ImGui::Checkbox("Dynamic Color", &CONFIGBOOL("Visuals>Enemies>ESP>Dynamic Color"));
-                }
-                ImGui::Checkbox("Money", &CONFIGBOOL("Visuals>Enemies>ESP>Money"));
-                ImGui::Checkbox("Radar", &CONFIGBOOL("Visuals>Enemies>ESP>Radar"));
-                ImGui::Checkbox("Only When Dead", &CONFIGBOOL("Visuals>Enemies>ESP>Only When Dead"));
-                ImGui::EndChild();
-            }
-            ImGui::BeginChild("Chams", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
-                ImGui::Text("Chams");
-                ImGui::Separator();
-                ImGui::Text("Visible");
-                ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.4f);
-                ImGui::Combo("##Visible Material", &CONFIGINT("Visuals>Enemies>Chams>Visible Material"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
-                ImGui::SameLine();
-                ImGui::ColorEdit4("Visible Color", (float*)&CONFIGCOL("Visuals>Enemies>Chams>Visible Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                ImGui::SameLine();
-                ImGui::Combo("##Visible Overlay Material", &CONFIGINT("Visuals>Enemies>Chams>Visible Overlay Material"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
-                ImGui::SameLine();
-                ImGui::ColorEdit4("Visible Overlay Color", (float*)&CONFIGCOL("Visuals>Enemies>Chams>Visible Overlay Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                
-                ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.9f);
-                ImGui::Text("Occluded");
-                ImGui::Combo("##Occluded Material", &CONFIGINT("Visuals>Enemies>Chams>Occluded Material"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
-                ImGui::SameLine();
-                ImGui::ColorEdit4("Occluded Color", (float*)&CONFIGCOL("Visuals>Enemies>Chams>Occluded Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                ImGui::EndChild();
-                ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.65f);
-            }
-            ImGui::EndTabItem();
-        }
 
-        if (ImGui::BeginTabItem("Teammates")) {
-            ImGui::BeginChild("ESP", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
-                ImGui::Text("ESP");
-                ImGui::Separator();
-                if (CONFIGBOOL("Visuals>Teammates>ESP>Box")) {
-                    ImGui::ColorEdit4("Box Color", (float*)&CONFIGCOL("Visuals>Teammates>ESP>Box Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                if (CONFIGBOOL("Visuals>Players>Teammates>Box")) {
+                    ImGui::ColorEdit4("Box Color", (float*)&CONFIGCOL("Visuals>Players>Teammates>Box Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                     ImGui::SameLine();
                 }
-                ImGui::Checkbox("Box", &CONFIGBOOL("Visuals>Teammates>ESP>Box"));
+                ImGui::Checkbox("Box", &CONFIGBOOL("Visuals>Players>Teammates>Box"));
 
-                ImGui::Checkbox("Name", &CONFIGBOOL("Visuals>Teammates>ESP>Name"));
-                ImGui::Checkbox("Health", &CONFIGBOOL("Visuals>Teammates>ESP>Health"));
-                if(CONFIGBOOL("Visuals>Teammates>ESP>Health Bar")) {
-                    ImGui::ColorEdit4("Health Bar Color", (float*)&CONFIGCOL("Visuals>Teammates>ESP>Health Bar Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::Checkbox("Name", &CONFIGBOOL("Visuals>Players>Teammates>Name"));
+                ImGui::Checkbox("Health", &CONFIGBOOL("Visuals>Players>Teammates>Health"));
+                if(CONFIGBOOL("Visuals>Players>Teammates>Health Bar")) {
+                    ImGui::ColorEdit4("Health Bar Color", (float*)&CONFIGCOL("Visuals>Players>Teammates>Health Bar Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                     ImGui::SameLine();
                 }
-                ImGui::Checkbox("Health Bar", &CONFIGBOOL("Visuals>Teammates>ESP>Health Bar"));
-                if(CONFIGBOOL("Visuals>Teammates>ESP>Health Bar")) {
+                ImGui::Checkbox("Health Bar", &CONFIGBOOL("Visuals>Players>Teammates>Health Bar"));
+                if(CONFIGBOOL("Visuals>Players>Teammates>Health Bar")) {
                     ImGui::SameLine();
-                    ImGui::Checkbox("Dynamic Color", &CONFIGBOOL("Visuals>Teammates>ESP>Dynamic Color"));
+                    ImGui::Checkbox("Dynamic Color", &CONFIGBOOL("Visuals>Players>Teammates>Dynamic Color"));
                 }
-                ImGui::Checkbox("Money", &CONFIGBOOL("Visuals>Teammates>ESP>Money"));
-                ImGui::Checkbox("Only When Dead", &CONFIGBOOL("Visuals>Teammates>ESP>Only When Dead"));
-                ImGui::EndChild();
-            }
-            ImGui::BeginChild("Chams", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
-                ImGui::Text("Chams");
-                ImGui::Separator();
-                ImGui::Text("Visible");
-                ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.4f);
-                ImGui::Combo("##Visible Material", &CONFIGINT("Visuals>Teammates>Chams>Visible Material"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
-                ImGui::SameLine();
-                ImGui::ColorEdit4("Visible Color", (float*)&CONFIGCOL("Visuals>Teammates>Chams>Visible Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                ImGui::SameLine();
-                ImGui::Combo("##Visible Overlay Material", &CONFIGINT("Visuals>Teammates>Chams>Visible Overlay Material"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
-                ImGui::SameLine();
-                ImGui::ColorEdit4("Visible Overlay Color", (float*)&CONFIGCOL("Visuals>Teammates>Chams>Visible Overlay Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                
-                ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.9f);
-                ImGui::Text("Occluded");
-                ImGui::Combo("##Occluded Material", &CONFIGINT("Visuals>Teammates>Chams>Occluded Material"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
-                ImGui::SameLine();
-                ImGui::ColorEdit4("Occluded Color", (float*)&CONFIGCOL("Visuals>Teammates>Chams>Occluded Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                ImGui::EndChild();
-                ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.65f);
-            }
-            ImGui::EndTabItem();
-        }
+                ImGui::Checkbox("Money", &CONFIGBOOL("Visuals>Players>Teammates>Money"));
+                ImGui::Checkbox("Only When Dead", &CONFIGBOOL("Visuals>Players>Teammates>Only When Dead"));
 
-        if (ImGui::BeginTabItem("World")) {
-            ImGui::BeginChild("Local Player", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
-                ImGui::Text("Local Player");
-                ImGui::Separator();
-                ImGui::Text("Arm Chams");
-                ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.4f);
-                ImGui::Combo("##Arms Material", &CONFIGINT("Visuals>World>Local Player>Arms Material"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
-                ImGui::SameLine();
-                ImGui::ColorEdit4("Arms Color", (float*)&CONFIGCOL("Visuals>World>Local Player>Arms Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                ImGui::SameLine();
-                ImGui::Combo("##Arms Overlay Material", &CONFIGINT("Visuals>World>Local Player>Arms Overlay Material"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
-                ImGui::SameLine();
-                ImGui::ColorEdit4("Arms Overlay Color", (float*)&CONFIGCOL("Visuals>World>Local Player>Arms Overlay Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                drawChamsWidget("Teammates", 
+                    &CONFIGINT("Visuals>Players>Teammates>Chams>Visible Material"), &CONFIGCOL("Visuals>Players>Teammates>Chams>Visible Color"), 
+                    &CONFIGINT("Visuals>Players>Teammates>Chams>Visible Overlay Material"), &CONFIGCOL("Visuals>Players>Teammates>Chams>Visible Overlay Color"), 
+                    true, &CONFIGINT("Visuals>Players>Teammates>Chams>Occluded Material"), &CONFIGCOL("Visuals>Players>Teammates>Chams>Occluded Color"));
 
-                ImGui::Text("Weapon Chams");
-                ImGui::Combo("##Weapon Material", &CONFIGINT("Visuals>World>Local Player>Weapon Material"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
-                ImGui::SameLine();
-                ImGui::ColorEdit4("Weapon Color", (float*)&CONFIGCOL("Visuals>World>Local Player>Weapon Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                ImGui::SameLine();
-                ImGui::Combo("##Weapon Overlay Material", &CONFIGINT("Visuals>World>Local Player>Weapon Overlay Material"), chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
-                ImGui::SameLine();
-                ImGui::ColorEdit4("Weapon Overlay Color", (float*)&CONFIGCOL("Visuals>World>Local Player>Weapon Overlay Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                ImGui::PushItemWidth(ImGui::GetWindowContentRegionWidth() * 0.65f);
-
-                ImGui::ColorEdit4("Crosshair Color", (float*)&CONFIGCOL("Visuals>World>Local Player>Crosshair Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                ImGui::SameLine();
-                ImGui::ColorEdit4("Crosshair Border Color", (float*)&CONFIGCOL("Visuals>World>Local Player>Crosshair Border Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-                ImGui::SameLine();
-                ImGui::Checkbox("Spread Crosshair", &CONFIGBOOL("Visuals>World>Local Player>Spread Crosshair"));
-                ImGui::SameLine();
-                ImGui::Checkbox("Recoil Crosshair", &CONFIGBOOL("Visuals>World>Local Player>Recoil Crosshair"));
-                //make sure they can't both be on at the same time
-                if (CONFIGBOOL("Visuals>World>Local Player>Recoil Crosshair") && !CONFIGBOOL("Visuals>World>Local Player>Spread Crosshair")) {
-                    ImGui::SameLine();
-                    ImGui::Checkbox("Only When Shooting", &CONFIGBOOL("Visuals>World>Local Player>Recoil Crosshair>Only When Shooting"));
-                }
-                if (CONFIGBOOL("Visuals>World>Local Player>Spread Crosshair") || CONFIGBOOL("Visuals>World>Local Player>Recoil Crosshair")) {
-                    ImGui::SameLine();
-                }
                 ImGui::EndChild();
             }
             ImGui::SameLine();
-            ImGui::BeginChild("Items", ImVec2(0, 253), true); {
+            ImGui::BeginChild("Enemies", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.325f, ImGui::GetWindowHeight() * 0.85f), true); {
+                ImGui::Text("Enemies");
+                ImGui::Separator();
+
+                if (CONFIGBOOL("Visuals>Players>Enemies>Box")) {
+                    ImGui::ColorEdit4("Box Color", (float*)&CONFIGCOL("Visuals>Players>Enemies>Box Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                    ImGui::SameLine();
+                }
+                ImGui::Checkbox("Box", &CONFIGBOOL("Visuals>Players>Enemies>Box"));
+                ImGui::Checkbox("Name", &CONFIGBOOL("Visuals>Players>Enemies>Name"));
+                ImGui::Checkbox("Health", &CONFIGBOOL("Visuals>Players>Enemies>Health"));
+                if(CONFIGBOOL("Visuals>Players>Enemies>Health Bar")) {
+                    ImGui::ColorEdit4("Health Bar Color", (float*)&CONFIGCOL("Visuals>Players>Enemies>Health Bar Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                    ImGui::SameLine();
+                }
+                ImGui::Checkbox("Health Bar", &CONFIGBOOL("Visuals>Players>Enemies>Health Bar"));
+                if(CONFIGBOOL("Visuals>Players>Enemies>Health Bar")) {
+                    ImGui::SameLine();
+                    ImGui::Checkbox("Dynamic Color", &CONFIGBOOL("Visuals>Players>Enemies>Dynamic Color"));
+                }
+                ImGui::Checkbox("Money", &CONFIGBOOL("Visuals>Players>Enemies>Money"));
+                ImGui::Checkbox("Radar", &CONFIGBOOL("Visuals>Players>Enemies>Radar"));
+                ImGui::Checkbox("Only When Dead", &CONFIGBOOL("Visuals>Players>Enemies>Only When Dead"));
+
+                drawChamsWidget("Enemies", 
+                    &CONFIGINT("Visuals>Players>Enemies>Chams>Visible Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Visible Color"), 
+                    &CONFIGINT("Visuals>Players>Enemies>Chams>Visible Overlay Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Visible Overlay Color"), 
+                    true, &CONFIGINT("Visuals>Players>Enemies>Chams>Occluded Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Occluded Color"));
+
+                ImGui::EndChild();
+            }
+            ImGui::SameLine();
+            ImGui::BeginChild("LocalPlayer", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.325f, ImGui::GetWindowHeight() * 0.85f), true); {
+                ImGui::Text("LocalPlayer");
+                ImGui::Separator();
+
+                ImGui::Text("Arms");
+                drawChamsWidget("Arm",
+                    &CONFIGINT("Visuals>Players>LocalPlayer>Arms Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Arms Color"), 
+                    &CONFIGINT("Visuals>Players>LocalPlayer>Arms Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Arms Overlay Color"), 
+                    false, nullptr, nullptr);
+                ImGui::Separator();
+                ImGui::Text("Weapons");
+                drawChamsWidget("Weapon",
+                    &CONFIGINT("Visuals>Players>LocalPlayer>Weapon Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Weapon Color"), 
+                    &CONFIGINT("Visuals>Players>LocalPlayer>Weapon Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Weapon Overlay Color"), 
+                    false, nullptr, nullptr);
+
+                ImGui::Separator();
+                ImGui::ColorEdit4("Crosshair Color", (float*)&CONFIGCOL("Visuals>Players>LocalPlayer>Crosshair Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::SameLine();
+                ImGui::ColorEdit4("Crosshair Border Color", (float*)&CONFIGCOL("Visuals>Players>LocalPlayer>Crosshair Border Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                ImGui::SameLine();
+                ImGui::Checkbox("Spread Crosshair", &CONFIGBOOL("Visuals>Players>LocalPlayer>Spread Crosshair"));
+                ImGui::Checkbox("Recoil Crosshair", &CONFIGBOOL("Visuals>Players>LocalPlayer>Recoil Crosshair"));
+                // Make sure they can't both be on at the same time
+                if (CONFIGBOOL("Visuals>Players>LocalPlayer>Recoil Crosshair") && !CONFIGBOOL("Visuals>Players>LocalPlayer>Spread Crosshair")) {
+                    ImGui::Checkbox("Only When Shooting", &CONFIGBOOL("Visuals>Players>LocalPlayer>Recoil Crosshair>Only When Shooting"));
+                }
+                ImGui::EndChild();
+            }
+            ImGui::EndTabItem();
+        }
+        if (ImGui::BeginTabItem("World")) {
+            ImGui::BeginChild("World", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, ImGui::GetWindowHeight() * 0.85f), true); {
+                ImGui::Text("World");
+                ImGui::Separator();
+                if (
+                  ImGui::ColorEdit4("World Color Modulation", (float*)&CONFIGCOL("Visuals>World>World>World Color Modulation"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_PickerHueWheel) || 
+                  ImGui::Button("Update Color Modulation")) {
+                    Features::WorldColorModulate::updateColorModulation();
+                }
+
+                ImGui::Text("NightMode");
+                ImGui::SliderInt("##NightMode", &CONFIGINT("Visuals>World>World>Nightmode"), 0, 100);
+                ImGui::Text("Skybox");
+                ImGui::Combo("##Skybox", &CONFIGINT("Visuals>World>World>Skybox"), skyboxes, IM_ARRAYSIZE(skyboxes));
+
+                ImGui::EndChild();
+            }
+            ImGui::SameLine();
+            ImGui::BeginChild("Items", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.34f, ImGui::GetWindowHeight() * 0.85f), true); {
                 ImGui::Text("Items");
                 ImGui::Separator();
                 if (CONFIGBOOL("Visuals>World>Items>Weapon Box")) {
@@ -180,23 +188,8 @@ void Menu::drawVisualsTab() {
                 ImGui::Checkbox("ESP Quite literally everything", &CONFIGBOOL("Visuals>World>Items>ESP Quite literally everything"));
                 ImGui::EndChild();
             }
-            ImGui::BeginChild("World", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
-                ImGui::Text("World");
-                ImGui::Separator();
-                if (
-                  ImGui::ColorEdit4("World Color Modulation", (float*)&CONFIGCOL("Visuals>World>World>World Color Modulation"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_PickerHueWheel) || 
-                  ImGui::Button("Update Color Modulation")) {
-                    Features::WorldColorModulate::updateColorModulation();
-                }
-                ImGui::SliderInt("NightMode", &CONFIGINT("Visuals>World>World>Nightmode"), 0, 100);
-                ImGui::Text("Skybox");
-                ImGui::Combo("##Skybox", &CONFIGINT("Visuals>World>World>Skybox"), skyboxes, IM_ARRAYSIZE(skyboxes));
-
-                ImGui::EndChild();
-            }
             ImGui::EndTabItem();
         }
-
         ImGui::EndTabBar();
     }
 }
