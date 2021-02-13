@@ -2,7 +2,7 @@
 #include "../../includes.hpp"
 
 void Features::Spectators::draw() {
-    if (CONFIGBOOL("Misc>Misc>Spectators")) {
+    if (CONFIGBOOL("Misc>Misc>Misc>Spectators")) {
         ImGui::Begin("Spectator List", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse | (Menu::open ? 0 : ImGuiWindowFlags_NoMouseInputs));
         ImGui::Text("Spectators");
         ImGui::Separator();

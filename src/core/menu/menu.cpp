@@ -1,4 +1,5 @@
 #include "menu.hpp"
+#include "imgui/imgui.h"
 
 void style() {
     ImVec4* colors = ImGui::GetStyle().Colors;
@@ -138,18 +139,27 @@ void Menu::drawMenu() {
 
     auto bWidth = ImVec2(80, 18);
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(2, 5));
+
+    ImGui::GetStyle().Colors[ImGuiCol_Button] = (Menu::tabSelected == 0) ? ImVec4(0.05f, 0.41f, 0.06f, 0.62f) : ImVec4(0.03f, 0.23f, 0.04f, 0.62f);
     if (ImGui::Button("Legit", bWidth)) {
         Menu::tabSelected = 0;
     } ImGui::SameLine(); 
+
+    ImGui::GetStyle().Colors[ImGuiCol_Button] = (Menu::tabSelected == 1) ? ImVec4(0.05f, 0.41f, 0.06f, 0.62f) : ImVec4(0.03f, 0.23f, 0.04f, 0.62f);
     if (ImGui::Button("Rage", bWidth)) {
         Menu::tabSelected = 1;
     } ImGui::SameLine(); 
+
+    ImGui::GetStyle().Colors[ImGuiCol_Button] = (Menu::tabSelected == 2) ? ImVec4(0.05f, 0.41f, 0.06f, 0.62f) : ImVec4(0.03f, 0.23f, 0.04f, 0.62f);
     if (ImGui::Button("Visuals", bWidth)) {
         Menu::tabSelected = 2;
     } ImGui::SameLine(); 
+
+    ImGui::GetStyle().Colors[ImGuiCol_Button] = (Menu::tabSelected == 3) ? ImVec4(0.05f, 0.41f, 0.06f, 0.62f) : ImVec4(0.03f, 0.23f, 0.04f, 0.62f);
     if (ImGui::Button("Misc", bWidth)) {
         Menu::tabSelected = 3;
     }
+    ImGui::GetStyle().Colors[ImGuiCol_Button] = ImVec4(0.05f, 0.41f, 0.06f, 0.62f);
     ImGui::PopStyleVar();
 
     ImGui::Separator();
@@ -166,9 +176,7 @@ void Menu::drawMenu() {
             Menu::drawVisualsTab(); break;
         }
         case 3: {
-            ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(800, 4));
-            Menu::drawMiscTab();
-            break;
+            Menu::drawMiscTab();break;
         }
     }
 

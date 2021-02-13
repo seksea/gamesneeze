@@ -22,15 +22,15 @@ void updateClantag() {
 }
 
 void Features::ClantagChanger::frameStageNotify(FrameStage frame) {
-    if (CONFIGBOOL("Misc>Misc>Clantag")) {
+    if (CONFIGBOOL("Misc>Misc>Clantag>Clantag")) {
         if (frame == FRAME_NET_UPDATE_POSTDATAUPDATE_END) {
-            if (CONFIGBOOL("Misc>Misc>Clantag Marquee")) {
+            if (CONFIGBOOL("Misc>Misc>Clantag>Clantag Marquee")) {
                 if(Interfaces::globals->tickcount % 32 == 0) {
                     shiftMarquee((Menu::clantag), strlen(Menu::clantag));
                     updateClantag();
                 }
             }
-            else if (CONFIGBOOL("Misc>Misc>Bee Movie Clantag")) {
+            else if (CONFIGBOOL("Misc>Misc>Clantag>Bee Movie Clantag")) {
                 if(Interfaces::globals->tickcount % 16 == 0) {
                     memcpy(Menu::clantag, &beeMovieScript[(Interfaces::globals->tickcount % 55000)/16], 127); // mod it by 55k just as a crude way of looping when it gets to the end, doubt anyone will have it on for 300 mins anyways lmao
                     Menu::clantag[127] = '\0';

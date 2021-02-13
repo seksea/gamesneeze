@@ -1,7 +1,6 @@
 #include "../menu.hpp"
 
 void Menu::drawLegitTab() {
-    ImGui::Text("Legit");
     ImGui::BeginChild("Aim", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
         ImGui::Text("Aim");
         ImGui::Separator();

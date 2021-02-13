@@ -129,19 +129,19 @@ namespace Config {
             // }
         // }
         // Misc {
-            CONFIGITEM("Misc>Movement>Auto Hop", false),
+            CONFIGITEM("Misc>Misc>Movement>Auto Hop", false),
 
-            CONFIGITEM("Misc>Misc>Force square radar", false),
-            CONFIGITEM("Misc>Misc>Rank Revealer", false),
-            CONFIGITEM("Misc>Misc>Clantag", false),
-            CONFIGITEM("Misc>Misc>Clantag Marquee", false),
-            CONFIGITEM("Misc>Misc>Bee Movie Clantag", false),
-            CONFIGITEM("Misc>Misc>Spectators", false),
-            CONFIGITEM("Misc>Misc>Player List", false),
-            CONFIGITEM("Misc>Misc>Auto Accept", false),
-            CONFIGITEM("Misc>Misc>Auto Defuse", false),
-            CONFIGITEM("Misc>Misc>Latest Defuse", false),
-            CONFIGITEM("Misc>Misc>Fast Duck", false),
+            CONFIGITEM("Misc>Misc>Misc>Force square radar", false),
+            CONFIGITEM("Misc>Misc>Misc>Rank Revealer", false),
+            CONFIGITEM("Misc>Misc>Clantag>Clantag", false),
+            CONFIGITEM("Misc>Misc>Clantag>Clantag Marquee", false),
+            CONFIGITEM("Misc>Misc>Clantag>Bee Movie Clantag", false),
+            CONFIGITEM("Misc>Misc>Misc>Spectators", false),
+            CONFIGITEM("Misc>Misc>Misc>Player List", false),
+            CONFIGITEM("Misc>Misc>Misc>Auto Accept", false),
+            CONFIGITEM("Misc>Misc>Misc>Auto Defuse", false),
+            CONFIGITEM("Misc>Misc>Misc>Latest Defuse", false),
+            CONFIGITEM("Misc>Misc>Movement>Fast Duck", false),
 
         // }
     };

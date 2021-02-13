@@ -2,7 +2,7 @@
 #include "../../includes.hpp"
 
 void Features::PlayerList::draw() {
-    if (CONFIGBOOL("Misc>Misc>Player List")) {
+    if (CONFIGBOOL("Misc>Misc>Misc>Player List")) {
         ImGui::Begin("Player List", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | (Menu::open ? 0 : ImGuiWindowFlags_NoMouseInputs));
         ImGui::Text("Players");
         ImGui::Separator();

@@ -37,10 +37,9 @@ void drawChamsWidget(const char* label,
 }
 
 void Menu::drawVisualsTab() {
-    ImGui::Text("Visuals");
     if (ImGui::BeginTabBar("##visTabs")) {
         if (ImGui::BeginTabItem("Players")) {
-            ImGui::BeginChild("Teammates", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.325f, ImGui::GetWindowHeight() * 0.85f), true); {
+            ImGui::BeginChild("Teammates", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.325f, ImGui::GetWindowHeight() * 0.875f), true); {
                 ImGui::Text("Teammates");
                 ImGui::Separator();
 
@@ -72,7 +71,7 @@ void Menu::drawVisualsTab() {
                 ImGui::EndChild();
             }
             ImGui::SameLine();
-            ImGui::BeginChild("Enemies", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.325f, ImGui::GetWindowHeight() * 0.85f), true); {
+            ImGui::BeginChild("Enemies", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.325f, ImGui::GetWindowHeight() * 0.875f), true); {
                 ImGui::Text("Enemies");
                 ImGui::Separator();
 
@@ -104,7 +103,7 @@ void Menu::drawVisualsTab() {
                 ImGui::EndChild();
             }
             ImGui::SameLine();
-            ImGui::BeginChild("LocalPlayer", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.325f, ImGui::GetWindowHeight() * 0.85f), true); {
+            ImGui::BeginChild("LocalPlayer", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.325f, ImGui::GetWindowHeight() * 0.875f), true); {
                 ImGui::Text("LocalPlayer");
                 ImGui::Separator();
 
@@ -136,7 +135,7 @@ void Menu::drawVisualsTab() {
             ImGui::EndTabItem();
         }
         if (ImGui::BeginTabItem("World")) {
-            ImGui::BeginChild("World", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, ImGui::GetWindowHeight() * 0.85f), true); {
+            ImGui::BeginChild("World", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, ImGui::GetWindowHeight() * 0.875f), true); {
                 ImGui::Text("World");
                 ImGui::Separator();
                 if (
@@ -146,14 +145,16 @@ void Menu::drawVisualsTab() {
                 }
 
                 ImGui::Text("NightMode");
+                ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##NightMode", &CONFIGINT("Visuals>World>World>Nightmode"), 0, 100);
                 ImGui::Text("Skybox");
+                ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::Combo("##Skybox", &CONFIGINT("Visuals>World>World>Skybox"), skyboxes, IM_ARRAYSIZE(skyboxes));
 
                 ImGui::EndChild();
             }
             ImGui::SameLine();
-            ImGui::BeginChild("Items", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.34f, ImGui::GetWindowHeight() * 0.85f), true); {
+            ImGui::BeginChild("Items", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.34f, ImGui::GetWindowHeight() * 0.875f), true); {
                 ImGui::Text("Items");
                 ImGui::Separator();
                 if (CONFIGBOOL("Visuals>World>Items>Weapon Box")) {
