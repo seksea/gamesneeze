@@ -3,7 +3,8 @@
 
 inline const char* skyboxes[] = {
         "None",
-        "cs_baggage_skybox_", 
+		"Black", // sky_l4d_rural02_ldr
+		"cs_baggage_skybox_", 
 		"cs_tibet",
 		"embassy",
 		"italy",
