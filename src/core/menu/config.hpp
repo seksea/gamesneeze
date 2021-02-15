@@ -131,6 +131,7 @@ namespace Config {
         // Misc {
             CONFIGITEM("Misc>Misc>Movement>Auto Hop", false),
 
+            CONFIGITEM("Misc>Misc>Misc>Disable Watermark", false),
             CONFIGITEM("Misc>Misc>Misc>Force square radar", false),
             CONFIGITEM("Misc>Misc>Misc>Rank Revealer", false),
             CONFIGITEM("Misc>Misc>Clantag>Clantag", false),
