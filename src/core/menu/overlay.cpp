@@ -3,8 +3,8 @@
 float framerate;
 void Menu::drawOverlay(ImDrawList* drawList) {
     Globals::drawList = drawList;
-    char watermarkText[64];
     if(!CONFIGBOOL("Misc>Misc>Misc>Disable Watermark")) {
+        char watermarkText[64];
         sprintf(watermarkText, "gamesneeze-linux fps: %.1f", ImGui::GetIO().Framerate);
         // Hacky way to do black shadow but it works
         Globals::drawList->AddText(ImVec2(4, 4), ImColor(0, 0, 0, 255), watermarkText);
