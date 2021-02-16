@@ -19,6 +19,7 @@ namespace Features {
         void createMove(CUserCmd* cmd);
     }
     namespace RecoilCrosshair {
+        void frameStageNotify(FrameStage frame);
         void draw();
     }
     namespace WorldColorModulate {
