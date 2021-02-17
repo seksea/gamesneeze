@@ -92,7 +92,7 @@ namespace Config {
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Occluded Color", ImColor(197, 66, 245, 255)),
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Backtrack Material", 0),
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Backtrack Color", ImColor(197, 66, 245, 255)),
-                CONFIGITEM("Visuals>Players>Enemies>Chams>Backtrack Trail", false),
+                CONFIGITEM("Visuals>Players>Enemies>Chams>Trail", false),
                 
                 CONFIGITEM("Visuals>Players>Teammates>Chams>Visible Material", 0),
                 CONFIGITEM("Visuals>Players>Teammates>Chams>Visible Color", ImColor(197, 66, 245, 255)),

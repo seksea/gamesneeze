@@ -36,7 +36,7 @@ void Features::Backtrack::createMove(CUserCmd* cmd) {
                     viewAngles += Globals::localPlayer->aimPunch() * 2;
 
                     float closestDelta = FLT_MAX;
-                    int closestTick = 0;
+                    int closestTick = cmd->tick_count;
 
                     if (cmd->buttons & (1 << 0)) {
                         for (BackTrackTick tick : backtrackTicks) {

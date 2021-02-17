@@ -40,7 +40,7 @@ void drawChamsWidget(const char* label,
             ImGui::Combo("##Backtrack Chams Material", backtrackMaterial, chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
             ImGui::SameLine();
             ImGui::ColorEdit4("Backtrack Chams Color", (float*)backtrackColor, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
-            ImGui::Checkbox("Backtrack Trail", backtrackTrail);
+            ImGui::Checkbox("Trail", backtrackTrail);
         }
         ImGui::EndPopup();
     }
@@ -122,7 +122,7 @@ void Menu::drawVisualsTab() {
                     &CONFIGINT("Visuals>Players>Enemies>Chams>Visible Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Visible Color"), 
                     &CONFIGINT("Visuals>Players>Enemies>Chams>Visible Overlay Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Visible Overlay Color"), 
                     true, &CONFIGINT("Visuals>Players>Enemies>Chams>Occluded Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Occluded Color"), 
-                    true, &CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), &CONFIGBOOL("Visuals>Players>Enemies>Chams>Backtrack Trail"));
+                    true, &CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), &CONFIGBOOL("Visuals>Players>Enemies>Chams>Trail"));
 
                 ImGui::EndChild();
             }
