@@ -56,7 +56,8 @@ namespace Config {
             // ESP {
                 CONFIGITEM("Visuals>Players>Enemies>Box", false),
                 CONFIGITEM("Visuals>Players>Enemies>Box Color", ImColor(197, 66, 245, 255)),
-                CONFIGITEM("Visuals>Players>Enemies>Only When Dead", false),
+                CONFIGITEM("Visuals>Players>Enemies>Skeleton", false),
+                CONFIGITEM("Visuals>Players>Enemies>Skeleton Color", ImColor(255, 255, 255, 255)),
                 CONFIGITEM("Visuals>Players>Enemies>Name", false),
                 CONFIGITEM("Visuals>Players>Enemies>Health", false),
                 CONFIGITEM("Visuals>Players>Enemies>Health Bar Color", ImColor(0, 240, 0, 255)),
@@ -64,15 +65,19 @@ namespace Config {
                 CONFIGITEM("Visuals>Players>Enemies>Dynamic Color", false),
                 CONFIGITEM("Visuals>Players>Enemies>Money", false),
                 CONFIGITEM("Visuals>Players>Enemies>Radar", false),
+                CONFIGITEM("Visuals>Players>Enemies>Only When Dead", false),
+                
                 CONFIGITEM("Visuals>Players>Teammates>Box", false),
                 CONFIGITEM("Visuals>Players>Teammates>Box Color", ImColor(10, 161, 32, 255)),
-                CONFIGITEM("Visuals>Players>Teammates>Only When Dead", false),
+                CONFIGITEM("Visuals>Players>Teammates>Skeleton", false),
+                CONFIGITEM("Visuals>Players>Teammates>Skeleton Color", ImColor(255, 255, 255, 255)),
                 CONFIGITEM("Visuals>Players>Teammates>Name", false),
                 CONFIGITEM("Visuals>Players>Teammates>Health", false),
                 CONFIGITEM("Visuals>Players>Teammates>Health Bar Color", ImColor(0, 240, 0, 255)),
                 CONFIGITEM("Visuals>Players>Teammates>Health Bar", false),
                 CONFIGITEM("Visuals>Players>Teammates>Dynamic Color", false),
                 CONFIGITEM("Visuals>Players>Teammates>Money", false),
+                CONFIGITEM("Visuals>Players>Teammates>Only When Dead", false),
             // }
             // Chams {
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Visible Material", 0),

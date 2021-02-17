@@ -102,6 +102,24 @@ void drawBox(int x, int y, int x2, int y2, bool drawBox, ImColor color, char* to
     outlinedText(ImVec2(x+((x2-x)/2)-(ImGui::CalcTextSize(topText).x/2), y-(ImGui::CalcTextSize(topText).y)), ImColor(255, 255, 255, 255), topText);
 }
 
+void drawSkeleton(Player* p, ImColor color) {
+    studiohdr_t* model = Interfaces::modelInfo->GetStudioModel(p->model());
+    if (model) {
+        matrix3x4_t boneMatrix[128];
+        if (p->setupBones(boneMatrix, 128, BONE_USED_BY_HITBOX, 0)) {
+            for (int i = 0; i < model->numbones; i++) {
+                mstudiobone_t* bone = model->pBone(i);
+                if (bone && (bone->flags & BONE_USED_BY_HITBOX) && bone->parent != -1) {
+                    Vector screenBonePos, screenParentBonePos;
+                    if (worldToScreen(Vector(boneMatrix[i][0][3], boneMatrix[i][1][3], boneMatrix[i][2][3]), screenBonePos) &&
+                        worldToScreen(Vector(boneMatrix[bone->parent][0][3], boneMatrix[bone->parent][1][3], boneMatrix[bone->parent][2][3]), screenParentBonePos)) {
+                        Globals::drawList->AddLine(ImVec2{screenBonePos.x, screenBonePos.y}, ImVec2{screenParentBonePos.x, screenParentBonePos.y}, color);
+                    }
+                }
+            }
+        }
+    }
+}
 
 void drawPlayer(Player* p) {
     if (!p->dormant()) {
@@ -123,6 +141,9 @@ void drawPlayer(Player* p) {
                                     CONFIGCOL("Visuals>Players>Enemies>Box Color"), CONFIGBOOL("Visuals>Players>Enemies>Name") ? info.name : (char*)"", 
                                     (char*)rightText.str().c_str(), CONFIGBOOL("Visuals>Players>Enemies>Health Bar") ? p->health() : -1, CONFIGBOOL("Visuals>Players>Enemies>Dynamic Color"), 
                                     CONFIGCOL("Visuals>Players>Enemies>Health Bar Color"));
+                        
+                        if (CONFIGBOOL("Visuals>Players>Enemies>Skeleton"))
+                            drawSkeleton(p, CONFIGCOL("Visuals>Players>Enemies>Skeleton Color"));
                     }
                 }
                 if (p->team() == Globals::localPlayer->team()) {
@@ -137,6 +158,9 @@ void drawPlayer(Player* p) {
                                     CONFIGCOL("Visuals>Players>Teammates>Box Color"), CONFIGBOOL("Visuals>Players>Teammates>Name") ? info.name : (char*)"", 
                                     (char*)rightText.str().c_str(), CONFIGBOOL("Visuals>Players>Teammates>Health Bar") ? p->health() : -1, CONFIGBOOL("Visuals>Players>Teammates>Dynamic Color"), 
                                     CONFIGCOL("Visuals>Players>Teammates>Health Bar Color"));
+
+                        if (CONFIGBOOL("Visuals>Players>Teammates>Skeleton"))
+                            drawSkeleton(p, CONFIGCOL("Visuals>Players>Teammates>Skeleton Color"));
                     }
                 }
             }

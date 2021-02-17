@@ -16,6 +16,10 @@ public:
 		return reinterpret_cast<void*>(uintptr_t(this) + 16);
 	}
 
+	void* renderable() {
+		return reinterpret_cast<void*>(uintptr_t(this) + 0x8);
+	}
+
 	ClientClass* clientClass() {
 		typedef ClientClass*(*Fn)(void*);
 		return getVirtualFunc<Fn>(networkable(), 2)(networkable());
@@ -31,12 +35,22 @@ public:
 		return getVirtualFunc<Fn>(networkable(), 10)(networkable());
 	}
 
+	model_t* model() {
+		typedef model_t* (*Fn)(void*);
+		return getVirtualFunc<Fn>(renderable(), 8)(renderable());
+	}
+
+	bool setupBones(matrix3x4_t* pBoneMatrix, int nMaxBones, int nBoneMask, float flCurTime = 0) {
+		typedef bool (*Fn)(void*, matrix3x4_t*, int, int, float);
+		return getVirtualFunc<Fn>(renderable(), 13)(renderable(), pBoneMatrix, nMaxBones, nBoneMask, flCurTime);
+	}
+
 	const Vector& origin()
 	{
 		typedef const Vector& (*Fn)(void*);
 		return getVirtualFunc<Fn>(this, 12)(this);
 	}
-
+	
 	bool isPlayer() {
 		typedef bool (*Fn)(void*);
 		return getVirtualFunc<Fn>(this, 157)(this);

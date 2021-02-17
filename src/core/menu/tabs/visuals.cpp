@@ -49,6 +49,12 @@ void Menu::drawVisualsTab() {
                 }
                 ImGui::Checkbox("Box", &CONFIGBOOL("Visuals>Players>Teammates>Box"));
 
+                if (CONFIGBOOL("Visuals>Players>Teammates>Skeleton")) {
+                    ImGui::ColorEdit4("Skeleton Color", (float*)&CONFIGCOL("Visuals>Players>Teammates>Skeleton Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                    ImGui::SameLine();
+                }
+                ImGui::Checkbox("Skeleton", &CONFIGBOOL("Visuals>Players>Teammates>Skeleton"));
+
                 ImGui::Checkbox("Name", &CONFIGBOOL("Visuals>Players>Teammates>Name"));
                 ImGui::Checkbox("Health", &CONFIGBOOL("Visuals>Players>Teammates>Health"));
                 if(CONFIGBOOL("Visuals>Players>Teammates>Health Bar")) {
@@ -80,6 +86,13 @@ void Menu::drawVisualsTab() {
                     ImGui::SameLine();
                 }
                 ImGui::Checkbox("Box", &CONFIGBOOL("Visuals>Players>Enemies>Box"));
+
+                if (CONFIGBOOL("Visuals>Players>Enemies>Skeleton")) {
+                    ImGui::ColorEdit4("Skeleton Color", (float*)&CONFIGCOL("Visuals>Players>Enemies>Skeleton Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                    ImGui::SameLine();
+                }
+                ImGui::Checkbox("Skeleton", &CONFIGBOOL("Visuals>Players>Enemies>Skeleton"));
+
                 ImGui::Checkbox("Name", &CONFIGBOOL("Visuals>Players>Enemies>Name"));
                 ImGui::Checkbox("Health", &CONFIGBOOL("Visuals>Players>Enemies>Health"));
                 if(CONFIGBOOL("Visuals>Players>Enemies>Health Bar")) {
