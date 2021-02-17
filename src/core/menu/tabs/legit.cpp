@@ -22,4 +22,14 @@ void Menu::drawLegitTab() {
             ImGui::SetTooltip("Immensely simple, just checks m_iCrosshairId kekw, in future will move to traceray");
         ImGui::EndChild();
     }
+    ImGui::BeginChild("Backtrack", ImVec2(0, 260), true); {
+        ImGui::Text("Backtrack");
+        ImGui::Separator();
+        ImGui::Checkbox("Backtrack", &CONFIGBOOL("Legit>Backtrack>Backtrack"));
+        if (CONFIGBOOL("Legit>Backtrack>Backtrack")) {
+            ImGui::Text("Backtrack Ticks");
+            ImGui::SliderInt("#Backtrack Ticks", &CONFIGINT("Legit>Backtrack>Backtrack Ticks"), 1, 12);
+        }
+        ImGui::EndChild();
+    }
 }

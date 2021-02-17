@@ -5,7 +5,8 @@ const char* chamsMaterials[] = {"None", "Shaded", "Flat", "Screen Pulse", "Energ
 void drawChamsWidget(const char* label, 
                     int* material, ImColor* color, 
                     int* overlayMaterial, ImColor* overlayColor,
-                    bool occluded, int* occludedMaterial, ImColor* occludedColor) {
+                    bool occluded = false, int* occludedMaterial = nullptr, ImColor* occludedColor = nullptr,
+                    bool backtrack = false, int* backtrackMaterial = nullptr, ImColor* backtrackColor = nullptr, bool* backtrackTrail = nullptr) {
     char btnLabel[64];
     snprintf(btnLabel, sizeof(btnLabel), "Chams##%s", label);
     if (ImGui::Button(btnLabel)) {
@@ -31,6 +32,15 @@ void drawChamsWidget(const char* label,
             ImGui::Combo("##Occluded Chams Material", occludedMaterial, chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
             ImGui::SameLine();
             ImGui::ColorEdit4("Occluded Chams Color", (float*)occludedColor, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+        }
+        if (backtrack) {
+            ImGui::Separator();
+
+            ImGui::Text("%s Backtrack Chams", label);
+            ImGui::Combo("##Backtrack Chams Material", backtrackMaterial, chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
+            ImGui::SameLine();
+            ImGui::ColorEdit4("Backtrack Chams Color", (float*)backtrackColor, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+            ImGui::Checkbox("Backtrack Trail", backtrackTrail);
         }
         ImGui::EndPopup();
     }
@@ -111,7 +121,8 @@ void Menu::drawVisualsTab() {
                 drawChamsWidget("Enemies", 
                     &CONFIGINT("Visuals>Players>Enemies>Chams>Visible Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Visible Color"), 
                     &CONFIGINT("Visuals>Players>Enemies>Chams>Visible Overlay Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Visible Overlay Color"), 
-                    true, &CONFIGINT("Visuals>Players>Enemies>Chams>Occluded Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Occluded Color"));
+                    true, &CONFIGINT("Visuals>Players>Enemies>Chams>Occluded Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Occluded Color"), 
+                    true, &CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), &CONFIGBOOL("Visuals>Players>Enemies>Chams>Backtrack Trail"));
 
                 ImGui::EndChild();
             }
@@ -123,14 +134,12 @@ void Menu::drawVisualsTab() {
                 ImGui::Text("Arms");
                 drawChamsWidget("Arm",
                     &CONFIGINT("Visuals>Players>LocalPlayer>Arms Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Arms Color"), 
-                    &CONFIGINT("Visuals>Players>LocalPlayer>Arms Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Arms Overlay Color"), 
-                    false, nullptr, nullptr);
+                    &CONFIGINT("Visuals>Players>LocalPlayer>Arms Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Arms Overlay Color"));
                 ImGui::Separator();
                 ImGui::Text("Weapons");
                 drawChamsWidget("Weapon",
                     &CONFIGINT("Visuals>Players>LocalPlayer>Weapon Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Weapon Color"), 
-                    &CONFIGINT("Visuals>Players>LocalPlayer>Weapon Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Weapon Overlay Color"), 
-                    false, nullptr, nullptr);
+                    &CONFIGINT("Visuals>Players>LocalPlayer>Weapon Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Weapon Overlay Color"));
 
                 ImGui::Separator();
                 ImGui::ColorEdit4("Crosshair Color", (float*)&CONFIGCOL("Visuals>Players>LocalPlayer>Crosshair Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);

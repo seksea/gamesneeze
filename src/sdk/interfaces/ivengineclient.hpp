@@ -53,6 +53,12 @@ public:
 		return getVirtualFunc<Fn>(this, 12)(this);
 	}
 
+	// Copy current view orientation into va
+	void GetViewAngles(QAngle& angle) {
+		typedef void (*Fn)(void*, QAngle&);
+		return getVirtualFunc<Fn>(this, 18)(this, angle);
+	}
+
     // Retrieve the current game's maxclients setting
 	int GetMaxClients() {
 		typedef int (*Fn)(void*);

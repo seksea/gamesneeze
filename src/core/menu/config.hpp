@@ -47,6 +47,10 @@ namespace Config {
 
     inline std::unordered_map<std::string_view, ConfigItem> config {
         // Legit {
+            // Backtrack {
+                CONFIGITEM("Legit>Backtrack>Backtrack", false),
+                CONFIGITEM("Legit>Backtrack>Backtrack Ticks", 12),
+            // }
             // Triggerbot {
                 CONFIGITEM("Legit>Triggerbot>Triggerbot", false),
                 CONFIGITEM("Legit>Triggerbot>Key", 0),
@@ -66,7 +70,7 @@ namespace Config {
                 CONFIGITEM("Visuals>Players>Enemies>Money", false),
                 CONFIGITEM("Visuals>Players>Enemies>Radar", false),
                 CONFIGITEM("Visuals>Players>Enemies>Only When Dead", false),
-                
+
                 CONFIGITEM("Visuals>Players>Teammates>Box", false),
                 CONFIGITEM("Visuals>Players>Teammates>Box Color", ImColor(10, 161, 32, 255)),
                 CONFIGITEM("Visuals>Players>Teammates>Skeleton", false),
@@ -86,6 +90,9 @@ namespace Config {
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Visible Overlay Color", ImColor(197, 66, 245, 255)),
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Occluded Material", 0),
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Occluded Color", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Visuals>Players>Enemies>Chams>Backtrack Material", 0),
+                CONFIGITEM("Visuals>Players>Enemies>Chams>Backtrack Color", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Visuals>Players>Enemies>Chams>Backtrack Trail", false),
                 
                 CONFIGITEM("Visuals>Players>Teammates>Chams>Visible Material", 0),
                 CONFIGITEM("Visuals>Players>Teammates>Chams>Visible Color", ImColor(197, 66, 245, 255)),

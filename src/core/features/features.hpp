@@ -1,5 +1,6 @@
 #pragma once
 #include "../../includes.hpp"
+#include <vector>
 
 namespace Features {
     namespace ESP {
@@ -21,6 +22,21 @@ namespace Features {
     namespace RecoilCrosshair {
         void frameStageNotify(FrameStage frame);
         void draw();
+    }
+    namespace Backtrack {
+        struct BacktrackPlayer {
+            matrix3x4_t boneMatrix[128];
+            int playerIndex;
+        };
+
+        struct BackTrackTick {
+            std::map<int, BacktrackPlayer> players;
+            int tickCount;
+        };
+
+        inline std::vector<BackTrackTick> backtrackTicks;
+
+        void createMove(CUserCmd* cmd);
     }
     namespace WorldColorModulate {
         void updateColorModulation();

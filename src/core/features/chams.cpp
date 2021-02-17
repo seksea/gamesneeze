@@ -1,5 +1,7 @@
 #include "../../includes.hpp"
 #include "../../sdk/classes/keyvalues.hpp"
+#include "features.hpp"
+#include <cstring>
 
 IMaterial* shadedMaterial;
 IMaterial* flatMaterial;
@@ -97,6 +99,28 @@ void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const M
                 /* Visible Enemy Overlay */
                 if (CONFIGINT("Visuals>Players>Enemies>Chams>Visible Overlay Material")) {
                     cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Players>Enemies>Chams>Visible Overlay Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Visible Overlay Material"), false);
+                }
+
+                if (CONFIGBOOL("Legit>Backtrack>Backtrack")) {
+                    if (CONFIGINT("Legit>Backtrack>Backtrack Ticks") > 2) {
+                        if (CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material")) {
+                            if (CONFIGBOOL("Visuals>Players>Enemies>Chams>Backtrack Trail")) {
+                                for (Features::Backtrack::BackTrackTick tick : Features::Backtrack::backtrackTicks) {
+                                    if (tick.tickCount % 2 == 0) { // only draw every other tick to reduce lag
+                                        if (tick.players.find(p->index()) != tick.players.end()) {
+                                            cham(thisptr, ctx, state, pInfo, tick.players.at(p->index()).boneMatrix, CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), false);
+                                        }
+                                    }
+                                }
+                            }
+                            else {
+                                Features::Backtrack::BackTrackTick tick = Features::Backtrack::backtrackTicks.at(Features::Backtrack::backtrackTicks.size()-1);
+                                if (tick.players.find(p->index()) != tick.players.end()) {
+                                    cham(thisptr, ctx, state, pInfo, tick.players.at(p->index()).boneMatrix, CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), false);
+                                }
+                            }
+                        }
+                    }
                 }
             }
             else {
