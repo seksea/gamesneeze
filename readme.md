@@ -52,6 +52,8 @@ An open source cheat for Counter-Strike: Global Offensive on Linux.
 - Radio fake ban/fake chat
 - Clantag (and pBeeMovie clantag)
 - Simple triggerbot
+- Backtracking
+- Backtrack Chams
 
 ### Others
 
@@ -80,7 +82,7 @@ All args are executed in the order they are written in, for example, "-u -b -l" 
 
 ## Found a bug / want to add something?
 
-- [Create a pull request](https://github.com/seksea/gamesneeze/compare) (Add yourself to the [credits](src/core/menu/tabs/misc.cpp#L10))
+- [Create a pull request](https://github.com/seksea/gamesneeze/compare) (Add yourself to the [credits](src/core/menu/tabs/misc.cpp#L65))
 - [Report a bug](https://github.com/seksea/gamesneeze/issues/new)
 
 ## [Todo List](https://github.com/seksea/gamesneeze/projects/1)

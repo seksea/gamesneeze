@@ -13,7 +13,7 @@ void Features::Backtrack::createMove(CUserCmd* cmd) {
                     for (int i = 1; i < Interfaces::globals->maxClients; i++) {
                         Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
                         if (p) {
-                            if (p->health() > 0 && !p->dormant() && p->team() != Globals::localPlayer->team()) {
+                            if (p->health() > 0 && !p->dormant() && p != Globals::localPlayer && p->team() != Globals::localPlayer->team()) {
                                 BacktrackPlayer player;
                                 player.playerIndex = i;
                                 if (p->setupBones(player.boneMatrix, 128, BONE_USED_BY_HITBOX, 0)) {
@@ -38,30 +38,36 @@ void Features::Backtrack::createMove(CUserCmd* cmd) {
                     float closestDelta = FLT_MAX;
                     int closestTick = 0;
 
-                    for (BackTrackTick tick : backtrackTicks) {
-                        for (auto player : tick.players) {
-                            Player* p = (Player*)Interfaces::entityList->GetClientEntity(player.second.playerIndex);
-                            if (p) {
-                                if (p != Globals::localPlayer) {
-                                    if (p->isPlayer()) {
-                                        if (p->health() > 0 && !p->dormant()) {
-                                            Vector localPlayerEyePos = Globals::localPlayer->origin();
-                                            localPlayerEyePos.z += (cmd->buttons & (1 << 2)) ? 46 : 64; // TODO: Properly get eyepos
+                    if (cmd->buttons & (1 << 0)) {
+                        for (BackTrackTick tick : backtrackTicks) {
+                            for (auto player : tick.players) {
+                                Player* p = (Player*)Interfaces::entityList->GetClientEntity(player.second.playerIndex);
+                                if (p) {
+                                    if (p->health() > 0 && !p->dormant()) {
+                                        Vector localPlayerEyePos = Globals::localPlayer->origin();
+                                        localPlayerEyePos.z += (cmd->buttons & (1 << 2)) ? 46 : 64; // TODO: Properly get eyepos
 
-                                            Vector targetEyePos = Vector(player.second.boneMatrix[8][0][3], player.second.boneMatrix[8][1][3], player.second.boneMatrix[8][2][3]); // 8 is headbone matrix
-                                            
-                                            QAngle angleToCurrentPlayer = calcAngle(localPlayerEyePos, targetEyePos);
-                                            angleToCurrentPlayer -= viewAngles;
-                                            if (angleToCurrentPlayer.y > 180.f) {
-                                                angleToCurrentPlayer.y -= 360.f;
-                                            }
+                                        Vector targetEyePos = Vector(player.second.boneMatrix[8][0][3], player.second.boneMatrix[8][1][3], player.second.boneMatrix[8][2][3]); // 8 is headbone matrix
+                                        
+                                        QAngle angleToCurrentPlayer = calcAngle(localPlayerEyePos, targetEyePos);
+                                        angleToCurrentPlayer -= viewAngles;
+                                        if (angleToCurrentPlayer.y > 180.f) {
+                                            angleToCurrentPlayer.y -= 360.f;
+                                        }
 
-                                            if (angleToCurrentPlayer.Length() < closestDelta) {
-                                                closestDelta = angleToCurrentPlayer.Length();
-                                                closestTick = tick.tickCount;
-                                            }
+                                        if (angleToCurrentPlayer.Length() < closestDelta) {
+                                            closestDelta = angleToCurrentPlayer.Length();
+                                            closestTick = tick.tickCount;
                                         }
                                     }
+                                    else {
+                                        // If p is dormant or dead then erase player from the tick
+                                        tick.players.erase(player.first);
+                                    }
+                                }
+                                else {
+                                    // If p doesnt exist then erase player from the tick
+                                    tick.players.erase(player.first);
                                 }
                             }
                         }
