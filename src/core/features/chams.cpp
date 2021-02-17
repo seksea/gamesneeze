@@ -104,7 +104,7 @@ void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const M
                 if (CONFIGBOOL("Legit>Backtrack>Backtrack")) {
                     if (Features::Backtrack::backtrackTicks.size() > 2) {
                         if (CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material")) {
-                            if (CONFIGBOOL("Visuals>Players>Enemies>Chams>Backtrack Trail")) {
+                            if (CONFIGBOOL("Visuals>Players>Enemies>Chams>Trail")) {
                                 for (Features::Backtrack::BackTrackTick tick : Features::Backtrack::backtrackTicks) {
                                     if (tick.tickCount % 2 == 0) { // only draw every other tick to reduce lag
                                         if (tick.players.find(p->index()) != tick.players.end()) {
