@@ -1,7 +1,7 @@
 #include "../menu.hpp"
 
 void Menu::drawLegitTab() {
-    ImGui::BeginChild("Aim", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 253), true); {
+    ImGui::BeginChild("Aim", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 260), true); {
         ImGui::Text("Aim");
         ImGui::Separator();
         ImGui::EndChild();
@@ -28,7 +28,8 @@ void Menu::drawLegitTab() {
         ImGui::Checkbox("Backtrack", &CONFIGBOOL("Legit>Backtrack>Backtrack"));
         if (CONFIGBOOL("Legit>Backtrack>Backtrack")) {
             ImGui::Text("Backtrack Ticks");
-            ImGui::SliderInt("#Backtrack Ticks", &CONFIGINT("Legit>Backtrack>Backtrack Ticks"), 1, 12);
+            ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+            ImGui::SliderInt("##Backtrack Ticks", &CONFIGINT("Legit>Backtrack>Backtrack Ticks"), 1, 12);
         }
         ImGui::EndChild();
     }
