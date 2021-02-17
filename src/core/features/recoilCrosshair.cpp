@@ -49,10 +49,16 @@ void Features::RecoilCrosshair::frameStageNotify(FrameStage frame) {
     if (CONFIGBOOL("Visuals>Players>LocalPlayer>Spread Crosshair") ||
         CONFIGBOOL("Visuals>Players>LocalPlayer>Recoil Crosshair")) {
         if (frame == FRAME_NET_UPDATE_POSTDATAUPDATE_END) {
-            Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)Globals::localPlayer->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
-            if (weapon) {
-                spread = weapon->GetSpread();
-                innacuracy = weapon->GetInaccuracy();
+            if (Globals::localPlayer) {
+                if (Interfaces::engine->IsInGame()) {
+                    if (Globals::localPlayer->health() > 0) {
+                        Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)Globals::localPlayer->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
+                        if (weapon) {
+                            spread = weapon->GetSpread();
+                            innacuracy = weapon->GetInaccuracy();
+                        }
+                    }
+                }
             }
         }
     }
