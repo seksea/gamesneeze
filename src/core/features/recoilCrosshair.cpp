@@ -54,6 +54,7 @@ void Features::RecoilCrosshair::frameStageNotify(FrameStage frame) {
                     if (Globals::localPlayer->health() > 0) {
                         Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)Globals::localPlayer->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
                         if (weapon) {
+                            // get spread and inaccuracy in FSN as if you do it when you draw sometimes you can run it too early and the game will crash
                             spread = weapon->GetSpread();
                             innacuracy = weapon->GetInaccuracy();
                         }
