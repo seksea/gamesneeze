@@ -26,7 +26,7 @@ void Features::Backtrack::createMove(CUserCmd* cmd) {
                     backtrackTicks.insert(backtrackTicks.begin(), currentTick);
 
                     // Delete ticks we cant backtrack
-                    while (backtrackTicks.size() > CONFIGINT("Legit>Backtrack>Backtrack Ticks")) {
+                    while ((int)backtrackTicks.size() > CONFIGINT("Legit>Backtrack>Backtrack Ticks")) {
                         backtrackTicks.pop_back();
                     }
 
