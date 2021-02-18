@@ -17,6 +17,7 @@ void Menu::drawMiscTab() {
 
                 ImGui::Checkbox("Spectators", &CONFIGBOOL("Misc>Misc>Misc>Spectators"));
                 ImGui::Checkbox("Player List", &CONFIGBOOL("Misc>Misc>Misc>Player List"));
+                ImGui::Checkbox("Flappy Birb", &CONFIGBOOL("Misc>Misc>Misc>Flappy Birb"));
                 ImGui::Checkbox("Auto Accept", &CONFIGBOOL("Misc>Misc>Misc>Auto Accept"));
                 ImGui::Checkbox("Auto Defuse", &CONFIGBOOL("Misc>Misc>Misc>Auto Defuse"));
                 if (CONFIGBOOL("Misc>Misc>Misc>Auto Defuse")) {

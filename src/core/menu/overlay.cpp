@@ -15,4 +15,5 @@ void Menu::drawOverlay(ImDrawList* drawList) {
     Features::RecoilCrosshair::draw();
     Features::Spectators::draw();
     Features::PlayerList::draw();
+    Features::FlappyBird::draw();
 }

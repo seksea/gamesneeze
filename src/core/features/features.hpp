@@ -53,6 +53,9 @@ namespace Features {
     namespace PlayerList {
         void draw();
     }
+    namespace FlappyBird {
+        void draw();
+    }
     namespace AutoHop {
         void createMove(CUserCmd* cmd);
     }
