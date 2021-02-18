@@ -16,7 +16,7 @@ void Features::Backtrack::createMove(CUserCmd* cmd) {
                             if (p->health() > 0 && !p->dormant() && p != Globals::localPlayer && p->team() != Globals::localPlayer->team()) {
                                 BacktrackPlayer player;
                                 player.playerIndex = i;
-                                if (p->setupBones(player.boneMatrix, 128, BONE_USED_BY_HITBOX, 0)) {
+                                if (p->setupBones(player.boneMatrix, 128, BONE_USED_BY_ANYTHING, 0)) {
                                     currentTick.players.insert(std::pair<int, BacktrackPlayer>(i, player));
                                 }
                             }
