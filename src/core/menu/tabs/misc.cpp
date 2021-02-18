@@ -57,6 +57,7 @@ void Menu::drawMiscTab() {
                 ImGui::Text("Movement");
                 ImGui::Separator();
                 ImGui::Checkbox("Auto Hop", &CONFIGBOOL("Misc>Misc>Movement>Auto Hop"));
+                ImGui::SliderInt("Legitness", CONFIGINT("Misc>Misc>Movement>Legitness"), 0, 10);
                 ImGui::Checkbox("Fast Duck", &CONFIGBOOL("Misc>Misc>Movement>Fast Duck"));
                 ImGui::EndChild();
             }

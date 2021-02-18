@@ -142,6 +142,7 @@ namespace Config {
         // }
         // Misc {
             CONFIGITEM("Misc>Misc>Movement>Auto Hop", false),
+            CONFIGITEM("Misc>Misc>Movement>Legitness", 0),
 
             CONFIGITEM("Misc>Misc>Misc>Disable Watermark", false),
             CONFIGITEM("Misc>Misc>Misc>Force square radar", false),
