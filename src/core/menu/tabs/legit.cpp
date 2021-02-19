@@ -1,8 +1,8 @@
 #include "../menu.hpp"
 
 void Menu::drawLegitTab() {
-    ImGui::BeginChild("Aim", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 260), true); {
-        ImGui::Text("Aim");
+    ImGui::BeginChild("LegitBot", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 260), true); {
+        ImGui::Text("LegitBot");
         ImGui::Separator();
         if (ImGui::BeginTabBar("Aim Weapons Tabbar")) {
             if (ImGui::BeginTabItem("Default")) {
