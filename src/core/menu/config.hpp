@@ -71,6 +71,12 @@ namespace Config {
                     CONFIGITEM("Legit>LegitBot>Rifle>Smoothing", 0),
                     CONFIGITEM("Legit>LegitBot>Rifle>Recoil Compensation", false),
                 //}
+                // SMG {
+                    CONFIGITEM("Legit>LegitBot>SMG>Override", false),
+                    CONFIGITEM("Legit>LegitBot>SMG>FOV", 0),
+                    CONFIGITEM("Legit>LegitBot>SMG>Smoothing", 0),
+                    CONFIGITEM("Legit>LegitBot>SMG>Recoil Compensation", false),
+                //}
                 // Scout {
                     CONFIGITEM("Legit>LegitBot>Scout>Override", false),
                     CONFIGITEM("Legit>LegitBot>Scout>FOV", 0),

@@ -421,6 +421,53 @@ enum ItemIndex {
 	GLOVE_HYDRA = 5035
 };
 
+const ItemIndex pistols[] = {
+	WEAPON_ELITE, 
+	WEAPON_FIVESEVEN, 
+	WEAPON_GLOCK, 
+	WEAPON_TEC9, 
+	WEAPON_HKP2000, 
+	WEAPON_P250, 
+	WEAPON_USP_SILENCER, 
+	WEAPON_CZ75A
+};
+
+const ItemIndex heavyPistols[] = {
+	WEAPON_DEAGLE, 
+	WEAPON_REVOLVER
+};
+
+const ItemIndex rifles[] = {
+	WEAPON_AK47, 
+	WEAPON_AUG, 
+	WEAPON_FAMAS, 
+	WEAPON_G3SG1, 
+	WEAPON_GALILAR, 
+	WEAPON_M4A1, 
+	WEAPON_SCAR20, 
+	WEAPON_SG556, 
+	WEAPON_M4A1_SILENCER
+};
+
+const ItemIndex heavyWeapons[] = {
+	WEAPON_M249, 
+	WEAPON_XM1014, 
+	WEAPON_MAG7, 
+	WEAPON_NEGEV, 
+	WEAPON_SAWEDOFF, 
+	WEAPON_NOVA
+};
+
+const ItemIndex smgs[] = {
+	WEAPON_MAC10, 
+	WEAPON_P90, 
+	WEAPON_UMP45, 
+	WEAPON_MP5, 
+	WEAPON_BIZON, 
+	WEAPON_MP7, 
+	WEAPON_MP9
+};
+
 const std::map<ItemIndex, const char*> itemIndexMap = {
 		{ ItemIndex::INVALID,						""},
 		{ ItemIndex::WEAPON_DEAGLE,				"Deagle"},
