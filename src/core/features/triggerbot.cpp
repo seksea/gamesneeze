@@ -2,7 +2,7 @@
 
 void Features::Triggerbot::createMove(CUserCmd* cmd) {
     if (CONFIGBOOL("Legit>Triggerbot>Triggerbot")) {
-        if (ImGui::IsKeyDown(CONFIGINT("Legit>Triggerbot>Key"))) {
+        if (Menu::CustomWidgets::isKeyDown(CONFIGINT("Legit>Triggerbot>Key"))) {
             if (Globals::localPlayer) {
                 int indexAtCrosshair = Globals::localPlayer->crosshair();
                 if (indexAtCrosshair && indexAtCrosshair <= 64) {

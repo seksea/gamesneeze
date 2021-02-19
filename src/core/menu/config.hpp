@@ -47,6 +47,49 @@ namespace Config {
 
     inline std::unordered_map<std::string_view, ConfigItem> config {
         // Legit {
+            // LegitBot {
+                // Default {
+                    CONFIGITEM("Legit>LegitBot>Default>Key", 0),
+                    CONFIGITEM("Legit>LegitBot>Default>Always on", false),
+                    CONFIGITEM("Legit>LegitBot>Default>FOV", 0),
+                    CONFIGITEM("Legit>LegitBot>Default>Smoothing", 0),
+                    CONFIGITEM("Legit>LegitBot>Default>Recoil Compensation", false),
+                //}
+                // Pistol {
+                    CONFIGITEM("Legit>LegitBot>Pistol>Override", false),
+                    CONFIGITEM("Legit>LegitBot>Pistol>FOV", 0),
+                    CONFIGITEM("Legit>LegitBot>Pistol>Smoothing", 0),
+                //}
+                // Heavy Pistol {
+                    CONFIGITEM("Legit>LegitBot>Heavy Pistol>Override", false),
+                    CONFIGITEM("Legit>LegitBot>Heavy Pistol>FOV", 0),
+                    CONFIGITEM("Legit>LegitBot>Heavy Pistol>Smoothing", 0),
+                //}
+                // Rifle {
+                    CONFIGITEM("Legit>LegitBot>Rifle>Override", false),
+                    CONFIGITEM("Legit>LegitBot>Rifle>FOV", 0),
+                    CONFIGITEM("Legit>LegitBot>Rifle>Smoothing", 0),
+                    CONFIGITEM("Legit>LegitBot>Rifle>Recoil Compensation", false),
+                //}
+                // Scout {
+                    CONFIGITEM("Legit>LegitBot>Scout>Override", false),
+                    CONFIGITEM("Legit>LegitBot>Scout>FOV", 0),
+                    CONFIGITEM("Legit>LegitBot>Scout>Smoothing", 0),
+                //}
+                // AWP {
+                    CONFIGITEM("Legit>LegitBot>AWP>Override", false),
+                    CONFIGITEM("Legit>LegitBot>AWP>FOV", 0),
+                    CONFIGITEM("Legit>LegitBot>AWP>Smoothing", 0),
+                //}
+                // Heavy {
+                    CONFIGITEM("Legit>LegitBot>Heavy>Override", false),
+                    CONFIGITEM("Legit>LegitBot>Heavy>FOV", 0),
+                    CONFIGITEM("Legit>LegitBot>Heavy>Smoothing", 0),
+                    CONFIGITEM("Legit>LegitBot>Heavy>Recoil Compensation", false),
+                //}
+            // }
+
+
             // Backtrack {
                 CONFIGITEM("Legit>Backtrack>Backtrack", false),
                 CONFIGITEM("Legit>Backtrack>Backtrack Ticks", 12),

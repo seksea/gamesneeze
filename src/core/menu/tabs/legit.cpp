@@ -3,6 +3,47 @@
 void Menu::drawLegitTab() {
     ImGui::BeginChild("Aim", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 260), true); {
         ImGui::Text("Aim");
+        if (ImGui::BeginTabBar("Aim Weapons Tabbar")) {
+            if (ImGui::BeginTabItem("Default")) {
+                static bool keybindToggled;
+                Menu::CustomWidgets::drawKeyBinder("Key", &CONFIGINT("Legit>LegitBot>Default>Key"), &keybindToggled);
+                ImGui::SameLine();
+                ImGui::Checkbox("Always On", &CONFIGBOOL("Legit>LegitBot>Default>Always on"));
+                ImGui::Text("FOV (x10)");
+                ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>Default>FOV"), 1, 1800);
+                ImGui::Text("Smoothing");
+                ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Default>Smoothing"), 0, 100);
+                ImGui::Checkbox("Recoil Compensation", &CONFIGBOOL("Legit>LegitBot>Default>Recoil Compensation"));
+                ImGui::EndTabItem();
+            }
+            if (ImGui::BeginTabItem("Pistol")) {
+                
+                ImGui::EndTabItem();
+            }
+            if (ImGui::BeginTabItem("Heavy Pistol")) {
+                
+                ImGui::EndTabItem();
+            }
+            if (ImGui::BeginTabItem("Rifle")) {
+                
+                ImGui::EndTabItem();
+            }
+            if (ImGui::BeginTabItem("Scout")) {
+                
+                ImGui::EndTabItem();
+            }
+            if (ImGui::BeginTabItem("AWP")) {
+                
+                ImGui::EndTabItem();
+            }
+            if (ImGui::BeginTabItem("Heavy")) {
+                
+                ImGui::EndTabItem();
+            }
+        ImGui::EndTabBar();
+        }
         ImGui::Separator();
         ImGui::EndChild();
     }

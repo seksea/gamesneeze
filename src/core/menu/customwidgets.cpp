@@ -47,3 +47,15 @@ void Menu::CustomWidgets::drawKeyBinder(const char* label, int* key, bool* toggl
         // TODO: Mouse4 & Mouse5
     }
 }
+
+bool Menu::CustomWidgets::isKeyDown(int key) {
+    if (key > 0) {
+        return ImGui::IsKeyDown(key);
+    }
+    switch(key) {
+        case -1: return ImGui::IsMouseDown(0);
+        case -2: return ImGui::IsMouseDown(1);
+        case -3: return ImGui::IsMouseDown(2);
+    }
+    return 0;
+}

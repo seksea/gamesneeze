@@ -9,6 +9,7 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
     Features::FastDuck::createMove(cmd);
     Features::Triggerbot::createMove(cmd);
     Features::Backtrack::createMove(cmd);
+    Features::LegitBot::createMove(cmd);
 
     if (Features::AutoDefuse::shouldDefuse) {
         cmd->buttons |= (1 << 5);

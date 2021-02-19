@@ -23,6 +23,9 @@ namespace Features {
         void frameStageNotify(FrameStage frame);
         void draw();
     }
+    namespace LegitBot {
+        void createMove(CUserCmd* cmd);
+    }
     namespace Backtrack {
         struct BacktrackPlayer {
             matrix3x4_t boneMatrix[128];
