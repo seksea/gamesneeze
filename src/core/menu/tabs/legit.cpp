@@ -3,6 +3,7 @@
 void Menu::drawLegitTab() {
     ImGui::BeginChild("Aim", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 260), true); {
         ImGui::Text("Aim");
+        ImGui::Separator();
         if (ImGui::BeginTabBar("Aim Weapons Tabbar")) {
             if (ImGui::BeginTabItem("Default")) {
                 static bool keybindToggled;
@@ -44,7 +45,6 @@ void Menu::drawLegitTab() {
             }
         ImGui::EndTabBar();
         }
-        ImGui::Separator();
         ImGui::EndChild();
     }
     ImGui::SameLine();
