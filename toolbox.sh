@@ -27,7 +27,7 @@ function load {
     echo "loading cheat..."
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
     cp build/libgamesneeze.so build/$libname
-    ./gdb -n -q -batch \
+    gdb -n -q -batch \
         -ex "set auto-load safe-path $(pwd)/build/:/usr/lib/" \
         -ex "attach $csgo_pid" \
         -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
