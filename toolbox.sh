@@ -38,6 +38,10 @@ function load {
 }
 
 function build {
+    if [[ $EUID -eq 0 ]]; then
+   	echo "You cannot build as root" 
+   	exit 1
+    fi
     echo "building cheat..."
     mkdir build
     cd build
