@@ -17,9 +17,6 @@ bool Hooks::init() {
     Log::log(LOG, " Hooking CreateMove...");
     CreateMove::original = (CreateMove::func)VMT::hook(Interfaces::clientMode, (void*)CreateMove::hook, 25);
 
-    Log::log(LOG, " Hooking PaintTraverse...");
-    PaintTraverse::original = (PaintTraverse::func)VMT::hook(Interfaces::panel, (void*)PaintTraverse::hook, 42);
-
     Log::log(LOG, " Hooking Paint...");
     Paint::original = (Paint::func)VMT::hook(Interfaces::engineVgui, (void*)Paint::hook, 15);
 
@@ -51,9 +48,6 @@ bool Hooks::unload() {
     /* hook with original to do bigrain unhooking */
     Log::log(LOG, " Unhooking CreateMove...");
     VMT::hook(Interfaces::clientMode, (void*)CreateMove::original, 25);
-
-    Log::log(LOG, " Unhooking PaintTraverse...");
-    VMT::hook(Interfaces::panel, (void*)PaintTraverse::original, 42);
 
     Log::log(LOG, " Unhooking Paint...");
     VMT::hook(Interfaces::engineVgui, (void*)Paint::original, 15);
