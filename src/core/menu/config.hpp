@@ -118,6 +118,7 @@ namespace Config {
                 CONFIGITEM("Visuals>Players>Enemies>Dynamic Color", false),
                 CONFIGITEM("Visuals>Players>Enemies>Money", false),
                 CONFIGITEM("Visuals>Players>Enemies>Radar", false),
+                CONFIGITEM("Visuals>Players>Enemies>Vis Check", false),
                 CONFIGITEM("Visuals>Players>Enemies>Only When Dead", false),
 
                 CONFIGITEM("Visuals>Players>Teammates>Box", false),

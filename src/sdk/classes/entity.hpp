@@ -3,6 +3,8 @@
 #include "vector.h"
 #include "../../utils/utils.hpp"
 
+void updatePlayersVisible();
+
 class ICollideable {
 public:
 	virtual void pad0();
@@ -70,10 +72,13 @@ public:
 	NETVAR("DT_CSPlayer", "m_hActiveWeapon", activeWeapon, void*);
 	NETVAR("DT_CSPlayer", "m_hObserverTarget", observerTarget, Player*);
 	NETVAR("DT_CSPlayer", "m_bHasDefuser", defuser, bool);
+	NETVAR("DT_BasePlayer", "m_vecViewOffset[0]", viewOffset, Vector);
 
 	int crosshair() {
 		return *reinterpret_cast<int*>((uintptr_t)defuser_ptr()+0x7c);
 	}
+
+	bool visible();
 };
 
 class Item : public Entity{

@@ -130,20 +130,22 @@ void drawPlayer(Player* p) {
                 Interfaces::engine->GetPlayerInfo(p->index(), &info);
 
                 if (p->team() != Globals::localPlayer->team()) {
-                    if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Visuals>Players>Enemies>Only When Dead")) || !CONFIGBOOL("Visuals>Players>Enemies>Only When Dead")) {
-                        std::stringstream rightText;
-                        if (CONFIGBOOL("Visuals>Players>Enemies>Health"))
-                            rightText << p->health() << "hp\n";
-                        if (CONFIGBOOL("Visuals>Players>Enemies>Money"))
-                            rightText << "$" << p->money() << "\n";
-                        
-                        drawBox(x, y, x2, y2, CONFIGBOOL("Visuals>Players>Enemies>Box"), 
-                                    CONFIGCOL("Visuals>Players>Enemies>Box Color"), CONFIGBOOL("Visuals>Players>Enemies>Name") ? info.name : (char*)"", 
-                                    (char*)rightText.str().c_str(), CONFIGBOOL("Visuals>Players>Enemies>Health Bar") ? p->health() : -1, CONFIGBOOL("Visuals>Players>Enemies>Dynamic Color"), 
-                                    CONFIGCOL("Visuals>Players>Enemies>Health Bar Color"));
-                        
-                        if (CONFIGBOOL("Visuals>Players>Enemies>Skeleton"))
-                            drawSkeleton(p, CONFIGCOL("Visuals>Players>Enemies>Skeleton Color"));
+                    if (CONFIGBOOL("Visuals>Players>Enemies>Vis Check") ? p->visible() : true) {
+                        if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Visuals>Players>Enemies>Only When Dead")) || !CONFIGBOOL("Visuals>Players>Enemies>Only When Dead")) {
+                            std::stringstream rightText;
+                            if (CONFIGBOOL("Visuals>Players>Enemies>Health"))
+                                rightText << p->health() << "hp\n";
+                            if (CONFIGBOOL("Visuals>Players>Enemies>Money"))
+                                rightText << "$" << p->money() << "\n";
+                            
+                            drawBox(x, y, x2, y2, CONFIGBOOL("Visuals>Players>Enemies>Box"), 
+                                        CONFIGCOL("Visuals>Players>Enemies>Box Color"), CONFIGBOOL("Visuals>Players>Enemies>Name") ? info.name : (char*)"", 
+                                        (char*)rightText.str().c_str(), CONFIGBOOL("Visuals>Players>Enemies>Health Bar") ? p->health() : -1, CONFIGBOOL("Visuals>Players>Enemies>Dynamic Color"), 
+                                        CONFIGCOL("Visuals>Players>Enemies>Health Bar Color"));
+                            
+                            if (CONFIGBOOL("Visuals>Players>Enemies>Skeleton"))
+                                drawSkeleton(p, CONFIGCOL("Visuals>Players>Enemies>Skeleton Color"));
+                        }
                     }
                 }
                 if (p->team() == Globals::localPlayer->team()) {
@@ -178,7 +180,7 @@ void drawGenericEnt(Entity* ent, bool box, ImColor color, const char* label) {
 void Features::ESP::draw() {
     if (Interfaces::engine->IsInGame()) {
         int highest = Interfaces::entityList->GetHighestEntityIndex();
-        for (int i; i < highest; i++) {
+        for (int i = 0; i < highest; i++) {
             if (Globals::localPlayer) {
                 if (i != Interfaces::engine->GetLocalPlayer()) {
                     Entity* ent = (Entity*)Interfaces::entityList->GetClientEntity(i);

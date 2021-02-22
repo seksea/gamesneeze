@@ -467,6 +467,17 @@ const ItemIndex smgs[] = {
 	WEAPON_MP7, 
 	WEAPON_MP9
 };
+enum HitGroups {
+	HITGROUP_GENERIC = 0,
+	HITGROUP_HEAD,
+	HITGROUP_CHEST,
+	HITGROUP_STOMACH,
+	HITGROUP_LEFTARM,
+	HITGROUP_RIGHTARM,
+	HITGROUP_LEFTLEG,
+	HITGROUP_RIGHTLEG,
+	HITGROUP_GEAR
+};
 
 const std::map<ItemIndex, const char*> itemIndexMap = {
 		{ ItemIndex::INVALID,						""},
