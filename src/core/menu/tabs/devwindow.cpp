@@ -96,6 +96,7 @@ void Menu::drawDevWindow() {
                                 ImGui::Text("DT_CSPlayer m_fFlags: %d", p->flags());
                                 ImGui::Text("DT_BaseEntity m_bSpotted: %d", p->spotted());
                                 ImGui::Text("origin: %f %f %f", p->origin().x, p->origin().y, p->origin().y);
+                                ImGui::Text("viewOffset: %f %f %f", p->viewOffset().x, p->viewOffset().y, p->viewOffset().y);
                                 ImGui::TreePop();
                             }
                         }

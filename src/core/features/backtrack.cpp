@@ -44,8 +44,7 @@ void Features::Backtrack::createMove(CUserCmd* cmd) {
                                 Player* p = (Player*)Interfaces::entityList->GetClientEntity(player.second.playerIndex);
                                 if (p) {
                                     if (p->health() > 0 && !p->dormant()) {
-                                        Vector localPlayerEyePos = Globals::localPlayer->origin();
-                                        localPlayerEyePos.z += (cmd->buttons & (1 << 2)) ? 46 : 64; // TODO: Properly get eyepos
+                                        Vector localPlayerEyePos = Globals::localPlayer->eyePos();
 
                                         Vector targetEyePos = Vector(player.second.boneMatrix[8][0][3], player.second.boneMatrix[8][1][3], player.second.boneMatrix[8][2][3]); // 8 is headbone in bonematrix
                                         
