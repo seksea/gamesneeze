@@ -95,7 +95,7 @@ class ITraceFilter
 public:
 	virtual bool ShouldHitEntity(Player* pEntity, int contentsMask) = 0;
 
-	virtual TraceType GetTraceType() const = 0;
+	virtual int GetTraceType() const = 0;
 };
 
 class TraceFilter : public ITraceFilter
