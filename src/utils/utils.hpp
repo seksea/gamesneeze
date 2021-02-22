@@ -25,6 +25,10 @@ inline T getVirtualFunc(void* c, size_t i, size_t offset = 0) {
     return reinterpret_cast<T>(getVTable(c, offset)[i]);
 }
 
+inline float randFloat(float min, float max) {
+    return min + ((((float)rand()) / (float)RAND_MAX) * (max - min));
+}
+
 namespace PatternScan {
     std::vector<uintptr_t> findMatches(const std::string &pattern, uintptr_t addr, size_t size);
     std::vector<uintptr_t> findMatchesInModule(const char* moduleName, const std::string &pattern);

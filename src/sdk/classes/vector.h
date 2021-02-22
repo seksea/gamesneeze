@@ -1652,3 +1652,9 @@ inline QAngle calcAngle(const Vector& src, const Vector& dst) {
 
 	return vAngle;
 }
+
+inline void angleVectors(const QAngle &angles, Vector& forward) {
+	forward.x = cos(DEG2RAD(angles.x)) * cos(DEG2RAD(angles.y));
+	forward.y = cos(DEG2RAD(angles.x)) * sin(DEG2RAD(angles.y));
+	forward.z = -sin(DEG2RAD(angles.x));
+}

@@ -49,6 +49,7 @@ void cachePlayers() {
 }
 
 bool Player::getHitboxBones(matrix3x4_t* boneMatrix) {
+    // get cached bonematrix from setupbones we got in fsn
     if (playerCache.find(index()) != playerCache.end()) {
         memcpy(boneMatrix, playerCache[index()].boneMatrixHitbox, sizeof(matrix3x4_t)*128);
         return boneMatrix;
@@ -57,6 +58,7 @@ bool Player::getHitboxBones(matrix3x4_t* boneMatrix) {
 }
 
 bool Player::getAnythingBones(matrix3x4_t* boneMatrix) {
+    // get cached bonematrix from setupbones we got in fsn
     if (playerCache.find(index()) != playerCache.end()) {
         memcpy(boneMatrix, playerCache[index()].boneMatrixAnything, sizeof(matrix3x4_t)*128);
         return boneMatrix;

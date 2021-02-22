@@ -12,7 +12,7 @@ void Menu::drawLegitTab() {
                 ImGui::Checkbox("Always On", &CONFIGBOOL("Legit>LegitBot>Default>Always on"));
                 ImGui::Text("FOV (x10)");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
-                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>Default>FOV"), 1, 1800);
+                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>Default>FOV"), 0, 1800);
                 ImGui::Text("Smoothing");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Default>Smoothing"), 0, 100);
@@ -24,7 +24,7 @@ void Menu::drawLegitTab() {
                 ImGui::Checkbox("Override", &CONFIGBOOL("Legit>LegitBot>Pistol>Override"));
                 ImGui::Text("FOV (x10)");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
-                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>Pistol>FOV"), 1, 1800);
+                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>Pistol>FOV"), 0, 1800);
                 ImGui::Text("Smoothing");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Pistol>Smoothing"), 0, 100);
@@ -35,7 +35,7 @@ void Menu::drawLegitTab() {
                 ImGui::Checkbox("Override", &CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Override"));
                 ImGui::Text("FOV (x10)");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
-                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>Heavy Pistol>FOV"), 1, 1800);
+                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>Heavy Pistol>FOV"), 0, 1800);
                 ImGui::Text("Smoothing");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Heavy Pistol>Smoothing"), 0, 100);
@@ -46,7 +46,7 @@ void Menu::drawLegitTab() {
                 ImGui::Checkbox("Override", &CONFIGBOOL("Legit>LegitBot>Rifle>Override"));
                 ImGui::Text("FOV (x10)");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
-                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>Rifle>FOV"), 1, 1800);
+                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>Rifle>FOV"), 0, 1800);
                 ImGui::Text("Smoothing");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Rifle>Smoothing"), 0, 100);
@@ -58,7 +58,7 @@ void Menu::drawLegitTab() {
                 ImGui::Checkbox("Override", &CONFIGBOOL("Legit>LegitBot>SMG>Override"));
                 ImGui::Text("FOV (x10)");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
-                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>SMG>FOV"), 1, 1800);
+                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>SMG>FOV"), 0, 1800);
                 ImGui::Text("Smoothing");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>SMG>Smoothing"), 0, 100);
@@ -70,7 +70,7 @@ void Menu::drawLegitTab() {
                 ImGui::Checkbox("Override", &CONFIGBOOL("Legit>LegitBot>Scout>Override"));
                 ImGui::Text("FOV (x10)");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
-                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>Scout>FOV"), 1, 1800);
+                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>Scout>FOV"), 0, 1800);
                 ImGui::Text("Smoothing");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Scout>Smoothing"), 0, 100);
@@ -81,7 +81,7 @@ void Menu::drawLegitTab() {
                 ImGui::Checkbox("Override", &CONFIGBOOL("Legit>LegitBot>AWP>Override"));
                 ImGui::Text("FOV (x10)");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
-                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>AWP>FOV"), 1, 1800);
+                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>AWP>FOV"), 0, 1800);
                 ImGui::Text("Smoothing");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>AWP>Smoothing"), 0, 100);
@@ -92,7 +92,7 @@ void Menu::drawLegitTab() {
                 ImGui::Checkbox("Override", &CONFIGBOOL("Legit>LegitBot>Heavy>Override"));
                 ImGui::Text("FOV (x10)");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
-                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>Heavy>FOV"), 1, 1800);
+                ImGui::SliderInt("##FOV", &CONFIGINT("Legit>LegitBot>Heavy>FOV"), 0, 1800);
                 ImGui::Text("Smoothing");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Heavy>Smoothing"), 0, 100);
@@ -114,10 +114,16 @@ void Menu::drawLegitTab() {
             ImGui::SameLine();
         }
         ImGui::Checkbox("Triggerbot", &CONFIGBOOL("Legit>Triggerbot>Triggerbot"));
-        ImGui::SameLine();
-        ImGui::TextDisabled("?");
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Immensely simple, just checks m_iCrosshairId kekw, in future will move to traceray");
+        if (CONFIGBOOL("Legit>Triggerbot>Triggerbot")) {
+            ImGui::Text("Head Hitchance");
+            ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+            ImGui::SliderInt("##Head Hitchance", &CONFIGINT("Legit>Triggerbot>Head Hitchance"), 0, 100);
+
+            ImGui::Text("Body Hitchance");
+            ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+            ImGui::SliderInt("##Body Hitchance", &CONFIGINT("Legit>Triggerbot>Body Hitchance"), 0, 100);
+        }
+
         ImGui::EndChild();
     }
     ImGui::BeginChild("Backtrack", ImVec2(0, 260), true); {

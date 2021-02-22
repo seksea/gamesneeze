@@ -101,8 +101,10 @@ namespace Config {
                 CONFIGITEM("Legit>Backtrack>Backtrack Ticks", 12),
             // }
             // Triggerbot {
-                CONFIGITEM("Legit>Triggerbot>Triggerbot", false),
                 CONFIGITEM("Legit>Triggerbot>Key", 0),
+                CONFIGITEM("Legit>Triggerbot>Triggerbot", false),
+                CONFIGITEM("Legit>Triggerbot>Head Hitchance", 0),
+                CONFIGITEM("Legit>Triggerbot>Body Hitchance", 0),
             // }
         // }
         // Visuals {
