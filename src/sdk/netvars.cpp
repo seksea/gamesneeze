@@ -1,6 +1,7 @@
 #include "../includes.hpp"
 #include "interfaces/ibaseclientdll.hpp"
 #include "interfaces/interfaces.hpp"
+#include "netvars.hpp"
 #include <cstdint>
 #include <cstring>
 
@@ -66,8 +67,12 @@ bool Netvar::init() {
     Log::log(LOG, " loadFromBuffer | %lx", Offsets::loadFromBuffer);
 
     Offsets::setNamedSkybox = (Offsets::SetNamedSkybox)PatternScan::findFirstInModule("engine_client.so", 
-        " 55 4C 8D 05 ? ? ? ? 48 89 E5 41");
+            "55 4C 8D 05 ? ? ? ? 48 89 E5 41");
     Log::log(LOG, " setNamedSkybox | %lx", Offsets::setNamedSkybox);
+
+    Offsets::lineGoesThroughSmoke = (Offsets::LineGoesThroughSmoke)PatternScan::findFirstInModule("/client_client.so", 
+            "40 0F B6 FF 55");
+    Log::log(LOG, " lineGoesThroughSmoke | %lx", Offsets::lineGoesThroughSmoke);
 
     return true;
 }

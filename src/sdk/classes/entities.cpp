@@ -11,7 +11,7 @@ bool visCheck(Player* player) {
     filter.pSkip = Globals::localPlayer;
                                 // solid|opaque|moveable|ignore nodraw
     Interfaces::trace->TraceRay(ray, (0x1 | 0x80 | 0x4000 |    0x2000   ), &filter, &traceToPlayer);
-    return (traceToPlayer.m_pEntityHit == player);
+    return (traceToPlayer.m_pEntityHit == player) && !Offsets::lineGoesThroughSmoke(Globals::localPlayer->origin() + Globals::localPlayer->viewOffset(), player->origin() + player->viewOffset(), 1);
 }
 
 std::map<int, bool> playersVisible;

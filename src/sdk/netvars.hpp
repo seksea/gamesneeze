@@ -55,6 +55,9 @@ namespace Offsets {
     typedef bool (*SetNamedSkybox)(const char *);
     inline SetNamedSkybox setNamedSkybox;
 
+    typedef bool (*LineGoesThroughSmoke) (Vector, Vector, int16_t);
+    inline LineGoesThroughSmoke lineGoesThroughSmoke;
+
 }
 
 #define GETNETVAROFFSET(table, prop) Netvar::offsets.at({table, prop})
