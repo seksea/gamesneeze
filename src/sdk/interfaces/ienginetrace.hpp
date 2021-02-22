@@ -3,14 +3,6 @@
 #include "interfaces.hpp"
 #include "../classes/entity.hpp"
 
-enum TraceType
-{
-	TRACE_EVERYTHING = 0,
-	TRACE_WORLD_ONLY,
-	TRACE_ENTITIES_ONLY,
-	TRACE_EVERYTHING_FILTER_PROPS,
-};
-
 struct Plane
 {
 	Vector normal;
@@ -114,9 +106,9 @@ public:
 		return !(pEntityHandle == pSkip);
 	}
 
-	virtual TraceType GetTraceType() const
+	virtual int GetTraceType() const
 	{
-		return TRACE_EVERYTHING;
+		return 0;
 	}
 
 	void *pSkip;
