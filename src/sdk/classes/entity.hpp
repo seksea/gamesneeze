@@ -3,7 +3,7 @@
 #include "vector.h"
 #include "../../utils/utils.hpp"
 
-void updatePlayersVisible();
+void cachePlayers();
 
 class ICollideable {
 public:
@@ -47,6 +47,11 @@ public:
 		return getVirtualFunc<Fn>(renderable(), 13)(renderable(), pBoneMatrix, nMaxBones, nBoneMask, flCurTime);
 	}
 
+	bool shouldDraw() {
+		typedef bool (*Fn)(void*);
+		return getVirtualFunc<Fn>(renderable(), 5)(renderable());
+	}
+
 	const Vector& origin()
 	{
 		typedef const Vector& (*Fn)(void*);
@@ -82,6 +87,8 @@ public:
 		return *reinterpret_cast<int*>((uintptr_t)defuser_ptr()+0x7c);
 	}
 
+	bool getHitboxBones(matrix3x4_t* boneMatrix);
+	bool getAnythingBones(matrix3x4_t* boneMatrix);
 	bool visible();
 };
 

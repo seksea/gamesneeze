@@ -7,7 +7,7 @@ void Hooks::FrameStageNotify::hook(void* thisptr, FrameStage frame) {
     Features::RecoilCrosshair::frameStageNotify(frame);
 
     if (frame == FRAME_NET_UPDATE_END) {
-        updatePlayersVisible();
+        cachePlayers();
     }
     original(thisptr, frame);
 }

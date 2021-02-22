@@ -106,7 +106,7 @@ void drawSkeleton(Player* p, ImColor color) {
     studiohdr_t* model = Interfaces::modelInfo->GetStudioModel(p->model());
     if (model) {
         matrix3x4_t boneMatrix[128];
-        if (p->setupBones(boneMatrix, 128, BONE_USED_BY_HITBOX, 0)) {
+        if (p->getHitboxBones(boneMatrix)) {
             for (int i = 0; i < model->numbones; i++) {
                 mstudiobone_t* bone = model->pBone(i);
                 if (bone && (bone->flags & BONE_USED_BY_HITBOX) && bone->parent != -1) {
@@ -131,7 +131,7 @@ void drawPlayer(Player* p) {
 
                 if (p->team() != Globals::localPlayer->team()) {
                     if (CONFIGBOOL("Visuals>Players>Enemies>Vis Check") ? p->visible() : true) {
-                        if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Visuals>Players>Enemies>Only When Dead")) || !CONFIGBOOL("Visuals>Players>Enemies>Only When Dead")) {
+                        if (CONFIGBOOL("Visuals>Players>Enemies>Only When Dead") ? (Globals::localPlayer->health() == 0) : true) {
                             std::stringstream rightText;
                             if (CONFIGBOOL("Visuals>Players>Enemies>Health"))
                                 rightText << p->health() << "hp\n";

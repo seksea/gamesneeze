@@ -62,7 +62,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                                 if (p && p != Globals::localPlayer) {
                                     if (p->health() > 0 && !p->dormant() && p->team() != Globals::localPlayer->team() && p->visible()) {
                                         matrix3x4_t boneMatrix[128];
-                                        if (p->setupBones(boneMatrix, 128, BONE_USED_BY_ANYTHING, 0)) {
+                                        if (p->getAnythingBones(boneMatrix)) {
                                             Vector localPlayerEyePos = Globals::localPlayer->eyePos();
 
                                             Vector targetEyePos = Vector(boneMatrix[8][0][3], boneMatrix[8][1][3], boneMatrix[8][2][3]); // 8 is headbone in bonematrix
