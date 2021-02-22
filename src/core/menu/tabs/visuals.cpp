@@ -117,10 +117,6 @@ void Menu::drawVisualsTab() {
                 ImGui::Checkbox("Money", &CONFIGBOOL("Visuals>Players>Enemies>Money"));
                 ImGui::Checkbox("Radar", &CONFIGBOOL("Visuals>Players>Enemies>Radar"));
                 ImGui::Checkbox("Vis Check", &CONFIGBOOL("Visuals>Players>Enemies>Vis Check"));
-                ImGui::SameLine();
-                ImGui::TextDisabled("?");
-                if (ImGui::IsItemHovered())
-                    ImGui::SetTooltip("Currently does not do a smoke check, so be careful when using for legit");
                 ImGui::Checkbox("Only When Dead", &CONFIGBOOL("Visuals>Players>Enemies>Only When Dead"));
 
                 drawChamsWidget("Enemies", 
