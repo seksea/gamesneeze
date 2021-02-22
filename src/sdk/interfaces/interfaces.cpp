@@ -18,6 +18,7 @@ bool Interfaces::init() {
     modelInfo = getInterface<IVModelInfo>("./bin/linux64/engine_client.so", "VModelInfoClient");
     materialSystem = getInterface<IMaterialSystem>("./bin/linux64/materialsystem_client.so", "VMaterialSystem");
     sound = getInterface<IEngineSound>("./bin/linux64/engine_client.so", "IEngineSoundClient");
+    trace = getInterface<IEngineTrace>("./bin/linux64/engine_client.so", "EngineTraceClient");
 
     /* Get IClientMode */
     uintptr_t HudProcessInput = reinterpret_cast<uintptr_t>(getVTable(client)[10]);

@@ -13,6 +13,7 @@
 #include "imaterialsystem.hpp" // Also contains IMaterial
 #include "ivmodelinfo.hpp"
 #include "ienginesound.hpp"
+#include "ienginetrace.hpp"
 
 #include "iclientmode.hpp"
 #include "globalvars.hpp"
@@ -30,6 +31,7 @@ namespace Interfaces {
     inline IVModelInfo* modelInfo;
     inline IMaterialSystem* materialSystem;
     inline IEngineSound* sound;
+    inline IEngineTrace* trace;
 
     inline IClientMode* clientMode;
     inline CGlobalVars* globals;
