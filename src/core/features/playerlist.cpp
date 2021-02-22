@@ -57,25 +57,25 @@ void Features::PlayerList::draw() {
                     ImGui::Text("Send fake: ");
                     ImGui::SameLine();
                     if (ImGui::Button("Message##btn")) {
-                        char radioMessage[128];
+                        char radioMessage[512];
                         snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8%s :\x01 %s\"", selectedPlayerInfo.name, message);
                         Interfaces::engine->ExecuteClientCmd(radioMessage);
                     }
                     ImGui::SameLine();
                     if (ImGui::Button("VAC")) {
-                        char radioMessage[128];
+                        char radioMessage[512];
                         snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8""\x02""%s has been permanently banned from official CS:GO servers.\"", selectedPlayerInfo.name);
                         Interfaces::engine->ExecuteClientCmd(radioMessage);
                     }
                     ImGui::SameLine();
                     if (ImGui::Button("Kick")) {
-                        char radioMessage[128];
+                        char radioMessage[512];
                         snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8""\x01""Player %s left the game (Kicked from the session)\"", selectedPlayerInfo.name);
                         Interfaces::engine->ExecuteClientCmd(radioMessage);
                     }
                     ImGui::SameLine();
                     if (ImGui::Button("Unbox")) {
-                        char radioMessage[128];
+                        char radioMessage[512];
                         snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8""\x0B""%s \x01 has opened a container and found: \x02%s\"", selectedPlayerInfo.name, skinName);
                         Interfaces::engine->ExecuteClientCmd(radioMessage);
                     }
