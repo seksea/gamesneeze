@@ -31,6 +31,7 @@ Powered by...\n\
             Log::log(ERR, "Failed to initialise hooks!");
         }
 
+        Features::Notifications::addNotification(ImColor(30, 255, 30), "[gs] Successfully injected! %f", Interfaces::globals->realtime);
         Log::log(LOG, "Initialised!");
     }
     catch(const std::exception& e) {

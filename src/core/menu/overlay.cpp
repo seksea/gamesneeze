@@ -16,4 +16,5 @@ void Menu::drawOverlay(ImDrawList* drawList) {
     Features::Spectators::draw();
     Features::PlayerList::draw();
     Features::FlappyBird::draw();
+    Features::Notifications::draw();
 }

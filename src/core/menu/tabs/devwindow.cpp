@@ -7,6 +7,9 @@ void Menu::drawDevWindow() {
     ImGui::Separator();
 
     ImGui::Checkbox("Demo window", &demoWindow);
+    if (ImGui::Button("Send test notification")) {
+        Features::Notifications::addNotification(ImColor(30, 255, 30), "[gs] Test notification! %f", Interfaces::globals->realtime);
+    }
 
     if (ImGui::TreeNode("Interfaces")) {
         if (ImGui::TreeNode("Engine")) {

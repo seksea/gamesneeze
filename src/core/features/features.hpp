@@ -56,6 +56,10 @@ namespace Features {
     namespace PlayerList {
         void draw();
     }
+    namespace Notifications {
+        void draw();
+        void addNotification(ImColor color, const char* fmt, ...);
+    }
     namespace FlappyBird {
         void draw();
     }
