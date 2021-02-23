@@ -3,6 +3,10 @@
 #include <vector>
 
 namespace Features {
+    namespace Prediction {
+        void start(CUserCmd *cmd);
+        void end();
+    }
     namespace ESP {
         void draw();
     }

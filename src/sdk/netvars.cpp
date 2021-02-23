@@ -74,5 +74,14 @@ bool Netvar::init() {
             "40 0F B6 FF 55");
     Log::log(LOG, " lineGoesThroughSmoke | %lx", Offsets::lineGoesThroughSmoke);
 
+    Offsets::moveData = **reinterpret_cast<CMoveData***>(getAbsoluteAddress(PatternScan::findFirstInModule("/client_client.so", "48 8B 0D ? ? ? ? 4C 89 EA"), 3, 7));
+    Log::log(LOG, " moveData | %lx", Offsets::moveData);
+
+    Interfaces::moveHelper = *reinterpret_cast<IMoveHelper **>(getAbsoluteAddress(PatternScan::findFirstInModule("/client_client.so", "00 48 89 3D ? ? ? ? C3") + 1, 3, 7));
+    Log::log(LOG, " moveHelper | %lx", Interfaces::moveHelper);
+
+    Offsets::predictionSeed = *reinterpret_cast<int **>(getAbsoluteAddress(PatternScan::findFirstInModule("/client_client.so", "48 8B 05 ? ? ? ? 8B 38 E8 ? ? ? ? 89 C7"), 3, 7));
+    Log::log(LOG, " predictionSeed | %lx", Offsets::predictionSeed);
+
     return true;
 }

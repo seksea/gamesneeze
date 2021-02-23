@@ -1,5 +1,6 @@
 #pragma once
 #include "interfaces/ibaseclientdll.hpp"
+#include "interfaces/iprediction.hpp"
 #include <map>
 
 namespace Netvar {
@@ -10,6 +11,7 @@ namespace Netvar {
         {std::make_pair("DT_BaseEntity", "m_bSpotted"), 0},
 
         /* Player */
+        {std::make_pair("DT_BasePlayer", "m_nTickBase"), 0},
         {std::make_pair("DT_CSPlayer", "m_iAccount"), 0},
         {std::make_pair("DT_BasePlayer", "m_iHealth"), 0},
         {std::make_pair("DT_CSPlayer", "m_fFlags"), 0},
@@ -57,6 +59,9 @@ namespace Offsets {
 
     typedef bool (*LineGoesThroughSmoke) (Vector, Vector, int16_t);
     inline LineGoesThroughSmoke lineGoesThroughSmoke;
+
+    inline int* predictionSeed;
+    inline CMoveData* moveData;
 
 }
 

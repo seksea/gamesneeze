@@ -70,6 +70,7 @@ public:
 
 class Player : public Entity {
 public:
+	NETVAR("DT_BasePlayer", "m_nTickBase", tickbase, unsigned int);
 	NETVAR("DT_CSPlayer", "m_iAccount", money, int);
     NETVAR("DT_BasePlayer", "m_iHealth", health, int);
 	NETVAR("DT_CSPlayer", "m_fFlags", flags, int);

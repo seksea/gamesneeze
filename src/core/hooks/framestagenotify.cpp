@@ -6,7 +6,7 @@ void Hooks::FrameStageNotify::hook(void* thisptr, FrameStage frame) {
     Features::SkyboxChanger::frameStageNotify(frame);
     Features::RecoilCrosshair::frameStageNotify(frame);
 
-    if (frame == FRAME_NET_UPDATE_END) {
+    if (frame == FRAME_START) {
         cachePlayers();
     }
     original(thisptr, frame);

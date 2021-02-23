@@ -14,6 +14,7 @@
 #include "ivmodelinfo.hpp"
 #include "ienginesound.hpp"
 #include "ienginetrace.hpp"
+#include "iprediction.hpp"
 
 #include "iclientmode.hpp"
 #include "globalvars.hpp"
@@ -32,6 +33,9 @@ namespace Interfaces {
     inline IMaterialSystem* materialSystem;
     inline IEngineSound* sound;
     inline IEngineTrace* trace;
+    inline IGameMovement* movement;
+    inline IMoveHelper* moveHelper;
+    inline IPrediction* prediction;
 
     inline IClientMode* clientMode;
     inline CGlobalVars* globals;

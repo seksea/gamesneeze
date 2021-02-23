@@ -1,5 +1,4 @@
 #include "../../includes.hpp"
-#include "ienginesound.hpp"
 #include "interfaces.hpp"
 #include <cstdint>
 #include <string>
@@ -19,6 +18,8 @@ bool Interfaces::init() {
     materialSystem = getInterface<IMaterialSystem>("./bin/linux64/materialsystem_client.so", "VMaterialSystem");
     sound = getInterface<IEngineSound>("./bin/linux64/engine_client.so", "IEngineSoundClient");
     trace = getInterface<IEngineTrace>("./bin/linux64/engine_client.so", "EngineTraceClient");
+	movement = getInterface<IGameMovement>("./csgo/bin/linux64/client_client.so", "GameMovement");
+    prediction = getInterface<IPrediction>("./csgo/bin/linux64/client_client.so", "VClientPrediction001", true);
 
     /* Get IClientMode */
     uintptr_t HudProcessInput = reinterpret_cast<uintptr_t>(getVTable(client)[10]);
@@ -26,7 +27,6 @@ bool Interfaces::init() {
     clientMode = getClientMode();
     Log::log(LOG, " ClientMode %lx", (uintptr_t)clientMode);
 
-    /* I know globals isn't technically an interface it just fits in well here :) */
     /* Get globals */
     uintptr_t hudUpdate = reinterpret_cast<uintptr_t>(getVTable(client)[11]);
 	globals = *reinterpret_cast<CGlobalVars**>(getAbsoluteAddress(hudUpdate + 13, 3, 7));
