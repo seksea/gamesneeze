@@ -28,7 +28,7 @@ void Features::Triggerbot::createMove(CUserCmd* cmd) {
                     int headHitchance = 0;
                     int bodyHitchance = 0;
 
-                    float spread = RAD2DEG(weapon->GetInaccuracy() + weapon->GetSpread()) * 0.9;
+                    float spread = RAD2DEG(weapon->GetInaccuracy() + weapon->GetSpread()) * 1.2; // I have 0 clue where this 1.2 comes from, the angle this makes is smaller than the actual spread circle by a bit and 1.2 corrects it pretty much perfectly
                     for (int i = 0; i < 100; i++) {
                         QAngle randomSpreadAngle = {
                                 randFloat(0, spread) - (spread / 2),
