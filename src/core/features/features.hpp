@@ -45,6 +45,9 @@ namespace Features {
 
         void createMove(CUserCmd* cmd);
     }
+    namespace Forwardtrack {
+        void createMove(CUserCmd* cmd);
+    }
     namespace WorldColorModulate {
         void updateColorModulation();
     }

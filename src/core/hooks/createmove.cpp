@@ -14,6 +14,7 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
             Features::Triggerbot::createMove(cmd);
             Features::Backtrack::createMove(cmd);
         Features::Prediction::end();
+        Features::Forwardtrack::createMove(cmd);
 
         if (Features::AutoDefuse::shouldDefuse) {
             cmd->buttons |= (1 << 5);

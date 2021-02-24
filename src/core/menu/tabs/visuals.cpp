@@ -116,6 +116,7 @@ void Menu::drawVisualsTab() {
                 }
                 ImGui::Checkbox("Money", &CONFIGBOOL("Visuals>Players>Enemies>Money"));
                 ImGui::Checkbox("Radar", &CONFIGBOOL("Visuals>Players>Enemies>Radar"));
+                ImGui::Checkbox("Forwardtrack Dots", &CONFIGBOOL("Visuals>Players>Enemies>Forwardtrack Dots"));
                 ImGui::Checkbox("Vis Check", &CONFIGBOOL("Visuals>Players>Enemies>Vis Check"));
                 ImGui::Checkbox("Only When Dead", &CONFIGBOOL("Visuals>Players>Enemies>Only When Dead"));
 

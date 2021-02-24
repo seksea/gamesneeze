@@ -70,6 +70,7 @@ public:
 
 class Player : public Entity {
 public:
+	NETVAR("DT_BasePlayer", "m_vecVelocity[0]", velocity, Vector);
 	NETVAR("DT_BasePlayer", "m_nTickBase", tickbase, unsigned int);
 	NETVAR("DT_CSPlayer", "m_iAccount", money, int);
     NETVAR("DT_BasePlayer", "m_iHealth", health, int);
@@ -125,3 +126,4 @@ public:
 	NETVAR("DT_EnvTonemapController", "m_flCustomAutoExposureMin", exposureMin, float);
 	NETVAR("DT_EnvTonemapController", "m_flCustomAutoExposureMax", exposureMax, float);
 };
+

@@ -11,6 +11,7 @@ namespace Netvar {
         {std::make_pair("DT_BaseEntity", "m_bSpotted"), 0},
 
         /* Player */
+        {std::make_pair("DT_BasePlayer", "m_vecVelocity[0]"), 0},
         {std::make_pair("DT_BasePlayer", "m_nTickBase"), 0},
         {std::make_pair("DT_CSPlayer", "m_iAccount"), 0},
         {std::make_pair("DT_BasePlayer", "m_iHealth"), 0},

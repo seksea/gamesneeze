@@ -99,6 +99,7 @@ namespace Config {
             // Backtrack {
                 CONFIGITEM("Legit>Backtrack>Backtrack", false),
                 CONFIGITEM("Legit>Backtrack>Backtrack Ticks", 12),
+                CONFIGITEM("Legit>Backtrack>Simple Forwardtracking", false),
             // }
             // Triggerbot {
                 CONFIGITEM("Legit>Triggerbot>Key", 0),
@@ -120,6 +121,7 @@ namespace Config {
                 CONFIGITEM("Visuals>Players>Enemies>Dynamic Color", false),
                 CONFIGITEM("Visuals>Players>Enemies>Money", false),
                 CONFIGITEM("Visuals>Players>Enemies>Radar", false),
+                CONFIGITEM("Visuals>Players>Enemies>Forwardtrack Dots", false),
                 CONFIGITEM("Visuals>Players>Enemies>Vis Check", false),
                 CONFIGITEM("Visuals>Players>Enemies>Only When Dead", false),
 

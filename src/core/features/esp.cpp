@@ -121,6 +121,19 @@ void drawSkeleton(Player* p, ImColor color) {
     }
 }
 
+void drawForwardTrack(Player* p) {
+    matrix3x4_t boneMatrix[128];
+    if (p->getAnythingBones(boneMatrix)) {
+        Vector targetEyePos = Vector(boneMatrix[8][0][3], boneMatrix[8][1][3], boneMatrix[8][2][3]); // 8 is headbone in bonematrix
+        targetEyePos+=(p->velocity()/64)*3;
+        Vector screenFtrackPos;
+        if (worldToScreen(targetEyePos, screenFtrackPos)) {
+            Globals::drawList->AddCircleFilled(ImVec2(screenFtrackPos.x, screenFtrackPos.y), 3, ImColor(0, 0, 0, 100));
+            Globals::drawList->AddCircleFilled(ImVec2(screenFtrackPos.x, screenFtrackPos.y), 3, ImColor(200, 200, 200, 100));
+        }
+    }
+}
+
 void drawPlayer(Player* p) {
     if (!p->dormant()) {
         if (p->health() > 0) {
@@ -130,6 +143,7 @@ void drawPlayer(Player* p) {
                 Interfaces::engine->GetPlayerInfo(p->index(), &info);
 
                 if (p->team() != Globals::localPlayer->team()) {
+                    
                     if (CONFIGBOOL("Visuals>Players>Enemies>Vis Check") ? p->visible() : true) {
                         if (CONFIGBOOL("Visuals>Players>Enemies>Only When Dead") ? (Globals::localPlayer->health() == 0) : true) {
                             std::stringstream rightText;
@@ -145,6 +159,9 @@ void drawPlayer(Player* p) {
                             
                             if (CONFIGBOOL("Visuals>Players>Enemies>Skeleton"))
                                 drawSkeleton(p, CONFIGCOL("Visuals>Players>Enemies>Skeleton Color"));
+
+                            if (CONFIGBOOL("Visuals>Players>Enemies>Forwardtrack Dots"))
+                                drawForwardTrack(p);
                         }
                     }
                 }
