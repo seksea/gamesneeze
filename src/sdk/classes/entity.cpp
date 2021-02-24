@@ -3,18 +3,33 @@
 #include "vector.h"
 
 bool visCheck(Player* player) {
-    Ray ray;
-    Trace traceToPlayer;
-    ray.Init(Globals::localPlayer->eyePos(), player->eyePos());
-    TraceFilter filter;
-    filter.pSkip = Globals::localPlayer;
-                                  // solid|opaque|moveable|ignore nodraw
-    Interfaces::trace->TraceRay(ray, (0x1 | 0x80 | 0x4000 |    0x2000   ), &filter, &traceToPlayer);
-    return (traceToPlayer.m_pEntityHit == player) && !Offsets::lineGoesThroughSmoke(Globals::localPlayer->eyePos(), player->eyePos(), 1);
+    matrix3x4_t boneMatrix[128];
+    if (player->getAnythingBones(boneMatrix)) {
+        TraceFilter filter;
+        filter.pSkip = Globals::localPlayer;
+
+
+        Trace traceToHead;
+        Ray rayToHead;
+        rayToHead.Init(Globals::localPlayer->eyePos(), Vector(boneMatrix[8][0][3], boneMatrix[8][1][3], boneMatrix[8][2][3]));
+                                    // solid|opaque|moveable|ignore nodraw
+        Interfaces::trace->TraceRay(rayToHead, (0x1 | 0x80 | 0x4000 |    0x2000   ), &filter, &traceToHead);
+
+        Trace traceToUpperSpinal;
+        Ray rayToUpperSpinal;
+        rayToUpperSpinal.Init(Globals::localPlayer->eyePos(), Vector(boneMatrix[6][0][3], boneMatrix[6][1][3], boneMatrix[6][2][3]));
+                                    // solid|opaque|moveable|ignore nodraw
+        Interfaces::trace->TraceRay(rayToUpperSpinal, (0x1 | 0x80 | 0x4000 |    0x2000   ), &filter, &traceToUpperSpinal);
+
+
+        return (traceToHead.m_pEntityHit == player) && (traceToUpperSpinal.m_pEntityHit == player) && !Offsets::lineGoesThroughSmoke(Globals::localPlayer->eyePos(), player->eyePos(), 1);
+    }
+    return false;
 }
 
 struct PlayerCache {
     bool visible;
+    bool alive;
     matrix3x4_t boneMatrixHitbox[128];
     matrix3x4_t boneMatrixAnything[128];
 };
@@ -27,8 +42,8 @@ void cachePlayers() {
         if (Interfaces::engine->IsInGame()) {
             for (int i = 1; i < Interfaces::globals->maxClients; i++) {
                 Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
-                if (p) {
-                    if (p->health() > 0 && !p->dormant() && p->team() != Globals::localPlayer->team()) {
+                if (p && p != Globals::localPlayer) {
+                    if (p->health() > 0 && !p->dormant()) {
                         PlayerCache player;
                         if (p->setupBones(player.boneMatrixHitbox, 128, BONE_USED_BY_HITBOX, Interfaces::globals->curtime)) {
                             if (p->setupBones(player.boneMatrixAnything, 128, BONE_USED_BY_ANYTHING, Interfaces::globals->curtime)) {
@@ -41,6 +56,16 @@ void cachePlayers() {
                                 }
                             }
                         }
+                    }
+                    else {
+                        if (playerCache.find(i) != playerCache.end()) {
+                            playerCache.erase(i);
+                        }
+                    }
+                }
+                else {
+                    if (playerCache.find(i) != playerCache.end()) {
+                        playerCache.erase(i);
                     }
                 }
             }

@@ -1,5 +1,6 @@
 #include "../../includes.hpp"
 #include "hooks.hpp"
+#include <algorithm>
 
 bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* cmd) {
     if (cmd->tick_count != 0) {
@@ -20,5 +21,9 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
             cmd->buttons |= (1 << 5);
         }
     }
+
+    cmd->viewangles.x = std::clamp(cmd->viewangles.x, -89.0f, 89.0f);
+    cmd->viewangles.y = std::clamp(cmd->viewangles.y, -180.0f, 180.0f);
+    cmd->viewangles.z = 0.0f;
     return original(thisptr, flInputSampleTime, cmd);
 }

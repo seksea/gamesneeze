@@ -1638,6 +1638,20 @@ public:
 	float x, y, z, w;
 };
 
+inline void normalizeAngles(QAngle& angle) {
+	while (angle.x > 89.0f)
+		angle.x -= 180.f;
+
+	while (angle.x < -89.0f)
+		angle.x += 180.f;
+
+	while (angle.y > 180.f)
+		angle.y -= 360.f;
+
+	while (angle.y < -180.f)
+		angle.y += 360.f;
+}
+
 inline QAngle calcAngle(const Vector& src, const Vector& dst) {
 	QAngle vAngle;
 	Vector delta((src.x - dst.x), (src.y - dst.y), (src.z - dst.z));

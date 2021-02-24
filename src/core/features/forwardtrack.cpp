@@ -31,7 +31,6 @@ void Features::Forwardtrack::createMove(CUserCmd* cmd) {
                                 if (angleToCurrentPlayer.y > 180.f) {
                                     angleToCurrentPlayer.y -= 360.f;
                                 }
-
                                 if (angleToCurrentPlayer.Length() < closestDelta) {
                                     closestDelta = angleToCurrentPlayer.Length();
                                     closestTick = cmd->tick_count+i;

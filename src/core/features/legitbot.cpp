@@ -21,32 +21,32 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                             FOV = CONFIGINT("Legit>LegitBot>Pistol>FOV")/10.f;
                             recoilCompensation = false;
                         }
-                        if ((std::find(std::begin(heavyPistols), std::end(heavyPistols), weapon->itemIndex()) != std::end(heavyPistols)) && CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Override")) {
+                        else if ((std::find(std::begin(heavyPistols), std::end(heavyPistols), weapon->itemIndex()) != std::end(heavyPistols)) && CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Override")) {
                             smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Heavy Pistol>Smoothing")/5.f);
                             FOV = CONFIGINT("Legit>LegitBot>Heavy Pistol>FOV")/10.f;
                             recoilCompensation = false;
                         }
-                        if ((std::find(std::begin(rifles), std::end(rifles), weapon->itemIndex()) != std::end(rifles)) && CONFIGBOOL("Legit>LegitBot>Rifle>Override")) {
+                        else if ((std::find(std::begin(rifles), std::end(rifles), weapon->itemIndex()) != std::end(rifles)) && CONFIGBOOL("Legit>LegitBot>Rifle>Override")) {
                             smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Rifle>Smoothing")/5.f);
                             FOV = CONFIGINT("Legit>LegitBot>Rifle>FOV")/10.f;
                             recoilCompensation = CONFIGINT("Legit>LegitBot>Rifle>Recoil Compensation");
                         }
-                        if ((std::find(std::begin(smgs), std::end(smgs), weapon->itemIndex()) != std::end(smgs)) && CONFIGBOOL("Legit>LegitBot>SMG>Override")) {
+                        else if ((std::find(std::begin(smgs), std::end(smgs), weapon->itemIndex()) != std::end(smgs)) && CONFIGBOOL("Legit>LegitBot>SMG>Override")) {
                             smoothing = 1.f + (CONFIGINT("Legit>LegitBot>SMG>Smoothing")/5.f);
                             FOV = CONFIGINT("Legit>LegitBot>SMG>FOV")/10.f;
                             recoilCompensation = CONFIGINT("Legit>LegitBot>SMG>Recoil Compensation");
                         }
-                        if ((weapon->itemIndex() == WEAPON_SSG08) && CONFIGBOOL("Legit>LegitBot>Scout>Override")) {
+                        else if ((weapon->itemIndex() == WEAPON_SSG08) && CONFIGBOOL("Legit>LegitBot>Scout>Override")) {
                             smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Scout>Smoothing")/5.f);
                             FOV = CONFIGINT("Legit>LegitBot>Scout>FOV")/10.f;
                             recoilCompensation = false;
                         }
-                        if ((weapon->itemIndex() == WEAPON_AWP) && CONFIGBOOL("Legit>LegitBot>AWP>Override")) {
+                        else if ((weapon->itemIndex() == WEAPON_AWP) && CONFIGBOOL("Legit>LegitBot>AWP>Override")) {
                             smoothing = 1.f + (CONFIGINT("Legit>LegitBot>AWP>Smoothing")/5.f);
                             FOV = CONFIGINT("Legit>LegitBot>AWP>FOV")/10.f;
                             recoilCompensation = false;
                         }
-                        if ((std::find(std::begin(heavyWeapons), std::end(heavyWeapons), weapon->itemIndex()) != std::end(heavyWeapons)) && CONFIGBOOL("Legit>LegitBot>Heavy>Override")) {
+                        else if ((std::find(std::begin(heavyWeapons), std::end(heavyWeapons), weapon->itemIndex()) != std::end(heavyWeapons)) && CONFIGBOOL("Legit>LegitBot>Heavy>Override")) {
                             smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Heavy>Smoothing")/5.f);
                             FOV = CONFIGINT("Legit>LegitBot>Heavy>FOV")/10.f;
                             recoilCompensation = CONFIGINT("Legit>LegitBot>Heavy>Recoil Compensation");
@@ -65,12 +65,12 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                                         Vector localPlayerEyePos = Globals::localPlayer->eyePos();
 
                                         Vector targetEyePos = Vector(boneMatrix[8][0][3], boneMatrix[8][1][3], boneMatrix[8][2][3]); // 8 is headbone in bonematrix
-                                        targetEyePos+=(p->velocity()/32)-(p->velocity()/128);
-                                        
-                                        QAngle angleToCurrentPlayer = calcAngle(localPlayerEyePos, targetEyePos) - cmd->viewangles - (recoilCompensation ? Globals::localPlayer->aimPunch()*2 : QAngle(0, 0, 0));
-                                        if (angleToCurrentPlayer.y > 180.f) {
-                                            angleToCurrentPlayer.y -= 360.f;
+                                        if (p->velocity().Length() < 300) {
+                                            targetEyePos+=(p->velocity()/32)-(p->velocity()/128);
                                         }
+
+                                        QAngle angleToCurrentPlayer = calcAngle(localPlayerEyePos, targetEyePos) - cmd->viewangles - (recoilCompensation ? Globals::localPlayer->aimPunch()*2 : QAngle(0, 0, 0));
+                                        normalizeAngles(angleToCurrentPlayer);
 
                                         if (angleToCurrentPlayer.Length() < closestDelta) {
                                             closestDelta = angleToCurrentPlayer.Length();
@@ -83,6 +83,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                         if (closestDelta < FOV) {
                             if (((angleToClosestPlayer) / smoothing).Length() > 0.005f) { // prevent micro-movements
                                 cmd->viewangles += (angleToClosestPlayer) / smoothing;
+                                normalizeAngles(cmd->viewangles);
                             }
                         }
                     }
