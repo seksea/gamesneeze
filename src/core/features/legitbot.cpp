@@ -68,7 +68,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                                             Vector targetEyePos = Vector(boneMatrix[8][0][3], boneMatrix[8][1][3], boneMatrix[8][2][3]); // 8 is headbone in bonematrix
                                             targetEyePos+=(p->velocity()/64)-(p->velocity()/128);
                                             
-                                            QAngle angleToCurrentPlayer = calcAngle(localPlayerEyePos, targetEyePos) - cmd->viewangles - (recoilCompensation ? Globals::localPlayer->aimPunch()*2 : QAngle());
+                                            QAngle angleToCurrentPlayer = calcAngle(localPlayerEyePos, targetEyePos) - cmd->viewangles - (recoilCompensation ? Globals::localPlayer->aimPunch()*2 : QAngle(0, 0, 0));
                                             if (angleToCurrentPlayer.y > 180.f) {
                                                 angleToCurrentPlayer.y -= 360.f;
                                             }
