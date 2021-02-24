@@ -32,6 +32,9 @@ bool Hooks::init() {
     Log::log(LOG, " Hooking IsHLTV...");
     IsHLTV::original = (IsHLTV::func)VMT::hook(Interfaces::engine, (void*)IsHLTV::hook, 93);
 
+    Log::log(LOG, " Hooking ClientCmd...");
+    ClientCmd::original = (ClientCmd::func)VMT::hook(Interfaces::engine, (void*)ClientCmd::hook, 7);
+
     Log::log(LOG, "Initialised hooks!");
     return true;
 }
@@ -45,7 +48,7 @@ bool Hooks::unload() {
         return false;
     }
 
-    /* hook with original to do bigrain unhooking */
+    /* hook with original to do bigbrain unhooking */
     Log::log(LOG, " Unhooking CreateMove...");
     VMT::hook(Interfaces::clientMode, (void*)CreateMove::original, 25);
 
@@ -63,6 +66,9 @@ bool Hooks::unload() {
 
     Log::log(LOG, " Unhooking IsHLTV...");
     VMT::hook(Interfaces::engine, (void*)IsHLTV::original, 93);
+
+    Log::log(LOG, " Unhooking ClientCmd...");
+    VMT::hook(Interfaces::engine, (void*)ClientCmd::original, 7);
 
     Log::log(LOG, "Unloaded hooks!");
     return true;

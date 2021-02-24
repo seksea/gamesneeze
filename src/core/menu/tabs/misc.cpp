@@ -24,10 +24,7 @@ void Menu::drawMiscTab() {
                     ImGui::SameLine();
                     ImGui::Checkbox("Latest Defuse", &CONFIGBOOL("Misc>Misc>Misc>Latest Defuse"));
                 }
-                ImGui::SameLine();
-                ImGui::TextDisabled("?");
-                if (ImGui::IsItemHovered())
-                    ImGui::SetTooltip("May cause untrusted, use at own risk!");
+                ImGui::Checkbox("Chat Filter Bypass", &CONFIGBOOL("Misc>Misc>Misc>Chat Filter Bypass"));
                 ImGui::EndChild();
             }
 
@@ -70,6 +67,10 @@ void Menu::drawMiscTab() {
                     ImGui::SliderInt("##Bhop Max Hops Hit", &CONFIGINT("Misc>Misc>Movement>Bhop Max Hops Hit"), 0, 16);
                 }
                 ImGui::Checkbox("Fast Duck", &CONFIGBOOL("Misc>Misc>Movement>Fast Duck"));
+                ImGui::SameLine();
+                ImGui::TextDisabled("?");
+                if (ImGui::IsItemHovered())
+                    ImGui::SetTooltip("May cause untrusted, use at own risk!");
                 ImGui::EndChild();
             }
             ImGui::Columns(1);

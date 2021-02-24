@@ -25,14 +25,14 @@ void cachePlayers() {
     // ran in framestage notify update_end
     if (Globals::localPlayer) {
         if (Interfaces::engine->IsInGame()) {
-            for (int i = 0; i < Interfaces::globals->maxClients; i++) {
+            for (int i = 1; i < Interfaces::globals->maxClients; i++) {
                 Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
                 if (p) {
                     if (p->health() > 0 && !p->dormant() && p->team() != Globals::localPlayer->team()) {
                         PlayerCache player;
-                        player.visible = visCheck(p);
                         if (p->setupBones(player.boneMatrixHitbox, 128, BONE_USED_BY_HITBOX, Interfaces::globals->curtime)) {
                             if (p->setupBones(player.boneMatrixAnything, 128, BONE_USED_BY_ANYTHING, Interfaces::globals->curtime)) {
+                                player.visible = visCheck(p);
                                 if (playerCache.find(i) != playerCache.end()) {
                                     playerCache[i] = player;
                                 }

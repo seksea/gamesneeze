@@ -36,7 +36,11 @@ namespace Hooks {
         inline func original;
         bool hook(void* thisptr);
     }
-
+    namespace ClientCmd {
+        using func = void(*)(void* thisptr, char* szCmdString);
+        inline func original;
+        void hook(void* thisptr, char* szCmdString);
+    }
     /* SDL HOOKS */
     namespace SDL {
         bool initSDL();
