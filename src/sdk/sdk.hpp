@@ -6,3 +6,4 @@
 #include "classes/keyvalues.hpp"
 #include "definitions.hpp"
 #include "netvars.hpp"
+#include "math.hpp"
