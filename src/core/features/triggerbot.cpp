@@ -19,8 +19,7 @@ void Features::Triggerbot::createMove(CUserCmd* cmd) {
                 Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)Globals::localPlayer->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
                 if (weapon) {
 
-                    QAngle viewAngles;
-                    Interfaces::engine->GetViewAngles(viewAngles);
+                    QAngle viewAngles = cmd->viewangles;
                     viewAngles += Globals::localPlayer->aimPunch() * 2;
                     
                     Vector endPos;

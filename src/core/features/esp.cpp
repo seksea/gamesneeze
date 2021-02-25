@@ -144,7 +144,7 @@ void drawPlayer(Player* p) {
 
                 if (p->team() != Globals::localPlayer->team()) {
                     
-                    if (CONFIGBOOL("Visuals>Players>Enemies>Vis Check") ? p->visible() : true) {
+                    if (CONFIGBOOL("Visuals>Players>Enemies>Vis Check") ? (Globals::localPlayer->health() > 0 ? p->visible() : true) : true) {
                         if (CONFIGBOOL("Visuals>Players>Enemies>Only When Dead") ? (Globals::localPlayer->health() == 0) : true) {
                             std::stringstream rightText;
                             if (CONFIGBOOL("Visuals>Players>Enemies>Health"))

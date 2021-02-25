@@ -91,6 +91,7 @@ public:
 
 	bool getHitboxBones(matrix3x4_t* boneMatrix);
 	bool getAnythingBones(matrix3x4_t* boneMatrix);
+	Vector getBonePos(int bone);
 	bool visible();
 };
 

@@ -43,6 +43,7 @@ namespace Features {
 
         inline std::vector<BackTrackTick> backtrackTicks;
 
+        void store(CUserCmd* cmd);
         void createMove(CUserCmd* cmd);
     }
     namespace Forwardtrack {

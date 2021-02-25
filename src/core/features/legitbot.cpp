@@ -64,10 +64,8 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                                     if (p->getAnythingBones(boneMatrix)) {
                                         Vector localPlayerEyePos = Globals::localPlayer->eyePos();
 
-                                        Vector targetEyePos = Vector(boneMatrix[8][0][3], boneMatrix[8][1][3], boneMatrix[8][2][3]); // 8 is headbone in bonematrix
-                                        if (p->velocity().Length() < 300) {
-                                            targetEyePos+=(p->velocity()/32)-(p->velocity()/128);
-                                        }
+                                        Vector targetEyePos = p->getBonePos(8); // 8 is headbone in bonematrix
+                                        targetEyePos+=(p->velocity()*Interfaces::globals->interval_per_tick);
 
                                         QAngle angleToCurrentPlayer = calcAngle(localPlayerEyePos, targetEyePos) - cmd->viewangles - (recoilCompensation ? Globals::localPlayer->aimPunch()*2 : QAngle(0, 0, 0));
                                         normalizeAngles(angleToCurrentPlayer);
@@ -83,7 +81,6 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                         if (closestDelta < FOV) {
                             if (((angleToClosestPlayer) / smoothing).Length() > 0.005f) { // prevent micro-movements
                                 cmd->viewangles += (angleToClosestPlayer) / smoothing;
-                                normalizeAngles(cmd->viewangles);
                             }
                         }
                     }

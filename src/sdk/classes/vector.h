@@ -1672,3 +1672,20 @@ inline void angleVectors(const QAngle &angles, Vector& forward) {
 	forward.y = cos(DEG2RAD(angles.x)) * sin(DEG2RAD(angles.y));
 	forward.z = -sin(DEG2RAD(angles.x));
 }
+
+inline float getDistance(Vector pos1, Vector pos2) {
+    // Do 3d pythag
+    float a = abs(pos1.x-pos2.x);
+    float b = abs(pos1.y-pos2.y);
+    float c = abs(pos1.z-pos2.z);
+    return sqrt(pow(a, 2.f) + pow(b, 2.f) + pow(c, 2.f));
+}
+
+inline float getDistanceNoSqrt(Vector pos1, Vector pos2) {
+    // When you dont need an exact distance and just want to see if 
+	// something is x further than something else for example theres no need to sqrt it
+    float a = abs(pos1.x-pos2.x);
+    float b = abs(pos1.y-pos2.y);
+    float c = abs(pos1.z-pos2.z);
+    return pow(a, 2.f) + pow(b, 2.f) + pow(c, 2.f);
+}

@@ -11,16 +11,15 @@ bool visCheck(Player* player) {
 
         Trace traceToHead;
         Ray rayToHead;
-        rayToHead.Init(Globals::localPlayer->eyePos(), Vector(boneMatrix[8][0][3], boneMatrix[8][1][3], boneMatrix[8][2][3]));
+        rayToHead.Init(Globals::localPlayer->eyePos(), player->getBonePos(8));
                                     // solid|opaque|moveable|ignore nodraw
         Interfaces::trace->TraceRay(rayToHead, (0x1 | 0x80 | 0x4000 |    0x2000   ), &filter, &traceToHead);
 
         Trace traceToUpperSpinal;
         Ray rayToUpperSpinal;
-        rayToUpperSpinal.Init(Globals::localPlayer->eyePos(), Vector(boneMatrix[6][0][3], boneMatrix[6][1][3], boneMatrix[6][2][3]));
+        rayToUpperSpinal.Init(Globals::localPlayer->eyePos(), player->getBonePos(6));
                                     // solid|opaque|moveable|ignore nodraw
         Interfaces::trace->TraceRay(rayToUpperSpinal, (0x1 | 0x80 | 0x4000 |    0x2000   ), &filter, &traceToUpperSpinal);
-
 
         return (traceToHead.m_pEntityHit == player) && (traceToUpperSpinal.m_pEntityHit == player) && !Offsets::lineGoesThroughSmoke(Globals::localPlayer->eyePos(), player->eyePos(), 1);
     }
@@ -29,7 +28,6 @@ bool visCheck(Player* player) {
 
 struct PlayerCache {
     bool visible;
-    bool alive;
     matrix3x4_t boneMatrixHitbox[128];
     matrix3x4_t boneMatrixAnything[128];
 };
@@ -37,7 +35,7 @@ struct PlayerCache {
 std::map<int, PlayerCache> playerCache;
 
 void cachePlayers() {
-    // ran in framestage notify update_end
+    // ran in framestagenotify
     if (Globals::localPlayer) {
         if (Interfaces::engine->IsInGame()) {
             for (int i = 1; i < Interfaces::globals->maxClients; i++) {
@@ -70,6 +68,15 @@ void cachePlayers() {
                 }
             }
         }
+    }
+}
+
+Vector Player::getBonePos(int bone) {
+    // get cached bonematrix from setupbones we got in fsn
+    if (playerCache.find(index()) != playerCache.end()) {
+        return Vector(playerCache[index()].boneMatrixAnything[bone][0][3], 
+                      playerCache[index()].boneMatrixAnything[bone][1][3], 
+                      playerCache[index()].boneMatrixAnything[bone][2][3]);
     }
 }
 
