@@ -1,8 +1,5 @@
 #include "../../includes.hpp"
 #include "features.hpp"
-#include <cfloat>
-#include <cstring>
-#include <iterator>
 #include <algorithm>
 
 void Features::LegitBot::createMove(CUserCmd* cmd) {
@@ -65,7 +62,6 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                                         Vector localPlayerEyePos = Globals::localPlayer->eyePos();
 
                                         Vector targetEyePos = p->getBonePos(8); // 8 is headbone in bonematrix
-                                        targetEyePos+=(p->velocity()*Interfaces::globals->interval_per_tick);
 
                                         QAngle angleToCurrentPlayer = calcAngle(localPlayerEyePos, targetEyePos) - cmd->viewangles - (recoilCompensation ? Globals::localPlayer->aimPunch()*2 : QAngle(0, 0, 0));
                                         normalizeAngles(angleToCurrentPlayer);

@@ -6,28 +6,33 @@
 
 bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* cmd) {
     original(thisptr, flInputSampleTime, cmd);
-    if (cmd && cmd->command_number) {
+    if (cmd->tick_count != 0) {
         
         Globals::localPlayer = (Player*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetLocalPlayer());
 
         startMovementFix(cmd);
-
             Features::RankReveal::createMove(cmd);
             Features::AutoHop::createMove(cmd);
             Features::FastDuck::createMove(cmd);
             
-            Features::Backtrack::store(cmd);
+            if (!CONFIGBOOL("Rage>Enabled")) {
+                Features::Backtrack::store(cmd);
+                Features::Forwardtrack::createMove(cmd);
+            }
             Features::Prediction::start(cmd);
-                Features::LegitBot::createMove(cmd);
-                Features::Triggerbot::createMove(cmd);
-                Features::Backtrack::createMove(cmd);
+                if (!CONFIGBOOL("Rage>Enabled")) {
+                    Features::LegitBot::createMove(cmd);
+                    Features::Triggerbot::createMove(cmd);
+                    Features::Backtrack::createMove(cmd);
+                }
+                else {
+                    Features::RageBot::createMove(cmd);
+                }
             Features::Prediction::end();
-            Features::Forwardtrack::createMove(cmd);
 
             if (Features::AutoDefuse::shouldDefuse) {
                 cmd->buttons |= (1 << 5);
             }
-
         endMovementFix(cmd);
 
         cmd->forwardmove = std::clamp(cmd->forwardmove, -450.0f, 450.0f);
@@ -40,5 +45,5 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
         cmd->viewangles.z = 0.0f;
     }
 
-    return false; // return false when we want to do silent angles for rb
+    return !(CONFIGBOOL("Rage>Enabled")); // return false when we want to do silent angles for rb
 }

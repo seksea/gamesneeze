@@ -84,7 +84,6 @@ void Features::Backtrack::createMove(CUserCmd* cmd) {
                                         Vector localPlayerEyePos = Globals::localPlayer->eyePos();
 
                                         Vector targetEyePos = Vector(player.second.boneMatrix[8][0][3], player.second.boneMatrix[8][1][3], player.second.boneMatrix[8][2][3]); // 8 is headbone in bonematrix
-                                        targetEyePos+=(p->velocity()/64);
                                         
                                         QAngle angleToCurrentPlayer = calcAngle(localPlayerEyePos, targetEyePos);
                                         angleToCurrentPlayer -= viewAngles;

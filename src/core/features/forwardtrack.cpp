@@ -23,7 +23,6 @@ void Features::Forwardtrack::createMove(CUserCmd* cmd) {
                             Vector localPlayerEyePos = Globals::localPlayer->eyePos();
 
                             Vector targetEyePos = Vector(boneMatrix[8][0][3], boneMatrix[8][1][3], boneMatrix[8][2][3]); // 8 is headbone in bonematrix
-                            targetEyePos+=(p->velocity()*Interfaces::globals->interval_per_tick);
                             for (int i = 0; i < 2; i++) {
                                 targetEyePos += (p->velocity()*Interfaces::globals->interval_per_tick);
                                 

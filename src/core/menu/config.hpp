@@ -108,6 +108,12 @@ namespace Config {
                 CONFIGITEM("Legit>Triggerbot>Body Hitchance", 0),
             // }
         // }
+        // RageBot {
+            // Default {
+                CONFIGITEM("Rage>Enabled", false),
+                CONFIGITEM("Rage>RageBot>Default>FOV", 0),
+            //}
+        // }
         // Visuals {
             // ESP {
                 CONFIGITEM("Visuals>Players>Enemies>Box", false),

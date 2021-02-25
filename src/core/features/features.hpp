@@ -86,4 +86,7 @@ namespace Features {
     namespace Triggerbot {
         void createMove(CUserCmd* cmd);
     }
+    namespace RageBot {
+        void createMove(CUserCmd* cmd);
+    }
 }
