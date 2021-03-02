@@ -1,5 +1,4 @@
 #include "features.hpp"
-#include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_scancode.h>
 #include <vector>
 
@@ -7,6 +6,7 @@ int score;
 ImVec2 cursorPos;
 float deltaTime;
 bool alive = true;
+bool paused = false;
 float birdHeight;
 
 class Bird {
@@ -14,6 +14,9 @@ public:
     void draw(ImDrawList* drawList) {
         drawList->AddRectFilled(ImVec2{cursorPos.x+60, cursorPos.y+(400-height)}, ImVec2{cursorPos.x+70, cursorPos.y+(400-height)+10}, ImColor(255, 255, 255, 255));
         if (alive) {
+            if(paused) {
+                velocity = 0;
+            }
             height += velocity*deltaTime; // add velocity
             birdHeight = height;
             velocity -= 250.f*deltaTime; // gravity
@@ -24,20 +27,31 @@ public:
         else {
             drawList->AddText(ImVec2{ImVec2{cursorPos.x+10, cursorPos.y+10}}, ImColor(255, 255, 255, 255), "You died, press up arrow to respawn");
         }
+        if (paused) {
+            drawList->AddText(ImVec2{ImVec2{cursorPos.x+10, cursorPos.y+10}}, ImColor(255, 255, 255, 255), "Paused");
+        }
     }
 
     void handleInput() {
         if (alive) {
-            if (ImGui::IsKeyPressed(SDL_SCANCODE_UP, false)) {
+            if (ImGui::IsKeyPressed(SDL_SCANCODE_UP, false) && !paused) {
                 velocity = 140.f;
             }
         }
         else {
             if (ImGui::IsKeyPressed(SDL_SCANCODE_UP, false)) {
                 alive = true;
+                paused = false;
                 score = 0;
                 velocity = 0;
                 height = 300;
+            }
+        }
+        if(ImGui::IsKeyPressed(SDL_SCANCODE_DOWN, false) && alive) {
+            if(paused) {
+                paused = false;
+            } else if (!paused) {
+                paused = true;
             }
         }
     }
@@ -59,7 +73,11 @@ public:
         drawList->AddRectFilled(ImVec2{cursorPos.x+x, cursorPos.y}, ImVec2{cursorPos.x+x+40, cursorPos.y+(400-gapTop)}, ImColor(0, 65, 0, 255));
         drawList->AddRectFilled(ImVec2{cursorPos.x+x, cursorPos.y+400}, ImVec2{cursorPos.x+x+40, cursorPos.y+(400-gapBottom)}, ImColor(0, 65, 0, 255));
         if (alive) {
-            x -= 90.f*deltaTime;
+            if (paused) {
+                x = x;
+            }else if (!paused) {
+                x -= 90.f * deltaTime;
+            }
             if (x < -200) {
                 x = 400;
                 gapTop = (rand() % 200) + 130;
