@@ -1,3 +1,5 @@
 /build
 /.vscode
 /gdb.txt
+/.idea
+/cmake-build-debug
