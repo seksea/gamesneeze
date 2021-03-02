@@ -5,7 +5,7 @@ void style() {
     ImVec4* colors = ImGui::GetStyle().Colors;
     colors[ImGuiCol_Text]                   = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
     colors[ImGuiCol_TextDisabled]           = ImVec4(0.50f, 0.50f, 0.50f, 1.00f);
-    colors[ImGuiCol_WindowBg]               = ImVec4(0.06f, 0.06f, 0.06f, 0.98f);
+    colors[ImGuiCol_WindowBg]               = ImVec4(0.06f, 0.06f, 0.06f, 1.00f);
     colors[ImGuiCol_ChildBg]                = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
     colors[ImGuiCol_PopupBg]                = ImVec4(0.08f, 0.08f, 0.08f, 0.94f);
     colors[ImGuiCol_Border]                 = ImVec4(0.24f, 0.24f, 0.24f, 0.50f);
@@ -54,9 +54,9 @@ void style() {
 
     ImGui::GetStyle().ScrollbarSize = 8;
     ImGui::GetStyle().ScrollbarRounding = 0;
-    ImGui::GetStyle().WindowRounding = 0;
-    ImGui::GetStyle().TabRounding = 2;
-    ImGui::GetStyle().FrameRounding = 0;
+    ImGui::GetStyle().WindowRounding = 6;
+    ImGui::GetStyle().ChildRounding = 3;
+    ImGui::GetStyle().FrameRounding = 4;
     ImGui::GetStyle().TabRounding = 2;
 }
 
@@ -121,7 +121,7 @@ void Menu::drawMenu() {
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 4));
     ImGui::Text("game"); ImGui::SameLine(); ImGui::PopStyleVar(); 
     if (ImGui::IsItemClicked()) {
-        system("xdg-open https://discord.gg/SCHsWHFJMb"); //if it works it works lmao
+        system("xdg-open https://discord.gg/SCHsWHFJMb &"); //if it works it works lmao
     }
     if (ImGui::IsItemHovered()) {
         ImGui::SetTooltip("Click for discord!");
@@ -129,7 +129,7 @@ void Menu::drawMenu() {
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(490, 5)); 
     ImGui::TextColored(ImColor(108, 195, 18, 255), "sneeze");
     if (ImGui::IsItemClicked()) {
-        system("xdg-open https://discord.gg/SCHsWHFJMb"); //if it works it works lmao
+        system("xdg-open https://discord.gg/SCHsWHFJMb &"); //if it works it works lmao
     }
     if (ImGui::IsItemHovered()) {
         ImGui::SetTooltip("Click for discord!");

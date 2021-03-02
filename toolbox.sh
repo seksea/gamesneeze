@@ -1,5 +1,4 @@
 #!/bin/bash
-# fuzion/aimtux
 
 libname="libgamemode.so" # Pretend to be gamemode, change this to another lib that may be in /maps
 csgo_pid=$(pidof csgo_linux64)
