@@ -16,17 +16,18 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
             Features::RankReveal::createMove(cmd);
             Features::AutoHop::createMove(cmd);
             Features::FastDuck::createMove(cmd);
+
             Features::Prediction::start(cmd);
-                if (!CONFIGBOOL("Rage>Enabled")) {
+                if (CONFIGBOOL("Rage>Enabled")) {
+                    Features::RageBot::createMove(cmd);
+                    Features::AntiAim::createMove(cmd);
+                }
+                else {
                     Features::LegitBot::createMove(cmd);
                     Features::Triggerbot::createMove(cmd);
                     Features::Backtrack::store(cmd);
                     Features::Backtrack::createMove(cmd);
                     Features::Forwardtrack::createMove(cmd);
-                }
-                else {
-                    Features::RageBot::createMove(cmd);
-                    Features::AntiAim::createMove(cmd);
                 }
             Features::Prediction::end();
 
