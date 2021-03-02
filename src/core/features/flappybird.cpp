@@ -14,21 +14,17 @@ public:
     void draw(ImDrawList* drawList) {
         drawList->AddRectFilled(ImVec2{cursorPos.x+60, cursorPos.y+(400-height)}, ImVec2{cursorPos.x+70, cursorPos.y+(400-height)+10}, ImColor(255, 255, 255, 255));
         if (alive) {
-            if(paused) {
-                velocity = 0;
-            }
-            height += velocity*deltaTime; // add velocity
-            birdHeight = height;
-            velocity -= 250.f*deltaTime; // gravity
-            if (height < 50) {
-                alive = false;
+            if (!paused) {
+                height += velocity*deltaTime; // add velocity
+                birdHeight = height;
+                velocity -= 250.f*deltaTime; // gravity
+                if (height < 50) {
+                    alive = false;
+                }
             }
         }
         else {
             drawList->AddText(ImVec2{ImVec2{cursorPos.x+10, cursorPos.y+10}}, ImColor(255, 255, 255, 255), "You died, press up arrow to respawn");
-        }
-        if (paused) {
-            drawList->AddText(ImVec2{ImVec2{cursorPos.x+10, cursorPos.y+10}}, ImColor(255, 255, 255, 255), "Paused");
         }
     }
 
@@ -37,21 +33,8 @@ public:
             if (ImGui::IsKeyPressed(SDL_SCANCODE_UP, false) && !paused) {
                 velocity = 140.f;
             }
-        }
-        else {
-            if (ImGui::IsKeyPressed(SDL_SCANCODE_UP, false)) {
-                alive = true;
-                paused = false;
-                score = 0;
-                velocity = 0;
-                height = 300;
-            }
-        }
-        if(ImGui::IsKeyPressed(SDL_SCANCODE_DOWN, false) && alive) {
-            if(paused) {
-                paused = false;
-            } else if (!paused) {
-                paused = true;
+            else if (ImGui::IsKeyPressed(SDL_SCANCODE_DOWN, false)) {
+                paused = !paused;
             }
         }
     }
@@ -73,24 +56,22 @@ public:
         drawList->AddRectFilled(ImVec2{cursorPos.x+x, cursorPos.y}, ImVec2{cursorPos.x+x+40, cursorPos.y+(400-gapTop)}, ImColor(0, 65, 0, 255));
         drawList->AddRectFilled(ImVec2{cursorPos.x+x, cursorPos.y+400}, ImVec2{cursorPos.x+x+40, cursorPos.y+(400-gapBottom)}, ImColor(0, 65, 0, 255));
         if (alive) {
-            if (paused) {
-                x = x;
-            }else if (!paused) {
+            if (!paused) {
                 x -= 90.f * deltaTime;
-            }
-            if (x < -200) {
-                x = 400;
-                gapTop = (rand() % 200) + 130;
-                gapBottom = gapTop - 65;
-                hasBirdPassed = false;
-            }
-            if ((x < 70) && (x > 20)) {
-                if ((birdHeight > gapTop) || (birdHeight < gapBottom)) {
-                    alive = false;
+                if (x < -200) {
+                    x = 400;
+                    gapTop = (rand() % 200) + 130;
+                    gapBottom = gapTop - 65;
+                    hasBirdPassed = false;
                 }
-                if (!hasBirdPassed) {
-                    score++;
-                    hasBirdPassed = true;
+                if ((x < 70) && (x > 20)) {
+                    if ((birdHeight > gapTop) || (birdHeight < gapBottom)) {
+                        alive = false;
+                    }
+                    if (!hasBirdPassed) {
+                        score++;
+                        hasBirdPassed = true;
+                    }
                 }
             }
         }
@@ -132,6 +113,10 @@ void Features::FlappyBird::draw() {
 
         static Pipe pipe3(700);
         pipe3.draw(drawList);
+        
+        if (paused) {
+            drawList->AddText(ImVec2{ImVec2{cursorPos.x+10, cursorPos.y+10}}, ImColor(255, 255, 255, 255), "Paused");
+        }
 
         ImGui::End();
     }
