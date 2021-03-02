@@ -41,6 +41,11 @@ namespace Hooks {
         inline func original;
         void hook(void* thisptr, char* szCmdString);
     }
+    namespace OverrideView {
+        using func = void(*)(void* thisptr, ViewSetup* setup);
+        inline func original;
+        void hook(void* thisptr, ViewSetup* setup);
+    }
     /* SDL HOOKS */
     namespace SDL {
         bool initSDL();

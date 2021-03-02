@@ -1,32 +1,32 @@
 #include "../../includes.hpp"
 #include "hooks.hpp"
 #include <algorithm>
+#include <cstdint>
 
 
 
 bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* cmd) {
     original(thisptr, flInputSampleTime, cmd);
     if (cmd->tick_count != 0) {
-        
-        Globals::localPlayer = (Player*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetLocalPlayer());
+        uintptr_t rbp;
+        asm volatile("mov %%rbp, %0" : "=r" (rbp));
+        Globals::sendPacket = ((*(bool **)rbp) - 0x18);
 
         startMovementFix(cmd);
             Features::RankReveal::createMove(cmd);
             Features::AutoHop::createMove(cmd);
             Features::FastDuck::createMove(cmd);
-            
-            if (!CONFIGBOOL("Rage>Enabled")) {
-                Features::Backtrack::store(cmd);
-                Features::Forwardtrack::createMove(cmd);
-            }
             Features::Prediction::start(cmd);
                 if (!CONFIGBOOL("Rage>Enabled")) {
                     Features::LegitBot::createMove(cmd);
                     Features::Triggerbot::createMove(cmd);
+                    Features::Backtrack::store(cmd);
                     Features::Backtrack::createMove(cmd);
+                    Features::Forwardtrack::createMove(cmd);
                 }
                 else {
                     Features::RageBot::createMove(cmd);
+                    Features::AntiAim::createMove(cmd);
                 }
             Features::Prediction::end();
 

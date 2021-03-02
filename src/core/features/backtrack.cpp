@@ -45,27 +45,6 @@ void Features::Backtrack::createMove(CUserCmd* cmd) {
         if (cmd->tick_count != 0) {
             if (Interfaces::engine->IsInGame()) {
                 if (Globals::localPlayer) {
-                    // Store
-                    BackTrackTick currentTick;
-                    for (int i = 1; i < Interfaces::globals->maxClients; i++) {
-                        Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
-                        if (p) {
-                            if (p->health() > 0 && !p->dormant() && p != Globals::localPlayer && p->team() != Globals::localPlayer->team()) {
-                                BacktrackPlayer player;
-                                player.playerIndex = i;
-                                if (p->getAnythingBones(player.boneMatrix)) {
-                                    currentTick.players.insert(std::pair<int, BacktrackPlayer>(i, player));
-                                }
-                            }
-                        }
-                    }
-                    currentTick.tickCount = cmd->tick_count;
-                    backtrackTicks.insert(backtrackTicks.begin(), currentTick);
-
-                    // Delete ticks we cant backtrack
-                    while ((int)backtrackTicks.size() > CONFIGINT("Legit>Backtrack>Backtrack Ticks")) {
-                        backtrackTicks.pop_back();
-                    }
 
                     // Find how far we should backtrack in this tick
                     QAngle viewAngles;

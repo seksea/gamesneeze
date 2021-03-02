@@ -80,6 +80,19 @@ public:
 	NETVAR("DT_CSPlayer", "m_hObserverTarget", observerTarget, Player*);
 	NETVAR("DT_CSPlayer", "m_bHasDefuser", defuser, bool);
 	NETVAR("DT_BasePlayer", "m_vecViewOffset[0]", viewOffset, Vector);
+    NETVAR("DT_CSPlayer", "m_angEyeAngles[0]", eyeAngles, QAngle);
+	NETVAR("DT_CSPlayer", "m_flLowerBodyYawTarget", lbyTarget, float);
+	NETVAR("DT_CSPlayer", "m_bIsScoped", scoped, bool);
+	NETVAR("DT_BasePlayer", "deadflag", deadflag, bool);
+
+	AnimState* animState() {
+		return *reinterpret_cast<AnimState **>((uintptr_t)
+		this + Offsets::animState);
+	}
+
+	QAngle* viewAngles() {
+		return (QAngle*)((uintptr_t)deadflag_ptr() + 0x4);
+	}
 
 	Vector eyePos() {
 		return origin() + ((viewOffset().z > 0) ? viewOffset() : Vector(0, 0, (flags() & (1 << 1)) ? 46 : 64)); // For some reason some ents' viewoffset is all 0s, this is a hacky fix for it

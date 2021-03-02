@@ -15,6 +15,7 @@
 #include "ienginesound.hpp"
 #include "ienginetrace.hpp"
 #include "iprediction.hpp"
+#include "input.hpp"
 
 #include "iclientmode.hpp"
 #include "globalvars.hpp"
@@ -39,6 +40,7 @@ namespace Interfaces {
 
     inline IClientMode* clientMode;
     inline CGlobalVars* globals;
+    inline CInput* input;
 
     typedef void* (*InstantiateInterfaceFn)();
     // https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/tier1/interface.h#L72

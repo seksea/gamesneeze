@@ -21,6 +21,10 @@ namespace Netvar {
         {std::make_pair("DT_CSPlayer", "m_hObserverTarget"), 0},
         {std::make_pair("DT_CSPlayer", "m_bHasDefuser"), 0},
         {std::make_pair("DT_BasePlayer", "m_vecViewOffset[0]"), 0},
+        {std::make_pair("DT_CSPlayer", "m_angEyeAngles[0]"), 0},
+        {std::make_pair("DT_CSPlayer", "m_flLowerBodyYawTarget"), 0},
+        {std::make_pair("DT_CSPlayer", "m_bIsScoped"), 0},
+        {std::make_pair("DT_BasePlayer", "deadflag"), 0},
 
         /* Item */
         {std::make_pair("DT_BaseAttributableItem", "m_iItemDefinitionIndex"), 0},
@@ -62,6 +66,7 @@ namespace Offsets {
     inline LineGoesThroughSmoke lineGoesThroughSmoke;
 
     inline int* predictionSeed;
+    inline unsigned int animState;
     inline CMoveData* moveData;
 
 }

@@ -35,6 +35,9 @@ bool Hooks::init() {
     Log::log(LOG, " Hooking ClientCmd...");
     ClientCmd::original = (ClientCmd::func)VMT::hook(Interfaces::engine, (void*)ClientCmd::hook, 7);
 
+    Log::log(LOG, " Hooking OverrideView...");
+    OverrideView::original = (OverrideView::func)VMT::hook(Interfaces::clientMode, (void*)OverrideView::hook, 19);
+
     Log::log(LOG, "Initialised hooks!");
     return true;
 }
@@ -69,6 +72,9 @@ bool Hooks::unload() {
 
     Log::log(LOG, " Unhooking ClientCmd...");
     VMT::hook(Interfaces::engine, (void*)ClientCmd::original, 7);
+
+    Log::log(LOG, " Unhooking OverrideView...");
+    VMT::hook(Interfaces::clientMode, (void*)OverrideView::original, 19);
 
     Log::log(LOG, "Unloaded hooks!");
     return true;

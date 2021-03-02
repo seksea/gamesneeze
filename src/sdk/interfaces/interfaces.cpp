@@ -32,6 +32,11 @@ bool Interfaces::init() {
 	globals = *reinterpret_cast<CGlobalVars**>(getAbsoluteAddress(hudUpdate + 13, 3, 7));
     Log::log(LOG, " Globals %lx", (uintptr_t)globals);
 
+    /* Get input (for thirdperson) */
+    uintptr_t activateMouse = reinterpret_cast<uintptr_t>(getVTable(client)[16]);
+
+	input = **reinterpret_cast<CInput***>(getAbsoluteAddress(activateMouse, 3, 7));
+
     Log::log(LOG, "Initialised interfaces!");
     return true;
 }

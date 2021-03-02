@@ -111,7 +111,45 @@ namespace Config {
         // RageBot {
             // Default {
                 CONFIGITEM("Rage>Enabled", false),
+                CONFIGITEM("Rage>RageBot>Default>Resolver", false),
                 CONFIGITEM("Rage>RageBot>Default>FOV", 0),
+
+                CONFIGITEM("Rage>AntiAim>AntiAim", 0),
+                CONFIGITEM("Rage>AntiAim>Pitch", 89),
+                CONFIGITEM("Rage>AntiAim>Offset", 180),
+                CONFIGITEM("Rage>AntiAim>FakeLag", 0),
+                // Static {
+                    CONFIGITEM("Rage>AntiAim>Static>Desync", 0),
+                // }
+
+                // Jitter {
+                    CONFIGITEM("Rage>AntiAim>Jitter>Desync", 0),
+                    CONFIGITEM("Rage>AntiAim>Jitter>Jitter Amount", 0),
+                    CONFIGITEM("Rage>AntiAim>Jitter>Jitter Delay", 1),
+                    CONFIGITEM("Rage>AntiAim>Jitter>Random", false),
+                    CONFIGITEM("Rage>AntiAim>Jitter>Random Min", 0),
+                    CONFIGITEM("Rage>AntiAim>Jitter>Random Max", 0),
+                // }
+
+                // Fake Jitter {
+                    CONFIGITEM("Rage>AntiAim>Fake Jitter>Jitter Amount", 0),
+                    CONFIGITEM("Rage>AntiAim>Fake Jitter>Jitter Delay", 1),
+                    CONFIGITEM("Rage>AntiAim>Fake Jitter>Random", false),
+                    CONFIGITEM("Rage>AntiAim>Fake Jitter>Random Min", 0),
+                    CONFIGITEM("Rage>AntiAim>Fake Jitter>Random Max", 0),
+                // }
+
+                // Real Jitter {
+                    CONFIGITEM("Rage>AntiAim>Real Jitter>Jitter Amount", 0),
+                    CONFIGITEM("Rage>AntiAim>Real Jitter>Jitter Delay", 1),
+                    CONFIGITEM("Rage>AntiAim>Real Jitter>Random", false),
+                    CONFIGITEM("Rage>AntiAim>Real Jitter>Random Min", 0),
+                    CONFIGITEM("Rage>AntiAim>Real Jitter>Random Max", 0),
+                // }
+
+                // Spin {
+                    CONFIGITEM("Rage>AntiAim>Spin>Desync", 0),
+                // }
             //}
         // }
         // Visuals {
@@ -180,6 +218,9 @@ namespace Config {
                 CONFIGITEM("Visuals>World>World>World Color Modulation", ImColor(255, 255, 255, 255)),
                 CONFIGITEM("Visuals>World>World>Nightmode", 0),
                 CONFIGITEM("Visuals>World>World>Skybox", 0),
+                CONFIGITEM("Visuals>World>World>FOV", 90),
+                CONFIGITEM("Visuals>World>World>Third Person", false),
+                CONFIGITEM("Visuals>World>World>Third Person Shows Fake", false),
 
                 CONFIGITEM("Visuals>World>Items>Weapon Box", false),
                 CONFIGITEM("Visuals>World>Items>Weapon Box Color", ImColor(255, 255, 255, 255)),

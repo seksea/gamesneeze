@@ -89,4 +89,9 @@ namespace Features {
     namespace RageBot {
         void createMove(CUserCmd* cmd);
     }
+    namespace AntiAim {
+        inline matrix3x4_t fakeBones[128];
+        inline float fakeYaw;
+        void createMove(CUserCmd* cmd);
+    }
 }
