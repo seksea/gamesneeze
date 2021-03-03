@@ -2,7 +2,9 @@
 #include "../netvars.hpp"
 #include "vector.h"
 #include "../../utils/utils.hpp"
+#include <functional>
 
+inline std::map<float, int, std::greater<float>> entityDistanceMap; // Map containing entity distance
 void cachePlayers();
 
 class ICollideable {

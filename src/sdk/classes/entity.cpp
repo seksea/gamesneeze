@@ -1,6 +1,7 @@
 #include "../../includes.hpp"
 #include "entity.hpp"
 #include "vector.h"
+#include <vector>
 
 bool visCheck(Player* player) {
     matrix3x4_t boneMatrix[128];
@@ -38,20 +39,28 @@ void cachePlayers() {
     // ran in framestagenotify
     if (Globals::localPlayer) {
         if (Interfaces::engine->IsInGame()) {
-            for (int i = 1; i < Interfaces::globals->maxClients; i++) {
-                Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
-                if (p && p != Globals::localPlayer) {
-                    if (p->health() > 0 && !p->dormant()) {
-                        PlayerCache player;
-                        if (p->setupBones(player.boneMatrixHitbox, 128, BONE_USED_BY_HITBOX, Interfaces::globals->curtime)) {
-                            if (p->setupBones(player.boneMatrixAnything, 128, BONE_USED_BY_ANYTHING, Interfaces::globals->curtime)) {
-                                player.visible = visCheck(p);
-                                if (playerCache.find(i) != playerCache.end()) {
-                                    playerCache[i] = player;
+            int highest = Interfaces::entityList->GetHighestEntityIndex();
+            for (int i = 1; i < highest; i++) {
+                if (i < Interfaces::globals->maxClients) {
+                    Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
+                    if (p && p != Globals::localPlayer) {
+                        if (p->health() > 0 && !p->dormant()) {
+                            PlayerCache player;
+                            if (p->setupBones(player.boneMatrixHitbox, 128, BONE_USED_BY_HITBOX, Interfaces::globals->curtime)) {
+                                if (p->setupBones(player.boneMatrixAnything, 128, BONE_USED_BY_ANYTHING, Interfaces::globals->curtime)) {
+                                    player.visible = visCheck(p);
+                                    if (playerCache.find(i) != playerCache.end()) {
+                                        playerCache[i] = player;
+                                    }
+                                    else {
+                                        playerCache.insert(std::pair<int, PlayerCache>(i, player));
+                                    }
                                 }
-                                else {
-                                    playerCache.insert(std::pair<int, PlayerCache>(i, player));
-                                }
+                            }
+                        }
+                        else {
+                            if (playerCache.find(i) != playerCache.end()) {
+                                playerCache.erase(i);
                             }
                         }
                     }
@@ -61,9 +70,15 @@ void cachePlayers() {
                         }
                     }
                 }
-                else {
-                    if (playerCache.find(i) != playerCache.end()) {
-                        playerCache.erase(i);
+                Entity* p = (Entity*)Interfaces::entityList->GetClientEntity(i);
+                if (p) {
+                    if (!p->dormant()) {
+                        for (auto& item : entityDistanceMap) {
+                            if (item.second == i) {
+                                entityDistanceMap.erase(item.first);
+                            }
+                        }
+                        entityDistanceMap.insert(std::pair<float, int>(getDistance(Globals::localPlayer->origin(), p->origin()), i));
                     }
                 }
             }

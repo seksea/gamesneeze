@@ -196,11 +196,10 @@ void drawGenericEnt(Entity* ent, bool box, ImColor color, const char* label) {
 
 void Features::ESP::draw() {
     if (Interfaces::engine->IsInGame()) {
-        int highest = Interfaces::entityList->GetHighestEntityIndex();
-        for (int i = 0; i < highest; i++) {
+        for (auto i : entityDistanceMap) {
             if (Globals::localPlayer) {
-                if (i != Interfaces::engine->GetLocalPlayer()) {
-                    Entity* ent = (Entity*)Interfaces::entityList->GetClientEntity(i);
+                if (i.second != Interfaces::engine->GetLocalPlayer()) {
+                    Entity* ent = (Entity*)Interfaces::entityList->GetClientEntity(i.second);
                     if (ent) {
                         ClientClass* clientClass = ent->clientClass();
 
