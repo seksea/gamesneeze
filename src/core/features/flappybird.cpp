@@ -24,18 +24,19 @@ public:
             }
         }
         else {
+            height = 300;
+            score = 0;
             drawList->AddText(ImVec2{ImVec2{cursorPos.x+10, cursorPos.y+10}}, ImColor(255, 255, 255, 255), "You died, press up arrow to respawn");
         }
     }
 
     void handleInput() {
-        if (alive) {
-            if (ImGui::IsKeyPressed(SDL_SCANCODE_UP, false) && !paused) {
-                velocity = 140.f;
-            }
-            else if (ImGui::IsKeyPressed(SDL_SCANCODE_DOWN, false)) {
-                paused = !paused;
-            }
+        if (ImGui::IsKeyPressed(SDL_SCANCODE_UP, false) && !paused) {
+            velocity = 140.f;
+            alive = true;
+        }
+        else if (ImGui::IsKeyPressed(SDL_SCANCODE_DOWN, false) && alive) {
+            paused = !paused;
         }
     }
 
