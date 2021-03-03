@@ -7,7 +7,7 @@ void Menu::drawMiscTab() {
         if (ImGui::BeginTabItem("Misc")) {
             ImGui::Columns(2, NULL, false);
             ImGui::SetColumnWidth(-1, ImGui::GetWindowContentRegionWidth() * 0.62);
-            ImGui::BeginChild("Misc", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.61, ImGui::GetWindowHeight() * 0.85f), true); {
+            ImGui::BeginChild("Misc", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.61, ImGui::GetWindowHeight() * 0.64f), true); {
                 ImGui::Text("Misc");
                 ImGui::Separator();
                 ImGui::Checkbox("Developer window", &devWindow);
@@ -25,6 +25,12 @@ void Menu::drawMiscTab() {
                     ImGui::Checkbox("Latest Defuse", &CONFIGBOOL("Misc>Misc>Misc>Latest Defuse"));
                 }
                 ImGui::Checkbox("Chat Filter Bypass", &CONFIGBOOL("Misc>Misc>Misc>Chat Filter Bypass"));
+                ImGui::EndChild();
+            }
+            ImGui::BeginChild("Hitmarkers", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.61, ImGui::GetWindowHeight() * 0.2f), true); {
+                ImGui::Text("Hitmarkers");
+                ImGui::Separator();
+                ImGui::Checkbox("Hitlogs", &CONFIGBOOL("Misc>Misc>Hitmarkers>Hitlogs"));
                 ImGui::EndChild();
             }
 

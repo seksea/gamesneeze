@@ -249,6 +249,8 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Movement>Bhop Max Hops Hit", 0),
             CONFIGITEM("Misc>Misc>Movement>Fast Duck", false),
 
+            CONFIGITEM("Misc>Misc>Hitmarkers>Hitlogs", false),
+            
             CONFIGITEM("Misc>Misc>Misc>Disable Watermark", false),
             CONFIGITEM("Misc>Misc>Misc>Force square radar", false),
             CONFIGITEM("Misc>Misc>Misc>Rank Revealer", false),

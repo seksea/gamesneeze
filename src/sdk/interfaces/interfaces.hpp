@@ -16,6 +16,7 @@
 #include "ienginetrace.hpp"
 #include "iprediction.hpp"
 #include "input.hpp"
+#include "igameevent.hpp"
 
 #include "iclientmode.hpp"
 #include "globalvars.hpp"
@@ -37,6 +38,7 @@ namespace Interfaces {
     inline IGameMovement* movement;
     inline IMoveHelper* moveHelper;
     inline IPrediction* prediction;
+    inline IGameEventManager2* eventManager;
 
     inline IClientMode* clientMode;
     inline CGlobalVars* globals;

@@ -6,6 +6,8 @@
 #include <tuple>
 #include <unistd.h>
 
+static Hooks::Events::EventListener* eventListener = nullptr;
+
 /* Create hooks */
 bool Hooks::init() {
     Log::log(LOG, "Initialising hooks...");
@@ -37,6 +39,8 @@ bool Hooks::init() {
 
     Log::log(LOG, " Hooking OverrideView...");
     OverrideView::original = (OverrideView::func)VMT::hook(Interfaces::clientMode, (void*)OverrideView::hook, 19);
+
+    eventListener = new Events::EventListener;
 
     Log::log(LOG, "Initialised hooks!");
     return true;
@@ -75,6 +79,8 @@ bool Hooks::unload() {
 
     Log::log(LOG, " Unhooking OverrideView...");
     VMT::hook(Interfaces::clientMode, (void*)OverrideView::original, 19);
+
+    delete eventListener;
 
     Log::log(LOG, "Unloaded hooks!");
     return true;

@@ -1,4 +1,5 @@
 #include "../../includes.hpp"
+#include "igameevent.hpp"
 #include "interfaces.hpp"
 #include <cstdint>
 #include <string>
@@ -20,6 +21,7 @@ bool Interfaces::init() {
     trace = getInterface<IEngineTrace>("./bin/linux64/engine_client.so", "EngineTraceClient");
 	movement = getInterface<IGameMovement>("./csgo/bin/linux64/client_client.so", "GameMovement");
     prediction = getInterface<IPrediction>("./csgo/bin/linux64/client_client.so", "VClientPrediction001", true);
+    eventManager = getInterface<IGameEventManager2>("./bin/linux64/engine_client.so", "GAMEEVENTSMANAGER002", true);
 
     /* Get IClientMode */
     uintptr_t HudProcessInput = reinterpret_cast<uintptr_t>(getVTable(client)[10]);

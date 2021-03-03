@@ -46,6 +46,19 @@ namespace Hooks {
         inline func original;
         void hook(void* thisptr, ViewSetup* setup);
     }
+
+    /* EVENT MANAGER */
+    namespace Events {
+        class EventListener : public IGameEventListener2 {
+        public:
+            EventListener();
+            ~EventListener();
+
+            void FireGameEvent(IGameEvent* event);
+            int GetEventDebugID() override;
+        };
+    }
+
     /* SDL HOOKS */
     namespace SDL {
         bool initSDL();
