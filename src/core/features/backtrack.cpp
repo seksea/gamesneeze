@@ -87,6 +87,7 @@ void Features::Backtrack::createMove(CUserCmd* cmd) {
                             }
                         }
                     }
+                    lastBacktrack = cmd->tick_count - closestTick; // To show how much you backtracked in hitlogs
                     cmd->tick_count = closestTick;
                 }
             }

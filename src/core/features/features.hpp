@@ -41,6 +41,7 @@ namespace Features {
             int tickCount;
         };
 
+        inline int lastBacktrack;
         inline std::vector<BackTrackTick> backtrackTicks;
 
         void store(CUserCmd* cmd);
