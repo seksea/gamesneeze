@@ -40,6 +40,9 @@ namespace Netvar {
         {std::make_pair("DT_EnvTonemapController", "m_bUseCustomAutoExposureMax"), 0},
         {std::make_pair("DT_EnvTonemapController", "m_flCustomAutoExposureMin"), 0},
         {std::make_pair("DT_EnvTonemapController", "m_flCustomAutoExposureMax"), 0},
+
+        /* Player Resource */
+        {std::make_pair("DT_PlayerResource", "m_iPing"), 0},
     };
     bool init();
 }

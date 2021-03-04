@@ -13,8 +13,8 @@ void Features::RecoilCrosshair::draw() {
                     float rad;
                     int x = Globals::screenSizeX / 2;
                     int y = Globals::screenSizeY / 2;
-                    int dx = Globals::screenSizeX / Globals::FOV; // swap 90 with fov in future
-                    int dy = Globals::screenSizeY / Globals::FOV; // swap 90 with fov in future
+                    int dx = Globals::screenSizeX / Globals::FOV;
+                    int dy = Globals::screenSizeY / Globals::FOV;
                     QAngle punchAngle = Globals::localPlayer->aimPunch();
                     if (CONFIGBOOL("Visuals>Players>LocalPlayer>Recoil Crosshair")) {
                         rad = 5;
