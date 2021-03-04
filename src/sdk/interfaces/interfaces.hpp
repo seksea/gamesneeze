@@ -22,7 +22,7 @@
 #include "iclientmode.hpp"
 #include "globalvars.hpp"
 
-#define playerResource ((*Interfaces::_playerResource))
+#define playerResource ((*Interfaces::_playerResource)) // its annoying to dereference every time
 
 namespace Interfaces {
     bool init();
