@@ -250,6 +250,7 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Movement>Fast Duck", false),
 
             CONFIGITEM("Misc>Misc>Hitmarkers>Hitlogs", false),
+            CONFIGITEM("Misc>Misc>Hitmarkers>Hitmarkers", false),
             
             CONFIGITEM("Misc>Misc>Misc>Disable Watermark", false),
             CONFIGITEM("Misc>Misc>Misc>Force square radar", false),

@@ -21,7 +21,26 @@ void Hooks::Events::EventListener::FireGameEvent(IGameEvent *event) {
                 Interfaces::engine->GetPlayerInfo(victim->index(), &info);
 
                 if (CONFIGBOOL("Misc>Misc>Hitmarkers>Hitlogs")) {
-                    Features::Notifications::addNotification(ImColor(220, 40, 40), "[gs] hit %s for %i", info.name, event->GetInt("dmg_health"));
+                    Features::Notifications::addNotification(ImColor(220, 220, 40), "[gs] hit %s for %i", info.name, event->GetInt("dmg_health"));
+                }
+
+                if (CONFIGBOOL("Misc>Misc>Hitmarkers>Hitmarkers")) {
+                    Features::Hitmarkers::drawHitmarkerTill = Interfaces::globals->curtime + 1.f;
+                    Interfaces::engine->ExecuteClientCmd("play buttons/arena_switch_press_02"); // TODO: play sound via a better method
+                }
+            }
+        }
+    }
+    if (strstr(event->GetName(), "player_death")) {
+        Entity* attacker = (Entity*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetPlayerForUserID(event->GetInt("attacker")));
+        Entity* victim = (Entity*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetPlayerForUserID(event->GetInt("userid")));
+        if (attacker && victim) {
+            if (attacker == Globals::localPlayer) {
+                player_info_t info;
+                Interfaces::engine->GetPlayerInfo(victim->index(), &info);
+
+                if (CONFIGBOOL("Misc>Misc>Hitmarkers>Hitlogs")) {
+                    Features::Notifications::addNotification(ImColor(220, 40, 40), "[gs] killed %s", info.name, event->GetInt("dmg_health"));
                 }
             }
         }

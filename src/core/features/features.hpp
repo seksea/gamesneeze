@@ -94,4 +94,8 @@ namespace Features {
         inline float fakeYaw;
         void createMove(CUserCmd* cmd);
     }
+    namespace Hitmarkers {
+        inline float drawHitmarkerTill;
+        void draw();
+    }
 }
