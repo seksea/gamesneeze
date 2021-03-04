@@ -32,5 +32,6 @@ void Hooks::OverrideView::hook(void* thisptr, ViewSetup* setup) {
             }
         }
     }
+    Globals::FOV = setup->fov;
     original(thisptr, setup);
 }

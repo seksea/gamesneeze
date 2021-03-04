@@ -25,6 +25,7 @@ namespace Globals {
     inline int screenSizeY;
     inline ImDrawList* drawList;
     inline bool* sendPacket;
+    inline float FOV;
 
     inline Player* localPlayer;
 }
