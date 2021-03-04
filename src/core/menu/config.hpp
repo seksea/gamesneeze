@@ -110,6 +110,7 @@ namespace Config {
         // }
         // RageBot {
             // Default {
+                CONFIGITEM("Rage>Slow Walk", false),
                 CONFIGITEM("Rage>Enabled", false),
                 CONFIGITEM("Rage>RageBot>Default>Resolver", false),
                 CONFIGITEM("Rage>RageBot>Default>FOV", 0),

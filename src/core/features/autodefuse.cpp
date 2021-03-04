@@ -1,5 +1,4 @@
 #include "features.hpp"
-
 void Features::AutoDefuse::onBombRender(PlantedC4* bomb) {
     if (CONFIGBOOL("Misc>Misc>Misc>Auto Defuse")) {
         // Could also check whether you're looking at the bomb but distance check should be good enough
