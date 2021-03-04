@@ -36,8 +36,13 @@ bool Interfaces::init() {
 
     /* Get input (for thirdperson) */
     uintptr_t activateMouse = reinterpret_cast<uintptr_t>(getVTable(client)[16]);
-
 	input = **reinterpret_cast<CInput***>(getAbsoluteAddress(activateMouse, 3, 7));
+    Log::log(LOG, " Input %lx", (uintptr_t)input);
+
+    /* Get PlayerResource */
+	uintptr_t instructionAddr = PatternScan::findFirstInModule("/client_client.so", " 48 8B 05 ? ? ? ? 55 48 89 E5 48 85 C0 74 10 48");
+	_playerResource = reinterpret_cast<PlayerResource**>(getAbsoluteAddress(instructionAddr, 3, 7));
+    Log::log(LOG, " PlayerResource %lx", (uintptr_t)_playerResource);
 
     Log::log(LOG, "Initialised interfaces!");
     return true;
