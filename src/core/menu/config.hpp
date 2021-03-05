@@ -229,6 +229,12 @@ namespace Config {
                 CONFIGITEM("Visuals>World>Items>Weapon Box Color", ImColor(255, 255, 255, 255)),
                 CONFIGITEM("Visuals>World>Items>Weapon Label", false),
 
+                CONFIGITEM("Visuals>World>Items>Grenade Box", false),
+                CONFIGITEM("Visuals>World>Items>Grenade Box Color", ImColor(255, 255, 255, 255)),
+                CONFIGITEM("Visuals>World>Items>Grenade Box Dynamic Color", false),
+                CONFIGITEM("Visuals>World>Items>Grenade Label", false),
+                CONFIGITEM("Visuals>World>Items>Grenade Owners", false),
+
                 CONFIGITEM("Visuals>World>Items>Planted C4 Box", false),
                 CONFIGITEM("Visuals>World>Items>Planted C4 Box Color", ImColor(255, 255, 255, 255)),
                 CONFIGITEM("Visuals>World>Items>Planted C4 Label", false),

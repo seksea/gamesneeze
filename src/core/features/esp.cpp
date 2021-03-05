@@ -210,7 +210,7 @@ void Features::ESP::draw() {
                         }
 
                         /* Weapon ESP */
-                        if ((clientClass->m_ClassID != EClassIds::CBaseWeaponWorldModel && strstr(clientClass->m_pNetworkName, "Weapon")) || clientClass->m_ClassID == EClassIds::CDEagle || clientClass->m_ClassID == EClassIds::CC4 || clientClass->m_ClassID == EClassIds::CAK47) {
+                        else if ((clientClass->m_ClassID != EClassIds::CBaseWeaponWorldModel && strstr(clientClass->m_pNetworkName, "Weapon")) || clientClass->m_ClassID == EClassIds::CDEagle || clientClass->m_ClassID == EClassIds::CC4 || clientClass->m_ClassID == EClassIds::CAK47) {
                             if (((Weapon*)ent)->owner() == -1) {
                                 try {
                                     drawGenericEnt(ent, CONFIGBOOL("Visuals>World>Items>Weapon Box"), CONFIGCOL("Visuals>World>Items>Weapon Box Color"), CONFIGBOOL("Visuals>World>Items>Weapon Label") ? itemIndexMap.at(((Weapon*)ent)->itemIndex()) : "");
@@ -221,30 +221,69 @@ void Features::ESP::draw() {
                             }
                         }
 
+                        /* Nade ESP*/
+                        else if (clientClass->m_ClassID == EClassIds::CBaseCSGrenadeProjectile || clientClass->m_ClassID == EClassIds::CSmokeGrenadeProjectile || clientClass->m_ClassID == EClassIds::CMolotovProjectile || clientClass->m_ClassID == CDecoyProjectile) {
+                            const char* modelName = Interfaces::modelInfo->GetModelName(ent->model());
+                            if (modelName) {
+                                player_info_t info;
+                                Interfaces::engine->GetPlayerInfo((*(int*)((uintptr_t)ent+GETNETVAROFFSET("DT_BaseCombatWeapon", "m_hOwnerEntity"))) & 0xFFF, &info);
+
+                                char label[128] = "";
+                                ImColor col(255, 255, 255, 255);
+
+                                if (strstr(modelName, "fraggrenade")) {
+                                    snprintf(label, 128, "%s\n%s", CONFIGBOOL("Visuals>World>Items>Grenade Label") ? "HE Grenade" : "", CONFIGBOOL("Visuals>World>Items>Grenade Owners") ? info.name : "");
+                                    col = ImColor(0, 86, 0, 255);
+                                }
+                                else if (strstr(modelName, "flashbang")) {
+                                    snprintf(label, 128, "%s\n%s", CONFIGBOOL("Visuals>World>Items>Grenade Label") ? "Flashbang" : "", CONFIGBOOL("Visuals>World>Items>Grenade Owners") ? info.name : "");
+                                    col = ImColor(255, 255, 0, 255);
+                                }
+                                else if (strstr(modelName, "molotov")) {
+                                    snprintf(label, 128, "%s\n%s", CONFIGBOOL("Visuals>World>Items>Grenade Label") ? "Molotov" : "", CONFIGBOOL("Visuals>World>Items>Grenade Owners") ? info.name : "");
+                                    col = ImColor(255, 0, 0, 255);
+                                }
+                                else if (strstr(modelName, "incendiarygrenade")) {
+                                    snprintf(label, 128, "%s\n%s", CONFIGBOOL("Visuals>World>Items>Grenade Label") ? "Incendiary" : "", CONFIGBOOL("Visuals>World>Items>Grenade Owners") ? info.name : "");
+                                    col = ImColor(255, 0, 0, 255);
+                                }
+                                else if (strstr(modelName, "decoy")) {
+                                    snprintf(label, 128, "%s\n%s", CONFIGBOOL("Visuals>World>Items>Grenade Label") ? "Decoy" : "", CONFIGBOOL("Visuals>World>Items>Grenade Owners") ? info.name : "");
+                                    col = ImColor(157, 157, 157, 255);
+                                }
+                                else if (strstr(modelName, "smokegrenade")) {
+                                    snprintf(label, 128, "%s\n%s", CONFIGBOOL("Visuals>World>Items>Grenade Label") ? "Smoke" : "", CONFIGBOOL("Visuals>World>Items>Grenade Owners") ? info.name : "");
+                                    col = ImColor(157, 157, 157, 255);
+                                }
+                                drawGenericEnt(ent, CONFIGBOOL("Visuals>World>Items>Grenade Box"), CONFIGBOOL("Visuals>World>Items>Grenade Box Dynamic Color") ? col : CONFIGCOL("Visuals>World>Items>Grenade Box Color"), label);
+                            }
+                        }
+
+
                         /* Planted C4 ESP */
-                        if (clientClass->m_ClassID == EClassIds::CPlantedC4) {
+                        else if (clientClass->m_ClassID == EClassIds::CPlantedC4) {
                             char label[32] = "";
                             snprintf(label, 32, "Planted C4\n%.3f", ((PlantedC4*)ent)->time() - Interfaces::globals->curtime);
                             drawGenericEnt(ent, CONFIGBOOL("Visuals>World>Items>Planted C4 Box"), CONFIGCOL("Visuals>World>Items>Planted C4 Box Color"), CONFIGBOOL("Visuals>World>Items>Planted C4 Label") ? label : "");
                             AutoDefuse::onBombRender((PlantedC4*)ent);
                         }
                         
-                        if (clientClass->m_ClassID == EClassIds::CEnvTonemapController) {
+                        else if (clientClass->m_ClassID == EClassIds::CEnvTonemapController) {
                             Nightmode::onTonemapController((TonemapController*)ent);
                         }
 
                         /* Chicken ESP */
-                        if (clientClass->m_ClassID == EClassIds::CChicken) {
+                        else if (clientClass->m_ClassID == EClassIds::CChicken) {
                             drawGenericEnt(ent, CONFIGBOOL("Visuals>World>Items>Chicken Box"), CONFIGCOL("Visuals>World>Items>Chicken Box Color"), CONFIGBOOL("Visuals>World>Items>Chicken Label") ? "Chicken" : "");
                         }
 
                         /* Fish ESP */
-                        if (clientClass->m_ClassID == EClassIds::CFish) {
+                        else if (clientClass->m_ClassID == EClassIds::CFish) {
                             drawGenericEnt(ent, CONFIGBOOL("Visuals>World>Items>Fish Box"), CONFIGCOL("Visuals>World>Items>Fish Box Color"), CONFIGBOOL("Visuals>World>Items>Fish Label") ? "Fish" : "");
                         }
 
                         /* Debug ESP Everything*/
-                        if (CONFIGBOOL("Visuals>World>Items>ESP Quite literally everything")) {
+                        else if (CONFIGBOOL("Visuals>World>Items>ESP Quite literally everything")) {
                             char label[128] = "";
                             snprintf(label, 128, "%d\n%s", clientClass->m_ClassID, clientClass->m_pNetworkName);
                             drawGenericEnt(ent, true, ImColor(255, 255, 255, 255), label);
