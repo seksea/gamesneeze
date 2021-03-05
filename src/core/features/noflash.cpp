@@ -3,7 +3,10 @@
 void Features::NoFlash::frameStageNotify(FrameStage frame) {
     if(Interfaces::engine->IsInGame()) {
         if(CONFIGBOOL("Visuals>World>World>No Flash")) {
-            Globals::localPlayer->maxFlash() = 0;
-        } else {Globals::localPlayer->maxFlash() = 255;}
+            *Globals::localPlayer->maxFlashAlpha_ptr() = 0;
+        }
+        else {
+            *Globals::localPlayer->maxFlashAlpha_ptr() = 255;
+        }
     }
 }
