@@ -76,8 +76,11 @@ public:
 		typedef bool (*Fn)(void*);
 		return getVirtualFunc<Fn>(this, 27)(this);
 	}
-
-	const VMatrix& WorldToScreenMatrix() {
+	bool IsVoiceRecording() {
+        typedef bool (*Fn)(void*);
+        return getVirtualFunc<Fn>(this, 225)(this);
+    }
+    const VMatrix& WorldToScreenMatrix() {
 		typedef VMatrix& (*Fn)(void*);
 		return getVirtualFunc<Fn>(this, 37)(this);
 	}

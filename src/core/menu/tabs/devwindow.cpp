@@ -20,6 +20,7 @@ void Menu::drawDevWindow() {
             ImGui::Text("IsConnected: %d",Interfaces::engine->IsConnected());
             ImGui::Text("GetLocalPlayer: %d",Interfaces::engine->GetLocalPlayer());
             ImGui::Text("GetMaxClients: %d",Interfaces::engine->GetMaxClients());
+            ImGui::Text("IsVoiceRecording: %d",Interfaces::engine->IsVoiceRecording());
             ImGui::TreePop();
         }
         if (ImGui::TreeNode("EntityList")) {

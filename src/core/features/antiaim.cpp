@@ -62,7 +62,15 @@ void Features::AntiAim::createMove(CUserCmd* cmd) {
                             }
                         }
 
-                        *Globals::sendPacket = cmd->tick_count % ((CONFIGBOOL("Rage>Enabled") && CONFIGINT("Rage>AntiAim>AntiAim")) + CONFIGINT("Rage>AntiAim>FakeLag") + 1);
+                        //TODO Check for net channel group 9 so we can desync and yell at nn's at the same time
+                        int fakelag = CONFIGINT("Rage>AntiAim>FakeLag");
+                        if (Interfaces::engine->IsVoiceRecording()) {
+                            fakelag = 0;
+                        } else {
+                            fakelag = CONFIGINT("Rage>AntiAim>FakeLag");
+                        }
+
+                        *Globals::sendPacket = cmd->tick_count % ((CONFIGBOOL("Rage>Enabled") && CONFIGINT("Rage>AntiAim>AntiAim")) + fakelag + 1);
 
                         if (updatingLby()) {
                             cmd->viewangles.y = real + (fake * 2);
