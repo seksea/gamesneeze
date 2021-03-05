@@ -6,6 +6,7 @@ void Hooks::FrameStageNotify::hook(void* thisptr, FrameStage frame) {
     Features::ClantagChanger::frameStageNotify(frame);
     Features::SkyboxChanger::frameStageNotify(frame);
     Features::RecoilCrosshair::frameStageNotify(frame);
+    Features::NoFlash::frameStageNotify(frame);
 
     if (frame == FRAME_RENDER_START) {
         cachePlayers();

@@ -179,7 +179,7 @@ void Menu::drawVisualsTab() {
                 ImGui::SliderInt("##FOV", &CONFIGINT("Visuals>World>World>FOV"), 70, 120);
                 ImGui::Checkbox("Third Person", &CONFIGBOOL("Visuals>World>World>Third Person"));
                 ImGui::Checkbox("Third Person Shows Fake", &CONFIGBOOL("Visuals>World>World>Third Person Shows Fake"));
-
+                ImGui::Checkbox("No Flash", &CONFIGBOOL("Visuals>World>World>No Flash"));
                 ImGui::EndChild();
             }
             ImGui::SameLine();
