@@ -31,6 +31,7 @@ namespace Netvar {
 
         /* Weapon */
         {std::make_pair("DT_BaseCombatWeapon", "m_hOwner"), 0},
+        {std::make_pair("DT_BaseCombatWeapon", "m_hOwnerEntity"), 0},
 
         /* Bomb */
         {std::make_pair("DT_PlantedC4", "m_flC4Blow"), 0},
