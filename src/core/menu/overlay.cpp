@@ -31,7 +31,7 @@ void Menu::drawOverlay(ImDrawList* drawList) {
     Globals::drawList = drawList;
     if(!CONFIGBOOL("Misc>Misc>Misc>Disable Watermark")) {
         char watermarkText[64];
-        sprintf(watermarkText, "gamesneeze (%s) | %.1f FPS | %i ping", distro, ImGui::GetIO().Framerate, (Interfaces::engine->IsInGame()) ? playerResource->GetPing(Interfaces::engine->GetLocalPlayer()) : 0);
+        sprintf(watermarkText, "gamesneeze (%s) | %.1f FPS | %i ping", distro, ImGui::GetIO().Framerate, (Interfaces::engine->IsInGame() && playerResource) ? playerResource->GetPing(Interfaces::engine->GetLocalPlayer()) : 0);
         // Hacky way to do black shadow but it works
         Globals::drawList->AddText(ImVec2(4, 4), ImColor(0, 0, 0, 255), watermarkText);
         Globals::drawList->AddText(ImVec2(3, 3), ImColor(255, 255, 255, 255), watermarkText);

@@ -127,11 +127,8 @@ void Menu::drawRageTab() {
             ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
             ImGui::SliderInt("##Desync", &CONFIGINT("Rage>AntiAim>Spin>Desync"), -60, 60);
         }
-
-
-
-
-
+        ImGui::Checkbox("Slow Walk",&CONFIGBOOL("Rage>AntiAim>Slow Walk"));
+        ImGui::SliderInt("Slow Walk Speed (%)", &CONFIGINT("Rage>AntiAim>Slow Walk Speed"), 0, 255);
         ImGui::EndChild();
     }
 }

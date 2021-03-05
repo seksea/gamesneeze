@@ -150,6 +150,8 @@ namespace Config {
                 // Spin {
                     CONFIGITEM("Rage>AntiAim>Spin>Desync", 0),
                 // }
+                CONFIGITEM("Rage>AntiAim>Slow Walk", false),
+                CONFIGITEM("Rage>AntiAim>Slow Walk Speed", 55),
             //}
         // }
         // Visuals {

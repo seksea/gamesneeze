@@ -99,4 +99,7 @@ namespace Features {
         inline float drawHitmarkerTill;
         void draw();
     }
+    namespace SlowWalk {
+        void createMove(CUserCmd* cmd);
+    }
 }
