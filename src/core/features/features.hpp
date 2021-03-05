@@ -102,4 +102,7 @@ namespace Features {
     namespace SlowWalk {
         void createMove(CUserCmd* cmd);
     }
+    namespace NoFlash {
+        void frameStageNotify(FrameStage frame);
+    }
 }

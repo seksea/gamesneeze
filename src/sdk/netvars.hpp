@@ -23,6 +23,7 @@ namespace Netvar {
         {std::make_pair("DT_BasePlayer", "m_vecViewOffset[0]"), 0},
         {std::make_pair("DT_CSPlayer", "m_angEyeAngles[0]"), 0},
         {std::make_pair("DT_CSPlayer", "m_flLowerBodyYawTarget"), 0},
+        {std::make_pair("DT_CSPlayer", "m_flFlashMaxAlpha"), 0},
         {std::make_pair("DT_CSPlayer", "m_bIsScoped"), 0},
         {std::make_pair("DT_BasePlayer", "deadflag"), 0},
 
