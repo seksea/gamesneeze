@@ -22,6 +22,14 @@ void Features::AntiAim::createMove(CUserCmd* cmd) {
     if (Interfaces::engine->IsInGame()) {
         if (Globals::localPlayer) {
             if (Globals::localPlayer->health() > 0) {
+                // TODO: Only turn off anti-aim for the throw time.
+                Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t) Globals::localPlayer->activeWeapon() & 0xFFF);
+                if(weapon) {
+                    if (weapon->itemIndex() == ItemIndex::WEAPON_DECOY || weapon->itemIndex() == ItemIndex::WEAPON_HEGRENADE || weapon->itemIndex() == ItemIndex::WEAPON_FLASHBANG || weapon->itemIndex() == ItemIndex::WEAPON_SMOKEGRENADE || weapon->itemIndex() == ItemIndex::WEAPON_MOLOTOV || weapon->itemIndex() == ItemIndex::WEAPON_INCGRENADE) {
+                        return;
+                    }
+                }
+
                 if (!((cmd->buttons & (1 << 0)) || (cmd->buttons & (1 << 5)))) {
                     if (CONFIGINT("Rage>AntiAim>AntiAim")) {
                         // TODO: for some reason it refuses to desync when looking forward???!?!?

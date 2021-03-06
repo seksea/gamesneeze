@@ -27,13 +27,13 @@ void Menu::drawRageTab() {
         ImGui::EndChild();
     }
     ImGui::SameLine();
-    ImGui::BeginChild("AntiAim", ImVec2((ImGui::GetWindowContentRegionWidth()/2) - 4, 520), true); {
-        ImGui::Text("AntiAim");
+    ImGui::BeginChild("Anti-Aim", ImVec2((ImGui::GetWindowContentRegionWidth()/2) - 4, 520), true); {
+        ImGui::Text("Anti-Aim");
         ImGui::Separator();
         
-        ImGui::Text("AntiAim");
+        ImGui::Text("Type");
         ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
-        ImGui::Combo("##AntiAim", &CONFIGINT("Rage>AntiAim>AntiAim"), antiAimTypes, IM_ARRAYSIZE(antiAimTypes));
+        ImGui::Combo("##Anti-Aim", &CONFIGINT("Rage>AntiAim>AntiAim"), antiAimTypes, IM_ARRAYSIZE(antiAimTypes));
 
         if (CONFIGINT("Rage>AntiAim>AntiAim")) {
             ImGui::Text("Pitch");
