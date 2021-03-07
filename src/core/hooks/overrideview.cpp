@@ -1,5 +1,6 @@
 #include "../../includes.hpp"
 #include "hooks.hpp"
+#include "../features/features.hpp"
 
 
 void Hooks::OverrideView::hook(void* thisptr, ViewSetup* setup) {
@@ -12,6 +13,9 @@ void Hooks::OverrideView::hook(void* thisptr, ViewSetup* setup) {
                         Interfaces::input->m_fCameraInThirdPerson = false;
                         return;
                     }
+                    if (ImGui::IsKeyPressed(SDL_SCANCODE_V, false)) {
+                        Menu::open = !Menu::open;
+                    }
                 }
 
                 if (!Globals::localPlayer->scoped()) {
@@ -23,9 +27,7 @@ void Hooks::OverrideView::hook(void* thisptr, ViewSetup* setup) {
                     Ray traceRay;
                     Vector eyePos = Globals::localPlayer->eyePos();
 
-                    Vector camOff = Vector(cos(DEG2RAD(viewAngles.y)) * 100,
-                                        sin(DEG2RAD(viewAngles.y)) * 100,
-                                        sin(DEG2RAD(-viewAngles.x)) * 100);
+                    Vector camOff = Vector(cos(DEG2RAD(viewAngles.y)) * 100,sin(DEG2RAD(viewAngles.y)) * 100,sin(DEG2RAD(-viewAngles.x)) * 100);
 
                     traceRay.Init(eyePos, (eyePos - camOff));
                     TraceFilter traceFilter;
@@ -35,8 +37,6 @@ void Hooks::OverrideView::hook(void* thisptr, ViewSetup* setup) {
                     if (CONFIGBOOL("Visuals>World>World>Third Person"))
                     Interfaces::input->m_vecCameraOffset = Vector(viewAngles.x, viewAngles.y, 100 * ((tr.fraction < 1.0f) ? tr.fraction : 1.0f) );
                     Interfaces::input->m_fCameraInThirdPerson = CONFIGBOOL("Visuals>World>World>Third Person");
-
-
                 }
             }
         }

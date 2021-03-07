@@ -22,7 +22,7 @@ void Features::AntiAim::createMove(CUserCmd* cmd) {
     if (Interfaces::engine->IsInGame()) {
         if (Globals::localPlayer) {
             if (Globals::localPlayer->health() > 0) {
-                // TODO: Only turn off anti-aim for the throw time.
+                // TODO: Only turn off anti-aim for the throw time so it's more reliable.
                 Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t) Globals::localPlayer->activeWeapon() & 0xFFF);
                 if(weapon) {
                     if (weapon->itemIndex() == ItemIndex::WEAPON_DECOY || weapon->itemIndex() == ItemIndex::WEAPON_HEGRENADE || weapon->itemIndex() == ItemIndex::WEAPON_FLASHBANG || weapon->itemIndex() == ItemIndex::WEAPON_SMOKEGRENADE || weapon->itemIndex() == ItemIndex::WEAPON_MOLOTOV || weapon->itemIndex() == ItemIndex::WEAPON_INCGRENADE) {
