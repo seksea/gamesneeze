@@ -4,7 +4,6 @@
 Hooks::Events::EventListener::EventListener() {
     Interfaces::eventManager->AddListener(this, "player_hurt", false);
     Interfaces::eventManager->AddListener(this, "player_death", false);
-    Interfaces::eventManager->AddListener(this, "bullet_impact", false);
 }
 
 Hooks::Events::EventListener::~EventListener() {
@@ -30,7 +29,7 @@ void Hooks::Events::EventListener::FireGameEvent(IGameEvent *event) {
                 }
 
                 if (CONFIGBOOL("Misc>Misc>Hitmarkers>Hitmarkers")) {
-                    Features::Hitmarkers::drawHitmarkerTill = Interfaces::globals->curtime + 1.f;
+                    Features::Hitmarkers::drawHitmarkerTill = Interfaces::globals->curtime + 0.7f;
                     Interfaces::engine->ExecuteClientCmd("play buttons/arena_switch_press_02"); // TODO: play sound via a better method
                 }
             }
