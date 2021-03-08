@@ -86,7 +86,9 @@ public:
 	NETVAR("DT_CSPlayer", "m_flLowerBodyYawTarget", lbyTarget, float);
 	NETVAR("DT_CSPlayer", "m_bIsScoped", scoped, bool);
 	NETVAR("DT_BasePlayer", "deadflag", deadflag, bool);
-	NETVAR("DT_CSPlayer","m_flFlashMaxAlpha", maxFlashAlpha, float);
+	NETVAR("DT_CSPlayer", "m_flFlashMaxAlpha", maxFlashAlpha, float);
+	NETVAR("DT_CSPlayer", "m_bHasHelmet", helmet, bool);
+	NETVAR("DT_CSPlayer", "m_ArmorValue", armor, int);
 
 	AnimState* animState() {
 		return *reinterpret_cast<AnimState **>((uintptr_t)

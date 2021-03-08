@@ -2,6 +2,7 @@
 #include "interfaces/ibaseclientdll.hpp"
 #include "interfaces/iprediction.hpp"
 #include <map>
+#include <utility>
 
 namespace Netvar {
     inline std::map<std::pair<std::string_view, std::string_view>, uintptr_t> offsets {
@@ -26,6 +27,8 @@ namespace Netvar {
         {std::make_pair("DT_CSPlayer", "m_flFlashMaxAlpha"), 0},
         {std::make_pair("DT_CSPlayer", "m_bIsScoped"), 0},
         {std::make_pair("DT_BasePlayer", "deadflag"), 0},
+        {std::make_pair("DT_CSPlayer", "m_bHasHelmet"), 0},
+        {std::make_pair("DT_CSPlayer", "m_ArmorValue"), 0},
 
         /* Item */
         {std::make_pair("DT_BaseAttributableItem", "m_iItemDefinitionIndex"), 0},

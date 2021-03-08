@@ -151,6 +151,9 @@ void drawPlayer(Player* p) {
                                 rightText << p->health() << "hp\n";
                             if (CONFIGBOOL("Visuals>Players>Enemies>Money"))
                                 rightText << "$" << p->money() << "\n";
+
+                            if (CONFIGBOOL("Visuals>Players>Enemies>Armor"))
+                                rightText << (p->helmet() ? "H" : "") << (p->armor() ? "K" : "") << "\n";
                             
                             if (CONFIGBOOL("Visuals>Players>Enemies>Weapon")) {
                                 Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)p->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
@@ -184,6 +187,9 @@ void drawPlayer(Player* p) {
                             rightText << p->health() << "hp\n";
                         if (CONFIGBOOL("Visuals>Players>Teammates>Money"))
                             rightText << "$" << p->money() << "\n";
+
+                        if (CONFIGBOOL("Visuals>Players>Teammates>Armor"))
+                            rightText << (p->helmet() ? "H" : "") << (p->armor() ? "K" : "") << "\n";
 
                         if (CONFIGBOOL("Visuals>Players>Teammates>Weapon")) {
                             Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)p->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
