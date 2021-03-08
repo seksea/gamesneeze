@@ -77,6 +77,7 @@ void Menu::drawVisualsTab() {
                     ImGui::Checkbox("Dynamic Color", &CONFIGBOOL("Visuals>Players>Teammates>Dynamic Color"));
                 }
                 ImGui::Checkbox("Money", &CONFIGBOOL("Visuals>Players>Teammates>Money"));
+                ImGui::Checkbox("Weapon", &CONFIGBOOL("Visuals>Players>Teammates>Weapon"));
                 ImGui::Checkbox("Only When Dead", &CONFIGBOOL("Visuals>Players>Teammates>Only When Dead"));
 
                 drawChamsWidget("Teammates", 
@@ -115,6 +116,7 @@ void Menu::drawVisualsTab() {
                     ImGui::Checkbox("Dynamic Color", &CONFIGBOOL("Visuals>Players>Enemies>Dynamic Color"));
                 }
                 ImGui::Checkbox("Money", &CONFIGBOOL("Visuals>Players>Enemies>Money"));
+                ImGui::Checkbox("Weapon", &CONFIGBOOL("Visuals>Players>Enemies>Weapon"));
                 ImGui::Checkbox("Radar", &CONFIGBOOL("Visuals>Players>Enemies>Radar"));
                 ImGui::Checkbox("Forwardtrack Dots", &CONFIGBOOL("Visuals>Players>Enemies>Forwardtrack Dots"));
                 ImGui::Checkbox("Vis Check", &CONFIGBOOL("Visuals>Players>Enemies>Vis Check"));

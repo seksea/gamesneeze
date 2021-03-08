@@ -166,6 +166,7 @@ namespace Config {
                 CONFIGITEM("Visuals>Players>Enemies>Health Bar", false),
                 CONFIGITEM("Visuals>Players>Enemies>Dynamic Color", false),
                 CONFIGITEM("Visuals>Players>Enemies>Money", false),
+                CONFIGITEM("Visuals>Players>Enemies>Weapon", false),
                 CONFIGITEM("Visuals>Players>Enemies>Radar", false),
                 CONFIGITEM("Visuals>Players>Enemies>Forwardtrack Dots", false),
                 CONFIGITEM("Visuals>Players>Enemies>Vis Check", false),
@@ -181,6 +182,7 @@ namespace Config {
                 CONFIGITEM("Visuals>Players>Teammates>Health Bar", false),
                 CONFIGITEM("Visuals>Players>Teammates>Dynamic Color", false),
                 CONFIGITEM("Visuals>Players>Teammates>Money", false),
+                CONFIGITEM("Visuals>Players>Teammates>Weapon", false),
                 CONFIGITEM("Visuals>Players>Teammates>Only When Dead", false),
             // }
             // Chams {
