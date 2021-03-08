@@ -8,7 +8,6 @@
 #include <string_view>
 
 void Hooks::ClientCmd::hook(void* thisptr, char* szCmdString) {
-
     if (strstr(szCmdString, "say ")) {
         // https://www.unknowncheats.me/forum/counterstrike-global-offensive/439677-bypass-chat-swear-filter.html
         if (CONFIGBOOL("Misc>Misc>Misc>Chat Filter Bypass")) {
