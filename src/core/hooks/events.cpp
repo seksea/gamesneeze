@@ -35,7 +35,7 @@ void Hooks::Events::EventListener::FireGameEvent(IGameEvent *event) {
             }
         }
     }
-    if (strstr(event->GetName(), "player_death")) {
+    else if (strstr(event->GetName(), "player_death")) {
         Entity* attacker = (Entity*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetPlayerForUserID(event->GetInt("attacker")));
         Entity* victim = (Entity*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetPlayerForUserID(event->GetInt("userid")));
         if (attacker && victim) {
@@ -44,7 +44,7 @@ void Hooks::Events::EventListener::FireGameEvent(IGameEvent *event) {
                 Interfaces::engine->GetPlayerInfo(victim->index(), &info);
 
                 if (CONFIGBOOL("Misc>Misc>Hitmarkers>Hitlogs")) {
-                    Features::Notifications::addNotification(ImColor(220, 40, 40), "[gs] killed %s", info.name, event->GetInt("dmg_health"));
+                    Features::Notifications::addNotification(ImColor(220, 40, 40), "[gs] killed %s", info.name);
                 }
             }
         }
