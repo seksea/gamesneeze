@@ -18,6 +18,8 @@ An open source cheat for Counter-Strike: Global Offensive on Linux.
 
 ### Features
 
+ - Basic GDB injector
+ - ImGui menu
  - Chams
  - ESP
  - Weapon ESP
@@ -37,12 +39,6 @@ An open source cheat for Counter-Strike: Global Offensive on Linux.
  - Skybox changer
  - Ragebot (currently in development and doesnt have awall so no mindmg/hitchance/autoshoot)
  - AntiAim (currently sways, need to fix lby breaker)
-
-
-### Others
-
- - Basic GDB injector
- - ImGui menu
 
 
 ## How to use
