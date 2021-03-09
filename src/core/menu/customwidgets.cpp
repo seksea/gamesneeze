@@ -27,20 +27,20 @@ void Menu::CustomWidgets::drawKeyBinder(const char* label, int* key, bool* toggl
                 *toggled = false;
             }
         }
-        if (ImGui::IsMouseDown(0)) {
+        if (ImGui::IsKeyPressed(SDL_SCANCODE_ESCAPE)) {
+            *key = 0;
+            *toggled = false;
+        }
+        else if (ImGui::IsMouseDown(0)) {
             *key = -1;
             *toggled = false;
         }
-        if (ImGui::IsMouseDown(1)) {
+        else if (ImGui::IsMouseDown(1)) {
             *key = -2;
             *toggled = false;
         }
-        if (ImGui::IsMouseDown(2)) {
+        else if (ImGui::IsMouseDown(2)) {
             *key = -3;
-            *toggled = false;
-        }
-        if (ImGui::IsKeyPressed(SDL_SCANCODE_ESCAPE)) {
-            *key = 0;
             *toggled = false;
         }
         // TODO: Mouse4 & Mouse5
