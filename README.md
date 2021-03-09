@@ -53,6 +53,15 @@ An open source cheat for Counter-Strike: Global Offensive on Linux.
  - Rank revealer
  - Radio fake ban/fake chat
  - Clantag (and pBeeMovie clantag)
+ - Backtracking
+ - Backtrack Chams
+ - Flappy Bird clone
+ - Legitbot
+ - Hitmarkers
+ - Nightmode
+ - Skybox changer
+ - Ragebot (currently in development and doesnt have awall so no mindmg/hitchance/autoshoot)
+ - AntiAim (currently sways, need to fix lby breaker)
 
 
 ### Others
@@ -69,7 +78,7 @@ An open source cheat for Counter-Strike: Global Offensive on Linux.
 
 ### Arch / Manjaro required packages:
 
-`sudo pacman -S base-devel git cmake gdb` (or if you don't like installing actual useful packages) `sudo pacman -S gcc sdl make git cmake gdb`
+`sudo pacman -S base-devel git cmake gdb sdl2 git`
 
 ### Fedora required packages:
 
@@ -103,9 +112,9 @@ All args are executed in the order they are written in, for example, "-u -b -l" 
 
 ## [Todo](https://github.com/seksea/gamesneeze/projects/1)
 
-## FAQ
-
- -
+## Common Issues
+##### GDB Segfaults and crashes game in process
+Currently on Arch based distros GDB is broken, use [cathook's gdb](https://nullworks.gitlab.io/cathook/cathook/gdb) instead.
 
 ## Screenshots
 
