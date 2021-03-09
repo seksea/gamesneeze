@@ -16,31 +16,6 @@ An open source cheat for Counter-Strike: Global Offensive on Linux.
 
 ## Current Features
 
-### Interfaces
-
- - Interfaces::client
- - Interfaces::engine
- - Interfaces::panel
- - Interfaces::clientMode
- - Interfaces::globals
- - Interfaces::entityList
- - Interfaces::engineVgui
- - Interfaces::modelRender
- - Interfaces::modelInfo
- - Interfaces::materialSystem
-
-
-### Hooks
-
- - CreateMove
- - PaintTraverse
- - SwapWindow
- - PollEvent
- - DrawModelExecute
- - FrameStageNotify
- - Paint
-
-
 ### Features
 
  - Chams
