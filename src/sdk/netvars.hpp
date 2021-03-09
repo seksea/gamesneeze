@@ -35,6 +35,7 @@ namespace Netvar {
 
         /* Weapon */
         {std::make_pair("DT_BaseCombatWeapon", "m_hOwner"), 0},
+        {std::make_pair("DT_BaseCombatWeapon", "m_hOwnerEntity"), 0},
         {std::make_pair("DT_BaseCombatWeapon", "m_iItemIDHigh"), 0},
         {std::make_pair("DT_BaseCombatWeapon", "m_iAccountID"), 0},
         {std::make_pair("DT_BaseCombatWeapon", "m_nFallbackPaintKit"), 0},
