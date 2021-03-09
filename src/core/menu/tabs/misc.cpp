@@ -92,6 +92,12 @@ void Menu::drawMiscTab() {
                 ImGui::SetTooltip("sekc (ofcourse)\nAll other contributors on GitHub (cristeigabriel, crazily, luk1337 & tango1337)\nand ocornut for his great ImGui UI framework");
             ImGui::EndTabItem();
         }
+        if (ImGui::BeginTabItem("Skins")) {
+            ImGui::DragInt("PaintKit", &CONFIGINT("Misc>Skins>Skins>PaintKit"));
+            ImGui::DragInt("StatTrack", &CONFIGINT("Misc>Skins>Skins>StatTrack"));
+            ImGui::SliderInt("Wear", &CONFIGINT("Misc>Skins>Skins>Wear"), 0, 100);
+            ImGui::EndTabItem();
+        }
         ImGui::EndTabBar();
     }
 }

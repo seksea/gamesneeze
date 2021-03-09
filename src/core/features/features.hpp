@@ -27,6 +27,9 @@ namespace Features {
         void frameStageNotify(FrameStage frame);
         void draw();
     }
+    namespace SkinChanger {
+        void frameStageNotify(FrameStage frame);
+    }
     namespace LegitBot {
         void createMove(CUserCmd* cmd);
     }

@@ -122,6 +122,12 @@ class Weapon : public Item {
 public:
 	NETVAR("DT_BaseCombatWeapon", "m_hOwner", owner, int);
 
+	NETVAR("DT_BaseCombatWeapon", "m_iItemIDHigh", itemIDHigh, int);
+	NETVAR("DT_BaseCombatWeapon", "m_iAccountID", accountID, int);
+	NETVAR("DT_BaseCombatWeapon", "m_nFallbackPaintKit", paintKit, int);
+	NETVAR("DT_BaseCombatWeapon", "m_flFallbackWear", wear, float);
+	NETVAR("DT_BaseCombatWeapon", "m_nFallbackStatTrak", statTrack, int);
+
 	float GetSpread() {
 		typedef float (*Fn)(void*);
 		return getVirtualFunc<Fn>(this, 520)(this);
