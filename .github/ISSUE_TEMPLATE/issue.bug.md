@@ -37,15 +37,12 @@ about: Create a report to help us improve and fix bugs.
 
 **OS used and version:**
 
-**GPU used:**
-
 **Version of GDB and from where:**
 
-
-## Game console / gdb / backtrace logs or media
+## GDB backtrace, toolbox logs, or media
 
 <!--- Provide a full log of your terminal output when injecting the cheat and any relevant logs and media associated. -->
 
-<!--- This can be made by doing ./toolbox.sh -u -bd -ld to create a debug version of the cheat. Press continue and then reproduce the bug/crash and when it does, continue and then bt to produce a backtrace. -->
+<!--- A gdb backtrace can be made by doing ./toolbox.sh -u -bd -ld to create a debug version of the cheat. Press c to continue (until there is no `( gdb )` prompt), and then reproduce the bug/crash, when it crashes, do c to continue, and then bt in gdb to produce a backtrace. -->
 
 <!--- Please include any logs surrounded by backticks ```like this``` to avoid eye bleach :thumbsup: -->
