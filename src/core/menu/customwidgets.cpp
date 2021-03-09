@@ -20,11 +20,6 @@ void Menu::CustomWidgets::drawKeyBinder(const char* label, int* key, bool* toggl
     };
 
     // Handle KeyPresses
-    if (ImGui::IsKeyPressed(SDL_SCANCODE_ESCAPE)) {
-        *key = 0;
-        *toggled = false;
-    }
-
     if (*toggled) {
         for (auto i = 0; i < SDL_NUM_SCANCODES; i++) {
             if (ImGui::IsKeyPressed(i)) {
@@ -42,6 +37,10 @@ void Menu::CustomWidgets::drawKeyBinder(const char* label, int* key, bool* toggl
         }
         if (ImGui::IsMouseDown(2)) {
             *key = -3;
+            *toggled = false;
+        }
+        if (ImGui::IsKeyPressed(SDL_SCANCODE_ESCAPE)) {
+            *key = 0;
             *toggled = false;
         }
         // TODO: Mouse4 & Mouse5
