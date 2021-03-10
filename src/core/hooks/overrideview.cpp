@@ -7,16 +7,6 @@ void Hooks::OverrideView::hook(void* thisptr, ViewSetup* setup) {
     if (Interfaces::engine->IsInGame()) {
         if (Globals::localPlayer) {
             if (Globals::localPlayer->health() > 0) {
-                Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t) Globals::localPlayer->activeWeapon() & 0xFFF);
-                if(weapon) {
-                    if (weapon->itemIndex() == ItemIndex::WEAPON_DECOY || weapon->itemIndex() == ItemIndex::WEAPON_HEGRENADE || weapon->itemIndex() == ItemIndex::WEAPON_FLASHBANG || weapon->itemIndex() == ItemIndex::WEAPON_SMOKEGRENADE || weapon->itemIndex() == ItemIndex::WEAPON_MOLOTOV || weapon->itemIndex() == ItemIndex::WEAPON_INCGRENADE) {
-                        Interfaces::input->m_fCameraInThirdPerson = false;
-                        return;
-                    }
-                    if (ImGui::IsKeyPressed(SDL_SCANCODE_V, false)) {
-                        Menu::open = !Menu::open;
-                    }
-                }
 
                 if (!Globals::localPlayer->scoped()) {
                     setup->fov = CONFIGINT("Visuals>World>World>FOV");
@@ -37,6 +27,14 @@ void Hooks::OverrideView::hook(void* thisptr, ViewSetup* setup) {
                     if (CONFIGBOOL("Visuals>World>World>Third Person"))
                     Interfaces::input->m_vecCameraOffset = Vector(viewAngles.x, viewAngles.y, 100 * ((tr.fraction < 1.0f) ? tr.fraction : 1.0f) );
                     Interfaces::input->m_fCameraInThirdPerson = CONFIGBOOL("Visuals>World>World>Third Person");
+
+
+                    Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t) Globals::localPlayer->activeWeapon() & 0xFFF);
+                    if(weapon) {
+                        if (weapon->itemIndex() == ItemIndex::WEAPON_DECOY || weapon->itemIndex() == ItemIndex::WEAPON_HEGRENADE || weapon->itemIndex() == ItemIndex::WEAPON_FLASHBANG || weapon->itemIndex() == ItemIndex::WEAPON_SMOKEGRENADE || weapon->itemIndex() == ItemIndex::WEAPON_MOLOTOV || weapon->itemIndex() == ItemIndex::WEAPON_INCGRENADE) {
+                            Interfaces::input->m_fCameraInThirdPerson = false;
+                        }
+                    }
                 }
             }
         }
