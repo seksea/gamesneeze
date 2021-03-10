@@ -77,6 +77,14 @@ function build_debug {
     cd ..
 }
 
+function pull {
+    if [[ $EUID -eq 0 ]]; then
+   	    echo "You cannot pull as root" 
+   	    exit 1
+    fi
+    git pull
+}
+
 while [[ $# -gt 0 ]]
 do
 keys="$1"
@@ -101,6 +109,10 @@ case $keys in
         build_debug
         shift
         ;;
+    -p|--pull)
+        pull
+        shift
+        ;;
     -h|--help)
         echo "
  help
@@ -113,11 +125,12 @@ Toolbox script for gamesneeze the beste lincuck cheat 2020
 | -ld (--load_debug) | Load/inject the cheat and debug via gdb |
 | -b (--build)       | Build to the build/ dir                 |
 | -bd (--build_debug)| Build to the build/ dir as debug        |
+| -p (--pull)        | Update the cheat                        |
 | -h (--help)        | Show help                               |
 ================================================================
 
 All args are executed in the order they are written in, for
-example, \"-u -b -l\" would unload the cheat, build it, and
+example, \"-p -u -b -l\" would update the cheat, then unload, then build it, and
 then load it back into csgo.
 "
         exit
