@@ -90,5 +90,9 @@ bool Netvar::init() {
 			"55 48 89 E5 53 48 89 FB 48 83 EC 28 48 8B 05 ? ? ? ? 48 8B 00") + 52);
     Log::log(LOG, " animState | %lx", Offsets::animState);
 
+	uintptr_t GetLocalPlayer = reinterpret_cast<uintptr_t>(getVTable(Interfaces::engine)[12]);
+	Offsets::getLocalClient = reinterpret_cast<Offsets::GetLocalClient>(getAbsoluteAddress(GetLocalPlayer + 9, 1, 5));
+    Log::log(LOG, " getLocalClient | %lx", Offsets::getLocalClient);
+
     return true;
 }

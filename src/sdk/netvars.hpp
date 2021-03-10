@@ -78,6 +78,9 @@ namespace Offsets {
     typedef bool (*LineGoesThroughSmoke) (Vector, Vector, int16_t);
     inline LineGoesThroughSmoke lineGoesThroughSmoke;
 
+    typedef BaseClientState* (*GetLocalClient) (int);
+    inline GetLocalClient getLocalClient;
+
     inline int* predictionSeed;
     inline unsigned int animState;
     inline CMoveData* moveData;

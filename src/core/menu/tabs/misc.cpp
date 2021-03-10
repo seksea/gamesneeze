@@ -50,7 +50,8 @@ void Menu::drawMiscTab() {
                     Config::save();
                 };
                 if (ImGui::Button("Load")) {
-                    Config::load();            
+                    Config::load();
+                    FULLUPDATE();
                 };
                 ImGui::EndChild();
             }
@@ -99,8 +100,10 @@ void Menu::drawMiscTab() {
                     if (item.first != ItemIndex::INVALID) {
                         ImGui::PushID(item.second);
                         const bool is_selected = (itemIndexMap.at(curWeaponSelected) == item.second);
-                        if (ImGui::Selectable(item.second, is_selected))
+                        if (ImGui::Selectable(item.second, is_selected)) {
                             curWeaponSelected = item.first;
+                            FULLUPDATE();
+                        }
                         ImGui::PopID();
                     }
                 }
@@ -109,15 +112,21 @@ void Menu::drawMiscTab() {
             if (curWeaponSelected != ItemIndex::INVALID) {
                 char* buf = new char[256];
                 snprintf(buf, 256, "Misc>Skins>Skins>%s>PaintKit", itemIndexMap.at(curWeaponSelected));
-                ImGui::DragInt("PaintKit", &CONFIGINT(buf));
+                if (ImGui::DragInt("PaintKit", &CONFIGINT(buf))) {
+                    FULLUPDATE();
+                }
 
                 char* buf2 = new char[256];
                 snprintf(buf2, 256, "Misc>Skins>Skins>%s>Wear", itemIndexMap.at(curWeaponSelected));
-                ImGui::SliderInt("Wear", &CONFIGINT(buf2), 0, 100);
+                if (ImGui::SliderInt("Wear", &CONFIGINT(buf2), 0, 100)) {
+                    FULLUPDATE();
+                }
 
                 char* buf3 = new char[256];
                 snprintf(buf3, 256, "Misc>Skins>Skins>%s>StatTrack", itemIndexMap.at(curWeaponSelected));
-                ImGui::DragInt("StatTrack", &CONFIGINT(buf3));
+                if (ImGui::DragInt("StatTrack", &CONFIGINT(buf3))) {
+                    FULLUPDATE();
+                }
             }
             ImGui::EndTabItem();
         }
