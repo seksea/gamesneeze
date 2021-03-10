@@ -8,7 +8,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
             if (Globals::localPlayer) {
                 if (Globals::localPlayer->health() > 0) {
                     Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)Globals::localPlayer->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
-                    if (weapon) {
+                    if (weapon && weapon->ammo()) {
                         float smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Default>Smoothing")/5.f);
                         float FOV = CONFIGINT("Legit>LegitBot>Default>FOV")/10.f;
                         bool recoilCompensation = CONFIGBOOL("Legit>LegitBot>Default>Recoil Compensation");
