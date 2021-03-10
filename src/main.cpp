@@ -1,3 +1,4 @@
+#include "core/menu/config.hpp"
 #include "includes.hpp"
 
 /* initialise everything in */
@@ -15,6 +16,8 @@ Powered by...\n\
   |___/ \n\
 ===========================================================\n";
         Log::log(LOG, "Initialising...");
+
+        Config::init();
         
         /* Initialise interfaces */
         if (!Interfaces::init()) {

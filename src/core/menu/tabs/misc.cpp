@@ -93,9 +93,32 @@ void Menu::drawMiscTab() {
             ImGui::EndTabItem();
         }
         if (ImGui::BeginTabItem("Skins")) {
-            ImGui::DragInt("PaintKit", &CONFIGINT("Misc>Skins>Skins>PaintKit"));
-            ImGui::DragInt("StatTrack", &CONFIGINT("Misc>Skins>Skins>StatTrack"));
-            ImGui::SliderInt("Wear", &CONFIGINT("Misc>Skins>Skins>Wear"), 0, 100);
+            static ItemIndex curWeaponSelected = ItemIndex::WEAPON_AK47;
+            if (ImGui::BeginCombo("Weapon", itemIndexMap.at(curWeaponSelected))) {
+                for (auto item : itemIndexMap) {
+                    if (item.first != ItemIndex::INVALID) {
+                        ImGui::PushID(item.second);
+                        const bool is_selected = (itemIndexMap.at(curWeaponSelected) == item.second);
+                        if (ImGui::Selectable(item.second, is_selected))
+                            curWeaponSelected = item.first;
+                        ImGui::PopID();
+                    }
+                }
+                ImGui::EndCombo();
+            }
+            if (curWeaponSelected != ItemIndex::INVALID) {
+                char* buf = new char[256];
+                snprintf(buf, 256, "Misc>Skins>Skins>%s>PaintKit", itemIndexMap.at(curWeaponSelected));
+                ImGui::DragInt("PaintKit", &CONFIGINT(buf));
+
+                char* buf2 = new char[256];
+                snprintf(buf2, 256, "Misc>Skins>Skins>%s>Wear", itemIndexMap.at(curWeaponSelected));
+                ImGui::SliderInt("Wear", &CONFIGINT(buf2), 0, 100);
+
+                char* buf3 = new char[256];
+                snprintf(buf3, 256, "Misc>Skins>Skins>%s>StatTrack", itemIndexMap.at(curWeaponSelected));
+                ImGui::DragInt("StatTrack", &CONFIGINT(buf3));
+            }
             ImGui::EndTabItem();
         }
         ImGui::EndTabBar();

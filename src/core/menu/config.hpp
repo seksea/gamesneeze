@@ -1,8 +1,11 @@
 #pragma once
+#include <cstdio>
 #include <unordered_map>
 #include <fstream>
+#include <utility>
 #include "imgui/imgui.h"
 #include "../../utils/utils.hpp"
+#include "../../sdk/definitions.hpp"
 
 #define CONFIGINT(name) Config::config.at(name).intValue
 #define CONFIGBOOL(name) Config::config.at(name).boolValue
@@ -338,6 +341,24 @@ namespace Config {
                 }
             } catch (std::out_of_range& e) {
                 Log::log(ERR, "Failed to load config item %s, probably due to an out of date config, just redo the selected item and save again.", name);
+            }
+        }
+    }
+
+    inline void init() {
+        for(auto item : itemIndexMap) {
+            if (item.first != ItemIndex::INVALID) {
+                char* buf = new char[256];
+                snprintf(buf, 256, "Misc>Skins>Skins>%s>PaintKit", item.second);
+                config.insert(std::make_pair<std::string_view, ConfigItem>(buf, 0));
+
+                char* buf2 = new char[256];
+                snprintf(buf2, 256, "Misc>Skins>Skins>%s>Wear", item.second);
+                config.insert(std::make_pair<std::string_view, ConfigItem>(buf2, 0));
+
+                char* buf3 = new char[256];
+                snprintf(buf3, 256, "Misc>Skins>Skins>%s>StatTrack", item.second);
+                config.insert(std::make_pair<std::string_view, ConfigItem>(buf3, 0));
             }
         }
     }
