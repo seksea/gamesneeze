@@ -22,8 +22,16 @@ void Features::AntiAim::createMove(CUserCmd* cmd) {
     if (Interfaces::engine->IsInGame()) {
         if (Globals::localPlayer) {
             if (Globals::localPlayer->health() > 0) {
+                // TODO: Only turn off anti-aim for the throw time so it's more reliable.
+                Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t) Globals::localPlayer->activeWeapon() & 0xFFF);
+                if(weapon) {
+                    if (weapon->itemIndex() == ItemIndex::WEAPON_DECOY || weapon->itemIndex() == ItemIndex::WEAPON_HEGRENADE || weapon->itemIndex() == ItemIndex::WEAPON_FLASHBANG || weapon->itemIndex() == ItemIndex::WEAPON_SMOKEGRENADE || weapon->itemIndex() == ItemIndex::WEAPON_MOLOTOV || weapon->itemIndex() == ItemIndex::WEAPON_INCGRENADE) {
+                        return;
+                    }
+                }
+
                 if (!((cmd->buttons & (1 << 0)) || (cmd->buttons & (1 << 5)))) {
-                    if (CONFIGINT("Rage>AntiAim>AntiAim")) {
+                    if (CONFIGINT("Rage>AntiAim>Type")) {
                         // TODO: for some reason it refuses to desync when looking forward???!?!?
                         
                         cmd->viewangles.x = CONFIGINT("Rage>AntiAim>Pitch");
@@ -31,7 +39,7 @@ void Features::AntiAim::createMove(CUserCmd* cmd) {
                         int real;
                         int fake;
 
-                        switch (CONFIGINT("Rage>AntiAim>AntiAim")) {
+                        switch (CONFIGINT("Rage>AntiAim>Type")) {
                             case 1: { // Static 
                                 real = cmd->viewangles.y + CONFIGINT("Rage>AntiAim>Offset");
                                 fake = CONFIGINT("Rage>AntiAim>Static>Desync");
@@ -62,7 +70,15 @@ void Features::AntiAim::createMove(CUserCmd* cmd) {
                             }
                         }
 
-                        *Globals::sendPacket = cmd->tick_count % ((CONFIGBOOL("Rage>Enabled") && CONFIGINT("Rage>AntiAim>AntiAim")) + CONFIGINT("Rage>AntiAim>FakeLag") + 1);
+                        //TODO Check for net channel group 9 so we can desync and yell at nn's at the same time
+                        int fakelag = CONFIGINT("Rage>AntiAim>FakeLag");
+                        if (Interfaces::engine->IsVoiceRecording()) {
+                            fakelag = 0;
+                        } else {
+                            fakelag = CONFIGINT("Rage>AntiAim>FakeLag");
+                        }
+
+                        *Globals::sendPacket = cmd->tick_count % ((CONFIGBOOL("Rage>Enabled") && CONFIGINT("Rage>AntiAim>Type")) + fakelag + 1);
 
                         if (updatingLby()) {
                             cmd->viewangles.y = real + (fake * 2);

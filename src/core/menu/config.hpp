@@ -117,7 +117,7 @@ namespace Config {
                 CONFIGITEM("Rage>RageBot>Default>Resolver", false),
                 CONFIGITEM("Rage>RageBot>Default>FOV", 0),
 
-                CONFIGITEM("Rage>AntiAim>AntiAim", 0),
+                CONFIGITEM("Rage>AntiAim>Type", 0),
                 CONFIGITEM("Rage>AntiAim>Pitch", 89),
                 CONFIGITEM("Rage>AntiAim>Offset", 180),
                 CONFIGITEM("Rage>AntiAim>FakeLag", 0),

@@ -27,15 +27,15 @@ void Menu::drawRageTab() {
         ImGui::EndChild();
     }
     ImGui::SameLine();
-    ImGui::BeginChild("AntiAim", ImVec2((ImGui::GetWindowContentRegionWidth()/2) - 4, 520), true); {
-        ImGui::Text("AntiAim");
+    ImGui::BeginChild("Anti-Aim", ImVec2((ImGui::GetWindowContentRegionWidth()/2) - 4, 520), true); {
+        ImGui::Text("Anti-Aim");
         ImGui::Separator();
         
-        ImGui::Text("AntiAim");
+        ImGui::Text("Type");
         ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
-        ImGui::Combo("##AntiAim", &CONFIGINT("Rage>AntiAim>AntiAim"), antiAimTypes, IM_ARRAYSIZE(antiAimTypes));
+        ImGui::Combo("##Type", &CONFIGINT("Rage>AntiAim>Type"), antiAimTypes, IM_ARRAYSIZE(antiAimTypes));
 
-        if (CONFIGINT("Rage>AntiAim>AntiAim")) {
+        if (CONFIGINT("Rage>AntiAim>Type")) {
             ImGui::Text("Pitch");
             ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
             ImGui::SliderInt("##Pitch", &CONFIGINT("Rage>AntiAim>Pitch"), -89, 89);
@@ -49,13 +49,13 @@ void Menu::drawRageTab() {
             ImGui::SliderInt("##FakeLag", &CONFIGINT("Rage>AntiAim>FakeLag"), 0, 16);
         }
 
-        if (CONFIGINT("Rage>AntiAim>AntiAim") == 1) { // Static
+        if (CONFIGINT("Rage>AntiAim>Type") == 1) { // Static
             ImGui::Text("Desync");
             ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
             ImGui::SliderInt("##Desync", &CONFIGINT("Rage>AntiAim>Static>Desync"), -60, 60);
         }
 
-        if (CONFIGINT("Rage>AntiAim>AntiAim") == 2) { // Jitter
+        if (CONFIGINT("Rage>AntiAim>Type") == 2) { // Jitter
             ImGui::Text("Desync");
             ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
             ImGui::SliderInt("##Desync", &CONFIGINT("Rage>AntiAim>Jitter>Desync"), -60, 60);
@@ -80,7 +80,7 @@ void Menu::drawRageTab() {
             }
         }
 
-        if (CONFIGINT("Rage>AntiAim>AntiAim") == 3) { // Fake Jitter
+        if (CONFIGINT("Rage>AntiAim>Type") == 3) { // Fake Jitter
             ImGui::Text("Jitter Amount");
             ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
             ImGui::SliderInt("##Jitter Amount", &CONFIGINT("Rage>AntiAim>Fake Jitter>Jitter Amount"), 0, 60);
@@ -101,7 +101,7 @@ void Menu::drawRageTab() {
             }
         }
 
-        if (CONFIGINT("Rage>AntiAim>AntiAim") == 4) { // Real Jitter
+        if (CONFIGINT("Rage>AntiAim>Type") == 4) { // Real Jitter
             ImGui::Text("Jitter Amount");
             ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
             ImGui::SliderInt("##Jitter Amount", &CONFIGINT("Rage>AntiAim>Real Jitter>Jitter Amount"), 0, 60);
@@ -122,7 +122,7 @@ void Menu::drawRageTab() {
             }
         }
 
-        if (CONFIGINT("Rage>AntiAim>AntiAim") == 5) { // Sping
+        if (CONFIGINT("Rage>AntiAim>Type") == 5) { // Sping
             ImGui::Text("Desync");
             ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
             ImGui::SliderInt("##Desync", &CONFIGINT("Rage>AntiAim>Spin>Desync"), -60, 60);
