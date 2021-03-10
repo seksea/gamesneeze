@@ -110,7 +110,7 @@ case $keys in
         shift
         ;;
     -p|--pull)
-        update
+        pull
         shift
         ;;
     -h|--help)
