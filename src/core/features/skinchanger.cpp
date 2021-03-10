@@ -7,7 +7,6 @@ void Features::SkinChanger::frameStageNotify(FrameStage frame) {
             if (Interfaces::engine->IsInGame()) {
                 if (Globals::localPlayer->health() > 0) {
                     Weapon* weapon = (Weapon*) Interfaces::entityList->GetClientEntity((uintptr_t)Globals::localPlayer->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
-                    // TODO: FullUpdate
                     try {
                         if (weapon) {
                             if (weapon->itemIndex() != ItemIndex::INVALID) {

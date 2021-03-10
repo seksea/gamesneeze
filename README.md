@@ -37,6 +37,7 @@ An open source cheat for Counter-Strike: Global Offensive on Linux.
  - Hitmarkers
  - Nightmode
  - Skybox changer
+ - Skinchanger
  - Ragebot (currently in development and doesnt have awall so no mindmg/hitchance/autoshoot)
  - AntiAim (currently sways, need to fix lby breaker)
 
