@@ -121,9 +121,10 @@ public:
 class Weapon : public Item {
 public:
 	NETVAR("DT_BaseCombatWeapon", "m_hOwner", owner, int);
+	NETVAR("DT_BaseCombatWeapon", "m_iClip1", ammo, int);
+	
 	NETVAR("DT_BaseCombatWeapon", "m_iItemIDHigh", itemIDHigh, int);
 	NETVAR("DT_BaseCombatWeapon", "m_iAccountID", accountID, int);
-	NETVAR("DT_BaseCombatWeapon", "m_iClip1", ammo, int);
 	NETVAR("DT_BaseCombatWeapon", "m_nFallbackPaintKit", paintKit, int);
 	NETVAR("DT_BaseCombatWeapon", "m_flFallbackWear", wear, float);
 	NETVAR("DT_BaseCombatWeapon", "m_nFallbackStatTrak", statTrack, int);
