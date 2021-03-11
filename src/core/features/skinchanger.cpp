@@ -6,6 +6,7 @@ void Features::SkinChanger::frameStageNotify(FrameStage frame) {
         if (Globals::localPlayer) {
             if (Interfaces::engine->IsInGame()) {
                 if (Globals::localPlayer->health() > 0) {
+                    // TODO: get all weapons, not just active weapon
                     Weapon* weapon = (Weapon*) Interfaces::entityList->GetClientEntity((uintptr_t)Globals::localPlayer->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
                     try {
                         if (weapon) {
