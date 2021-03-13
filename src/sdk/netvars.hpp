@@ -29,6 +29,7 @@ namespace Netvar {
         {std::make_pair("DT_BasePlayer", "deadflag"), 0},
         {std::make_pair("DT_CSPlayer", "m_bHasHelmet"), 0},
         {std::make_pair("DT_CSPlayer", "m_ArmorValue"), 0},
+        {std::make_pair("DT_BaseEntity", "m_nRenderMode"), 0}, // Used for movetype
 
         /* Item */
         {std::make_pair("DT_BaseAttributableItem", "m_iItemDefinitionIndex"), 0},

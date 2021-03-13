@@ -193,8 +193,10 @@ namespace Config {
             // Chams {
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Visible Material", 0),
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Visible Color", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Visuals>Players>Enemies>Chams>Visible Wireframe", false),
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Visible Overlay Material", 0),
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Visible Overlay Color", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Visuals>Players>Enemies>Chams>Visible Overlay Wireframe", false),
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Occluded Material", 0),
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Occluded Color", ImColor(197, 66, 245, 255)),
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Backtrack Material", 0),
@@ -203,19 +205,25 @@ namespace Config {
                 
                 CONFIGITEM("Visuals>Players>Teammates>Chams>Visible Material", 0),
                 CONFIGITEM("Visuals>Players>Teammates>Chams>Visible Color", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Visuals>Players>Teammates>Chams>Visible Wireframe", false),
                 CONFIGITEM("Visuals>Players>Teammates>Chams>Visible Overlay Material", 0),
                 CONFIGITEM("Visuals>Players>Teammates>Chams>Visible Overlay Color", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Visuals>Players>Teammates>Chams>Visible Overlay Wireframe", false),
                 CONFIGITEM("Visuals>Players>Teammates>Chams>Occluded Material", 0),
                 CONFIGITEM("Visuals>Players>Teammates>Chams>Occluded Color", ImColor(197, 66, 245, 255)),
 
                 CONFIGITEM("Visuals>Players>LocalPlayer>Weapon Material", 0),
                 CONFIGITEM("Visuals>Players>LocalPlayer>Weapon Color", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Visuals>Players>LocalPlayer>Weapon Wireframe", false),
                 CONFIGITEM("Visuals>Players>LocalPlayer>Weapon Overlay Material", 0),
                 CONFIGITEM("Visuals>Players>LocalPlayer>Weapon Overlay Color", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Visuals>Players>LocalPlayer>Weapon Overlay Wireframe", false),
                 CONFIGITEM("Visuals>Players>LocalPlayer>Arms Material", 0),
                 CONFIGITEM("Visuals>Players>LocalPlayer>Arms Color", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Visuals>Players>LocalPlayer>Arms Wireframe", false),
                 CONFIGITEM("Visuals>Players>LocalPlayer>Arms Overlay Material", 0),
                 CONFIGITEM("Visuals>Players>LocalPlayer>Arms Overlay Color", ImColor(197, 66, 245, 255)),
+                CONFIGITEM("Visuals>Players>LocalPlayer>Arms Overlay Wireframe", false),
             // }
             // World {
                 CONFIGITEM("Visuals>Players>LocalPlayer>Spread Crosshair", false),
@@ -358,7 +366,7 @@ namespace Config {
 
                 char* buf3 = new char[256];
                 snprintf(buf3, 256, "Misc>Skins>Skins>%s>StatTrack", item.second);
-                config.insert(std::make_pair<std::string_view, ConfigItem>(buf3, 0));
+                config.insert(std::make_pair<std::string_view, ConfigItem>(buf3, -1));
             }
         }
     }

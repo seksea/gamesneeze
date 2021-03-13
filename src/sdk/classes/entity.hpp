@@ -107,6 +107,10 @@ public:
 		return *reinterpret_cast<int*>((uintptr_t)defuser_ptr()+0x7c);
 	}
 
+	int moveType() {
+		return *reinterpret_cast<int*>((uintptr_t)this + GETNETVAROFFSET("DT_BaseEntity", "m_nRenderMode") + 1);
+	}
+
 	bool getHitboxBones(matrix3x4_t* boneMatrix);
 	bool getAnythingBones(matrix3x4_t* boneMatrix);
 	Vector getBonePos(int bone);

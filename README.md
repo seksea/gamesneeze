@@ -61,18 +61,21 @@ An open source cheat for Counter-Strike: Global Offensive on Linux.
 git clone https://github.com/seksea/gamesneeze
 cd gamesneeze
 chmod +x toolbox.sh
-sudo ./toolbox.sh -u -b -l # unload cheat if currently injected, build and then load, use -h for help
+sudo ./toolbox.sh -p -u -b -l # pull, unload cheat if currently injected, build and then load, use -h for help
 ```
 
 
 ## Basic toolbox.sh usage
 
-| Argument          | Description                           |
-| ----------------- | ------------------------------------- |
-| -u (--unload)     | Unload the cheat from CS:GO if loaded |
-| -l (--load)       | Load/inject the cheat via gdb         |
-| -b (--build)      | Build to the build/ dir               |
-| -h (--help)       | Show help                             |
+| Argument           | Description                             |
+| ------------------ | --------------------------------------- |
+| -u (--unload)      | Unload the cheat from CS:GO if loaded   |
+| -l (--load)        | Load/inject the cheat via gdb           |
+| -ld (--load_debug) | Load/inject the cheat and debug via gdb |
+| -b (--build)       | Build to the build/ dir                 |
+| -bd (--build_debug)| Build to the build/ dir as debug        |
+| -p (--pull)        | Update the cheat                        |
+| -h (--help)        | Show help                               |
 
 All args are executed in the order they are written in, for example, "-u -b -l" would unload the cheat, build it, and then load it back into csgo.
 

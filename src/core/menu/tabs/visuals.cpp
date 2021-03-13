@@ -6,7 +6,8 @@ void drawChamsWidget(const char* label,
                     int* material, ImColor* color, 
                     int* overlayMaterial, ImColor* overlayColor,
                     bool occluded = false, int* occludedMaterial = nullptr, ImColor* occludedColor = nullptr,
-                    bool backtrack = false, int* backtrackMaterial = nullptr, ImColor* backtrackColor = nullptr, bool* backtrackTrail = nullptr) {
+                    bool backtrack = false, int* backtrackMaterial = nullptr, ImColor* backtrackColor = nullptr, bool* backtrackTrail = nullptr, 
+                    bool* wireframe = nullptr, bool* overlayWireframe = nullptr) {
     char btnLabel[64];
     snprintf(btnLabel, sizeof(btnLabel), "Chams##%s", label);
     if (ImGui::Button(btnLabel)) {
@@ -19,11 +20,19 @@ void drawChamsWidget(const char* label,
         ImGui::Combo("##Chams Material", material, chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
         ImGui::SameLine();
         ImGui::ColorEdit4("##Chams Color", (float*)color, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+        if (wireframe) {
+            ImGui::SameLine();
+            ImGui::Checkbox("Wireframe ##Visible Wireframe", wireframe);
+        }
 
         ImGui::Text("%s Chams Overlay", label);
         ImGui::Combo("##Chams Overlay Material", overlayMaterial, chamsMaterials, IM_ARRAYSIZE(chamsMaterials));
         ImGui::SameLine();
         ImGui::ColorEdit4("Chams Overlay Color", (float*)overlayColor, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+        if (overlayWireframe) {
+            ImGui::SameLine();
+            ImGui::Checkbox("Wireframe ##Visible Overlay Wireframe", overlayWireframe);
+        }
 
         if (occluded) {
             ImGui::Separator();
@@ -84,7 +93,9 @@ void Menu::drawVisualsTab() {
                 drawChamsWidget("Teammates", 
                     &CONFIGINT("Visuals>Players>Teammates>Chams>Visible Material"), &CONFIGCOL("Visuals>Players>Teammates>Chams>Visible Color"), 
                     &CONFIGINT("Visuals>Players>Teammates>Chams>Visible Overlay Material"), &CONFIGCOL("Visuals>Players>Teammates>Chams>Visible Overlay Color"), 
-                    true, &CONFIGINT("Visuals>Players>Teammates>Chams>Occluded Material"), &CONFIGCOL("Visuals>Players>Teammates>Chams>Occluded Color"));
+                    true, &CONFIGINT("Visuals>Players>Teammates>Chams>Occluded Material"), &CONFIGCOL("Visuals>Players>Teammates>Chams>Occluded Color"), 
+                    false, nullptr, nullptr, nullptr,
+                    &CONFIGBOOL("Visuals>Players>Teammates>Chams>Visible Wireframe"), &CONFIGBOOL("Visuals>Players>Teammates>Chams>Visible Overlay Wireframe"));
 
                 ImGui::EndChild();
             }
@@ -128,7 +139,8 @@ void Menu::drawVisualsTab() {
                     &CONFIGINT("Visuals>Players>Enemies>Chams>Visible Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Visible Color"), 
                     &CONFIGINT("Visuals>Players>Enemies>Chams>Visible Overlay Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Visible Overlay Color"), 
                     true, &CONFIGINT("Visuals>Players>Enemies>Chams>Occluded Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Occluded Color"), 
-                    true, &CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), &CONFIGBOOL("Visuals>Players>Enemies>Chams>Trail"));
+                    true, &CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), &CONFIGBOOL("Visuals>Players>Enemies>Chams>Trail"),
+                    &CONFIGBOOL("Visuals>Players>Enemies>Chams>Visible Wireframe"), &CONFIGBOOL("Visuals>Players>Enemies>Chams>Visible Overlay Wireframe"));
 
                 ImGui::EndChild();
             }
@@ -140,12 +152,18 @@ void Menu::drawVisualsTab() {
                 ImGui::Text("Arms");
                 drawChamsWidget("Arm",
                     &CONFIGINT("Visuals>Players>LocalPlayer>Arms Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Arms Color"), 
-                    &CONFIGINT("Visuals>Players>LocalPlayer>Arms Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Arms Overlay Color"));
+                    &CONFIGINT("Visuals>Players>LocalPlayer>Arms Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Arms Overlay Color"), 
+                    false, nullptr, nullptr, 
+                    false, nullptr, nullptr, nullptr,
+                    &CONFIGBOOL("Visuals>Players>LocalPlayer>Arms Wireframe"), &CONFIGBOOL("Visuals>Players>LocalPlayer>Arms Overlay Wireframe"));
                 ImGui::Separator();
                 ImGui::Text("Weapons");
                 drawChamsWidget("Weapon",
                     &CONFIGINT("Visuals>Players>LocalPlayer>Weapon Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Weapon Color"), 
-                    &CONFIGINT("Visuals>Players>LocalPlayer>Weapon Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Weapon Overlay Color"));
+                    &CONFIGINT("Visuals>Players>LocalPlayer>Weapon Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Weapon Overlay Color"), 
+                    false, nullptr, nullptr, 
+                    false, nullptr, nullptr, nullptr,
+                    &CONFIGBOOL("Visuals>Players>LocalPlayer>Weapon Wireframe"), &CONFIGBOOL("Visuals>Players>LocalPlayer>Weapon Overlay Wireframe"));
 
                 ImGui::Separator();
                 ImGui::ColorEdit4("Crosshair Color", (float*)&CONFIGCOL("Visuals>Players>LocalPlayer>Crosshair Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
@@ -198,7 +216,7 @@ void Menu::drawVisualsTab() {
                 ImGui::Checkbox("Weapon Label", &CONFIGBOOL("Visuals>World>Items>Weapon Label"));
                 ImGui::Separator();
                 if (CONFIGBOOL("Visuals>World>Items>Grenade Box")) {
-                    ImGui::ColorEdit4("Weapon Box Color", (float*)&CONFIGCOL("Visuals>World>Items>Grenade Box Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                    ImGui::ColorEdit4("Grenade Box Color", (float*)&CONFIGCOL("Visuals>World>Items>Grenade Box Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
                     ImGui::SameLine();
                 }
                 ImGui::Checkbox("Grenade Box", &CONFIGBOOL("Visuals>World>Items>Grenade Box"));
