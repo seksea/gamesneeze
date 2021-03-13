@@ -106,13 +106,10 @@ void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const M
                     if (Features::Backtrack::backtrackTicks.size() > 2) {
                         if (CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material")) {
                             if (CONFIGBOOL("Visuals>Players>Enemies>Chams>Trail")) {
-                                //TODO check if they were moving for the number of ticks we are backtracking to prevent minor flicker.
-                                if(p->velocity().Length2D() > 0) {
-                                    for (Features::Backtrack::BackTrackTick tick : Features::Backtrack::backtrackTicks) {
-                                        if (tick.tickCount % 2 == 0) { // only draw every other tick to reduce lag
-                                            if (tick.players.find(p->index()) != tick.players.end()) {
-                                                cham(thisptr, ctx, state, pInfo, tick.players.at(p->index()).boneMatrix, CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), false);
-                                            }
+                                for (Features::Backtrack::BackTrackTick tick : Features::Backtrack::backtrackTicks) {
+                                    if (tick.tickCount % 2 == 0) { // only draw every other tick to reduce lag
+                                        if (tick.players.find(p->index()) != tick.players.end()) {
+                                            cham(thisptr, ctx, state, pInfo, tick.players.at(p->index()).boneMatrix, CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), false);
                                         }
                                     }
                                 }
