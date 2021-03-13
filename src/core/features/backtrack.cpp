@@ -13,7 +13,7 @@ void Features::Backtrack::store(CUserCmd *cmd) {
                     for (int i = 1; i < Interfaces::globals->maxClients; i++) {
                         Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
                         if (p) {
-                            if (p->health() > 0 && !p->dormant() && p != Globals::localPlayer && p->team() != Globals::localPlayer->team()) {
+                            if (p->isAlive() && !p->dormant() && p != Globals::localPlayer && p->team() != Globals::localPlayer->team()) {
                                 BacktrackPlayer player;
                                 player.playerIndex = i;
                                 if (p->getAnythingBones(player.boneMatrix)) {
@@ -59,7 +59,7 @@ void Features::Backtrack::createMove(CUserCmd* cmd) {
                             for (auto player : tick.players) {
                                 Player* p = (Player*)Interfaces::entityList->GetClientEntity(player.second.playerIndex);
                                 if (p) {
-                                    if (p->health() > 0 && !p->dormant()) {
+                                    if (p->isAlive() && !p->dormant()) {
                                         Vector localPlayerEyePos = Globals::localPlayer->eyePos();
 
                                         Vector targetEyePos = Vector(player.second.boneMatrix[8][0][3], player.second.boneMatrix[8][1][3], player.second.boneMatrix[8][2][3]); // 8 is headbone in bonematrix

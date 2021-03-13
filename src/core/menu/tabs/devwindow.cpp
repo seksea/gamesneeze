@@ -54,7 +54,7 @@ void Menu::drawDevWindow() {
                 if (ent) {
                     if (ent->isPlayer()) {
                         Player* p = (Player*)ent;
-                        if (p->health() > 0) {
+                        if (p->isAlive()) {
                             if (ImGui::TreeNode(std::to_string(i).c_str(), "PLAYER: %d", i)) {
                                 ImGui::Text("dormant: %d", p->dormant());
                                 ImGui::Text("isPlayer: %d", p->isPlayer());

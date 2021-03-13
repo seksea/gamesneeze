@@ -44,7 +44,7 @@ void cachePlayers() {
                 if (i < Interfaces::globals->maxClients) {
                     Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
                     if (p && p != Globals::localPlayer) {
-                        if (p->health() > 0 && !p->dormant()) {
+                        if (p->isAlive() && !p->dormant()) {
                             PlayerCache player;
                             if (p->setupBones(player.boneMatrixHitbox, 128, BONE_USED_BY_HITBOX, Interfaces::globals->curtime)) {
                                 if (p->setupBones(player.boneMatrixAnything, 128, BONE_USED_BY_ANYTHING, Interfaces::globals->curtime)) {

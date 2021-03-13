@@ -89,7 +89,7 @@ void cham(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRe
 void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld) {
     Player* p = (Player*)Interfaces::entityList->GetClientEntity(pInfo.entity_index);
     if (Globals::localPlayer) {
-        if (p->health() > 0) {
+        if (p->isAlive() > 0) {
             if (p->team() != Globals::localPlayer->team()) {
                 /* Ignorez Enemy */
                 if (CONFIGINT("Visuals>Players>Enemies>Chams>Occluded Material")) {

@@ -9,7 +9,7 @@ void Features::RecoilCrosshair::draw() {
         CONFIGBOOL("Visuals>Players>LocalPlayer>Recoil Crosshair")) {
         if (Globals::localPlayer) {
             if (Interfaces::engine->IsInGame()) {
-                if (Globals::localPlayer->health() > 0) {
+                if (Globals::localPlayer->isAlive()) {
                     float rad;
                     int x = Globals::screenSizeX / 2;
                     int y = Globals::screenSizeY / 2;
@@ -51,7 +51,7 @@ void Features::RecoilCrosshair::frameStageNotify(FrameStage frame) {
         if (frame == FRAME_NET_UPDATE_POSTDATAUPDATE_END) {
             if (Globals::localPlayer) {
                 if (Interfaces::engine->IsInGame()) {
-                    if (Globals::localPlayer->health() > 0) {
+                    if (Globals::localPlayer->isAlive()) {
                         Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)Globals::localPlayer->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
                         if (weapon) {
                             // get spread and inaccuracy in FSN as if you do it when you draw sometimes you can run it too early and the game will crash

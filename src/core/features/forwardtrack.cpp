@@ -17,7 +17,7 @@ void Features::Forwardtrack::createMove(CUserCmd* cmd) {
             for (int i = 1; i < Interfaces::globals->maxClients; i++) {
                 Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
                 if (p) {
-                    if (p->health() > 0 && !p->dormant()) {
+                    if (p->isAlive() && !p->dormant()) {
                         matrix3x4_t boneMatrix[128];
                         if (p->getAnythingBones(boneMatrix)) {
                             Vector localPlayerEyePos = Globals::localPlayer->eyePos();

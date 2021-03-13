@@ -4,7 +4,7 @@
 void Features::RageBot::createMove(CUserCmd* cmd) {
     if (Interfaces::engine->IsInGame()) {
         if (Globals::localPlayer) {
-            if (Globals::localPlayer->health() > 0) {
+            if (Globals::localPlayer->isAlive()) {
                 if (cmd->buttons & (1 << 0)) {
                     Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)Globals::localPlayer->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
                     if (weapon) {
@@ -17,7 +17,7 @@ void Features::RageBot::createMove(CUserCmd* cmd) {
                         for (int i = 1; i < Interfaces::globals->maxClients; i++) {
                             Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
                             if (p && p != Globals::localPlayer) {
-                                if (p->health() > 0 && !p->dormant() && p->team() != Globals::localPlayer->team()) {
+                                if (p->isAlive() && !p->dormant() && p->team() != Globals::localPlayer->team()) {
                                     matrix3x4_t boneMatrix[128];
                                     if (p->getAnythingBones(boneMatrix)) {
                                         Vector localPlayerEyePos = Globals::localPlayer->eyePos();

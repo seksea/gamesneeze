@@ -136,7 +136,7 @@ void drawForwardTrack(Player* p) {
 
 void drawPlayer(Player* p) {
     if (!p->dormant()) {
-        if (p->health() > 0) {
+        if (p->isAlive() > 0) {
             int x, y, x2, y2;
             if (getBox(p, x, y, x2, y2)) {
                 player_info_t info;
@@ -144,7 +144,7 @@ void drawPlayer(Player* p) {
 
                 if (p->team() != Globals::localPlayer->team()) {
                     
-                    if (CONFIGBOOL("Visuals>Players>Enemies>Vis Check") ? (Globals::localPlayer->health() > 0 ? p->visible() : true) : true) {
+                    if (CONFIGBOOL("Visuals>Players>Enemies>Vis Check") ? (Globals::localPlayer->isAlive() ? p->visible() : true) : true) {
                         if (CONFIGBOOL("Visuals>Players>Enemies>Only When Dead") ? (Globals::localPlayer->health() == 0) : true) {
                             std::stringstream rightText;
                             if (CONFIGBOOL("Visuals>Players>Enemies>Health"))
@@ -181,7 +181,7 @@ void drawPlayer(Player* p) {
                     }
                 }
                 if (p->team() == Globals::localPlayer->team()) {
-                    if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Visuals>Players>Teammates>Only When Dead")) || !CONFIGBOOL("Visuals>Players>Teammates>Only When Dead")) {
+                    if ((!Globals::localPlayer->isAlive() && CONFIGBOOL("Visuals>Players>Teammates>Only When Dead")) || !CONFIGBOOL("Visuals>Players>Teammates>Only When Dead")) {
                         std::stringstream rightText;
                         if (CONFIGBOOL("Visuals>Players>Teammates>Health"))
                             rightText << p->health() << "hp\n";

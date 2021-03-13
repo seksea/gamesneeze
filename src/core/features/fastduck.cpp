@@ -3,7 +3,7 @@
 void Features::FastDuck::createMove(CUserCmd* cmd) {
     if (CONFIGBOOL("Misc>Misc>Movement>Fast Duck")) {
         if (Globals::localPlayer) {
-            if (Globals::localPlayer->health() > 0) {
+            if (Globals::localPlayer->isAlive()) {
                 cmd->buttons |= (1 << 22);
             }
         }

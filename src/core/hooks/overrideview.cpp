@@ -6,7 +6,7 @@
 void Hooks::OverrideView::hook(void* thisptr, ViewSetup* setup) {
     if (Interfaces::engine->IsInGame()) {
         if (Globals::localPlayer) {
-            if (Globals::localPlayer->health() > 0) {
+            if (Globals::localPlayer->isAlive()) {
 
                 if (!Globals::localPlayer->scoped()) {
                     setup->fov = CONFIGINT("Visuals>World>World>FOV");

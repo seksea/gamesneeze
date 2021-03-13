@@ -12,7 +12,7 @@ void Hooks::FrameStageNotify::hook(void* thisptr, FrameStage frame) {
     if (frame == FRAME_RENDER_START) {
         cachePlayers();
         if (Globals::localPlayer) {
-            if (Globals::localPlayer->health() > 0) {
+            if (Globals::localPlayer->isAlive()) {
                 if (Interfaces::input->m_fCameraInThirdPerson) {
                     QAngle viewAngles;
                     Interfaces::engine->GetViewAngles(viewAngles);
@@ -28,7 +28,7 @@ void Hooks::FrameStageNotify::hook(void* thisptr, FrameStage frame) {
             for (int i = 1; i < Interfaces::globals->maxClients; i++) {
                 Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
                 if (p && p != Globals::localPlayer) {
-                    if (p->health() > 0 && !p->dormant() && p->team() != Globals::localPlayer->team()) {
+                    if (p->isAlive() && !p->dormant() && p->team() != Globals::localPlayer->team()) {
                         p->eyeAngles_ptr()->y = p->lbyTarget() + (rand() % 100) - 50; // p resolve
                     }
                 }

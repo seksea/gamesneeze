@@ -4,7 +4,7 @@
 void Features::SlowWalk::createMove(CUserCmd *cmd) {
     if (CONFIGBOOL("Rage>AntiAim>Slow Walk")) {
         if (Interfaces::engine->IsInGame()) {
-            if (Globals::localPlayer->health() > 0) {
+            if (Globals::localPlayer->isAlive()) {
                 if (Globals::localPlayer->flags() & (1 << 0)) {
                     //I think 18 is walking idk
                     if (cmd->buttons & (1 << 17)) {

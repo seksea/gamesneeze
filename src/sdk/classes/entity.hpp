@@ -95,6 +95,13 @@ public:
 		this + Offsets::animState);
 	}
 
+	bool isAlive() {
+	    if (health() > 0) {
+	        return true;
+	    } else {
+	        return false;
+	    }
+	}
 	QAngle* viewAngles() {
 		return (QAngle*)((uintptr_t)deadflag_ptr() + 0x4);
 	}
