@@ -366,7 +366,7 @@ namespace Config {
 
                 char* buf3 = new char[256];
                 snprintf(buf3, 256, "Misc>Skins>Skins>%s>StatTrack", item.second);
-                config.insert(std::make_pair<std::string_view, ConfigItem>(buf3, 0));
+                config.insert(std::make_pair<std::string_view, ConfigItem>(buf3, -1));
             }
         }
     }
