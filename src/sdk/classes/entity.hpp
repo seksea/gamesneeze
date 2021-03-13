@@ -102,6 +102,7 @@ public:
 	        return false;
 	    }
 	}
+	
 	QAngle* viewAngles() {
 		return (QAngle*)((uintptr_t)deadflag_ptr() + 0x4);
 	}
