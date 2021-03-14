@@ -1,4 +1,5 @@
 #pragma once
+#include "../../core/menu/config.hpp"
 
 #define FCVAR_NONE					0
 
@@ -62,18 +63,24 @@ public:
 	}
 
 	void SetValue(const char* value) {
-		typedef void (*Fn)(void*, const char*);
-		return getVirtualFunc<Fn>(this, 17)(this, value);
+		if (CONFIGBOOL("Misc>Misc>Misc>Enable Setting Cvars")) {
+			typedef void (*Fn)(void*, const char*);
+			return getVirtualFunc<Fn>(this, 17)(this, value);
+		}
 	}
 
 	void SetValue(float value) {
-		typedef void (*Fn)(void*, float);
-		return getVirtualFunc<Fn>(this, 18)(this, value);
+		if (CONFIGBOOL("Misc>Misc>Misc>Enable Setting Cvars")) {
+			typedef void (*Fn)(void*, float);
+			return getVirtualFunc<Fn>(this, 18)(this, value);
+		}
 	}
 
 	void SetValue(int value) {
-		typedef void (*Fn)(void*, int);
-		return getVirtualFunc<Fn>(this, 19)(this, value);
+		if (CONFIGBOOL("Misc>Misc>Misc>Enable Setting Cvars")) {
+			typedef void (*Fn)(void*, int);
+			return getVirtualFunc<Fn>(this, 19)(this, value);
+		}
 	}
 
 	void* vtable;

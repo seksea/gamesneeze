@@ -291,6 +291,7 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Misc>Chat Filter Bypass", false),
             CONFIGITEM("Misc>Misc>Misc>Use Spam", false),
             CONFIGITEM("Misc>Misc>Misc>Use Spam Key", 0),
+            CONFIGITEM("Misc>Misc>Misc>Enable Setting Cvars", false),
             
             CONFIGITEM("Misc>Skins>Skins>PaintKit", 0),
             CONFIGITEM("Misc>Skins>Skins>Wear", 0),

@@ -31,6 +31,7 @@ void Menu::drawMiscTab() {
                     ImGui::SameLine();
                 }
                 ImGui::Checkbox("Use Spam", &CONFIGBOOL("Misc>Misc>Misc>Use Spam"));
+                ImGui::Checkbox("Enable Setting Cvars", &CONFIGBOOL("Misc>Misc>Misc>Enable Setting Cvars"));
                 ImGui::EndChild();
             }
             ImGui::BeginChild("Hitmarkers", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.61, ImGui::GetWindowHeight() * 0.2f), true); {
