@@ -6,13 +6,13 @@ libname="libgamemode.so" # Pretend to be gamemode, change this to another lib th
 csgo_pid=$(pidof csgo_linux64)
 # Lets user set compiler to whatever they want
 export CC="gcc"
-export CXX= "g++"
+export CXX="g++"
 
 rm -rf /tmp/dumps
-mkdir --mode=000 /tmp/dumps 
+mkdir -p --mode=000 /tmp/dumps 
 
 function unload {
-    echo "unloading cheat..."
+    echo "Unloading cheat..."
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
     if grep -q "$libname" "/proc/$csgo_pid/maps"; then
         $gdb -n -q -batch -ex "attach $csgo_pid" \
@@ -28,7 +28,7 @@ function unload {
 }
 
 function load {
-    echo "loading cheat..."
+    echo "Loading cheat..."
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
     cp build/libgamesneeze.so build/$libname
     $gdb -n -q -batch \
@@ -38,11 +38,11 @@ function load {
         -ex "call \$dlopen(\"$(pwd)/build/$libname\", 1)" \
         -ex "detach" \
         -ex "quit"
-    echo "successfully loaded!"
+    echo "Successfully loaded!"
 }
 
 function load_debug {
-    echo "loading cheat..."
+    echo "Loading cheat..."
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
     cp build/libgamesneeze.so build/$libname
     $gdb -n -q -batch \
@@ -58,11 +58,11 @@ function load_debug {
 
 function build {
     if [[ $EUID -eq 0 ]]; then
-   	    echo "You cannot build as root" 
+   	    echo "You cannot build as root." 
    	    exit 1
     fi
-    echo "building cheat..."
-    mkdir build
+    echo "Building cheat..."
+    mkdir -p build
     cd build
     cmake -D CMAKE_BUILD_TYPE=Release ..
     make -j $(nproc --all)
@@ -71,11 +71,11 @@ function build {
 
 function build_debug {
     if [[ $EUID -eq 0 ]]; then
-   	    echo "You cannot build as root" 
+   	    echo "You cannot build as root." 
    	    exit 1
     fi
-    echo "building cheat..."
-    mkdir build
+    echo "Building cheat..."
+    mkdir -p build
     cd build
     cmake -D CMAKE_BUILD_TYPE=Debug ..
     make -j $(nproc --all)
