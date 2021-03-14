@@ -87,6 +87,14 @@ function pull {
     git pull
 }
 
+function pullUpstream {
+    if [[ $EUID -eq 0 ]]; then
+   	    echo "You cannot pull as root" 
+   	    exit 1
+    fi
+    git pull https://github.com/seksea/gamesneeze 
+}
+
 while [[ $# -gt 0 ]]
 do
 keys="$1"
@@ -115,20 +123,25 @@ case $keys in
         pull
         shift
         ;;
+    -pu|--pullUp)
+        pullUpstream
+        shift
+        ;;
     -h|--help)
         echo "
  help
-Toolbox script for gamesneeze the beste lincuck cheat 2020
+Toolbox script for gamesneeze the beste lincuck cheat 2021
 ================================================================
 | Argument           | Description                             |
 | ------------------ | --------------------------------------- |
-| -u (--unload)      | Unload the cheat from CS:GO if loaded   |
-| -l (--load)        | Load/inject the cheat via gdb           |
-| -ld (--load_debug) | Load/inject the cheat and debug via gdb |
-| -b (--build)       | Build to the build/ dir                 |
-| -bd (--build_debug)| Build to the build/ dir as debug        |
-| -p (--pull)        | Update the cheat                        |
-| -h (--help)        | Show help                               |
+| -u (--unload)      | Unload the cheat from CS:GO if loaded.  |
+| -l (--load)        | Load/inject the cheat via gdb.          |
+| -ld (--load_debug) | Load/inject the cheat and debug via gdb.|
+| -b (--build)       | Build to the build/ dir.                |
+| -bd (--build_debug)| Build to the build/ dir as debug.       |
+| -p (--pull)        | Update the cheat.                       |
+| -pu (--pullUp)     | Update the cheat from main repo.        |
+| -h (--help)        | Show help.                              |
 ================================================================
 
 All args are executed in the order they are written in, for
