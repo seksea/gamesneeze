@@ -91,3 +91,4 @@ inline float getDistanceNoSqrt(Vector pos1, Vector pos2) {
     return pow(a, 2.f) + pow(b, 2.f) + pow(c, 2.f);
 }
 
+bool worldToScreen(const Vector& origin, Vector& screen);

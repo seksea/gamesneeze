@@ -34,11 +34,13 @@ void Menu::drawMiscTab() {
                 ImGui::Checkbox("Enable Setting Cvars", &CONFIGBOOL("Misc>Misc>Misc>Enable Setting Cvars"));
                 ImGui::EndChild();
             }
+
             ImGui::BeginChild("Hitmarkers", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.61, ImGui::GetWindowHeight() * 0.2f), true); {
                 ImGui::Text("Hitmarkers");
                 ImGui::Separator();
                 ImGui::Checkbox("Hitlogs", &CONFIGBOOL("Misc>Misc>Hitmarkers>Hitlogs"));
                 ImGui::Checkbox("Hitmarkers", &CONFIGBOOL("Misc>Misc>Hitmarkers>Hitmarkers"));
+                ImGui::Checkbox("Damage Markers", &CONFIGBOOL("Misc>Misc>Hitmarkers>Damage Markers"));
                 ImGui::EndChild();
             }
 
@@ -56,6 +58,7 @@ void Menu::drawMiscTab() {
                 };
                 ImGui::EndChild();
             }
+
             ImGui::BeginChild("Clantag", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.38, ImGui::GetWindowHeight() * 0.279f), true); {
                 ImGui::Text("Clantag");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
@@ -65,6 +68,7 @@ void Menu::drawMiscTab() {
                 ImGui::Checkbox("Bee Movie Clantag", &CONFIGBOOL("Misc>Misc>Clantag>Bee Movie Clantag"));
                 ImGui::EndChild();
             }
+
             ImGui::BeginChild("Movement", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.38, ImGui::GetWindowHeight() * 0.279f), true); {
                 ImGui::Text("Movement");
                 ImGui::Separator();
@@ -94,6 +98,7 @@ void Menu::drawMiscTab() {
                 ImGui::SetTooltip("sekc (ofcourse)\nAll other contributors on GitHub (cristeigabriel, crazily, luk1337 & tango1337)\nand ocornut for his great ImGui UI framework");
             ImGui::EndTabItem();
         }
+
         if (ImGui::BeginTabItem("Skins")) {
             static ItemIndex curWeaponSelected = ItemIndex::WEAPON_AK47;
             if (ImGui::BeginCombo("Weapon", itemIndexMap.at(curWeaponSelected))) {

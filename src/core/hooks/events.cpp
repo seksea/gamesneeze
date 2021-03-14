@@ -12,8 +12,8 @@ Hooks::Events::EventListener::~EventListener() {
 
 void Hooks::Events::EventListener::FireGameEvent(IGameEvent *event) {
     if (strstr(event->GetName(), "player_hurt")) {
-        Entity* attacker = (Entity*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetPlayerForUserID(event->GetInt("attacker")));
-        Entity* victim = (Entity*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetPlayerForUserID(event->GetInt("userid")));
+        Player* attacker = (Player*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetPlayerForUserID(event->GetInt("attacker")));
+        Player* victim = (Player*)Interfaces::entityList->GetClientEntity(Interfaces::engine->GetPlayerForUserID(event->GetInt("userid")));
         if (attacker && victim) {
             if (attacker == Globals::localPlayer) {
                 player_info_t info;
@@ -31,6 +31,21 @@ void Hooks::Events::EventListener::FireGameEvent(IGameEvent *event) {
                 if (CONFIGBOOL("Misc>Misc>Hitmarkers>Hitmarkers")) {
                     Features::Hitmarkers::drawHitmarkerTill = Interfaces::globals->curtime + 0.7f;
                     Interfaces::engine->ExecuteClientCmd("play buttons/arena_switch_press_02"); // TODO: play sound via a better method
+                }
+
+                if (CONFIGBOOL("Misc>Misc>Hitmarkers>Damage Markers")) {
+                    Features::Hitmarkers::DamageMarker damageMarker;
+                    damageMarker.drawHitmarkerTill = Interfaces::globals->curtime + 4.f;
+                    damageMarker.headshot = event->GetInt("hitgroup") == HITGROUP_HEAD;
+                    damageMarker.damage = event->GetInt("dmg_health");
+                    switch (event->GetInt("hitgroup")) {
+                        case HITGROUP_HEAD: damageMarker.position = victim->getBonePos(8); break;
+                        case HITGROUP_CHEST: damageMarker.position = victim->getBonePos(6); break;
+                        case HITGROUP_STOMACH: damageMarker.position = victim->getBonePos(4); break;
+                        default:
+                            damageMarker.position = victim->getBonePos(3); break;
+                    }
+                    Features::Hitmarkers::damageMarkers.push_back(damageMarker);
                 }
             }
         }

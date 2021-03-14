@@ -102,6 +102,14 @@ namespace Features {
         void createMove(CUserCmd* cmd);
     }
     namespace Hitmarkers {
+        struct DamageMarker {
+            float drawHitmarkerTill;
+            Vector position;
+            bool headshot;
+            int damage;
+        };
+
+        inline std::vector<DamageMarker> damageMarkers;
         inline float drawHitmarkerTill;
         void draw();
     }
