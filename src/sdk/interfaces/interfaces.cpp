@@ -1,4 +1,5 @@
 #include "../../includes.hpp"
+#include "icvar.hpp"
 #include "igameevent.hpp"
 #include "interfaces.hpp"
 #include <cstdint>
@@ -8,6 +9,8 @@ typedef IClientMode* (*getClientModeFunc)();
 
 bool Interfaces::init() {
     Log::log(LOG, "Initialising interfaces...");
+
+    convar = getInterface<ICvar>("./bin/linux64/materialsystem_client.so", "VEngineCvar"); // do this first so we can log all the interfaces to game console
 
     client = getInterface<IBaseClientDLL>("./csgo/bin/linux64/client_client.so", "VClient");
     engine = getInterface<IVEngineClient>("./bin/linux64/engine_client.so", "VEngineClient");

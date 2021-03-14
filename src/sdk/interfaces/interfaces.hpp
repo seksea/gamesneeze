@@ -18,6 +18,7 @@
 #include "input.hpp"
 #include "igameevent.hpp"
 #include "playerResource.hpp"
+#include "icvar.hpp"
 
 #include "iclientmode.hpp"
 #include "globalvars.hpp"
@@ -42,6 +43,7 @@ namespace Interfaces {
     inline IMoveHelper* moveHelper;
     inline IPrediction* prediction;
     inline IGameEventManager2* eventManager;
+    inline ICvar* convar;
 
     inline IClientMode* clientMode;
     inline CGlobalVars* globals;
