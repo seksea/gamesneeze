@@ -1,5 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
+# TODO: make this some sort of fucking automaticly randomly chosen name. - allbombson
+gdb="$(dirname "$0")/gdb9" # For using a gdb build such as the cathook one (The one included)
 libname="libgamemode.so" # Pretend to be gamemode, change this to another lib that may be in /maps
 csgo_pid=$(pidof csgo_linux64)
 
@@ -10,7 +12,7 @@ function unload {
     echo "unloading cheat..."
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
     if grep -q "$libname" "/proc/$csgo_pid/maps"; then
-        gdb -n -q -batch -ex "attach $csgo_pid" \
+        $gdb -n -q -batch -ex "attach $csgo_pid" \
             -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
             -ex "set \$dlclose = (int(*)(void*)) dlclose" \
             -ex "set \$library = \$dlopen(\"$(pwd)/build/$libname\", 6)" \
@@ -26,7 +28,7 @@ function load {
     echo "loading cheat..."
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
     cp build/libgamesneeze.so build/$libname
-    gdb -n -q -batch \
+    $gdb -n -q -batch \
         -ex "set auto-load safe-path $(pwd)/build/:/usr/lib/" \
         -ex "attach $csgo_pid" \
         -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
@@ -40,14 +42,14 @@ function load_debug {
     echo "loading cheat..."
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
     cp build/libgamesneeze.so build/$libname
-    gdb -n -q -batch \
+    $gdb -n -q -batch \
         -ex "set auto-load safe-path $(pwd)/build/:/usr/lib/" \
         -ex "attach $csgo_pid" \
         -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
         -ex "call \$dlopen(\"$(pwd)/build/$libname\", 1)" \
         -ex "detach" \
         -ex "quit"
-    gdb -p "$csgo_pid"
+    $gdb -p "$csgo_pid"
     echo "successfully loaded!"
 }
 
