@@ -30,6 +30,9 @@ void Hooks::Events::EventListener::FireGameEvent(IGameEvent *event) {
 
                 if (CONFIGBOOL("Misc>Misc>Hitmarkers>Hitmarkers")) {
                     Features::Hitmarkers::drawHitmarkerTill = Interfaces::globals->curtime + 0.7f;
+                }
+
+                if (CONFIGBOOL("Misc>Misc>Hitmarkers>Hitsound")) {
                     Interfaces::engine->ExecuteClientCmd("play buttons/arena_switch_press_02"); // TODO: play sound via a better method
                 }
 
