@@ -57,6 +57,16 @@ function load_debug {
     echo "successfully loaded!"
 }
 
+function reload_normal {
+    unload
+    load
+}
+
+function reload_debug {
+    unload
+    load_debug
+}
+
 function build {
     if [[ $EUID -eq 0 ]]; then
    	    echo "You cannot build as root." 
@@ -91,7 +101,7 @@ function pull {
     git pull
 }
 
-function pullUpstream {
+function pull_upstream {
     if [[ $EUID -eq 0 ]]; then
    	    echo "You cannot pull as root" 
    	    exit 1
@@ -115,6 +125,14 @@ case $keys in
         load_debug
         shift
         ;;
+    -r|--reload)
+        reload_normal
+        shift
+        ;;
+    -rd|--reload_debug)
+        reload_debug
+        shift
+        ;;
     -b|--build)
         build
         shift
@@ -127,26 +145,28 @@ case $keys in
         pull
         shift
         ;;
-    -pu|--pullUp)
-        pullUpstream
+    -pu|--pull_up)
+        pull_upstream
         shift
         ;;
     -h|--help)
         echo "
  help
 Toolbox script for gamesneeze the beste lincuck cheat 2021
-================================================================
-| Argument           | Description                             |
-| ------------------ | --------------------------------------- |
-| -u (--unload)      | Unload the cheat from CS:GO if loaded.  |
-| -l (--load)        | Load/inject the cheat via gdb.          |
-| -ld (--load_debug) | Load/inject the cheat and debug via gdb.|
-| -b (--build)       | Build to the build/ dir.                |
-| -bd (--build_debug)| Build to the build/ dir as debug.       |
-| -p (--pull)        | Update the cheat.                       |
-| -pu (--pullUp)     | Update the cheat from main repo.        |
-| -h (--help)        | Show help.                              |
-================================================================
+=======================================================================
+| Argument             | Description                                  |
+| -------------------- | -------------------------------------------- |
+| -u (--unload)        | Unload the cheat from CS:GO if loaded.       |
+| -l (--load)          | Load/inject the cheat via gdb.               |
+| -ld (--load_debug)   | Load/inject the cheat and debug via gdb.     |
+| -r (--reload)        | Reload/Reinject the cheat via gdb.           |
+| -rd (--reload_debug) | Reload/Reinject the cheat and debug via gdb. |
+| -b (--build)         | Build to the build/ dir.                     |
+| -bd (--build_debug)  | Build to the build/ dir as debug.            |
+| -p (--pull)          | Update the cheat.                            |
+| -pu (--pull_up)      | Update the cheat from main repo.             |
+| -h (--help)          | Show help.                                   |
+=======================================================================
 
 All args are executed in the order they are written in, for
 example, \"-p -u -b -l\" would update the cheat, then unload, then build it, and
