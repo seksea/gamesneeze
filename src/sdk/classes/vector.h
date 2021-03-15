@@ -1351,9 +1351,9 @@ inline void QAngle::Init(float ix, float iy, float iz)
 
 inline void QAngle::Random(float minVal, float maxVal)
 {
-	x = minVal + ((float)rand() / RAND_MAX) * (maxVal - minVal);
-	y = minVal + ((float)rand() / RAND_MAX) * (maxVal - minVal);
-	z = minVal + ((float)rand() / RAND_MAX) * (maxVal - minVal);
+	x = minVal + ((float)rand() / (float)RAND_MAX) * (maxVal - minVal);
+	y = minVal + ((float)rand() / (float)RAND_MAX) * (maxVal - minVal);
+	z = minVal + ((float)rand() / (float)RAND_MAX) * (maxVal - minVal);
 	CHECK_VALID(*this);
 }
 

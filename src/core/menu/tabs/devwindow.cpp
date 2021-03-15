@@ -49,7 +49,8 @@ void Menu::drawDevWindow() {
     if (ImGui::TreeNode("Entities")) {
         if (Interfaces::engine->IsInGame()) {
             int highest = Interfaces::entityList->GetHighestEntityIndex();
-            for (int i; i < highest; i++) {
+            // To whatever nigger frogot to initalise i, this is a possible reason for why the cheat crashes somtimes
+            for (int i = 0; i < highest; i++) {
                 Entity* ent = (Entity*)Interfaces::entityList->GetClientEntity(i);
                 if (ent) {
                     if (ent->isPlayer()) {

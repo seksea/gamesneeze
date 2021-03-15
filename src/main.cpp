@@ -1,20 +1,24 @@
 #include "core/menu/config.hpp"
 #include "includes.hpp"
+#include <unistd.h>
 
 /* initialise everything in */
 void MainThread() {
     /* if serverbrowser is not open then wait, (serverbrowser is last to be loaded) */
     while (!dlopen("./bin/linux64/serverbrowser_client.so", RTLD_NOLOAD | RTLD_NOW))
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        // Y'all niggas ever heard of unistd? Stop using cpp garbage its cock and ball
+        usleep(500*1000);
+        //std::this_thread::sleep_for(std::chrono::milliseconds(500));
     try {
-        std::cout << " \n\
+        // Some nigger was using cpp garbage before
+        fputs(" \n\
 Powered by...\n\
    __ _  __ _ _ __ ___   ___ \e[32m ___ _ __   ___  ___ _______ \e[0m \n\
   / _` |/ _` | '_ ` _ \\ / _ \\\e[32m/ __| '_ \\ / _ \\/ _ \\_  / _ \\\e[0m \n\
  | (_| | (_| | | | | | |  __/\e[32m\\__ \\ | | |  __/  __// /  __/\e[0m \n\
   \\__, |\\__,_|_| |_| |_|\\___|\e[32m|___/_| |_|\\___|\\___/___\\___|\e[0m \n\
   |___/ \n\
-===========================================================\n";
+===========================================================\n", stdout);
         Log::log(LOG, "Initialising...");
 
         Config::init();

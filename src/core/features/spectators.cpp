@@ -8,7 +8,8 @@ void Features::Spectators::draw() {
         ImGui::Separator();
         if (Interfaces::engine->IsInGame()) {
             if (Globals::localPlayer) {
-                for (int i; i < Interfaces::globals->maxClients; i++) {
+                // To whatever nigger frogot to initalise i, this is a possible reason for why the cheat crashes somtimes
+                for (int i = 0; i < Interfaces::globals->maxClients; i++) {
                     if (i != Interfaces::engine->GetLocalPlayer()) {
                         Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
                         if (p) {
