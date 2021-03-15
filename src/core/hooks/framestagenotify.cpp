@@ -8,6 +8,7 @@ void Hooks::FrameStageNotify::hook(void* thisptr, FrameStage frame) {
     Features::RecoilCrosshair::frameStageNotify(frame);
     Features::SkinChanger::frameStageNotify(frame);
     Features::NoFlash::frameStageNotify(frame);
+    Features::RagdollGravity::frameStageNotify(frame);
 
     if (frame == FRAME_RENDER_START) {
         cachePlayers();

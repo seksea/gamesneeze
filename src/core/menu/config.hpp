@@ -263,6 +263,8 @@ namespace Config {
                 CONFIGITEM("Visuals>World>Items>Fish Label", false),
 
                 CONFIGITEM("Visuals>World>Items>ESP Quite literally everything", false),
+
+                CONFIGITEM("Visuals>World>World>Ragdoll Gravity", false),
             // }
         // }
         // Misc {
