@@ -119,4 +119,7 @@ namespace Features {
     namespace NoFlash {
         void frameStageNotify(FrameStage frame);
     }
+    namespace RagdollGravity {
+        void frameStageNotify(FrameStage frame);
+    }
 }
