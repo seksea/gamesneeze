@@ -9,6 +9,11 @@ csgo_pid=$(pidof csgo_linux64)
 export CC="clang"
 export CXX="clang++"
 
+if [[ $EUID -eq 0 ]]; then
+    echo "You cannot run this as root." 
+    exit 1
+fi
+
 rm -rf /tmp/dumps
 mkdir -p --mode=000 /tmp/dumps 
 
@@ -58,10 +63,6 @@ function load_debug {
 }
 
 function build {
-    if [[ $EUID -eq 0 ]]; then
-   	    echo "You cannot build as root." 
-   	    exit 1
-    fi
     echo "Building cheat..."
     mkdir -p build
     cd build
@@ -71,10 +72,6 @@ function build {
 }
 
 function build_debug {
-    if [[ $EUID -eq 0 ]]; then
-   	    echo "You cannot build as root." 
-   	    exit 1
-    fi
     echo "Building cheat..."
     mkdir -p build
     cd build
@@ -84,10 +81,6 @@ function build_debug {
 }
 
 function pull {
-    if [[ $EUID -eq 0 ]]; then
-   	    echo "You cannot pull as root" 
-   	    exit 1
-    fi
     git pull
 }
 
