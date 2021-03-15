@@ -1,4 +1,5 @@
 #pragma once
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 
 class IBaseFileSystem;
 class CUtlBuffer;

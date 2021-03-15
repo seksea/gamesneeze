@@ -21,7 +21,7 @@
 
 struct mstudiobone_t {
 	int					sznameindex;
-	inline char * const pszName( void ) const { return ((char *)this) + sznameindex; }
+	inline char         *pszName( void ) const { return ((char *)this) + sznameindex; }
 	int		 			parent;		// parent bone
 	int					bonecontroller[6];	// bone controller index, -1 == none
 
@@ -39,9 +39,9 @@ struct mstudiobone_t {
 	int					proctype;
 	int					procindex;		// procedural rule
 	mutable int			physicsbone;	// index into physically simulated bone
-	inline void *pProcedure( ) const { if (procindex == 0) return 0; else return  (void *)(((char*)this) + procindex); };
+	inline void         *pProcedure( ) const { if (procindex == 0) return 0; else return  (void *)(((char*)this) + procindex); };
 	int					surfacepropidx;	// index into string tablefor property name
-	inline char * const pszSurfaceProp( void ) const { return ((char *)this) + surfacepropidx; }
+	inline char         *pszSurfaceProp( void ) const { return ((char *)this) + surfacepropidx; }
 	inline int			GetSurfaceProp( void ) const { return surfacepropLookup; }
 
 	int					contents;		// See BSPFlags.h for the contents flags
@@ -71,7 +71,7 @@ struct mstudiobbox_t {
 struct mstudiohitboxset_t {
 	int sznameindex;
 
-	inline char *const pszName() const
+	inline char *pszName() const
 	{
 		return ((char *) this) + sznameindex;
 	}
@@ -261,7 +261,7 @@ struct studiohdr_t {
 
 	int surfacepropindex;
 
-	inline char *const pszSurfaceProp() const
+	inline char *pszSurfaceProp() const
 	{
 		return ((char *) this) + surfacepropindex;
 	}
@@ -304,7 +304,7 @@ struct studiohdr_t {
 	// for demand loaded animation blocks
 	int szanimblocknameindex;
 
-	inline char *const pszAnimBlockName() const
+	inline char *pszAnimBlockName() const
 	{
 		return ((char *) this) + szanimblocknameindex;
 	}

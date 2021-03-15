@@ -1,5 +1,6 @@
 #pragma GCC diagnostic ignored "-Wunused-value"
 #pragma GCC diagnostic ignored "-Wreturn-type"
+#pragma GCC diagnostic ignored "-Wdeprecated-copy"
 
 #include <math.h>
 #include <stdlib.h>
