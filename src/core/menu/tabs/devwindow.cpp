@@ -49,7 +49,7 @@ void Menu::drawDevWindow() {
     if (ImGui::TreeNode("Entities")) {
         if (Interfaces::engine->IsInGame()) {
             int highest = Interfaces::entityList->GetHighestEntityIndex();
-            for (int i; i < highest; i++) {
+            for (int i = 0; i < highest; i++) {
                 Entity* ent = (Entity*)Interfaces::entityList->GetClientEntity(i);
                 if (ent) {
                     if (ent->isPlayer()) {
