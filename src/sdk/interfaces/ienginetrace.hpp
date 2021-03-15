@@ -1,4 +1,5 @@
 #pragma once
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 #include "../sdk.hpp"
 #include "interfaces.hpp"
 #include "../classes/entity.hpp"

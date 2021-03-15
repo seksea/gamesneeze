@@ -33,7 +33,9 @@ void Features::Notifications::draw() {
 }
 
 void Features::Notifications::addNotification(ImColor color, const char* fmt, ...) {
-    Notification notif = {Interfaces::globals->realtime, color};
+    Notification notif;
+    notif.openTime = Interfaces::globals->realtime;
+    notif.color = color;
 
     va_list args;
     va_start(args, fmt);
