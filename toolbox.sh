@@ -25,7 +25,7 @@ function unload {
             -ex "detach" \
             -ex "quit"
     fi
-    echo "unloaded!"
+    echo "Unloaded!"
 }
 
 function load {
@@ -54,7 +54,7 @@ function load_debug {
         -ex "detach" \
         -ex "quit"
     $gdb -p "$csgo_pid"
-    echo "successfully loaded!"
+    echo "Successfully loaded!"
 }
 
 function reload_normal {

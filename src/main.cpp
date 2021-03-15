@@ -8,7 +8,6 @@ void MainThread() {
     while (!dlopen("./bin/linux64/serverbrowser_client.so", RTLD_NOLOAD | RTLD_NOW))
         // Y'all niggas ever heard of unistd? Stop using cpp garbage its cock and ball
         usleep(500*1000);
-        //std::this_thread::sleep_for(std::chrono::milliseconds(500));
     try {
         // Some nigger was using cpp garbage before
         fputs(" \n\
