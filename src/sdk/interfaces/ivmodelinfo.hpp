@@ -1,5 +1,3 @@
-
-
 // https://github.com/perilouswithadollarsign/cstrike15_src/blob/master/public/studio.h
 
 #define BONE_USED_BY_ANYTHING		0x000FFF00
@@ -21,7 +19,7 @@
 
 struct mstudiobone_t {
 	int					sznameindex;
-	inline char         *pszName( void ) const { return ((char *)this) + sznameindex; }
+	inline char*        pszName( void ) const { return ((char* )this) + sznameindex; }
 	int		 			parent;		// parent bone
 	int					bonecontroller[6];	// bone controller index, -1 == none
 
@@ -39,9 +37,9 @@ struct mstudiobone_t {
 	int					proctype;
 	int					procindex;		// procedural rule
 	mutable int			physicsbone;	// index into physically simulated bone
-	inline void         *pProcedure( ) const { if (procindex == 0) return 0; else return  (void *)(((char*)this) + procindex); };
+	inline void*        pProcedure( ) const { if (procindex == 0) return 0; else return  (void* )(((char*)this) + procindex); };
 	int					surfacepropidx;	// index into string tablefor property name
-	inline char         *pszSurfaceProp( void ) const { return ((char *)this) + surfacepropidx; }
+	inline char*        pszSurfaceProp( void ) const { return ((char* )this) + surfacepropidx; }
 	inline int			GetSurfaceProp( void ) const { return surfacepropLookup; }
 
 	int					contents;		// See BSPFlags.h for the contents flags
@@ -59,29 +57,29 @@ struct mstudiobbox_t {
 	float radius;
 	int pad2[4];
 
-	char *pszHitboxName()
+	char* pszHitboxName()
 	{
 		if (hitboxnameindex == 0)
 			return nullptr;
 
-		return ((char *) this) + hitboxnameindex;
+		return ((char* ) this) + hitboxnameindex;
 	}
 };
 
 struct mstudiohitboxset_t {
 	int sznameindex;
 
-	inline char *pszName() const
+	inline char* pszName() const
 	{
-		return ((char *) this) + sznameindex;
+		return ((char* ) this) + sznameindex;
 	}
 
 	int numhitboxes;
 	int hitboxindex;
 
-	inline mstudiobbox_t *pHitbox(int i) const
+	inline mstudiobbox_t* pHitbox(int i) const
 	{
-		return (mstudiobbox_t *) (((unsigned char *) this) + hitboxindex) + i;
+		return (mstudiobbox_t* ) (((unsigned char* ) this) + hitboxindex) + i;
 	};
 };
 
@@ -102,10 +100,10 @@ struct studiohdr_t {
 	int flags;
 	int numbones;            // bones
 	int boneindex;
-	inline mstudiobone_t *pBone(int i) const
+	inline mstudiobone_t* pBone(int i) const
 	{
 		Assert(i >= 0 && i < numbones);
-		return (mstudiobone_t *)(((unsigned char * ) this) + boneindex ) + i;
+		return (mstudiobone_t* )(((unsigned char*  ) this) + boneindex ) + i;
 	};
 
 	int RemapSeqBone(int iSequence, int iLocalBone) const;    // maps local sequence bone to global bone
@@ -116,16 +114,16 @@ struct studiohdr_t {
 	int hitboxsetindex;
 
 	// Look up hitbox set by index
-	mstudiohitboxset_t *pHitboxSet(int i) const
+	mstudiohitboxset_t* pHitboxSet(int i) const
 	{
 		(i >= 0 && i < numhitboxsets);
-		return (mstudiohitboxset_t * )(((unsigned char * ) this ) +hitboxsetindex ) +i;
+		return (mstudiohitboxset_t*  )(((unsigned char*  ) this ) +hitboxsetindex ) +i;
 	};
 
 	// Calls through to hitbox to determine size of specified set
-	inline mstudiobbox_t *pHitbox(int i, int set) const
+	inline mstudiobbox_t* pHitbox(int i, int set) const
 	{
-		mstudiohitboxset_t const *s = pHitboxSet(set);
+		mstudiohitboxset_t const* s = pHitboxSet(set);
 		if (!s)
 			return nullptr;
 
@@ -135,7 +133,7 @@ struct studiohdr_t {
 	// Calls through to set to get hitbox count for set
 	inline int iHitboxCount(int set) const
 	{
-		mstudiohitboxset_t const *s = pHitboxSet(set);
+		mstudiohitboxset_t const* s = pHitboxSet(set);
 		if (!s)
 			return 0;
 
@@ -182,9 +180,9 @@ struct studiohdr_t {
 	int numcdtextures;
 	int cdtextureindex;
 
-	inline char *pCdtexture(int i) const
+	inline char* pCdtexture(int i) const
 	{
-		return (((char *) this) + *((int *) (((unsigned char *) this) +cdtextureindex) + i));
+		return (((char* ) this) +* ((int* ) (((unsigned char* ) this) +cdtextureindex) + i));
 	};
 
 	// replaceable textures tables
@@ -192,9 +190,9 @@ struct studiohdr_t {
 	int numskinfamilies;
 	int skinindex;
 
-	inline short *pSkinref(int i) const
+	inline short* pSkinref(int i) const
 	{
-		return (short *) (((unsigned char *) this) +skinindex) +i;
+		return (short* ) (((unsigned char* ) this) +skinindex) +i;
 	};
 	int numbodyparts;
 	int bodypartindex;
@@ -218,16 +216,16 @@ struct studiohdr_t {
 	int localnodeindex;
 	int localnodenameindex;
 
-	inline char *pszLocalNodeName(int iNode) const
+	inline char* pszLocalNodeName(int iNode) const
 	{
 		(iNode >= 0 && iNode < numlocalnodes);
-		return (((char *) this) + *((int *) (((unsigned char *) this) + localnodenameindex) + iNode));
+		return (((char* ) this) +* ((int* ) (((unsigned char* ) this) + localnodenameindex) + iNode));
 	}
 
-	inline unsigned char *pLocalTransition(int i) const
+	inline unsigned char* pLocalTransition(int i) const
 	{
-		(i >= 0 && i < (numlocalnodes * numlocalnodes));
-		return (unsigned char * )(((unsigned char *) this) + localnodeindex) + i;
+		(i >= 0 && i < (numlocalnodes*  numlocalnodes));
+		return (unsigned char*  )(((unsigned char* ) this) + localnodeindex) + i;
 	};
 
 	//public:
@@ -235,7 +233,7 @@ struct studiohdr_t {
 
 	int ExitNode(int iSequence);
 
-	char *pszNodeName(int iNode);
+	char* pszNodeName(int iNode);
 
 	int GetTransition(int iFrom, int iTo) const;
 
@@ -261,18 +259,18 @@ struct studiohdr_t {
 
 	int surfacepropindex;
 
-	inline char *pszSurfaceProp() const
+	inline char* pszSurfaceProp() const
 	{
-		return ((char *) this) + surfacepropindex;
+		return ((char* ) this) + surfacepropindex;
 	}
 
 	// Key values
 	int keyvalueindex;
 	int keyvaluesize;
 
-	inline const char *KeyValueText() const
+	inline const char* KeyValueText() const
 	{
-		return keyvaluesize != 0 ? ((char *) this) + keyvalueindex : nullptr;
+		return keyvaluesize != 0 ? ((char* ) this) + keyvalueindex : nullptr;
 	}
 
 	int numlocalikautoplaylocks;
@@ -282,9 +280,9 @@ struct studiohdr_t {
 
 	int CountAutoplaySequences() const;
 
-	int CopyAutoplaySequences(unsigned short *pOut, int outCount) const;
+	int CopyAutoplaySequences(unsigned short* pOut, int outCount) const;
 
-	int GetAutoplayList(unsigned short **pOut) const;
+	int GetAutoplayList(unsigned short* *pOut) const;
 
 	// The collision model mass that jay wanted
 	float mass;
@@ -295,45 +293,45 @@ struct studiohdr_t {
 	int includemodelindex;
 
 	// implementation specific call to get a named model
-	const studiohdr_t *FindModel(void **cache, char const *modelname) const;
+	const studiohdr_t* FindModel(void* *cache, char const* modelname) const;
 
 	// implementation specific back pointer to virtual data
-	mutable void *virtualModel;
+	mutable void* virtualModel;
 	//virtualmodel_t		GetVirtualModel() const;
 
 	// for demand loaded animation blocks
 	int szanimblocknameindex;
 
-	inline char *pszAnimBlockName() const
+	inline char* pszAnimBlockName() const
 	{
-		return ((char *) this) + szanimblocknameindex;
+		return ((char* ) this) + szanimblocknameindex;
 	}
 
 	int numanimblocks;
 	int animblockindex;
-	mutable void *animblockModel;
+	mutable void* animblockModel;
 
-	unsigned char *GetAnimBlock(int i) const;
+	unsigned char* GetAnimBlock(int i) const;
 
 	int bonetablebynameindex;
 
-	inline const unsigned char *GetBoneTableSortedByName() const
+	inline const unsigned char* GetBoneTableSortedByName() const
 	{
-		return (unsigned char *) this + bonetablebynameindex;
+		return (unsigned char* ) this + bonetablebynameindex;
 	}
 
 	// used by tools only that don't cache, but persist mdl's peer data
 	// engine uses virtualModel to back link to cache pointers
-	void *pVertexBase;
-	void *pIndexBase;
+	void* pVertexBase;
+	void* pIndexBase;
 
 	// if STUDIOHDR_FLAGS_CONSTANT_DIRECTIONAL_LIGHT_DOT is set,
 	// this value is used to calculate directional components of lighting
 	// on static props
 	unsigned char constdirectionallightdot;
 
-	// set during load of mdl data to track *desired* lod configuration (not actual)
-	// the *actual* clamped root lod is found in studiohwdata
+	// set during load of mdl data to track* desired* lod configuration (not actual)
+	// the* actual* clamped root lod is found in studiohwdata
 	// this is stored here as a global store to ensure the staged loading matches the rendering
 	unsigned char rootLOD;
 
