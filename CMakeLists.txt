@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.11.0)
 project(gamesneeze)
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_C_FLAGS_DEBUG "-Wall -Wextra -ggdb -DDEBUG")
+set(CMAKE_C_FLAGS_DEBUG "-Wall -Wextra -O3 -march=core2 -mtune=native -fvisibility=hidden -flto -ggdb -DDEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -std=c++2a -Wall")
 
 # You can swap these lines around if using gcc. Top is clang bottom is gcc
