@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# TODO: make this some sort of fucking automaticly randomly chosen name. - allbombson
-gdb="$(dirname "$0")/gdb9" # For using a gdb build such as the cathook one (The one included)
+gdb="$(dirname "$0")/gdb" # For using a gdb build such as the cathook one (The one included)
 libname="libgamemode.so" # Pretend to be gamemode, change this to another lib that may be in /maps
 csgo_pid=$(pidof csgo_linux64)
+
 # Lets user set compiler to whatever they want - you can change this back to gcc if you wish.
 # However clang is overall a more strict and efficent compiler so rather use it.
 export CC="clang"
@@ -57,16 +57,6 @@ function load_debug {
     echo "Successfully loaded!"
 }
 
-function reload_normal {
-    unload
-    load
-}
-
-function reload_debug {
-    unload
-    load_debug
-}
-
 function build {
     if [[ $EUID -eq 0 ]]; then
    	    echo "You cannot build as root." 
@@ -101,14 +91,6 @@ function pull {
     git pull
 }
 
-function pull_upstream {
-    if [[ $EUID -eq 0 ]]; then
-   	    echo "You cannot pull as root" 
-   	    exit 1
-    fi
-    git pull https://github.com/seksea/gamesneeze 
-}
-
 while [[ $# -gt 0 ]]
 do
 keys="$1"
@@ -125,14 +107,6 @@ case $keys in
         load_debug
         shift
         ;;
-    -r|--reload)
-        reload_normal
-        shift
-        ;;
-    -rd|--reload_debug)
-        reload_debug
-        shift
-        ;;
     -b|--build)
         build
         shift
@@ -145,10 +119,6 @@ case $keys in
         pull
         shift
         ;;
-    -pu|--pull_up)
-        pull_upstream
-        shift
-        ;;
     -h|--help)
         echo "
  help
@@ -159,12 +129,9 @@ Toolbox script for gamesneeze the beste lincuck cheat 2021
 | -u (--unload)        | Unload the cheat from CS:GO if loaded.       |
 | -l (--load)          | Load/inject the cheat via gdb.               |
 | -ld (--load_debug)   | Load/inject the cheat and debug via gdb.     |
-| -r (--reload)        | Reload/Reinject the cheat via gdb.           |
-| -rd (--reload_debug) | Reload/Reinject the cheat and debug via gdb. |
 | -b (--build)         | Build to the build/ dir.                     |
 | -bd (--build_debug)  | Build to the build/ dir as debug.            |
 | -p (--pull)          | Update the cheat.                            |
-| -pu (--pull_up)      | Update the cheat from main repo.             |
 | -h (--help)          | Show help.                                   |
 =======================================================================
 
