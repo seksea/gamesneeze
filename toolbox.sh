@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 gdb="$(dirname "$0")/gdb" # For using a gdb build such as the cathook one (The one included)
 libname="libgamemode.so" # Pretend to be gamemode, change this to another lib that may be in /maps
