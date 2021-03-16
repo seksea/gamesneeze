@@ -78,6 +78,7 @@ public:
     NETVAR("DT_BasePlayer", "m_iHealth", health, int);
 	NETVAR("DT_CSPlayer", "m_fFlags", flags, int);
 	NETVAR("DT_BasePlayer", "m_aimPunchAngle", aimPunch, QAngle);
+	NETVAR("DT_BasePlayer", "m_viewPunchAngle", viewPunch, QAngle);
 	NETVAR("DT_CSPlayer", "m_hActiveWeapon", activeWeapon, void*);
 	NETVAR("DT_CSPlayer", "m_hObserverTarget", observerTarget, Player*);
 	NETVAR("DT_CSPlayer", "m_bHasDefuser", defuser, bool);
