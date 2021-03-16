@@ -176,6 +176,9 @@ void Menu::drawVisualsTab() {
                 if (CONFIGBOOL("Visuals>Players>LocalPlayer>Recoil Crosshair") && !CONFIGBOOL("Visuals>Players>LocalPlayer>Spread Crosshair")) {
                     ImGui::Checkbox("Only When Shooting", &CONFIGBOOL("Visuals>Players>LocalPlayer>Recoil Crosshair>Only When Shooting"));
                 }
+                ImGui::Seperator();
+                ImGui::Checkbox("No Aim Punch", &CONFIGBOOL("Visuals>Players>LocalPlayer>No Aim Punch"));
+                ImGui::Checkbox("No View Punch", &CONFIGBOOL("Visuals>Players>LocalPlayer>No View Punch"));
                 ImGui::EndChild();
             }
             ImGui::EndTabItem();

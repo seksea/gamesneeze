@@ -224,6 +224,9 @@ namespace Config {
                 CONFIGITEM("Visuals>Players>LocalPlayer>Arms Overlay Material", 0),
                 CONFIGITEM("Visuals>Players>LocalPlayer>Arms Overlay Color", ImColor(197, 66, 245, 255)),
                 CONFIGITEM("Visuals>Players>LocalPlayer>Arms Overlay Wireframe", false),
+
+                CONFIGITEM("Visuals>Players>LocalPlayer>No Aim Punch", false),
+                CONFIGITEM("Visuals>Players>LocalPlayer>No View Pucnch", false),
             // }
             // World {
                 CONFIGITEM("Visuals>Players>LocalPlayer>Spread Crosshair", false),
