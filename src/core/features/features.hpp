@@ -125,4 +125,7 @@ namespace Features {
     namespace NoVisualRecoil {
         void frameStageNotify(FrameStage frame);
     }
+    namespace BulletTracers {
+        void event(IGameEvent* event);
+    }
 }

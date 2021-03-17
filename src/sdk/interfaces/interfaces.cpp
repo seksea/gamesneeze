@@ -7,6 +7,11 @@
 
 typedef IClientMode* (*getClientModeFunc)();
 
+template <typename T>
+static constexpr auto relativeToAbsolute(std::uintptr_t address) noexcept {
+    return (T)(address + 4 + *reinterpret_cast<std::int32_t*>(address));
+}
+
 bool Interfaces::init() {
     Log::log(LOG, "Initialising interfaces...");
 
@@ -46,6 +51,9 @@ bool Interfaces::init() {
 	uintptr_t instructionAddr = PatternScan::findFirstInModule("/client_client.so", " 48 8B 05 ? ? ? ? 55 48 89 E5 48 85 C0 74 10 48");
 	_playerResource = reinterpret_cast<PlayerResource**>(getAbsoluteAddress(instructionAddr, 3, 7));
     Log::log(LOG, " PlayerResource %lx", (uintptr_t)_playerResource);
+
+    renderBeams = **relativeToAbsolute<ViewRenderBeams***>(PatternScan::findFirstInModule("/client_client.so", "4C 89 F6 4C 8B 25 ? ? ? ? 48 8D 05") + 6); // Credit: danielkrupinski
+    Log::log(LOG, " renderBeams %lx", (uintptr_t)renderBeams);
 
     Log::log(LOG, "Initialised interfaces!");
     return true;

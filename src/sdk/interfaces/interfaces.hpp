@@ -22,6 +22,7 @@
 
 #include "iclientmode.hpp"
 #include "globalvars.hpp"
+#include "iviewrenderbeams.hpp"
 
 #define playerResource ((*Interfaces::_playerResource)) // its annoying to dereference every time
 
@@ -49,6 +50,7 @@ namespace Interfaces {
     inline CGlobalVars* globals;
     inline CInput* input;
     inline PlayerResource** _playerResource;
+    inline ViewRenderBeams* renderBeams;
 
     typedef void* (*InstantiateInterfaceFn)();
     // https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/public/tier1/interface.h#L72

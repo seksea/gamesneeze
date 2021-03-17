@@ -206,6 +206,11 @@ void Menu::drawVisualsTab() {
                 ImGui::Checkbox("Third Person Shows Fake", &CONFIGBOOL("Visuals>World>World>Third Person Shows Fake"));
                 ImGui::Checkbox("No Flash", &CONFIGBOOL("Visuals>World>World>No Flash"));
                 ImGui::Checkbox("Ragdoll Gravity", &CONFIGBOOL("Visuals>World>World>Ragdoll Gravity"));
+                if (CONFIGBOOL("Visuals>World>World>Bullet Tracers")) {
+                    ImGui::ColorEdit4("Bullet Tracers Color", (float*)&CONFIGCOL("Visuals>World>World>Bullet Tracers Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_PickerHueWheel);
+                    ImGui::SameLine();
+                }
+                ImGui::Checkbox("Bullet Tracers", &CONFIGBOOL("Visuals>World>World>Bullet Tracers"));
                 ImGui::EndChild();
             }
             ImGui::SameLine();

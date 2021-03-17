@@ -4,6 +4,7 @@
 Hooks::Events::EventListener::EventListener() {
     Interfaces::eventManager->AddListener(this, "player_hurt", false);
     Interfaces::eventManager->AddListener(this, "player_death", false);
+    Interfaces::eventManager->AddListener(this, "bullet_impact", false);
 }
 
 Hooks::Events::EventListener::~EventListener() {
@@ -67,6 +68,7 @@ void Hooks::Events::EventListener::FireGameEvent(IGameEvent *event) {
             }
         }
     }
+    Features::BulletTracers::event(event);
 }
 
 int Hooks::Events::EventListener::GetEventDebugID() {

@@ -242,6 +242,8 @@ namespace Config {
                 CONFIGITEM("Visuals>World>World>Third Person", false),
                 CONFIGITEM("Visuals>World>World>Third Person Shows Fake", false),
                 CONFIGITEM("Visuals>World>World>No Flash", false),
+                CONFIGITEM("Visuals>World>World>Bullet Tracers", false),
+                CONFIGITEM("Visuals>World>World>Bullet Tracers Color", ImColor(255, 255, 255, 255)),
 
                 CONFIGITEM("Visuals>World>Items>Weapon Box", false),
                 CONFIGITEM("Visuals>World>Items>Weapon Box Color", ImColor(255, 255, 255, 255)),
