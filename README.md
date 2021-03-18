@@ -54,7 +54,7 @@ An open source cheat for Counter-Strike: Global Offensive on Linux.
 
 ### Fedora required packages:
 
-`sudo dnf install gcc gdb SDL2-devel cmake git clang`
+`sudo dnf install gcc-g++ gdb SDL2-devel cmake git clang`
 
 ### OpenSUSE required packages:
 
