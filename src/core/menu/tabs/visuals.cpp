@@ -211,6 +211,10 @@ void Menu::drawVisualsTab() {
                     ImGui::SameLine();
                 }
                 ImGui::Checkbox("Bullet Tracers", &CONFIGBOOL("Visuals>World>World>Bullet Tracers"));
+                if (CONFIGBOOL("Visuals>World>World>Bullet Tracers")) {
+                    ImGui::SameLine();
+                    ImGui::Checkbox("Laser", &CONFIGBOOL("Visuals>World>World>Bullet Tracers Laser"));
+                }
                 ImGui::EndChild();
             }
             ImGui::SameLine();

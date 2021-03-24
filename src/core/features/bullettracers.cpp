@@ -17,7 +17,7 @@ void Features::BulletTracers::event(IGameEvent* event) {
                     beamInfo.end.y = event->GetFloat("y");
                     beamInfo.end.z = event->GetFloat("z");
 
-                    beamInfo.modelName = "sprites/physbeam.vmt";
+                    beamInfo.modelName = CONFIGBOOL("Visuals>World>World>Bullet Tracers Laser") ? "sprites/purplelaser1.vmt" : "sprites/physbeam.vmt";
                     beamInfo.modelIndex = -1;
                     beamInfo.haloName = nullptr;
                     beamInfo.haloIndex = -1;
@@ -26,7 +26,7 @@ void Features::BulletTracers::event(IGameEvent* event) {
                     beamInfo.green = 255.0f * CONFIGCOL("Visuals>World>World>Bullet Tracers Color").Value.y;
                     beamInfo.blue = 255.0f * CONFIGCOL("Visuals>World>World>Bullet Tracers Color").Value.z;
                     beamInfo.brightness = 255.0f * CONFIGCOL("Visuals>World>World>Bullet Tracers Color").Value.w;
-
+                    
                     beamInfo.type = 0;
                     beamInfo.life = 0.0f;
                     beamInfo.amplitude = 0.0f;
