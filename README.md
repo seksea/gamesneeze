@@ -64,7 +64,7 @@ An open source cheat for Counter-Strike: Global Offensive on Linux.
 git clone https://github.com/seksea/gamesneeze
 cd gamesneeze
 chmod +x toolbox.sh
-sudo ./toolbox.sh -p -u -b -l # pull, unload cheat if currently injected, build and then load, use -h for help
+./toolbox.sh -p -u -b -l # pull, unload cheat if currently injected, build and then load, use -h for help
 ```
 
 
