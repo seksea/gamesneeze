@@ -24,7 +24,7 @@ function unload {
         $gdb -n -q -batch -ex "attach $csgo_pid" \
             -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
             -ex "set \$dlclose = (int(*)(void*)) dlclose" \
-            -ex "set \$library = \$dlopen(\"$(pwd)/build/$libname\", 6)" \
+            -ex "set \$library = \$dlopen(\"/usr/lib64/$libname\", 6)" \
             -ex "call \$dlclose(\$library)" \
             -ex "call \$dlclose(\$library)" \
             -ex "detach" \
@@ -36,12 +36,13 @@ function unload {
 function load {
     echo "Loading cheat..."
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-    cp build/libgamesneeze.so build/$libname
+    sudo rm /usr/lib64/$libname
+    sudo cp build/libgamesneeze.so /usr/lib64/$libname
     $gdb -n -q -batch \
         -ex "set auto-load safe-path $(pwd)/build/:/usr/lib/" \
         -ex "attach $csgo_pid" \
         -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
-        -ex "call \$dlopen(\"$(pwd)/build/$libname\", 1)" \
+        -ex "call \$dlopen(\"/usr/lib64/$libname\", 1)" \
         -ex "detach" \
         -ex "quit"
     echo "Successfully loaded!"
@@ -68,6 +69,7 @@ function build {
     cd build
     cmake -D CMAKE_BUILD_TYPE=Release ..
     make -j $(nproc --all)
+    strip -s libgamesneeze.so
     cd ..
 }
 
