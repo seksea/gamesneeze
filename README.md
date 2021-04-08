@@ -98,7 +98,8 @@ Currently on Arch based distros GDB is broken, use [cathook's gdb](https://nullw
 1. Delete the entire gamesneeze directory. 
 2. Clone the directory again so it is fresh
 3. Comment lines 9 and 10 in toolbox.sh like so ![image](https://user-images.githubusercontent.com/54869024/113949758-74628380-97ff-11eb-8e4a-ba6427afca73.png)
-4. Move the comment from line 10 to line 9, and from line 14 to line 13. Like so ![image](https://user-images.githubusercontent.com/54869024/113950071-05d1f580-9800-11eb-97eb-77decaf86af9.png)
+4. Move the comment from line 10 to line 9, and from line 14 to line 13. Like so ![image](https://user-images.githubusercontent.com/54869024/113950279-71b45e00-9800-11eb-871a-1448b5984592.png)
+
 5. Build normally
 
 
