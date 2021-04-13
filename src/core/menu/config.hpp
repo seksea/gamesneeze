@@ -23,7 +23,8 @@ enum CONFIGITEMTYPE {
 };
 
 namespace Config {
-
+    inline char configFileName[128] = "gamesneeze.cfg";
+    
     class ConfigItem {
         public:
         ConfigItem(int value) {
