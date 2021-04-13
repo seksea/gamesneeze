@@ -50,6 +50,8 @@ void Menu::drawMiscTab() {
             ImGui::BeginChild("Config", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.38, ImGui::GetWindowHeight() * 0.279f), true); {
                 ImGui::Text("Config");
                 ImGui::Separator();
+                ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                ImGui::InputText("##configfile-tbox", Config::configFileName, IM_ARRAYSIZE(Config::configFileName));
                 if (ImGui::Button("Save")) {
                     Config::save();
                 };
@@ -62,6 +64,7 @@ void Menu::drawMiscTab() {
 
             ImGui::BeginChild("Clantag", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.38, ImGui::GetWindowHeight() * 0.279f), true); {
                 ImGui::Text("Clantag");
+                ImGui::Separator();
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::InputText("##clantag-tbox", clantag, IM_ARRAYSIZE(clantag));
                 ImGui::Checkbox("Clantag", &CONFIGBOOL("Misc>Misc>Clantag>Clantag"));
