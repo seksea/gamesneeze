@@ -3,7 +3,6 @@
 #include <unordered_map>
 #include <fstream>
 #include <utility>
-#include <regex>
 #include "imgui/imgui.h"
 #include "../../utils/utils.hpp"
 #include "../../sdk/definitions.hpp"
