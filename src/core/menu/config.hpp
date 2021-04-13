@@ -22,7 +22,8 @@ enum CONFIGITEMTYPE {
 };
 
 namespace Config {
-
+    inline char configFileName[128] = "gamesneeze.cfg";
+    
     class ConfigItem {
         public:
         ConfigItem(int value) {
@@ -312,7 +313,7 @@ namespace Config {
 
     inline void save() {
         std::ofstream configFile;
-        configFile.open("gamesneeze.cfg");
+        configFile.open(configFileName);
         for (auto i : config) {
             switch (i.second.type) {
                 case INT: 
@@ -335,7 +336,7 @@ namespace Config {
     inline void load() {
         std::string line;
         std::ifstream configFile;
-        configFile.open("gamesneeze.cfg");
+        configFile.open(configFileName);
         while(std::getline(configFile, line)) {
             CONFIGITEMTYPE type;
             char name[64];
