@@ -314,7 +314,7 @@ namespace Config {
 
     inline void save() {
         std::ofstream configFile;
-        configFile.open(std::regex_replace(configFileName, std::regex("/"), ""));
+        configFile.open(configFileName);
         for (auto i : config) {
             switch (i.second.type) {
                 case INT: 
@@ -337,7 +337,7 @@ namespace Config {
     inline void load() {
         std::string line;
         std::ifstream configFile;
-        configFile.open(std::regex_replace(configFileName, std::regex("/"), ""));
+        configFile.open(configFileName);
         while(std::getline(configFile, line)) {
             CONFIGITEMTYPE type;
             char name[64];
