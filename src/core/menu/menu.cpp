@@ -107,6 +107,7 @@ void Menu::onSwapWindow(SDL_Window* window) {
 
 
     if (ImGui::IsKeyPressed(SDL_SCANCODE_INSERT, false)) {
+        Config::reloadCfgList();
         Menu::open = !Menu::open;
     }
 
@@ -119,14 +120,14 @@ void Menu::drawMenu() {
     ImGui::SetNextWindowSize(ImVec2{900, 600});
     ImGui::Begin("gamesneeze-linux", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 4));
-    ImGui::Text("game"); ImGui::SameLine(); ImGui::PopStyleVar(); 
+    ImGui::Text("game"); ImGui::SameLine(); ImGui::PopStyleVar();
     if (ImGui::IsItemClicked()) {
         system("xdg-open https://discord.gg/SCHsWHFJMb &"); //if it works it works lmao
     }
     if (ImGui::IsItemHovered()) {
         ImGui::SetTooltip("Click for discord!");
     }
-    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(490, 5)); 
+    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(490, 5));
     ImGui::TextColored(ImColor(108, 195, 18, 255), "sneeze");
     if (ImGui::IsItemClicked()) {
         system("xdg-open https://discord.gg/SCHsWHFJMb &"); //if it works it works lmao
@@ -134,7 +135,7 @@ void Menu::drawMenu() {
     if (ImGui::IsItemHovered()) {
         ImGui::SetTooltip("Click for discord!");
     }
-    ImGui::SameLine(); 
+    ImGui::SameLine();
     ImGui::PopStyleVar();
 
     auto bWidth = ImVec2(80, 18);
@@ -143,17 +144,17 @@ void Menu::drawMenu() {
     ImGui::GetStyle().Colors[ImGuiCol_Button] = (Menu::tabSelected == 0) ? ImVec4(0.05f, 0.41f, 0.06f, 0.62f) : ImVec4(0.03f, 0.23f, 0.04f, 0.62f);
     if (ImGui::Button("Legit", bWidth)) {
         Menu::tabSelected = 0;
-    } ImGui::SameLine(); 
+    } ImGui::SameLine();
 
     ImGui::GetStyle().Colors[ImGuiCol_Button] = (Menu::tabSelected == 1) ? ImVec4(0.05f, 0.41f, 0.06f, 0.62f) : ImVec4(0.03f, 0.23f, 0.04f, 0.62f);
     if (ImGui::Button("Rage", bWidth)) {
         Menu::tabSelected = 1;
-    } ImGui::SameLine(); 
+    } ImGui::SameLine();
 
     ImGui::GetStyle().Colors[ImGuiCol_Button] = (Menu::tabSelected == 2) ? ImVec4(0.05f, 0.41f, 0.06f, 0.62f) : ImVec4(0.03f, 0.23f, 0.04f, 0.62f);
     if (ImGui::Button("Visuals", bWidth)) {
         Menu::tabSelected = 2;
-    } ImGui::SameLine(); 
+    } ImGui::SameLine();
 
     ImGui::GetStyle().Colors[ImGuiCol_Button] = (Menu::tabSelected == 3) ? ImVec4(0.05f, 0.41f, 0.06f, 0.62f) : ImVec4(0.03f, 0.23f, 0.04f, 0.62f);
     if (ImGui::Button("Misc", bWidth)) {

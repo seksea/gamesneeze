@@ -1,7 +1,9 @@
 #pragma once
+#include <algorithm>
 #include <cstdio>
 #include <unordered_map>
 #include <fstream>
+#include <filesystem>
 #include <utility>
 #include "imgui/imgui.h"
 #include "../../utils/utils.hpp"
@@ -22,8 +24,9 @@ enum CONFIGITEMTYPE {
 };
 
 namespace Config {
+    inline std::vector<std::string> cfgFiles;
     inline char configFileName[128] = "gamesneeze.cfg";
-    
+
     class ConfigItem {
         public:
         ConfigItem(int value) {
@@ -203,7 +206,7 @@ namespace Config {
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Backtrack Material", 0),
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Backtrack Color", ImColor(197, 66, 245, 255)),
                 CONFIGITEM("Visuals>Players>Enemies>Chams>Trail", false),
-                
+
                 CONFIGITEM("Visuals>Players>Teammates>Chams>Visible Material", 0),
                 CONFIGITEM("Visuals>Players>Teammates>Chams>Visible Color", ImColor(197, 66, 245, 255)),
                 CONFIGITEM("Visuals>Players>Teammates>Chams>Visible Wireframe", false),
@@ -286,7 +289,7 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Hitmarkers>Hitmarkers", false),
             CONFIGITEM("Misc>Misc>Hitmarkers>Hitsound", false),
             CONFIGITEM("Misc>Misc>Hitmarkers>Damage Markers", false),
-            
+
             CONFIGITEM("Misc>Misc>Misc>Disable Watermark", false),
             CONFIGITEM("Misc>Misc>Misc>Force square radar", false),
             CONFIGITEM("Misc>Misc>Misc>Rank Revealer", false),
@@ -303,7 +306,7 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Misc>Use Spam", false),
             CONFIGITEM("Misc>Misc>Misc>Use Spam Key", 0),
             CONFIGITEM("Misc>Misc>Misc>Enable Setting Cvars", false),
-            
+
             CONFIGITEM("Misc>Skins>Skins>PaintKit", 0),
             CONFIGITEM("Misc>Skins>Skins>Wear", 0),
             CONFIGITEM("Misc>Skins>Skins>StatTrack", -1),
@@ -311,32 +314,61 @@ namespace Config {
         // }
     };
 
+    inline void reloadCfgList()
+    {
+        Config::cfgFiles.clear();
+        if (!std::filesystem::is_directory("gamesneeze_config"))
+        {
+            std::filesystem::create_directory("gamesneeze_config");
+        }
+        for (const auto &entry : std::filesystem::directory_iterator("gamesneeze_config"))
+        {
+            Config::cfgFiles.push_back(entry.path().string().substr(18));
+        }
+        std::sort(Config::cfgFiles.begin(), Config::cfgFiles.end());
+    }
+
     inline void save() {
         std::ofstream configFile;
-        configFile.open(configFileName);
+        char path[128];
+        if (configFileName[0] == '/') {
+            strcpy(path, configFileName);
+        } else {
+            strcpy(path, "gamesneeze_config/");
+            strcat(path, configFileName);
+        }
+        configFile.open(path);
         for (auto i : config) {
             switch (i.second.type) {
-                case INT: 
+                case INT:
                     configFile << i.second.type << "\t"<< i.first << "\t" << i.second.intValue << "\n";
                 break;
-                case BOOL: 
+                case BOOL:
                     configFile << i.second.type << "\t" << i.first << "\t" << i.second.boolValue << "\n";
                 break;
-                case STR: 
+                case STR:
                     configFile << i.second.type << "\t" << i.first << "\t" << i.second.strValue << "\n";
                 break;
-                case COLOR: 
+                case COLOR:
                     configFile << i.second.type << "\t" << i.first << "\t" << i.second.colValue.Value.x << "|" << i.second.colValue.Value.y << "|" << i.second.colValue.Value.z << "|" << i.second.colValue.Value.w << "\n";
                 break;
             }
         }
         configFile.close();
+        reloadCfgList();
     }
 
     inline void load() {
         std::string line;
         std::ifstream configFile;
-        configFile.open(configFileName);
+        char path[128];
+        if (configFileName[0] == '/') {
+            strcpy(path, configFileName);
+        } else {
+            strcpy(path, "gamesneeze_config/");
+            strcat(path, configFileName);
+        }
+        configFile.open(path);
         while(std::getline(configFile, line)) {
             CONFIGITEMTYPE type;
             char name[64];
@@ -365,7 +397,24 @@ namespace Config {
         }
     }
 
+    inline void remove() {
+        std::vector<std::string>::iterator itr = std::find(cfgFiles.begin(), cfgFiles.end(), configFileName);
+        if (itr != cfgFiles.cend())
+        {
+            char path[128];
+            strcpy(path, "gamesneeze_config/");
+            strcat(path, configFileName);
+            std::remove(path);
+            //int index = std::distance(cfgFiles.begin(), itr);
+            cfgFiles.erase(itr);
+        }
+    }
+
     inline void init() {
+        reloadCfgList();
+        if (cfgFiles.size() == 1) {
+            strcpy(configFileName, cfgFiles[0].c_str());
+        }
         for(auto item : itemIndexMap) {
             if (item.first != ItemIndex::INVALID) {
                 char* buf = new char[256];
