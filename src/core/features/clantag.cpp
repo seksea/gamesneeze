@@ -22,25 +22,23 @@ void updateClantag() {
 }
 
 void Features::ClantagChanger::frameStageNotify(FrameStage frame) {
-    if (CONFIGBOOL("Misc>Misc>Clantag>Clantag")) {
-        if (frame == FRAME_NET_UPDATE_POSTDATAUPDATE_END) {
-            if (CONFIGBOOL("Misc>Misc>Clantag>Clantag Marquee")) {
-                if(TICKCOUNTWITHPING() % 32 == 0) {
-                    shiftMarquee((Menu::clantag), strlen(Menu::clantag));
-                    updateClantag();
-                }
+    if (CONFIGBOOL("Misc>Misc>Clantag>Clantag") && frame == FRAME_NET_UPDATE_POSTDATAUPDATE_END) {
+        if (CONFIGBOOL("Misc>Misc>Clantag>Clantag Marquee")) {
+            if(TICKCOUNTWITHPING() % 32 == 0) {
+                shiftMarquee((Menu::clantag), strlen(Menu::clantag));
+                updateClantag();
             }
-            else if (CONFIGBOOL("Misc>Misc>Clantag>Bee Movie Clantag")) {
-                if(TICKCOUNTWITHPING() % 16 == 0) {
-                    memcpy(Menu::clantag, &beeMovieScript[(TICKCOUNTWITHPING() % 55000)/16], 127); // mod it by 55k just as a crude way of looping when it gets to the end, doubt anyone will have it on for 300 mins anyways lmao
-                    Menu::clantag[127] = '\0';
-                    updateClantag();
-                }
+        }
+        else if (CONFIGBOOL("Misc>Misc>Clantag>Bee Movie Clantag")) {
+            if(TICKCOUNTWITHPING() % 16 == 0) {
+                memcpy(Menu::clantag, &beeMovieScript[(TICKCOUNTWITHPING() % 55000)/16], 127); // mod it by 55k just as a crude way of looping when it gets to the end, doubt anyone will have it on for 300 mins anyways lmao
+                Menu::clantag[127] = '\0';
+                updateClantag();
             }
-            else {
-                if(TICKCOUNTWITHPING() % 128 == 0) {
-                    updateClantag();
-                }
+        }
+        else {
+            if(TICKCOUNTWITHPING() % 128 == 0) {
+                updateClantag();
             }
         }
     }

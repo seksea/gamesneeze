@@ -163,37 +163,36 @@ void drawPlayer(Player* p) {
                         }
                     }
                 }
-                if (p->team() == Globals::localPlayer->team()) {
-                    if ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Visuals>Players>Teammates>Only When Dead")) || !CONFIGBOOL("Visuals>Players>Teammates>Only When Dead")) {
-                        std::stringstream rightText;
-                        if (CONFIGBOOL("Visuals>Players>Teammates>Health"))
-                            rightText << p->health() << "hp\n";
-                        if (CONFIGBOOL("Visuals>Players>Teammates>Money"))
-                            rightText << "$" << p->money() << "\n";
+                else if (p->team() == Globals::localPlayer->team() && 
+                        ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Visuals>Players>Teammates>Only When Dead")) || !CONFIGBOOL("Visuals>Players>Teammates>Only When Dead"))) {
+                    std::stringstream rightText;
+                    if (CONFIGBOOL("Visuals>Players>Teammates>Health"))
+                        rightText << p->health() << "hp\n";
+                    if (CONFIGBOOL("Visuals>Players>Teammates>Money"))
+                        rightText << "$" << p->money() << "\n";
 
-                        if (CONFIGBOOL("Visuals>Players>Teammates>Armor"))
-                            rightText << (p->helmet() ? "H" : "") << (p->armor() ? "K" : "") << "\n";
+                    if (CONFIGBOOL("Visuals>Players>Teammates>Armor"))
+                        rightText << (p->helmet() ? "H" : "") << (p->armor() ? "K" : "") << "\n";
 
-                        if (CONFIGBOOL("Visuals>Players>Teammates>Weapon")) {
-                            Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)p->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
-                            if (weapon) {
-                                try {
-                                    rightText << itemIndexMap.at(weapon->itemIndex()) << "\n";
-                                }
-                                catch(const std::exception & e) {
-                                    //Log::log(WARN, "itemDefinitionIndex %d not found!", ((Weapon*)ent)->itemIndex());
-                                }
+                    if (CONFIGBOOL("Visuals>Players>Teammates>Weapon")) {
+                        Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)p->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
+                        if (weapon) {
+                            try {
+                                rightText << itemIndexMap.at(weapon->itemIndex()) << "\n";
+                            }
+                            catch(const std::exception & e) {
+                                //Log::log(WARN, "itemDefinitionIndex %d not found!", ((Weapon*)ent)->itemIndex());
                             }
                         }
-                        
-                        drawBox(x, y, x2, y2, CONFIGBOOL("Visuals>Players>Teammates>Box"), 
-                                    CONFIGCOL("Visuals>Players>Teammates>Box Color"), CONFIGBOOL("Visuals>Players>Teammates>Name") ? info.name : (char*)"", 
-                                    (char*)rightText.str().c_str(), CONFIGBOOL("Visuals>Players>Teammates>Health Bar") ? p->health() : -1, CONFIGBOOL("Visuals>Players>Teammates>Dynamic Color"), 
-                                    CONFIGCOL("Visuals>Players>Teammates>Health Bar Color"));
-
-                        if (CONFIGBOOL("Visuals>Players>Teammates>Skeleton"))
-                            drawSkeleton(p, CONFIGCOL("Visuals>Players>Teammates>Skeleton Color"));
                     }
+                    
+                    drawBox(x, y, x2, y2, CONFIGBOOL("Visuals>Players>Teammates>Box"), 
+                                CONFIGCOL("Visuals>Players>Teammates>Box Color"), CONFIGBOOL("Visuals>Players>Teammates>Name") ? info.name : (char*)"", 
+                                (char*)rightText.str().c_str(), CONFIGBOOL("Visuals>Players>Teammates>Health Bar") ? p->health() : -1, CONFIGBOOL("Visuals>Players>Teammates>Dynamic Color"), 
+                                CONFIGCOL("Visuals>Players>Teammates>Health Bar Color"));
+
+                    if (CONFIGBOOL("Visuals>Players>Teammates>Skeleton"))
+                        drawSkeleton(p, CONFIGCOL("Visuals>Players>Teammates>Skeleton Color"));
                 }
             }
         }
