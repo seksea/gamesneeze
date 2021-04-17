@@ -35,7 +35,7 @@ void Menu::drawMiscTab() {
                 ImGui::EndChild();
             }
 
-            ImGui::BeginChild("Hitmarkers", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.61, ImGui::GetWindowHeight() * 0.2f), true); {
+            ImGui::BeginChild("Hitmarkers", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.61, ImGui::GetWindowHeight() * 0.21f), true); {
                 ImGui::Text("Hitmarkers");
                 ImGui::Separator();
                 ImGui::Checkbox("Hitlogs", &CONFIGBOOL("Misc>Misc>Hitmarkers>Hitlogs"));
@@ -47,22 +47,35 @@ void Menu::drawMiscTab() {
 
             ImGui::NextColumn();
 
-            ImGui::BeginChild("Config", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.38, ImGui::GetWindowHeight() * 0.279f), true); {
+            ImGui::BeginChild("Config", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.38, ImGui::GetWindowHeight() * 0.382), true); {
                 ImGui::Text("Config");
                 ImGui::Separator();
+
+                ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                ImGui::ListBoxHeader("##configlist-lbox", ImVec2(0, 100));
+                for (std::string file : Config::cfgFiles) {
+                    if (ImGui::Button(file.c_str())) {
+                        strcpy(Config::configFileName, file.c_str());
+                    }
+                }
+                ImGui::ListBoxFooter();
+
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::InputText("##configfile-tbox", Config::configFileName, IM_ARRAYSIZE(Config::configFileName));
-                if (ImGui::Button("Save")) {
+                if (ImGui::Button("Save", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.315, 0))) {
                     Config::save();
-                };
-                if (ImGui::Button("Load")) {
+                }; ImGui::SameLine();
+                if (ImGui::Button("Load", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.315, 0))) {
                     Config::load();
                     FULLUPDATE();
+                }; ImGui::SameLine();
+                if (ImGui::Button("Remove", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.315, 0))) {
+                    Config::remove();
                 };
                 ImGui::EndChild();
             }
 
-            ImGui::BeginChild("Clantag", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.38, ImGui::GetWindowHeight() * 0.279f), true); {
+            ImGui::BeginChild("Clantag", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.38, ImGui::GetWindowHeight() * 0.21f), true); {
                 ImGui::Text("Clantag");
                 ImGui::Separator();
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
@@ -73,7 +86,7 @@ void Menu::drawMiscTab() {
                 ImGui::EndChild();
             }
 
-            ImGui::BeginChild("Movement", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.38, ImGui::GetWindowHeight() * 0.279f), true); {
+            ImGui::BeginChild("Movement", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.38, ImGui::GetWindowHeight() * 0.251f), true); {
                 ImGui::Text("Movement");
                 ImGui::Separator();
                 ImGui::Checkbox("Auto Hop", &CONFIGBOOL("Misc>Misc>Movement>Auto Hop"));
