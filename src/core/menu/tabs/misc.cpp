@@ -62,14 +62,14 @@ void Menu::drawMiscTab() {
 
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::InputText("##configfile-tbox", Config::configFileName, IM_ARRAYSIZE(Config::configFileName));
-                if (ImGui::Button("Save")) {
+                if (ImGui::Button("Save", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.315, 0))) {
                     Config::save();
-                };
-                if (ImGui::Button("Load")) {
+                }; ImGui::SameLine();
+                if (ImGui::Button("Load", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.315, 0))) {
                     Config::load();
                     FULLUPDATE();
-                };
-                if (ImGui::Button("Remove")) {
+                }; ImGui::SameLine();
+                if (ImGui::Button("Remove", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.315, 0))) {
                     Config::remove();
                 };
                 ImGui::EndChild();
