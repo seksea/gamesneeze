@@ -26,7 +26,7 @@ enum CONFIGITEMTYPE {
 namespace Config {
     inline std::vector<std::string> cfgFiles;
     inline char configFileName[128] = "gamesneeze.cfg";
-    inline char cfgDir[128];
+    inline char cfgDir[256];
 
     class ConfigItem {
         public:
