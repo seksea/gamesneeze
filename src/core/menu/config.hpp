@@ -26,6 +26,7 @@ enum CONFIGITEMTYPE {
 namespace Config {
     inline std::vector<std::string> cfgFiles;
     inline char configFileName[128] = "gamesneeze.cfg";
+    inline char cfgDir[128];
 
     class ConfigItem {
         public:
@@ -317,16 +318,19 @@ namespace Config {
     inline void reloadCfgList()
     {
         Config::cfgFiles.clear();
-        if (!std::filesystem::is_directory("gamesneeze")) {
-            std::filesystem::create_directory("gamesneeze");
+        char path[128];
+        strcpy(path, getenv("HOME"));
+        strcat(path, "/.gamesneeze");
+        if (!std::filesystem::is_directory(path)) {
+            std::filesystem::create_directory(path);
         }
-        if (!std::filesystem::is_directory("gamesneeze/cfg"))
-        {
-            std::filesystem::create_directory("gamesneeze/cfg");
+        strcat(path, "/configs");
+        if (!std::filesystem::is_directory(path)) {
+            std::filesystem::create_directory(path);
             return;
         }
-        for (const auto &entry : std::filesystem::directory_iterator("gamesneeze/cfg")) {
-            Config::cfgFiles.push_back(entry.path().string().substr(15));
+        for (const auto &entry : std::filesystem::directory_iterator(cfgDir)) {
+            Config::cfgFiles.push_back(entry.path().string().substr(31));
         }
         std::sort(Config::cfgFiles.begin(), Config::cfgFiles.end());
     }
@@ -337,7 +341,7 @@ namespace Config {
         if (configFileName[0] == '/') {
             strcpy(path, configFileName);
         } else {
-            strcpy(path, "gamesneeze/cfg/");
+            strcpy(path, cfgDir);
             strcat(path, configFileName);
         }
         configFile.open(path);
@@ -368,7 +372,7 @@ namespace Config {
         if (configFileName[0] == '/') {
             strcpy(path, configFileName);
         } else {
-            strcpy(path, "gamesneeze/cfg/");
+            strcpy(path, cfgDir);
             strcat(path, configFileName);
         }
         configFile.open(path);
@@ -404,7 +408,7 @@ namespace Config {
         std::vector<std::string>::iterator itr = std::find(cfgFiles.begin(), cfgFiles.end(), configFileName);
         if (itr != cfgFiles.cend()) {
             char path[128];
-            strcpy(path, "gamesneeze/cfg/");
+            strcpy(path, cfgDir);
             strcat(path, configFileName);
             std::remove(path);
             cfgFiles.erase(itr);
@@ -412,6 +416,8 @@ namespace Config {
     }
 
     inline void init() {
+        strcpy(cfgDir, getenv("HOME"));
+        strcat(cfgDir, "/.gamesneeze/configs/");
         reloadCfgList();
         if (cfgFiles.size() == 1) {
             strcpy(configFileName, cfgFiles[0].c_str());
