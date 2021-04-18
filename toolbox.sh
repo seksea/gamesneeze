@@ -4,10 +4,8 @@ gdb="$(dirname "$0")/gdb" # For using a gdb build such as the cathook one (The o
 libname="libgamemode.so" # Pretend to be gamemode, change this to another lib that may be in /maps
 csgo_pid=$(pidof csgo_linux64)
 
-# Lets user set compiler to whatever they want - you can change this back to gcc if you wish.
-# However clang is overall a more strict and efficent compiler so rather use it.
-export CC="clang"
-export CXX="clang++"
+# Set to true to compile with clang.
+export USE_CLANG="true"
 
 if [[ $EUID -eq 0 ]]; then
     echo "You cannot run this as root." 
@@ -15,7 +13,7 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 rm -rf /tmp/dumps
-mkdir -p --mode=000 /tmp/dumps 
+mkdir -p --mode=000 /tmp/dumps
 
 function unload {
     echo "Unloading cheat..."

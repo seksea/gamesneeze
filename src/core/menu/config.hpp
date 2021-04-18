@@ -317,13 +317,16 @@ namespace Config {
     inline void reloadCfgList()
     {
         Config::cfgFiles.clear();
-        if (!std::filesystem::is_directory("gamesneeze_config"))
-        {
-            std::filesystem::create_directory("gamesneeze_config");
+        if (!std::filesystem::is_directory("gamesneeze")) {
+            std::filesystem::create_directory("gamesneeze");
         }
-        for (const auto &entry : std::filesystem::directory_iterator("gamesneeze_config"))
+        if (!std::filesystem::is_directory("gamesneeze/cfg"))
         {
-            Config::cfgFiles.push_back(entry.path().string().substr(18));
+            std::filesystem::create_directory("gamesneeze/cfg");
+            return;
+        }
+        for (const auto &entry : std::filesystem::directory_iterator("gamesneeze/cfg")) {
+            Config::cfgFiles.push_back(entry.path().string().substr(15));
         }
         std::sort(Config::cfgFiles.begin(), Config::cfgFiles.end());
     }
@@ -334,7 +337,7 @@ namespace Config {
         if (configFileName[0] == '/') {
             strcpy(path, configFileName);
         } else {
-            strcpy(path, "gamesneeze_config/");
+            strcpy(path, "gamesneeze/cfg/");
             strcat(path, configFileName);
         }
         configFile.open(path);
@@ -365,7 +368,7 @@ namespace Config {
         if (configFileName[0] == '/') {
             strcpy(path, configFileName);
         } else {
-            strcpy(path, "gamesneeze_config/");
+            strcpy(path, "gamesneeze/cfg/");
             strcat(path, configFileName);
         }
         configFile.open(path);
@@ -399,13 +402,11 @@ namespace Config {
 
     inline void remove() {
         std::vector<std::string>::iterator itr = std::find(cfgFiles.begin(), cfgFiles.end(), configFileName);
-        if (itr != cfgFiles.cend())
-        {
+        if (itr != cfgFiles.cend()) {
             char path[128];
-            strcpy(path, "gamesneeze_config/");
+            strcpy(path, "gamesneeze/cfg/");
             strcat(path, configFileName);
             std::remove(path);
-            //int index = std::distance(cfgFiles.begin(), itr);
             cfgFiles.erase(itr);
         }
     }
