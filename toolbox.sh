@@ -33,16 +33,23 @@ function unload {
 
 function load {
     echo "Loading cheat..."
-    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
     cp build/libgamesneeze.so build/$libname
-    $gdb -n -q -batch \
-        -ex "set auto-load safe-path $(pwd)/build/:/usr/lib/" \
-        -ex "attach $csgo_pid" \
-        -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
-        -ex "call \$dlopen(\"$(pwd)/build/$libname\", 1)" \
-        -ex "detach" \
-        -ex "quit"
-    echo "Successfully loaded!"
+    gdbOut=$(
+      $gdb -n -q -batch \
+      -ex "set auto-load safe-path $(pwd)/build/:/usr/lib/" \
+      -ex "attach $csgo_pid" \
+      -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
+      -ex "call \$dlopen(\"$(pwd)/build/$libname\", 1)" \
+      -ex "detach" \
+      -ex "quit" 2> /dev/null
+    )
+    lastLine="${gdbOut##*$'\n'}"
+    if [[ "$lastLine" != "\$1 = (void *) 0x0" ]]; then
+      echo "Successfully injected!"
+    else
+      echo "Injection failed, make sure you have compiled."
+    fi
 }
 
 function load_debug {
