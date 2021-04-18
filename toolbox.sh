@@ -5,7 +5,7 @@ libname="libgamemode.so" # Pretend to be gamemode, change this to another lib th
 csgo_pid=$(pidof csgo_linux64)
 
 # Set to true to compile with clang.
-export USE_CLANG="true"
+export USE_CLANG="false"
 
 if [[ $EUID -eq 0 ]]; then
     echo "You cannot run this as root." 
