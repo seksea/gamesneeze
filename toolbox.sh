@@ -4,7 +4,7 @@ gdb="$(dirname "$0")/gdb" # For using a gdb build such as the cathook one (The o
 libname="libgamemodeauto.so.0" # Pretend to be gamemode, change this to another lib that may be in /maps (if already using real gamemode, I'd suggest using libMangoHud.so)
 csgo_pid=$(pidof csgo_linux64)
 
-# Set to true to compile with clang.
+# Set to true to compile with clang. (if changing to true, make sure to delete the build directory from gcc)
 export USE_CLANG="false"
 
 if [[ $EUID -eq 0 ]]; then
@@ -34,7 +34,7 @@ function unload {
 function load {
     echo "Loading cheat..."
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
-    cp build/libgamesneeze.so /usr/lib/$libname
+    sudo cp build/libgamesneeze.so /usr/lib/$libname
     gdbOut=$(
       $gdb -n -q -batch \
       -ex "set auto-load safe-path /usr/lib/" \
