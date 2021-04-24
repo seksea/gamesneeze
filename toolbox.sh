@@ -1,7 +1,7 @@
 #!/bin/bash
 
 gdb="$(dirname "$0")/gdb" # For using a gdb build such as the cathook one (The one included)
-libname="libgamemode.so" # Pretend to be gamemode, change this to another lib that may be in /maps
+libname="libgamemodeauto.so.0" # Pretend to be gamemode, change this to another lib that may be in /maps (if already using real gamemode, I'd suggest using libMangoHud.so)
 csgo_pid=$(pidof csgo_linux64)
 
 # Lets user set compiler to whatever they want - you can change this back to gcc if you wish.
@@ -24,7 +24,7 @@ function unload {
         $gdb -n -q -batch -ex "attach $csgo_pid" \
             -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
             -ex "set \$dlclose = (int(*)(void*)) dlclose" \
-            -ex "set \$library = \$dlopen(\"$(pwd)/build/$libname\", 6)" \
+            -ex "set \$library = \$dlopen(\"/usr/lib/$libname\", 6)" \
             -ex "call \$dlclose(\$library)" \
             -ex "call \$dlclose(\$library)" \
             -ex "detach" \
@@ -36,12 +36,12 @@ function unload {
 function load {
     echo "Loading cheat..."
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-    cp build/libgamesneeze.so build/$libname
+    sudo cp build/libgamesneeze.so /usr/lib/$libname
     $gdb -n -q -batch \
-        -ex "set auto-load safe-path $(pwd)/build/:/usr/lib/" \
+        -ex "set auto-load safe-path /usr/lib:/usr/lib/" \
         -ex "attach $csgo_pid" \
         -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
-        -ex "call \$dlopen(\"$(pwd)/build/$libname\", 1)" \
+        -ex "call \$dlopen(\"/usr/lib/$libname\", 1)" \
         -ex "detach" \
         -ex "quit"
     echo "Successfully loaded!"
@@ -50,12 +50,12 @@ function load {
 function load_debug {
     echo "Loading cheat..."
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-    cp build/libgamesneeze.so build/$libname
+    sudo cp build/libgamesneeze.so /usr/lib/$libname
     $gdb -n -q -batch \
-        -ex "set auto-load safe-path $(pwd)/build/:/usr/lib/" \
+        -ex "set auto-load safe-path /usr/lib:/usr/lib/" \
         -ex "attach $csgo_pid" \
         -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
-        -ex "call \$dlopen(\"$(pwd)/build/$libname\", 1)" \
+        -ex "call \$dlopen(\"/usr/lib/$libname\", 1)" \
         -ex "detach" \
         -ex "quit"
     $gdb -p "$csgo_pid"
