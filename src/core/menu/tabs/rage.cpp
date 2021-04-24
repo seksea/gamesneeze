@@ -16,10 +16,14 @@ void Menu::drawRageTab() {
         if (ImGui::BeginTabBar("Weapons Tabbar")) {
             if (ImGui::BeginTabItem("Default")) {
                 ImGui::Checkbox("Resolver", &CONFIGBOOL("Rage>RageBot>Default>Resolver"));
+                ImGui::Checkbox("Force Baim if health < X", &CONFIGBOOL("Rage>RageBot>Default>ForceBaim"));
+                if(CONFIGBOOL("Rage>RageBot>Default>ForceBaim")) {
+                    ImGui::Text("Health");
+                    ImGui::SliderInt("##HEALTH", &CONFIGINT("Rage>RageBot>Default>ForceBaimValue"), 1, 100);
+                }
                 ImGui::Text("FOV (x10)");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##FOV", &CONFIGINT("Rage>RageBot>Default>FOV"), 0, 1800);
-
                 ImGui::EndTabItem();
             }
             ImGui::EndTabBar();
