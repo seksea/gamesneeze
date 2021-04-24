@@ -18,10 +18,17 @@ void Features::RageBot::createMove(CUserCmd* cmd) {
                         matrix3x4_t boneMatrix[128];
                         if (p->getAnythingBones(boneMatrix)) {
                             Vector localPlayerEyePos = Globals::localPlayer->eyePos();
+                            Vector targetBonePos;
+                            //TODO check which bone would be exposed sooner with engine prediction and which would do more damage.
+                            if(CONFIGBOOL("Rage>RageBot>Default>ForceBaim")) {
+                                if(p->health() <= CONFIGINT("Rage>RageBot>Default>ForceBaimValue")) {
+                                    targetBonePos = p->getBonePos(0); // Pelvis
+                                } else {
+                                    targetBonePos = p->getBonePos(8); // Head
+                                }
+                            }
 
-                            Vector targetEyePos = p->getBonePos(8); // 8 is headbone in bonematrix
-
-                            QAngle angleToCurrentPlayer = calcAngle(localPlayerEyePos, targetEyePos) - cmd->viewangles - Globals::localPlayer->aimPunch()*2;
+                            QAngle angleToCurrentPlayer = calcAngle(localPlayerEyePos, targetBonePos) - cmd->viewangles - Globals::localPlayer->aimPunch()*2;
                             normalizeAngles(angleToCurrentPlayer);
 
                             if (angleToCurrentPlayer.Length() < closestDelta) {
