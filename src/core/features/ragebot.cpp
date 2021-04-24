@@ -21,7 +21,7 @@ void Features::RageBot::createMove(CUserCmd* cmd) {
                             Vector targetBonePos;
                             //TODO check which bone would be exposed sooner with engine prediction and which would do more damage.
                             if(CONFIGBOOL("Rage>RageBot>Default>ForceBaim")) {
-                                if(p->health() < CONFIGINT("Rage>RageBot>Default>ForceBaimValue")) {
+                                if(p->health() <= CONFIGINT("Rage>RageBot>Default>ForceBaimValue")) {
                                     targetBonePos = p->getBonePos(0); // Pelvis
                                 } else {
                                     targetBonePos = p->getBonePos(8); // Head
