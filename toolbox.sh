@@ -4,10 +4,8 @@ gdb="$(dirname "$0")/gdb" # For using a gdb build such as the cathook one (The o
 libname="libgamemodeauto.so.0" # Pretend to be gamemode, change this to another lib that may be in /maps (if already using real gamemode, I'd suggest using libMangoHud.so)
 csgo_pid=$(pidof csgo_linux64)
 
-# Lets user set compiler to whatever they want - you can change this back to gcc if you wish.
-# However clang is overall a more strict and efficent compiler so rather use it.
-export CC="clang"
-export CXX="clang++"
+# Set to true to compile with clang. (if changing to true, make sure to delete the build directory from gcc)
+export USE_CLANG="false"
 
 if [[ $EUID -eq 0 ]]; then
     echo "You cannot run this as root." 
@@ -15,7 +13,7 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 rm -rf /tmp/dumps
-mkdir -p --mode=000 /tmp/dumps 
+mkdir -p --mode=000 /tmp/dumps
 
 function unload {
     echo "Unloading cheat..."
@@ -35,16 +33,23 @@ function unload {
 
 function load {
     echo "Loading cheat..."
-    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
     sudo cp build/libgamesneeze.so /usr/lib/$libname
-    $gdb -n -q -batch \
-        -ex "set auto-load safe-path /usr/lib:/usr/lib/" \
-        -ex "attach $csgo_pid" \
-        -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
-        -ex "call \$dlopen(\"/usr/lib/$libname\", 1)" \
-        -ex "detach" \
-        -ex "quit"
-    echo "Successfully loaded!"
+    gdbOut=$(
+      $gdb -n -q -batch \
+      -ex "set auto-load safe-path /usr/lib/" \
+      -ex "attach $csgo_pid" \
+      -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
+      -ex "call \$dlopen(\"/usr/lib/$libname\", 1)" \
+      -ex "detach" \
+      -ex "quit" 2> /dev/null
+    )
+    lastLine="${gdbOut##*$'\n'}"
+    if [[ "$lastLine" != "\$1 = (void *) 0x0" ]]; then
+      echo "Successfully injected!"
+    else
+      echo "Injection failed, make sure you have compiled."
+    fi
 }
 
 function load_debug {

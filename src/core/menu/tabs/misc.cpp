@@ -47,7 +47,7 @@ void Menu::drawMiscTab() {
 
             ImGui::NextColumn();
 
-            ImGui::BeginChild("Config", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.38, ImGui::GetWindowHeight() * 0.382), true); {
+            ImGui::BeginChild("Config", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.38, ImGui::GetWindowHeight() * 0.307), true); {
                 ImGui::Text("Config");
                 ImGui::Separator();
 
@@ -86,7 +86,7 @@ void Menu::drawMiscTab() {
                 ImGui::EndChild();
             }
 
-            ImGui::BeginChild("Movement", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.38, ImGui::GetWindowHeight() * 0.251f), true); {
+            ImGui::BeginChild("Movement", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.38, ImGui::GetWindowHeight() * 0.326f), true); {
                 ImGui::Text("Movement");
                 ImGui::Separator();
                 ImGui::Checkbox("Auto Hop", &CONFIGBOOL("Misc>Misc>Movement>Auto Hop"));
