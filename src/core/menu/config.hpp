@@ -1,6 +1,7 @@
 #pragma once
 #include <algorithm>
 #include <cstdio>
+#include <cstring>
 #include <unordered_map>
 #include <fstream>
 #include <filesystem>
@@ -332,7 +333,7 @@ namespace Config {
             return;
         }
         for (const auto &entry : std::filesystem::directory_iterator(cfgDir)) {
-            Config::cfgFiles.push_back(entry.path().string().substr(31));
+            Config::cfgFiles.push_back(entry.path().string().substr(strlen(path)+1));
         }
         std::sort(Config::cfgFiles.begin(), Config::cfgFiles.end());
     }
