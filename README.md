@@ -90,19 +90,6 @@ All args are executed in the order they are written in, for example, "-u -b -l" 
 
 ## [Todo](https://github.com/seksea/gamesneeze/projects/1)
 
-## Common Issues
-##### GDB Segfaults and crashes game in process
-Currently on Arch based distros GDB is broken, use [cathook's gdb](https://nullworks.gitlab.io/cathook/cathook/gdb) instead.
-
-##### `begin_code.h` errors
-1. Delete the entire gamesneeze directory.
-2. Clone it again and cd into it
-3. Replace clang with gcc and clang++ with g++ on lines 9 and 10 in toolbox.sh ![image](https://user-images.githubusercontent.com/54869024/113949758-74628380-97ff-11eb-8e4a-ba6427afca73.png)
-4. In CMakeLists move the comment from line 10 to line 9, and from line 14 to line 13. Like so ![image](https://user-images.githubusercontent.com/54869024/113950279-71b45e00-9800-11eb-871a-1448b5984592.png)
-5. Try to build again with `./toolbox.sh -u -b -l`
-
-
-
 ## Screenshots
 
 ![Console Output](res/console.png)
