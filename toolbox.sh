@@ -33,6 +33,10 @@ function unload {
 
 function load {
     echo "Loading cheat..."
+    	if grep -q "$libname" /proc/"$csgo_pid"/maps; then
+    /bin/echo -e "\\e[33mCheat is already injected.\\e[0m"
+    exit
+fi
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
     sudo cp build/libgamesneeze.so /usr/lib/$libname
     gdbOut=$(
@@ -54,6 +58,10 @@ function load {
 
 function load_debug {
     echo "Loading cheat..."
+        	if grep -q "$libname" /proc/"$csgo_pid"/maps; then
+    /bin/echo -e "\\e[33mCheat is already injected.\\e[0m"
+    exit
+fi
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
     sudo cp build/libgamesneeze.so /usr/lib/$libname
     $gdb -n -q -batch \
@@ -65,6 +73,36 @@ function load_debug {
         -ex "quit"
     $gdb -p "$csgo_pid"
     echo "Successfully loaded!"
+}
+
+function reload {
+        if grep -q "$libname" "/proc/$csgo_pid/maps"; then
+        echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
+        $gdb -n -q -batch -ex "attach $csgo_pid" \
+            -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
+            -ex "set \$dlclose = (int(*)(void*)) dlclose" \
+            -ex "set \$library = \$dlopen(\"/usr/lib/$libname\", 6)" \
+            -ex "call \$dlclose(\$library)" \
+            -ex "call \$dlclose(\$library)" \
+            -ex "detach" \
+            -ex "quit"
+            echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
+    sudo cp build/libgamesneeze.so /usr/lib/$libname
+    gdbOut=$(
+      $gdb -n -q -batch \
+      -ex "set auto-load safe-path /usr/lib/" \
+      -ex "attach $csgo_pid" \
+      -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
+      -ex "call \$dlopen(\"/usr/lib/$libname\", 1)" \
+      -ex "detach" \
+      -ex "quit" 2> /dev/null
+    )
+    lastLine="${gdbOut##*$'\n'}"
+    if [[ "$lastLine" != "\$1 = (void *) 0x0" ]]; then
+      echo "Successfully reloaded."
+    else
+    echo -e "Cheat must be injected before you attempt to reload."
+    fi
 }
 
 function build {
@@ -105,6 +143,10 @@ case $keys in
         load_debug
         shift
         ;;
+    -rl|--reload)
+        reload
+        shift
+        ;;
     -b|--build)
         build
         shift
@@ -127,6 +169,7 @@ Toolbox script for gamesneeze the beste lincuck cheat 2021
 | -u (--unload)        | Unload the cheat from CS:GO if loaded.       |
 | -l (--load)          | Load/inject the cheat via gdb.               |
 | -ld (--load_debug)   | Load/inject the cheat and debug via gdb.     |
+| -rl (--reload)       | Reload the currently injected cheat.         |
 | -b (--build)         | Build to the build/ dir.                     |
 | -bd (--build_debug)  | Build to the build/ dir as debug.            |
 | -p (--pull)          | Update the cheat.                            |
