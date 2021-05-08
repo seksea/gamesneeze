@@ -16,9 +16,9 @@ rm -rf /tmp/dumps
 mkdir -p --mode=000 /tmp/dumps
 
 function unload {
+    if grep -q "$libname" "/proc/$csgo_pid/maps"; then
     echo "Unloading cheat..."
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-    if grep -q "$libname" "/proc/$csgo_pid/maps"; then
         $gdb -n -q -batch -ex "attach $csgo_pid" \
             -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
             -ex "set \$dlclose = (int(*)(void*)) dlclose" \
@@ -27,16 +27,18 @@ function unload {
             -ex "call \$dlclose(\$library)" \
             -ex "detach" \
             -ex "quit"
+            echo "Unloaded!"
+    else 
+    echo "Cheat isn't injected."
     fi
-    echo "Unloaded!"
 }
 
 function load {
-    echo "Loading cheat..."
     	if grep -q "$libname" /proc/"$csgo_pid"/maps; then
     /bin/echo -e "\\e[33mCheat is already injected.\\e[0m"
     exit
 fi
+    echo "Loading cheat..."
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
     sudo cp build/libgamesneeze.so /usr/lib/$libname
     gdbOut=$(
@@ -57,11 +59,11 @@ fi
 }
 
 function load_debug {
-    echo "Loading cheat..."
         	if grep -q "$libname" /proc/"$csgo_pid"/maps; then
     /bin/echo -e "\\e[33mCheat is already injected.\\e[0m"
     exit
 fi
+    echo "Loading cheat..."
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
     sudo cp build/libgamesneeze.so /usr/lib/$libname
     $gdb -n -q -batch \
@@ -73,36 +75,6 @@ fi
         -ex "quit"
     $gdb -p "$csgo_pid"
     echo "Successfully loaded!"
-}
-
-function reload {
-        if grep -q "$libname" "/proc/$csgo_pid/maps"; then
-        echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
-        $gdb -n -q -batch -ex "attach $csgo_pid" \
-            -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
-            -ex "set \$dlclose = (int(*)(void*)) dlclose" \
-            -ex "set \$library = \$dlopen(\"/usr/lib/$libname\", 6)" \
-            -ex "call \$dlclose(\$library)" \
-            -ex "call \$dlclose(\$library)" \
-            -ex "detach" \
-            -ex "quit"
-            echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
-    sudo cp build/libgamesneeze.so /usr/lib/$libname
-    gdbOut=$(
-      $gdb -n -q -batch \
-      -ex "set auto-load safe-path /usr/lib/" \
-      -ex "attach $csgo_pid" \
-      -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
-      -ex "call \$dlopen(\"/usr/lib/$libname\", 1)" \
-      -ex "detach" \
-      -ex "quit" 2> /dev/null
-    )
-    lastLine="${gdbOut##*$'\n'}"
-    if [[ "$lastLine" != "\$1 = (void *) 0x0" ]]; then
-      echo "Successfully reloaded."
-    else
-    echo -e "Cheat must be injected before you attempt to reload."
-    fi
 }
 
 function build {
@@ -125,6 +97,19 @@ function build_debug {
 
 function pull {
     git pull
+}
+
+function reload {
+    if grep -q "$libname" /proc/"$csgo_pid"/maps; then
+        unload
+	    sleep 5
+	    load
+	    sleep 1
+	    echo Reloaded.
+    exit
+    else
+    echo "Chaet isnt injected."
+    fi
 }
 
 while [[ $# -gt 0 ]]
@@ -188,3 +173,4 @@ then load it back into csgo.
         ;;
 esac
 done
+
