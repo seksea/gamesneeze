@@ -10,7 +10,7 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
     if (cmd->tick_count != 0) {
         uintptr_t rbp;
         asm volatile("mov %%rbp, %0" : "=r" (rbp));
-        Globals::sendPacket = ((*(bool **)rbp) - 0x18);
+        Globals::sendPacket = ((*(bool **)rbp) - 0x18); //https://www.unknowncheats.me/forum/counterstrike-global-offensive/290258-updating-bsendpacket-linux.html
 
         startMovementFix(cmd);
             Features::RankReveal::createMove(cmd);
