@@ -274,10 +274,13 @@ void Features::ESP::draw() {
 
                         /* Planted C4 ESP */
                         else if (clientClass->m_ClassID == EClassIds::CPlantedC4) {
-                            char label[32] = "";
-                            snprintf(label, 32, "Planted C4\n%.3f", ((PlantedC4*)ent)->time() - Interfaces::globals->curtime);
-                            drawGenericEnt(ent, CONFIGBOOL("Visuals>World>Items>Planted C4 Box"), CONFIGCOL("Visuals>World>Items>Planted C4 Box Color"), CONFIGBOOL("Visuals>World>Items>Planted C4 Label") ? label : "");
-                            AutoDefuse::onBombRender((PlantedC4*)ent);
+                            float bombTime = ((PlantedC4*)ent)->time() - Interfaces::globals->curtime;
+                            if (bombTime >= 0.f) {
+                                char label[32] = "";
+                                snprintf(label, 32, "Planted C4\n%.3f", bombTime);
+                                drawGenericEnt(ent, CONFIGBOOL("Visuals>World>Items>Planted C4 Box"), CONFIGCOL("Visuals>World>Items>Planted C4 Box Color"), CONFIGBOOL("Visuals>World>Items>Planted C4 Label") ? label : "");
+                                AutoDefuse::onBombRender((PlantedC4*)ent);
+                            }
                         }
                         
                         else if (clientClass->m_ClassID == EClassIds::CEnvTonemapController) {
