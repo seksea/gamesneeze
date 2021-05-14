@@ -157,6 +157,16 @@ void Menu::drawVisualsTab() {
                     false, nullptr, nullptr, nullptr,
                     &CONFIGBOOL("Visuals>Players>LocalPlayer>Arms Wireframe"), &CONFIGBOOL("Visuals>Players>LocalPlayer>Arms Overlay Wireframe"));
                 ImGui::Separator();
+
+                ImGui::Text("Sleeve");
+                drawChamsWidget("Sleeve",
+                    &CONFIGINT("Visuals>Players>LocalPlayer>Sleeve Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Sleeve Color"), 
+                    &CONFIGINT("Visuals>Players>LocalPlayer>Sleeve Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Sleeve Overlay Color"), 
+                    false, nullptr, nullptr, 
+                    false, nullptr, nullptr, nullptr,
+                    &CONFIGBOOL("Visuals>Players>LocalPlayer>Sleeve Wireframe"), &CONFIGBOOL("Visuals>Players>LocalPlayer>Sleeve Overlay Wireframe"));
+                ImGui::Separator();
+
                 ImGui::Text("Weapons");
                 drawChamsWidget("Weapon",
                     &CONFIGINT("Visuals>Players>LocalPlayer>Weapon Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Weapon Color"), 

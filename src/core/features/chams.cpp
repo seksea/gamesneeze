@@ -151,6 +151,14 @@ void chamArms(void* thisptr, void* ctx, const DrawModelState_t &state, const Mod
     }
 }
 
+void chamSleeves(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld) {
+    cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Players>LocalPlayer>Sleeve Color"), CONFIGINT("Visuals>Players>LocalPlayer>Sleeve Material"), false, CONFIGBOOL("Visuals>Players>LocalPlayer>Sleeve Wireframe"));
+    /* Arms Overlay */
+    if (CONFIGINT("Visuals>Players>LocalPlayer>Sleeve Overlay Material")) {
+        cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Players>LocalPlayer>Sleeve Overlay Color"), CONFIGINT("Visuals>Players>LocalPlayer>Sleeve Overlay Material"), false, CONFIGBOOL("Visuals>Players>LocalPlayer>Sleeve Overlay Wireframe"));
+    }
+}
+
 void chamWeapon(void* thisptr, void* ctx, const DrawModelState_t &state, const ModelRenderInfo_t &pInfo, matrix3x4_t *pCustomBoneToWorld) {
     if (Globals::localPlayer) {
         if (!Globals::localPlayer->scoped()) {
@@ -174,10 +182,18 @@ void Features::Chams::drawModelExecute(void* thisptr, void* ctx, const DrawModel
 	if (strstr(modelName, "models/player") && !strstr(modelName, "shadow")) {
         chamPlayer(thisptr, ctx, state, pInfo, pCustomBoneToWorld);
     }
-    else if (strstr(modelName, "models/weapons/v_models/arms")) {
-        chamArms(thisptr, ctx, state, pInfo, pCustomBoneToWorld);
+    else if (strstr(modelName, "models/weapons/v_")) {
+        if (strstr(modelName, "sleeve")) {
+            chamSleeves(thisptr, ctx, state, pInfo, pCustomBoneToWorld);
+        }
+        else if (strstr(modelName, "arms")) {
+            chamArms(thisptr, ctx, state, pInfo, pCustomBoneToWorld);
+        }
+        else {
+            chamWeapon(thisptr, ctx, state, pInfo, pCustomBoneToWorld);
+        }
     } 
-    else if (strstr(modelName, "models/weapons")) {
+    else if (strstr(modelName, "models/weapons/v_")) {
         chamWeapon(thisptr, ctx, state, pInfo, pCustomBoneToWorld);
     }
     else {
