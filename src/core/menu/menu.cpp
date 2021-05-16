@@ -1,5 +1,6 @@
 #include "menu.hpp"
 #include "imgui/imgui.h"
+#include "roboto.hpp"
 
 void style() {
     ImVec4* colors = ImGui::GetStyle().Colors;
@@ -75,6 +76,7 @@ void Menu::onSwapWindow(SDL_Window* window) {
         ImGui_ImplOpenGL3_Init("#version 100");
         ImGui_ImplSDL2_InitForOpenGL(window, nullptr);
         style();
+        ImGui::GetIO().Fonts->AddFontFromMemoryCompressedTTF(Roboto_compressed_data, Roboto_compressed_size, 14.f);
         initialised = true;
     }
 
