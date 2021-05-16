@@ -119,7 +119,7 @@ void Menu::onSwapWindow(SDL_Window* window) {
 
 
 void Menu::drawMenu() {
-    ImGui::SetNextWindowSize(ImVec2{900, 600});
+    ImGui::SetNextWindowSize(ImVec2{900, 627});
     ImGui::Begin("gamesneeze-linux", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 4));
     ImGui::Text("game"); ImGui::SameLine(); ImGui::PopStyleVar();
@@ -140,7 +140,7 @@ void Menu::drawMenu() {
     ImGui::SameLine();
     ImGui::PopStyleVar();
 
-    auto bWidth = ImVec2(80, 18);
+    auto bWidth = ImVec2(80, 20);
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(2, 5));
 
     ImGui::GetStyle().Colors[ImGuiCol_Button] = (Menu::tabSelected == 0) ? ImVec4(0.05f, 0.41f, 0.06f, 0.62f) : ImVec4(0.03f, 0.23f, 0.04f, 0.62f);
