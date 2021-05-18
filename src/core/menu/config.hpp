@@ -178,6 +178,7 @@ namespace Config {
                 CONFIGITEM("Visuals>Players>Enemies>Dynamic Color", false),
                 CONFIGITEM("Visuals>Players>Enemies>Money", false),
                 CONFIGITEM("Visuals>Players>Enemies>Armor", false),
+                CONFIGITEM("Visuals>Players>Enemies>Flashed", false),
                 CONFIGITEM("Visuals>Players>Enemies>Weapon", false),
                 CONFIGITEM("Visuals>Players>Enemies>Radar", false),
                 CONFIGITEM("Visuals>Players>Enemies>Forwardtrack Dots", false),

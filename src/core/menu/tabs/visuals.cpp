@@ -129,6 +129,7 @@ void Menu::drawVisualsTab() {
                 }
                 ImGui::Checkbox("Money", &CONFIGBOOL("Visuals>Players>Enemies>Money"));
                 ImGui::Checkbox("Armor", &CONFIGBOOL("Visuals>Players>Enemies>Armor"));
+                ImGui::Checkbox("Flashed", &CONFIGBOOL("Visuals>Players>Enemies>Flashed"));
                 ImGui::Checkbox("Weapon", &CONFIGBOOL("Visuals>Players>Enemies>Weapon"));
                 ImGui::Checkbox("Radar", &CONFIGBOOL("Visuals>Players>Enemies>Radar"));
                 ImGui::Checkbox("Forwardtrack Dots", &CONFIGBOOL("Visuals>Players>Enemies>Forwardtrack Dots"));
