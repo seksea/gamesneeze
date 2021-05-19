@@ -31,7 +31,7 @@ void createMaterials() {
         plasticMaterial = Interfaces::materialSystem->FindMaterial("models/inventory_items/trophy_majors/gloss", 0);
         darudeMaterial = Interfaces::materialSystem->FindMaterial("models/inventory_items/music_kit/darude_01/mp3_detail", 0);
 
-        glowMaterial = createMaterial("glow", "VertexLitGeneric", 
+        glowMaterial = createMaterial("glow", "VertexLitGeneric",
         R"#("VertexLitGeneric" {
             "$additive" "1"
             "$envmap" "models/effects/cube_white"
@@ -41,7 +41,7 @@ void createMaterials() {
             "$alpha" "0.8"
         })#");
 
-        oilMaterial = createMaterial("pearlescent", "VertexLitGeneric", 
+        oilMaterial = createMaterial("pearlescent", "VertexLitGeneric",
         R"#("VertexLitGeneric"
         {
             "$basetexture" "vgui/white_additive"
@@ -108,8 +108,10 @@ void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const M
                             if (CONFIGBOOL("Visuals>Players>Enemies>Chams>Trail")) {
                                 for (Features::Backtrack::BackTrackTick tick : Features::Backtrack::backtrackTicks) {
                                     if (tick.tickCount % 2 == 0) { // only draw every other tick to reduce lag
-                                        if (tick.players.find(p->index()) != tick.players.end()) {
-                                            cham(thisptr, ctx, state, pInfo, tick.players.at(p->index()).boneMatrix, CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), false);
+                                        if (tick.players.at(p->index()).velocity > 0) {
+                                            if (tick.players.find(p->index()) != tick.players.end()) {
+                                                cham(thisptr, ctx, state, pInfo, tick.players.at(p->index()).boneMatrix, CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), false);
+                                            }
                                         }
                                     }
                                 }
@@ -117,7 +119,9 @@ void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const M
                             else {
                                 Features::Backtrack::BackTrackTick tick = Features::Backtrack::backtrackTicks.at(Features::Backtrack::backtrackTicks.size()-1);
                                 if (tick.players.find(p->index()) != tick.players.end()) {
-                                    cham(thisptr, ctx, state, pInfo, tick.players.at(p->index()).boneMatrix, CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), false);
+                                    if (tick.players.at(p->index()).velocity > 0) {
+                                        cham(thisptr, ctx, state, pInfo, tick.players.at(p->index()).boneMatrix, CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), false);
+                                    }
                                 }
                             }
                         }
@@ -192,7 +196,7 @@ void Features::Chams::drawModelExecute(void* thisptr, void* ctx, const DrawModel
         else {
             chamWeapon(thisptr, ctx, state, pInfo, pCustomBoneToWorld);
         }
-    } 
+    }
     else if (strstr(modelName, "models/weapons/v_")) {
         chamWeapon(thisptr, ctx, state, pInfo, pCustomBoneToWorld);
     }
