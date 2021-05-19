@@ -17,6 +17,14 @@ void Menu::drawLegitTab() {
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Default>Smoothing"), 0, 100);
                 ImGui::Checkbox("Recoil Compensation", &CONFIGBOOL("Legit>LegitBot>Default>Recoil Compensation"));
+                if (CONFIGBOOL("Legit>LegitBot>Default>Recoil Compensation")) {
+                    ImGui::Text("RCS Amount X");
+                    ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                    ImGui::SliderInt("##RCS Amount X", &CONFIGINT("Legit>LegitBot>Default>RCS Amount X"), 0, 100);
+                    ImGui::Text("RCS Amount Y");
+                    ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                    ImGui::SliderInt("##RCS Amount Y", &CONFIGINT("Legit>LegitBot>Default>RCS Amount Y"), 0, 100);
+                }
 
                 ImGui::EndTabItem();
             }
@@ -28,7 +36,7 @@ void Menu::drawLegitTab() {
                 ImGui::Text("Smoothing");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Pistol>Smoothing"), 0, 100);
-                
+
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("Heavy Pistol")) {
@@ -39,7 +47,7 @@ void Menu::drawLegitTab() {
                 ImGui::Text("Smoothing");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Heavy Pistol>Smoothing"), 0, 100);
-                
+
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("Rifle")) {
@@ -51,7 +59,15 @@ void Menu::drawLegitTab() {
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Rifle>Smoothing"), 0, 100);
                 ImGui::Checkbox("Recoil Compensation", &CONFIGBOOL("Legit>LegitBot>Rifle>Recoil Compensation"));
-                
+                if (CONFIGBOOL("Legit>LegitBot>Rifle>Recoil Compensation")) {
+                    ImGui::Text("RCS Amount X");
+                    ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                    ImGui::SliderInt("##RCS Amount X", &CONFIGINT("Legit>LegitBot>Rifle>RCS Amount X"), 0, 100);
+                    ImGui::Text("RCS Amount Y");
+                    ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                    ImGui::SliderInt("##RCS Amount Y", &CONFIGINT("Legit>LegitBot>Rifle>RCS Amount Y"), 0, 100);
+                }
+
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("SMG")) {
@@ -63,7 +79,15 @@ void Menu::drawLegitTab() {
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>SMG>Smoothing"), 0, 100);
                 ImGui::Checkbox("Recoil Compensation", &CONFIGBOOL("Legit>LegitBot>SMG>Recoil Compensation"));
-                
+                if (CONFIGBOOL("Legit>LegitBot>SMG>Recoil Compensation")) {
+                    ImGui::Text("RCS Amount X");
+                    ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                    ImGui::SliderInt("##RCS Amount X", &CONFIGINT("Legit>LegitBot>SMG>RCS Amount X"), 0, 100);
+                    ImGui::Text("RCS Amount Y");
+                    ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                    ImGui::SliderInt("##RCS Amount Y", &CONFIGINT("Legit>LegitBot>SMG>RCS Amount Y"), 0, 100);
+                }
+
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("Scout")) {
@@ -74,7 +98,7 @@ void Menu::drawLegitTab() {
                 ImGui::Text("Smoothing");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Scout>Smoothing"), 0, 100);
-                
+
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("AWP")) {
@@ -85,7 +109,7 @@ void Menu::drawLegitTab() {
                 ImGui::Text("Smoothing");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>AWP>Smoothing"), 0, 100);
-                
+
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("Heavy")) {
@@ -97,7 +121,15 @@ void Menu::drawLegitTab() {
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Heavy>Smoothing"), 0, 100);
                 ImGui::Checkbox("Recoil Compensation", &CONFIGBOOL("Legit>LegitBot>Heavy>Recoil Compensation"));
-                
+                if (CONFIGBOOL("Legit>LegitBot>Heavy>Recoil Compensation")) {
+                    ImGui::Text("RCS Amount X");
+                    ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                    ImGui::SliderInt("##RCS Amount X", &CONFIGINT("Legit>LegitBot>Heavy>RCS Amount X"), 0, 100);
+                    ImGui::Text("RCS Amount Y");
+                    ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                    ImGui::SliderInt("##RCS Amount Y", &CONFIGINT("Legit>LegitBot>Heavy>RCS Amount Y"), 0, 100);
+                }
+
                 ImGui::EndTabItem();
             }
         ImGui::EndTabBar();

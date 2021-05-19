@@ -63,6 +63,8 @@ namespace Config {
                     CONFIGITEM("Legit>LegitBot>Default>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Default>Smoothing", 0),
                     CONFIGITEM("Legit>LegitBot>Default>Recoil Compensation", false),
+                    CONFIGITEM("Legit>LegitBot>Default>RCS Amount X", 100),
+                    CONFIGITEM("Legit>LegitBot>Default>RCS Amount Y", 100),
                 //}
                 // Pistol {
                     CONFIGITEM("Legit>LegitBot>Pistol>Override", false),
@@ -79,12 +81,16 @@ namespace Config {
                     CONFIGITEM("Legit>LegitBot>Rifle>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Rifle>Smoothing", 0),
                     CONFIGITEM("Legit>LegitBot>Rifle>Recoil Compensation", false),
+                    CONFIGITEM("Legit>LegitBot>Rifle>RCS Amount X", 100),
+                    CONFIGITEM("Legit>LegitBot>Rifle>RCS Amount Y", 100),
                 //}
                 // SMG {
                     CONFIGITEM("Legit>LegitBot>SMG>Override", false),
                     CONFIGITEM("Legit>LegitBot>SMG>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>SMG>Smoothing", 0),
                     CONFIGITEM("Legit>LegitBot>SMG>Recoil Compensation", false),
+                    CONFIGITEM("Legit>LegitBot>SMG>RCS Amount X", 100),
+                    CONFIGITEM("Legit>LegitBot>SMG>RCS Amount Y", 100),
                 //}
                 // Scout {
                     CONFIGITEM("Legit>LegitBot>Scout>Override", false),
@@ -101,6 +107,8 @@ namespace Config {
                     CONFIGITEM("Legit>LegitBot>Heavy>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Heavy>Smoothing", 0),
                     CONFIGITEM("Legit>LegitBot>Heavy>Recoil Compensation", false),
+                    CONFIGITEM("Legit>LegitBot>Heavy>RCS Amount X", 100),
+                    CONFIGITEM("Legit>LegitBot>Heavy>RCS Amount Y", 100),
                 //}
             // }
 
