@@ -26,6 +26,16 @@ void Menu::drawLegitTab() {
                     ImGui::SliderInt("##RCS Amount Y", &CONFIGINT("Legit>LegitBot>Default>RCS Amount Y"), 0, 100);
                 }
 
+                ImGui::Checkbox("Flash Check", &CONFIGBOOL("Legit>LegitBot>Default>Flash Check"));
+                ImGui::Checkbox("Jump Check", &CONFIGBOOL("Legit>LegitBot>Default>Jump Check"));
+                ImGui::Checkbox("Enemy Jump Check", &CONFIGBOOL("Legit>LegitBot>Default>Enemy Jump Check"));
+
+                ImGui::Text("Hitboxes");
+                ImGui::Checkbox("Head", &CONFIGBOOL("Legit>LegitBot>Default>Head"));
+                ImGui::Checkbox("Chest", &CONFIGBOOL("Legit>LegitBot>Default>Chest"));
+                ImGui::Checkbox("Stomach", &CONFIGBOOL("Legit>LegitBot>Default>Stomach"));
+                ImGui::Checkbox("Pelvis", &CONFIGBOOL("Legit>LegitBot>Default>Pelvis"));
+
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("Pistol")) {
@@ -37,6 +47,16 @@ void Menu::drawLegitTab() {
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Pistol>Smoothing"), 0, 100);
 
+                ImGui::Checkbox("Flash Check", &CONFIGBOOL("Legit>LegitBot>Pistol>Flash Check"));
+                ImGui::Checkbox("Jump Check", &CONFIGBOOL("Legit>LegitBot>Pistol>Jump Check"));
+                ImGui::Checkbox("Enemy Jump Check", &CONFIGBOOL("Legit>LegitBot>Pistol>Enemy Jump Check"));
+
+                ImGui::Text("Hitboxes");
+                ImGui::Checkbox("Head", &CONFIGBOOL("Legit>LegitBot>Pistol>Head"));
+                ImGui::Checkbox("Chest", &CONFIGBOOL("Legit>LegitBot>Pistol>Chest"));
+                ImGui::Checkbox("Stomach", &CONFIGBOOL("Legit>LegitBot>Pistol>Stomach"));
+                ImGui::Checkbox("Pelvis", &CONFIGBOOL("Legit>LegitBot>Pistol>Pelvis"));
+
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("Heavy Pistol")) {
@@ -47,6 +67,16 @@ void Menu::drawLegitTab() {
                 ImGui::Text("Smoothing");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Heavy Pistol>Smoothing"), 0, 100);
+
+                ImGui::Checkbox("Flash Check", &CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Flash Check"));
+                ImGui::Checkbox("Jump Check", &CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Jump Check"));
+                ImGui::Checkbox("Enemy Jump Check", &CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Enemy Jump Check"));
+
+                ImGui::Text("Hitboxes");
+                ImGui::Checkbox("Head", &CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Head"));
+                ImGui::Checkbox("Chest", &CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Chest"));
+                ImGui::Checkbox("Stomach", &CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Stomach"));
+                ImGui::Checkbox("Pelvis", &CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Pelvis"));
 
                 ImGui::EndTabItem();
             }
@@ -68,6 +98,16 @@ void Menu::drawLegitTab() {
                     ImGui::SliderInt("##RCS Amount Y", &CONFIGINT("Legit>LegitBot>Rifle>RCS Amount Y"), 0, 100);
                 }
 
+                ImGui::Checkbox("Flash Check", &CONFIGBOOL("Legit>LegitBot>Rifle>Flash Check"));
+                ImGui::Checkbox("Jump Check", &CONFIGBOOL("Legit>LegitBot>Rifle>Jump Check"));
+                ImGui::Checkbox("Enemy Jump Check", &CONFIGBOOL("Legit>LegitBot>Rifle>Enemy Jump Check"));
+
+                ImGui::Text("Hitboxes");
+                ImGui::Checkbox("Head", &CONFIGBOOL("Legit>LegitBot>Rifle>Head"));
+                ImGui::Checkbox("Chest", &CONFIGBOOL("Legit>LegitBot>Rifle>Chest"));
+                ImGui::Checkbox("Stomach", &CONFIGBOOL("Legit>LegitBot>Rifle>Stomach"));
+                ImGui::Checkbox("Pelvis", &CONFIGBOOL("Legit>LegitBot>Rifle>Pelvis"));
+
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("SMG")) {
@@ -88,6 +128,16 @@ void Menu::drawLegitTab() {
                     ImGui::SliderInt("##RCS Amount Y", &CONFIGINT("Legit>LegitBot>SMG>RCS Amount Y"), 0, 100);
                 }
 
+                ImGui::Checkbox("Flash Check", &CONFIGBOOL("Legit>LegitBot>SMG>Flash Check"));
+                ImGui::Checkbox("Jump Check", &CONFIGBOOL("Legit>LegitBot>SMG>Jump Check"));
+                ImGui::Checkbox("Enemy Jump Check", &CONFIGBOOL("Legit>LegitBot>SMG>Enemy Jump Check"));
+
+                ImGui::Text("Hitboxes");
+                ImGui::Checkbox("Head", &CONFIGBOOL("Legit>LegitBot>SMG>Head"));
+                ImGui::Checkbox("Chest", &CONFIGBOOL("Legit>LegitBot>SMG>Chest"));
+                ImGui::Checkbox("Stomach", &CONFIGBOOL("Legit>LegitBot>SMG>Stomach"));
+                ImGui::Checkbox("Pelvis", &CONFIGBOOL("Legit>LegitBot>SMG>Pelvis"));
+
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("Scout")) {
@@ -99,6 +149,16 @@ void Menu::drawLegitTab() {
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Scout>Smoothing"), 0, 100);
 
+                ImGui::Checkbox("Flash Check", &CONFIGBOOL("Legit>LegitBot>Scout>Flash Check"));
+                ImGui::Checkbox("Jump Check", &CONFIGBOOL("Legit>LegitBot>Scout>Jump Check"));
+                ImGui::Checkbox("Enemy Jump Check", &CONFIGBOOL("Legit>LegitBot>Scout>Enemy Jump Check"));
+
+                ImGui::Text("Hitboxes");
+                ImGui::Checkbox("Head", &CONFIGBOOL("Legit>LegitBot>Scout>Head"));
+                ImGui::Checkbox("Chest", &CONFIGBOOL("Legit>LegitBot>Scout>Chest"));
+                ImGui::Checkbox("Stomach", &CONFIGBOOL("Legit>LegitBot>Scout>Stomach"));
+                ImGui::Checkbox("Pelvis", &CONFIGBOOL("Legit>LegitBot>Scout>Pelvis"));
+
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("AWP")) {
@@ -109,6 +169,16 @@ void Menu::drawLegitTab() {
                 ImGui::Text("Smoothing");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>AWP>Smoothing"), 0, 100);
+
+                ImGui::Checkbox("Flash Check", &CONFIGBOOL("Legit>LegitBot>AWP>Flash Check"));
+                ImGui::Checkbox("Jump Check", &CONFIGBOOL("Legit>LegitBot>AWP>Jump Check"));
+                ImGui::Checkbox("Enemy Jump Check", &CONFIGBOOL("Legit>LegitBot>AWP>Enemy Jump Check"));
+
+                ImGui::Text("Hitboxes");
+                ImGui::Checkbox("Head", &CONFIGBOOL("Legit>LegitBot>AWP>Head"));
+                ImGui::Checkbox("Chest", &CONFIGBOOL("Legit>LegitBot>AWP>Chest"));
+                ImGui::Checkbox("Stomach", &CONFIGBOOL("Legit>LegitBot>AWP>Stomach"));
+                ImGui::Checkbox("Pelvis", &CONFIGBOOL("Legit>LegitBot>AWP>Pelvis"));
 
                 ImGui::EndTabItem();
             }
@@ -129,6 +199,16 @@ void Menu::drawLegitTab() {
                     ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                     ImGui::SliderInt("##RCS Amount Y", &CONFIGINT("Legit>LegitBot>Heavy>RCS Amount Y"), 0, 100);
                 }
+
+                ImGui::Checkbox("Flash Check", &CONFIGBOOL("Legit>LegitBot>Heavy>Flash Check"));
+                ImGui::Checkbox("Jump Check", &CONFIGBOOL("Legit>LegitBot>Heavy>Jump Check"));
+                ImGui::Checkbox("Enemy Jump Check", &CONFIGBOOL("Legit>LegitBot>Heavy>Enemy Jump Check"));
+
+                ImGui::Text("Hitboxes");
+                ImGui::Checkbox("Head", &CONFIGBOOL("Legit>LegitBot>Heavy>Head"));
+                ImGui::Checkbox("Chest", &CONFIGBOOL("Legit>LegitBot>Heavy>Chest"));
+                ImGui::Checkbox("Stomach", &CONFIGBOOL("Legit>LegitBot>Heavy>Stomach"));
+                ImGui::Checkbox("Pelvis", &CONFIGBOOL("Legit>LegitBot>Heavy>Pelvis"));
 
                 ImGui::EndTabItem();
             }
@@ -158,6 +238,7 @@ void Menu::drawLegitTab() {
 
         ImGui::EndChild();
     }
+    //ImGui::SameLine();
     ImGui::BeginChild("Backtrack", ImVec2(0, 260), true); {
         ImGui::Text("Backtrack");
         ImGui::Separator();
