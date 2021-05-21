@@ -75,6 +75,9 @@ namespace Config {
                     CONFIGITEM("Legit>LegitBot>Default>Chest", false),
                     CONFIGITEM("Legit>LegitBot>Default>Stomach", false),
                     CONFIGITEM("Legit>LegitBot>Default>Pelvis", false),
+
+                    CONFIGITEM("Legit>LegitBot>Default>Reaction Time", 0),
+                    CONFIGITEM("Legit>LegitBot>Default>Max Lock Time", 0),
                 //}
                 // Pistol {
                     CONFIGITEM("Legit>LegitBot>Pistol>Override", false),
@@ -121,6 +124,9 @@ namespace Config {
                     CONFIGITEM("Legit>LegitBot>Rifle>Chest", false),
                     CONFIGITEM("Legit>LegitBot>Rifle>Stomach", false),
                     CONFIGITEM("Legit>LegitBot>Rifle>Pelvis", false),
+
+                    CONFIGITEM("Legit>LegitBot>Rifle>Reaction Time", 0),
+                    CONFIGITEM("Legit>LegitBot>Rifle>Max Lock Time", 0),
                 //}
                 // SMG {
                     CONFIGITEM("Legit>LegitBot>SMG>Override", false),
@@ -139,6 +145,9 @@ namespace Config {
                     CONFIGITEM("Legit>LegitBot>SMG>Chest", false),
                     CONFIGITEM("Legit>LegitBot>SMG>Stomach", false),
                     CONFIGITEM("Legit>LegitBot>SMG>Pelvis", false),
+
+                    CONFIGITEM("Legit>LegitBot>SMG>Reaction Time", 0),
+                    CONFIGITEM("Legit>LegitBot>SMG>Max Lock Time", 0),
                 //}
                 // Scout {
                     CONFIGITEM("Legit>LegitBot>Scout>Override", false),

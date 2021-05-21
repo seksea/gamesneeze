@@ -10,11 +10,10 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
             float smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Default>Smoothing")/2.5f);
             float FOV = CONFIGINT("Legit>LegitBot>Default>FOV")/10.f;
 
-            bool recoilCompensation = CONFIGBOOL("Legit>LegitBot>Default>Recoil Compensation");
             float rcsX = Globals::localPlayer->aimPunch().x * 2 * CONFIGINT("Legit>LegitBot>Default>RCS Amount Y") / 100; // Flipped because it makes more sense in game this way
             float rcsY = Globals::localPlayer->aimPunch().y * 2 * CONFIGINT("Legit>LegitBot>Default>RCS Amount X") / 100;
             float rcsZ = Globals::localPlayer->aimPunch().z * 2;
-            QAngle rcsAngle = recoilCompensation ? QAngle(rcsX, rcsY, rcsZ) : QAngle(0, 0, 0);
+            QAngle rcsAngle = QAngle(rcsX, rcsY, rcsZ);
 
             bool flashCheck = CONFIGBOOL("Legit>LegitBot>Default>Flash Check");
             bool jumpCheck = CONFIGBOOL("Legit>LegitBot>Default>Jump Check");
@@ -25,11 +24,12 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
             bool hbStomach = CONFIGBOOL("Legit>LegitBot>Default>Stomach");
             bool hbPelvis = CONFIGBOOL("Legit>LegitBot>Default>Pelvis");
 
+            float reactionTime = CONFIGINT("Legit>LegitBot>Default>Reaction Time");
+            float maxLockTime = CONFIGINT("Legit>LegitBot>Default>Max Lock Time");
+
             if ((std::find(std::begin(pistols), std::end(pistols), weapon->itemIndex()) != std::end(pistols)) && CONFIGBOOL("Legit>LegitBot>Pistol>Override")) {
                 smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Pistol>Smoothing")/2.5f);
                 FOV = CONFIGINT("Legit>LegitBot>Pistol>FOV")/10.f;
-
-                recoilCompensation = false;
 
                 flashCheck = CONFIGBOOL("Legit>LegitBot>Pistol>Flash Check");
                 jumpCheck = CONFIGBOOL("Legit>LegitBot>Pistol>Jump Check");
@@ -44,8 +44,6 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Heavy Pistol>Smoothing")/2.5f);
                 FOV = CONFIGINT("Legit>LegitBot>Heavy Pistol>FOV")/10.f;
 
-                recoilCompensation = false;
-
                 flashCheck = CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Flash Check");
                 jumpCheck = CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Jump Check");
                 enemyJumpCheck = CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Enemy Jump Check");
@@ -59,10 +57,9 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Rifle>Smoothing")/2.5f);
                 FOV = CONFIGINT("Legit>LegitBot>Rifle>FOV")/10.f;
 
-                recoilCompensation = CONFIGINT("Legit>LegitBot>Rifle>Recoil Compensation");
                 rcsX = Globals::localPlayer->aimPunch().x * 2 * CONFIGINT("Legit>LegitBot>Rifle>RCS Amount Y") / 100; // Flipped because it makes more sense in game this way
                 rcsY = Globals::localPlayer->aimPunch().y * 2 * CONFIGINT("Legit>LegitBot>Rifle>RCS Amount X") / 100;
-                rcsAngle = recoilCompensation ? QAngle(rcsX, rcsY, rcsZ) : QAngle(0, 0, 0);
+                rcsAngle = QAngle(rcsX, rcsY, rcsZ);
 
                 flashCheck = CONFIGBOOL("Legit>LegitBot>Rifle>Flash Check");
                 jumpCheck = CONFIGBOOL("Legit>LegitBot>Rifle>Jump Check");
@@ -72,15 +69,17 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 hbChest = CONFIGBOOL("Legit>LegitBot>Rifle>Chest");
                 hbStomach = CONFIGBOOL("Legit>LegitBot>Rifle>Stomach");
                 hbPelvis = CONFIGBOOL("Legit>LegitBot>Rifle>Pelvis");
+
+                reactionTime = CONFIGINT("Legit>LegitBot>Rifle>Reaction Time");
+                maxLockTime = CONFIGINT("Legit>LegitBot>Rifle>Max Lock Time");
             }
             else if ((std::find(std::begin(smgs), std::end(smgs), weapon->itemIndex()) != std::end(smgs)) && CONFIGBOOL("Legit>LegitBot>SMG>Override")) {
                 smoothing = 1.f + (CONFIGINT("Legit>LegitBot>SMG>Smoothing")/2.5f);
                 FOV = CONFIGINT("Legit>LegitBot>SMG>FOV")/10.f;
 
-                recoilCompensation = CONFIGINT("Legit>LegitBot>SMG>Recoil Compensation");
                 rcsX = Globals::localPlayer->aimPunch().x * 2 * CONFIGINT("Legit>LegitBot>SMG>RCS Amount Y") / 100; // Flipped because it makes more sense in game this way
                 rcsY = Globals::localPlayer->aimPunch().y * 2 * CONFIGINT("Legit>LegitBot>SMG>RCS Amount X") / 100;
-                rcsAngle = recoilCompensation ? QAngle(rcsX, rcsY, rcsZ) : QAngle(0, 0, 0);
+                rcsAngle = QAngle(rcsX, rcsY, rcsZ);
 
                 flashCheck = CONFIGBOOL("Legit>LegitBot>SMG>Flash Check");
                 jumpCheck = CONFIGBOOL("Legit>LegitBot>SMG>Jump Check");
@@ -90,12 +89,13 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 hbChest = CONFIGBOOL("Legit>LegitBot>SMG>Chest");
                 hbStomach = CONFIGBOOL("Legit>LegitBot>SMG>Stomach");
                 hbPelvis = CONFIGBOOL("Legit>LegitBot>SMG>Pelvis");
+
+                reactionTime = CONFIGINT("Legit>LegitBot>SMG>Reaction Time");
+                maxLockTime = CONFIGINT("Legit>LegitBot>SMG>Max Lock Time");
             }
             else if ((weapon->itemIndex() == WEAPON_SSG08) && CONFIGBOOL("Legit>LegitBot>Scout>Override")) {
                 smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Scout>Smoothing")/2.5f);
                 FOV = CONFIGINT("Legit>LegitBot>Scout>FOV")/10.f;
-
-                recoilCompensation = false;
 
                 flashCheck = CONFIGBOOL("Legit>LegitBot>Scout>Flash Check");
                 jumpCheck = CONFIGBOOL("Legit>LegitBot>Scout>Jump Check");
@@ -110,8 +110,6 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 smoothing = 1.f + (CONFIGINT("Legit>LegitBot>AWP>Smoothing")/2.5f);
                 FOV = CONFIGINT("Legit>LegitBot>AWP>FOV")/10.f;
 
-                recoilCompensation = false;
-
                 flashCheck = CONFIGBOOL("Legit>LegitBot>AWP>Flash Check");
                 jumpCheck = CONFIGBOOL("Legit>LegitBot>AWP>Jump Check");
                 enemyJumpCheck = CONFIGBOOL("Legit>LegitBot>AWP>Enemy Jump Check");
@@ -125,10 +123,9 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Heavy>Smoothing")/2.5f);
                 FOV = CONFIGINT("Legit>LegitBot>Heavy>FOV")/10.f;
 
-                recoilCompensation = CONFIGINT("Legit>LegitBot>Heavy>Recoil Compensation");
                 rcsX = Globals::localPlayer->aimPunch().x * 2 * CONFIGINT("Legit>LegitBot>Heavy>RCS Amount Y") / 100; // Flipped because it makes more sense in game this way
                 rcsY = Globals::localPlayer->aimPunch().y * 2 * CONFIGINT("Legit>LegitBot>Heavy>RCS Amount X") / 100;
-                rcsAngle = recoilCompensation ? QAngle(rcsX, rcsY, rcsZ) : QAngle(0, 0, 0);
+                rcsAngle = QAngle(rcsX, rcsY, rcsZ);
 
                 flashCheck = CONFIGBOOL("Legit>LegitBot>Heavy>Flash Check");
                 jumpCheck = CONFIGBOOL("Legit>LegitBot>Heavy>Jump Check");
@@ -149,8 +146,6 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
             // Enumerate over players and get angle to the closest player to crosshair
             for (int i = 1; i < Interfaces::globals->maxClients; i++) {
                 Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
-                //if (p && p != Globals::localPlayer && (flashCheck && Globals::localPlayer->maxFlashAlpha() >= 60.f) &&
-                        //(jumpCheck && Globals::localPlayer->flags() & (1<<0)) && (enemyJumpCheck && p->flags() & (1<<0))) {
                 if (p && p != Globals::localPlayer) {
                     if (p->health() > 0 && !p->dormant() && p->team() != Globals::localPlayer->team() && p->visible()) {
 
@@ -167,9 +162,24 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                         if (enemyJumpCheck && !(p->flags() & (1<<0)))
                             return;
 
+                        // TODO: What the hell am I doing wrong, idk how to use curtime
+                        /*if (reactionTime > 0.f) {
+                            float curTime = Interfaces::globals->curtime;
+                            const float timeToWait = curTime + (reactionTime / 1000.f);
+                            if (curTime < timeToWait)
+                                return;
+                        }
+                        if (maxLockTime > 0.f) {
+                            float curTime = Interfaces::globals->curtime;
+                            const float timeToWait = curTime + (maxLockTime / 1000.f);
+                            if (curTime > maxLockTime)
+                                return;
+                        }*/
+
                         matrix3x4_t boneMatrix[128];
                         if (p->getAnythingBones(boneMatrix)) {
                             Vector localPlayerEyePos = Globals::localPlayer->eyePos();
+
                             std::vector<int> hitboxes = { hbHead ? 8 : 0, hbChest ? 6 : 0, hbStomach ? 5 : 0, hbPelvis ? 3 : 0 };
 
                             studiohdr_t* model = Interfaces::modelInfo->GetStudioModel(p->model());
