@@ -13,6 +13,9 @@ void Features::Backtrack::store(CUserCmd *cmd) {
                 if (p->health() > 0 && !p->dormant() && p != Globals::localPlayer && p->team() != Globals::localPlayer->team()) {
                     BacktrackPlayer player;
                     player.playerIndex = i;
+                    player.playerFlags = p->flags();
+                    player.playerVelocity = p->velocity().Length2D();
+                    player.playerHeadPos = p->getBonePos(8);
                     if (p->getAnythingBones(player.boneMatrix)) {
                         currentTick.players.insert(std::pair<int, BacktrackPlayer>(i, player));
                     }
@@ -53,7 +56,7 @@ void Features::Backtrack::createMove(CUserCmd* cmd) {
                             Vector localPlayerEyePos = Globals::localPlayer->eyePos();
 
                             Vector targetEyePos = Vector(player.second.boneMatrix[8][0][3], player.second.boneMatrix[8][1][3], player.second.boneMatrix[8][2][3]); // 8 is headbone in bonematrix
-                            
+
                             QAngle angleToCurrentPlayer = calcAngle(localPlayerEyePos, targetEyePos);
                             angleToCurrentPlayer -= viewAngles;
                             if (angleToCurrentPlayer.y > 180.f) {

@@ -37,6 +37,9 @@ namespace Features {
         struct BacktrackPlayer {
             matrix3x4_t boneMatrix[128];
             int playerIndex;
+            int playerFlags;
+            float playerVelocity;
+            Vector playerHeadPos;
         };
 
         struct BackTrackTick {
@@ -121,7 +124,7 @@ namespace Features {
     }
     namespace RagdollGravity {
         void frameStageNotify(FrameStage frame);
-    } 
+    }
     namespace NoVisualRecoil {
         void frameStageNotify(FrameStage frame);
     }
