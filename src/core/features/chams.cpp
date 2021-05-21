@@ -31,7 +31,7 @@ void createMaterials() {
         plasticMaterial = Interfaces::materialSystem->FindMaterial("models/inventory_items/trophy_majors/gloss", 0);
         darudeMaterial = Interfaces::materialSystem->FindMaterial("models/inventory_items/music_kit/darude_01/mp3_detail", 0);
 
-        glowMaterial = createMaterial("glow", "VertexLitGeneric", 
+        glowMaterial = createMaterial("glow", "VertexLitGeneric",
         R"#("VertexLitGeneric" {
             "$additive" "1"
             "$envmap" "models/effects/cube_white"
@@ -41,7 +41,7 @@ void createMaterials() {
             "$alpha" "0.8"
         })#");
 
-        oilMaterial = createMaterial("pearlescent", "VertexLitGeneric", 
+        oilMaterial = createMaterial("pearlescent", "VertexLitGeneric",
         R"#("VertexLitGeneric"
         {
             "$basetexture" "vgui/white_additive"
@@ -109,6 +109,14 @@ void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const M
                                 for (Features::Backtrack::BackTrackTick tick : Features::Backtrack::backtrackTicks) {
                                     if (tick.tickCount % 2 == 0) { // only draw every other tick to reduce lag
                                         if (tick.players.find(p->index()) != tick.players.end()) {
+                                            // Check for velocity and origin diff so we don't stop
+                                            // drawing if the player walks back and forth
+                                            // Also checking for jumping as a fix for more oddities
+                                            if ((tick.players.at(p->index()).playerHeadPos.Length() - p->getBonePos(8).Length() < 0.2f) &&
+                                                    tick.players.at(p->index()).playerVelocity < 0.1f &&
+                                                    tick.players.at(p->index()).playerFlags & (1 << 0)) {
+                                                return;
+                                            }
                                             cham(thisptr, ctx, state, pInfo, tick.players.at(p->index()).boneMatrix, CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), false);
                                         }
                                     }
@@ -117,6 +125,14 @@ void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const M
                             else {
                                 Features::Backtrack::BackTrackTick tick = Features::Backtrack::backtrackTicks.at(Features::Backtrack::backtrackTicks.size()-1);
                                 if (tick.players.find(p->index()) != tick.players.end()) {
+                                    // Check for velocity and origin diff so we don't stop
+                                    // drawing if the player walks back and forth
+                                    // Also checking for jumping as a fix for more oddities
+                                    if ((tick.players.at(p->index()).playerHeadPos.Length() - p->getBonePos(8).Length() < 0.2f) &&
+                                            tick.players.at(p->index()).playerVelocity < 0.1f &&
+                                            tick.players.at(p->index()).playerFlags & (1 << 0)) {
+                                        return;
+                                    }
                                     cham(thisptr, ctx, state, pInfo, tick.players.at(p->index()).boneMatrix, CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), false);
                                 }
                             }
@@ -192,7 +208,7 @@ void Features::Chams::drawModelExecute(void* thisptr, void* ctx, const DrawModel
         else {
             chamWeapon(thisptr, ctx, state, pInfo, pCustomBoneToWorld);
         }
-    } 
+    }
     else if (strstr(modelName, "models/weapons/v_")) {
         chamWeapon(thisptr, ctx, state, pInfo, pCustomBoneToWorld);
     }
