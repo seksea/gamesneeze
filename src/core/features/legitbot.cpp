@@ -7,7 +7,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
             Interfaces::engine->IsInGame() && Globals::localPlayer && Globals::localPlayer->health() > 0) {
         Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)Globals::localPlayer->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
         if (weapon) {
-            float smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Default>Smoothing")/5.f);
+            float smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Default>Smoothing")/2.5f);
             float FOV = CONFIGINT("Legit>LegitBot>Default>FOV")/10.f;
 
             bool recoilCompensation = CONFIGBOOL("Legit>LegitBot>Default>Recoil Compensation");
@@ -26,7 +26,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
             bool hbPelvis = CONFIGBOOL("Legit>LegitBot>Default>Pelvis");
 
             if ((std::find(std::begin(pistols), std::end(pistols), weapon->itemIndex()) != std::end(pistols)) && CONFIGBOOL("Legit>LegitBot>Pistol>Override")) {
-                smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Pistol>Smoothing")/5.f);
+                smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Pistol>Smoothing")/2.5f);
                 FOV = CONFIGINT("Legit>LegitBot>Pistol>FOV")/10.f;
 
                 recoilCompensation = false;
@@ -41,7 +41,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 hbPelvis = CONFIGBOOL("Legit>LegitBot>Pistol>Pelvis");
             }
             else if ((std::find(std::begin(heavyPistols), std::end(heavyPistols), weapon->itemIndex()) != std::end(heavyPistols)) && CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Override")) {
-                smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Heavy Pistol>Smoothing")/5.f);
+                smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Heavy Pistol>Smoothing")/2.5f);
                 FOV = CONFIGINT("Legit>LegitBot>Heavy Pistol>FOV")/10.f;
 
                 recoilCompensation = false;
@@ -56,7 +56,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 hbPelvis = CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Pelvis");
             }
             else if ((std::find(std::begin(rifles), std::end(rifles), weapon->itemIndex()) != std::end(rifles)) && CONFIGBOOL("Legit>LegitBot>Rifle>Override")) {
-                smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Rifle>Smoothing")/5.f);
+                smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Rifle>Smoothing")/2.5f);
                 FOV = CONFIGINT("Legit>LegitBot>Rifle>FOV")/10.f;
 
                 recoilCompensation = CONFIGINT("Legit>LegitBot>Rifle>Recoil Compensation");
@@ -74,7 +74,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 hbPelvis = CONFIGBOOL("Legit>LegitBot>Rifle>Pelvis");
             }
             else if ((std::find(std::begin(smgs), std::end(smgs), weapon->itemIndex()) != std::end(smgs)) && CONFIGBOOL("Legit>LegitBot>SMG>Override")) {
-                smoothing = 1.f + (CONFIGINT("Legit>LegitBot>SMG>Smoothing")/5.f);
+                smoothing = 1.f + (CONFIGINT("Legit>LegitBot>SMG>Smoothing")/2.5f);
                 FOV = CONFIGINT("Legit>LegitBot>SMG>FOV")/10.f;
 
                 recoilCompensation = CONFIGINT("Legit>LegitBot>SMG>Recoil Compensation");
@@ -92,7 +92,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 hbPelvis = CONFIGBOOL("Legit>LegitBot>SMG>Pelvis");
             }
             else if ((weapon->itemIndex() == WEAPON_SSG08) && CONFIGBOOL("Legit>LegitBot>Scout>Override")) {
-                smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Scout>Smoothing")/5.f);
+                smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Scout>Smoothing")/2.5f);
                 FOV = CONFIGINT("Legit>LegitBot>Scout>FOV")/10.f;
 
                 recoilCompensation = false;
@@ -107,7 +107,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 hbPelvis = CONFIGBOOL("Legit>LegitBot>Scout>Pelvis");
             }
             else if ((weapon->itemIndex() == WEAPON_AWP) && CONFIGBOOL("Legit>LegitBot>AWP>Override")) {
-                smoothing = 1.f + (CONFIGINT("Legit>LegitBot>AWP>Smoothing")/5.f);
+                smoothing = 1.f + (CONFIGINT("Legit>LegitBot>AWP>Smoothing")/2.5f);
                 FOV = CONFIGINT("Legit>LegitBot>AWP>FOV")/10.f;
 
                 recoilCompensation = false;
@@ -122,7 +122,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 hbPelvis = CONFIGBOOL("Legit>LegitBot>AWP>Pelvis");
             }
             else if ((std::find(std::begin(heavyWeapons), std::end(heavyWeapons), weapon->itemIndex()) != std::end(heavyWeapons)) && CONFIGBOOL("Legit>LegitBot>Heavy>Override")) {
-                smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Heavy>Smoothing")/5.f);
+                smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Heavy>Smoothing")/2.5f);
                 FOV = CONFIGINT("Legit>LegitBot>Heavy>FOV")/10.f;
 
                 recoilCompensation = CONFIGINT("Legit>LegitBot>Heavy>Recoil Compensation");
