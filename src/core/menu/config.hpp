@@ -10,6 +10,14 @@
 #include "../../utils/utils.hpp"
 #include "../../sdk/definitions.hpp"
 
+enum class HitBoxes {
+    HEAD = 1 << 0,
+    NECK = 1 << 1,
+    CHEST = 1 << 2,
+    STOMACH = 1 << 3,
+    PELVIS = 1 << 4,
+};
+
 #define CONFIGINT(name) Config::config.at(name).intValue
 #define CONFIGBOOL(name) Config::config.at(name).boolValue
 #define CONFIGSTR(name) Config::config.at(name).strValue
@@ -17,7 +25,7 @@
 
 #define CONFIGITEM(name, value) {name, ConfigItem(value)}
 
-enum CONFIGITEMTYPE {
+enum ConfigItemType {
     INT,
     BOOL,
     STR,
@@ -47,7 +55,7 @@ namespace Config {
             type = COLOR;
             colValue = value;
         }
-        CONFIGITEMTYPE type;
+        ConfigItemType type;
         int intValue = -1;
         bool boolValue = false;
         char* strValue;
@@ -60,43 +68,51 @@ namespace Config {
                 // Default {
                     CONFIGITEM("Legit>LegitBot>Default>Key", 0),
                     CONFIGITEM("Legit>LegitBot>Default>Always on", false),
+                    CONFIGITEM("Legit>LegitBot>Default>Hitboxes", 1),
                     CONFIGITEM("Legit>LegitBot>Default>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Default>Smoothing", 0),
                     CONFIGITEM("Legit>LegitBot>Default>Recoil Compensation", false),
                 //}
                 // Pistol {
+                    CONFIGITEM("Legit>LegitBot>Pistol>Hitboxes", 1),
                     CONFIGITEM("Legit>LegitBot>Pistol>Override", false),
                     CONFIGITEM("Legit>LegitBot>Pistol>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Pistol>Smoothing", 0),
                 //}
                 // Heavy Pistol {
+                    CONFIGITEM("Legit>LegitBot>Heavy Pistol>Hitboxes", 1),
                     CONFIGITEM("Legit>LegitBot>Heavy Pistol>Override", false),
                     CONFIGITEM("Legit>LegitBot>Heavy Pistol>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Heavy Pistol>Smoothing", 0),
                 //}
                 // Rifle {
+                    CONFIGITEM("Legit>LegitBot>Rifle>Hitboxes", 1),
                     CONFIGITEM("Legit>LegitBot>Rifle>Override", false),
                     CONFIGITEM("Legit>LegitBot>Rifle>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Rifle>Smoothing", 0),
                     CONFIGITEM("Legit>LegitBot>Rifle>Recoil Compensation", false),
                 //}
                 // SMG {
+                    CONFIGITEM("Legit>LegitBot>SMG>Hitboxes", 1),
                     CONFIGITEM("Legit>LegitBot>SMG>Override", false),
                     CONFIGITEM("Legit>LegitBot>SMG>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>SMG>Smoothing", 0),
                     CONFIGITEM("Legit>LegitBot>SMG>Recoil Compensation", false),
                 //}
                 // Scout {
+                    CONFIGITEM("Legit>LegitBot>Scout>Hitboxes", 1),
                     CONFIGITEM("Legit>LegitBot>Scout>Override", false),
                     CONFIGITEM("Legit>LegitBot>Scout>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Scout>Smoothing", 0),
                 //}
                 // AWP {
+                    CONFIGITEM("Legit>LegitBot>AWP>Hitboxes", 1),
                     CONFIGITEM("Legit>LegitBot>AWP>Override", false),
                     CONFIGITEM("Legit>LegitBot>AWP>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>AWP>Smoothing", 0),
                 //}
                 // Heavy {
+                    CONFIGITEM("Legit>LegitBot>Heavy>Hitboxes", 1),
                     CONFIGITEM("Legit>LegitBot>Heavy>Override", false),
                     CONFIGITEM("Legit>LegitBot>Heavy>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Heavy>Smoothing", 0),
@@ -386,7 +402,7 @@ namespace Config {
         }
         configFile.open(path);
         while(std::getline(configFile, line)) {
-            CONFIGITEMTYPE type;
+            ConfigItemType type;
             char name[64];
             char value[64];
             sscanf(line.c_str(), "%d\t%[^\t]\t%[^\t]", (int*)&type, name, value);
