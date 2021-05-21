@@ -59,7 +59,7 @@ public:
 		typedef const Vector& (*Fn)(void*);
 		return getVirtualFunc<Fn>(this, 12)(this);
 	}
-	
+
 	bool isPlayer() {
 		typedef bool (*Fn)(void*);
 		return getVirtualFunc<Fn>(this, 157)(this);
@@ -87,6 +87,7 @@ public:
 	NETVAR("DT_CSPlayer", "m_flLowerBodyYawTarget", lbyTarget, float);
 	NETVAR("DT_CSPlayer", "m_bIsScoped", scoped, bool);
 	NETVAR("DT_BasePlayer", "deadflag", deadflag, bool);
+    NETVAR("DT_CSPlayer", "m_flFlashDuration", flashDuration, float);
 	NETVAR("DT_CSPlayer", "m_flFlashMaxAlpha", maxFlashAlpha, float);
 	NETVAR("DT_CSPlayer", "m_bHasHelmet", helmet, bool);
 	NETVAR("DT_CSPlayer", "m_ArmorValue", armor, int);
@@ -137,7 +138,7 @@ public:
 		typedef float (*Fn)(void*);
 		return getVirtualFunc<Fn>(this, 520)(this);
 	}
-	
+
 	float GetInaccuracy() {
 		typedef float (*Fn)(void*);
 		return getVirtualFunc<Fn>(this, 550)(this);
@@ -156,4 +157,3 @@ public:
 	NETVAR("DT_EnvTonemapController", "m_flCustomAutoExposureMin", exposureMin, float);
 	NETVAR("DT_EnvTonemapController", "m_flCustomAutoExposureMax", exposureMax, float);
 };
-
