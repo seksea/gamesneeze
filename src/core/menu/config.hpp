@@ -62,53 +62,129 @@ namespace Config {
                     CONFIGITEM("Legit>LegitBot>Default>Always on", false),
                     CONFIGITEM("Legit>LegitBot>Default>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Default>Smoothing", 0),
+
                     CONFIGITEM("Legit>LegitBot>Default>Recoil Compensation", false),
                     CONFIGITEM("Legit>LegitBot>Default>RCS Amount X", 100),
                     CONFIGITEM("Legit>LegitBot>Default>RCS Amount Y", 100),
+
+                    CONFIGITEM("Legit>LegitBot>Default>Flash Check", false),
+                    CONFIGITEM("Legit>LegitBot>Default>Jump Check", false),
+                    CONFIGITEM("Legit>LegitBot>Default>Enemy Jump Check", false),
+
+                    CONFIGITEM("Legit>LegitBot>Default>Head", false),
+                    CONFIGITEM("Legit>LegitBot>Default>Chest", false),
+                    CONFIGITEM("Legit>LegitBot>Default>Stomach", false),
+                    CONFIGITEM("Legit>LegitBot>Default>Pelvis", false),
                 //}
                 // Pistol {
                     CONFIGITEM("Legit>LegitBot>Pistol>Override", false),
                     CONFIGITEM("Legit>LegitBot>Pistol>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Pistol>Smoothing", 0),
+
+                    CONFIGITEM("Legit>LegitBot>Pistol>Flash Check", false),
+                    CONFIGITEM("Legit>LegitBot>Pistol>Jump Check", false),
+                    CONFIGITEM("Legit>LegitBot>Pistol>Enemy Jump Check", false),
+
+                    CONFIGITEM("Legit>LegitBot>Pistol>Head", false),
+                    CONFIGITEM("Legit>LegitBot>Pistol>Chest", false),
+                    CONFIGITEM("Legit>LegitBot>Pistol>Stomach", false),
+                    CONFIGITEM("Legit>LegitBot>Pistol>Pelvis", false),
                 //}
                 // Heavy Pistol {
                     CONFIGITEM("Legit>LegitBot>Heavy Pistol>Override", false),
                     CONFIGITEM("Legit>LegitBot>Heavy Pistol>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Heavy Pistol>Smoothing", 0),
+
+                    CONFIGITEM("Legit>LegitBot>Heavy Pistol>Flash Check", false),
+                    CONFIGITEM("Legit>LegitBot>Heavy Pistol>Jump Check", false),
+                    CONFIGITEM("Legit>LegitBot>Heavy Pistol>Enemy Jump Check", false),
+
+                    CONFIGITEM("Legit>LegitBot>Heavy Pistol>Head", false),
+                    CONFIGITEM("Legit>LegitBot>Heavy Pistol>Chest", false),
+                    CONFIGITEM("Legit>LegitBot>Heavy Pistol>Stomach", false),
+                    CONFIGITEM("Legit>LegitBot>Heavy Pistol>Pelvis", false),
                 //}
                 // Rifle {
                     CONFIGITEM("Legit>LegitBot>Rifle>Override", false),
                     CONFIGITEM("Legit>LegitBot>Rifle>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Rifle>Smoothing", 0),
+
                     CONFIGITEM("Legit>LegitBot>Rifle>Recoil Compensation", false),
                     CONFIGITEM("Legit>LegitBot>Rifle>RCS Amount X", 100),
                     CONFIGITEM("Legit>LegitBot>Rifle>RCS Amount Y", 100),
+
+                    CONFIGITEM("Legit>LegitBot>Rifle>Flash Check", false),
+                    CONFIGITEM("Legit>LegitBot>Rifle>Jump Check", false),
+                    CONFIGITEM("Legit>LegitBot>Rifle>Enemy Jump Check", false),
+
+                    CONFIGITEM("Legit>LegitBot>Rifle>Head", false),
+                    CONFIGITEM("Legit>LegitBot>Rifle>Chest", false),
+                    CONFIGITEM("Legit>LegitBot>Rifle>Stomach", false),
+                    CONFIGITEM("Legit>LegitBot>Rifle>Pelvis", false),
                 //}
                 // SMG {
                     CONFIGITEM("Legit>LegitBot>SMG>Override", false),
                     CONFIGITEM("Legit>LegitBot>SMG>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>SMG>Smoothing", 0),
+
                     CONFIGITEM("Legit>LegitBot>SMG>Recoil Compensation", false),
                     CONFIGITEM("Legit>LegitBot>SMG>RCS Amount X", 100),
                     CONFIGITEM("Legit>LegitBot>SMG>RCS Amount Y", 100),
+
+                    CONFIGITEM("Legit>LegitBot>SMG>Flash Check", false),
+                    CONFIGITEM("Legit>LegitBot>SMG>Jump Check", false),
+                    CONFIGITEM("Legit>LegitBot>SMG>Enemy Jump Check", false),
+
+                    CONFIGITEM("Legit>LegitBot>SMG>Head", false),
+                    CONFIGITEM("Legit>LegitBot>SMG>Chest", false),
+                    CONFIGITEM("Legit>LegitBot>SMG>Stomach", false),
+                    CONFIGITEM("Legit>LegitBot>SMG>Pelvis", false),
                 //}
                 // Scout {
                     CONFIGITEM("Legit>LegitBot>Scout>Override", false),
                     CONFIGITEM("Legit>LegitBot>Scout>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Scout>Smoothing", 0),
+
+                    CONFIGITEM("Legit>LegitBot>Scout>Flash Check", false),
+                    CONFIGITEM("Legit>LegitBot>Scout>Jump Check", false),
+                    CONFIGITEM("Legit>LegitBot>Scout>Enemy Jump Check", false),
+
+                    CONFIGITEM("Legit>LegitBot>Scout>Head", false),
+                    CONFIGITEM("Legit>LegitBot>Scout>Chest", false),
+                    CONFIGITEM("Legit>LegitBot>Scout>Stomach", false),
+                    CONFIGITEM("Legit>LegitBot>Scout>Pelvis", false),
                 //}
                 // AWP {
                     CONFIGITEM("Legit>LegitBot>AWP>Override", false),
                     CONFIGITEM("Legit>LegitBot>AWP>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>AWP>Smoothing", 0),
+
+                    CONFIGITEM("Legit>LegitBot>AWP>Flash Check", false),
+                    CONFIGITEM("Legit>LegitBot>AWP>Jump Check", false),
+                    CONFIGITEM("Legit>LegitBot>AWP>Enemy Jump Check", false),
+
+                    CONFIGITEM("Legit>LegitBot>AWP>Head", false),
+                    CONFIGITEM("Legit>LegitBot>AWP>Chest", false),
+                    CONFIGITEM("Legit>LegitBot>AWP>Stomach", false),
+                    CONFIGITEM("Legit>LegitBot>AWP>Pelvis", false),
                 //}
                 // Heavy {
                     CONFIGITEM("Legit>LegitBot>Heavy>Override", false),
                     CONFIGITEM("Legit>LegitBot>Heavy>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Heavy>Smoothing", 0),
+
                     CONFIGITEM("Legit>LegitBot>Heavy>Recoil Compensation", false),
                     CONFIGITEM("Legit>LegitBot>Heavy>RCS Amount X", 100),
                     CONFIGITEM("Legit>LegitBot>Heavy>RCS Amount Y", 100),
+
+                    CONFIGITEM("Legit>LegitBot>Heavy>Flash Check", false),
+                    CONFIGITEM("Legit>LegitBot>Heavy>Jump Check", false),
+                    CONFIGITEM("Legit>LegitBot>Heavy>Enemy Jump Check", false),
+
+                    CONFIGITEM("Legit>LegitBot>Heavy>Head", false),
+                    CONFIGITEM("Legit>LegitBot>Heavy>Chest", false),
+                    CONFIGITEM("Legit>LegitBot>Heavy>Stomach", false),
+                    CONFIGITEM("Legit>LegitBot>Heavy>Pelvis", false),
                 //}
             // }
 
