@@ -1,5 +1,6 @@
 #include "../../includes.hpp"
 #include <cstring>
+#include <unistd.h>
 
 // p100 flex ur distro
 char distro[32];
@@ -27,11 +28,12 @@ void getDistro() {
 
 void Menu::drawOverlay(ImDrawList* drawList) {
     getDistro();
-
+    char hostname[64];
+    gethostname(hostname, 64);
     Globals::drawList = drawList;
     if(!CONFIGBOOL("Misc>Misc>Misc>Disable Watermark")) {
         char watermarkText[64];
-        sprintf(watermarkText, "gamesneeze (%s) | %.1f FPS | %i ms", distro, ImGui::GetIO().Framerate, (Interfaces::engine->IsInGame() && playerResource) ? playerResource->GetPing(Interfaces::engine->GetLocalPlayer()) : 0);
+        sprintf(watermarkText, "gamesneeze (%s - %s@%s) | %.1f FPS | %i ms", distro, getlogin(), hostname, ImGui::GetIO().Framerate, (Interfaces::engine->IsInGame() && playerResource) ? playerResource->GetPing(Interfaces::engine->GetLocalPlayer()) : 0);
         // Hacky way to do black shadow but it works
         Globals::drawList->AddText(ImVec2(4, 4), ImColor(0, 0, 0, 255), watermarkText);
         Globals::drawList->AddText(ImVec2(3, 3), ImColor(255, 255, 255, 255), watermarkText);
