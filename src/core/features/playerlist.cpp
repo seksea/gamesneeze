@@ -34,11 +34,9 @@ void Features::PlayerList::draw() {
                     }
 
                     ImGui::NextColumn();
-                    int playerHealth = p->health();
-                    int healthRed = 255 - 2.55f * playerHealth;
-                    int healthGreen = 2.55 * playerHealth;
-                    int healthBlue = 0;
-                    ImGui::TextColored(ImColor(healthRed, healthGreen, healthBlue, 255), "%d", playerHealth);
+                    ImColor healthColor = ImColor(0, 255, 0);
+                    ImGui::ColorConvertHSVtoRGB(((float)p->health()-20.f)/255.f, 1.f, 1.f, healthColor.Value.x, healthColor.Value.y, healthColor.Value.z);
+                    ImGui::TextColored(healthColor, "%d", p->health());
                     ImGui::NextColumn();
                     ImGui::TextColored(ImColor(100, 200, 0, 255), "$%d", p->money());
                     ImGui::NextColumn();
