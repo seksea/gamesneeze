@@ -7,14 +7,12 @@ void Features::PlayerList::draw() {
         ImGui::Text("Players");
         ImGui::Separator();
         if (Interfaces::engine->IsInGame() && Globals::localPlayer) {
-            ImGui::Columns(4, NULL);
+            ImGui::Columns(3, NULL);
             ImGui::Text("Name");
             ImGui::NextColumn();
             ImGui::Text("Health");
             ImGui::NextColumn();
             ImGui::Text("Money");
-            ImGui::NextColumn();
-            ImGui::Text("Team");
             ImGui::NextColumn();
             static Player* selectedPlayer;
             static player_info_t selectedPlayerInfo;
@@ -25,7 +23,7 @@ void Features::PlayerList::draw() {
                     player_info_t info;
                     Interfaces::engine->GetPlayerInfo(i, &info);
 
-                    ImGui::TextColored(p->dormant() ? ImColor(255, 100, 100, 255) : ImColor(255, 255, 255, 255), "%s", info.name);
+                    ImGui::TextColored(p->team() == 2 ? ImColor(229, 189, 94, 255) : ImColor(110, 149, 215, 255), "%s", info.name);
                     if (ImGui::IsItemClicked()) {
                         selectedPlayer = p;
                         selectedPlayerInfo = info;
@@ -34,12 +32,15 @@ void Features::PlayerList::draw() {
                     if (ImGui::IsItemHovered()) {
                         ImGui::SetTooltip("Click for player settings!");
                     }
+
                     ImGui::NextColumn();
-                    ImGui::Text("%d", p->health());
+                    int playerHealth = p->health();
+                    int healthRed = 255 - 2.55f * playerHealth;
+                    int healthGreen = 2.55 * playerHealth;
+                    int healthBlue = 0;
+                    ImGui::TextColored(ImColor(healthRed, healthGreen, healthBlue, 255), "%d", playerHealth);
                     ImGui::NextColumn();
-                    ImGui::Text("$%d", p->money());
-                    ImGui::NextColumn();
-                    ImGui::Text("%d", p->team());
+                    ImGui::TextColored(ImColor(100, 200, 0, 255), "$%d", p->money());
                     ImGui::NextColumn();
                 }
             }
