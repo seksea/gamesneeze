@@ -1,5 +1,6 @@
 #include "features.hpp"
 #include "../../includes.hpp"
+#include <cstring>
 
 void Features::PlayerList::draw() {
     if (CONFIGBOOL("Misc>Misc>Misc>Player List") && (CONFIGBOOL("Misc>Misc>Misc>Player List Only When Menu Open") ? Menu::open : true)) {
@@ -43,44 +44,54 @@ void Features::PlayerList::draw() {
                 }
             }
             if (ImGui::BeginPopup("Player Popup")){
-                ImGui::Text("Player Options");
+                ImGui::Text("Player Options | %s", selectedPlayerInfo.name);
                 ImGui::Separator();
                 if (selectedPlayer) {
-                    ImGui::Text("%s", selectedPlayerInfo.name);
-
-                static char message[128] = "";
-                ImGui::InputText("Message##tbox", message, IM_ARRAYSIZE(message));
-                static char skinName[128] = "★ M9 Bayonet | Doppler";
-                ImGui::InputText("Skin/Weapon##tbox", skinName, IM_ARRAYSIZE(skinName));
-                ImGui::Text("Send fake: ");
-                ImGui::SameLine();
-                if (ImGui::Button("Message##btn")) {
-                    char radioMessage[512];
-                    snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8%s :\x01 %s\"", selectedPlayerInfo.name, message);
-                    Interfaces::engine->ExecuteClientCmd(radioMessage);
-                }
-                ImGui::SameLine();
-                if (ImGui::Button("VAC")) {
-                    char radioMessage[512];
-                    snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8""\x02""%s has been permanently banned from official CS:GO servers.\"", selectedPlayerInfo.name);
-                    Interfaces::engine->ExecuteClientCmd(radioMessage);
-                }
-                ImGui::SameLine();
-                if (ImGui::Button("Kick")) {
-                    char radioMessage[512];
-                    snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8""\x01""Player %s left the game (Kicked from the session)\"", selectedPlayerInfo.name);
-                    Interfaces::engine->ExecuteClientCmd(radioMessage);
-                }
-                ImGui::SameLine();
-                if (ImGui::Button("Unbox")) {
-                    char radioMessage[512];
-                    snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8""\x0B""%s \x01 has opened a container and found: \x02%s\"", selectedPlayerInfo.name, skinName);
-                    Interfaces::engine->ExecuteClientCmd(radioMessage);
-                }
-                ImGui::SameLine();
-                ImGui::TextDisabled("?");
-                if (ImGui::IsItemHovered())
-                    ImGui::SetTooltip("Sends a fake message into the chat via a radio message that uses\nchars to create a newline and change colours (pastebin.com/pZvCnGaC),\nyou can do this legit too via the 'playerchatwheel . \"\"' command!\n\nOnly works if you are alive and only teammates can see the message :(");
+                    ImGui::Text("Name: %s", selectedPlayerInfo.name); ImGui::SameLine(); if (ImGui::Button("Steal Name")) {
+                        static auto nameConvar = Interfaces::convar->FindVar("name");
+                        nameConvar->fnChangeCallback = 0;
+                        
+                        char* name = selectedPlayerInfo.name;
+                        strcat(name, "\xAD");
+                        nameConvar->SetValue(name);
+                    }
+                    ImGui::Text("GUID: %s", selectedPlayerInfo.guid);
+                    ImGui::Text("XUID: %li", selectedPlayerInfo.xuid);
+                    
+                    ImGui::Separator();
+                    static char message[128] = "";
+                    ImGui::InputText("Message##tbox", message, IM_ARRAYSIZE(message));
+                    static char skinName[128] = "★ M9 Bayonet | Doppler";
+                    ImGui::InputText("Skin/Weapon##tbox", skinName, IM_ARRAYSIZE(skinName));
+                    ImGui::Text("Send fake: ");
+                    ImGui::SameLine();
+                    if (ImGui::Button("Message##btn")) {
+                        char radioMessage[512];
+                        snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8%s :\x01 %s\"", selectedPlayerInfo.name, message);
+                        Interfaces::engine->ExecuteClientCmd(radioMessage);
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button("VAC")) {
+                        char radioMessage[512];
+                        snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8""\x02""%s has been permanently banned from official CS:GO servers.\"", selectedPlayerInfo.name);
+                        Interfaces::engine->ExecuteClientCmd(radioMessage);
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button("Kick")) {
+                        char radioMessage[512];
+                        snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8""\x01""Player %s left the game (Kicked from the session)\"", selectedPlayerInfo.name);
+                        Interfaces::engine->ExecuteClientCmd(radioMessage);
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button("Unbox")) {
+                        char radioMessage[512];
+                        snprintf(radioMessage, sizeof(radioMessage), "playerchatwheel . \"Cheer! \xe2\x80\xa8""\x0B""%s \x01 has opened a container and found: \x02%s\"", selectedPlayerInfo.name, skinName);
+                        Interfaces::engine->ExecuteClientCmd(radioMessage);
+                    }
+                    ImGui::SameLine();
+                    ImGui::TextDisabled("?");
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Sends a fake message into the chat via a radio message that uses\nchars to create a newline and change colours (pastebin.com/pZvCnGaC),\nyou can do this legit too via the 'playerchatwheel . \"\"' command!\n\nOnly works if you are alive and only teammates can see the message :(");
                 }
                 ImGui::EndPopup();
             }

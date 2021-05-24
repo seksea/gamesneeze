@@ -63,21 +63,21 @@ public:
 	}
 
 	void SetValue(const char* value) {
-		if (CONFIGBOOL("Misc>Misc>Misc>Enable Setting Cvars")) {
+		if (!CONFIGBOOL("Misc>Misc>Misc>Disable Setting Cvars")) {
 			typedef void (*Fn)(void*, const char*);
 			return getVirtualFunc<Fn>(this, 17)(this, value);
 		}
 	}
-
+	
 	void SetValue(float value) {
-		if (CONFIGBOOL("Misc>Misc>Misc>Enable Setting Cvars")) {
+		if (!CONFIGBOOL("Misc>Misc>Misc>Disable Setting Cvars")) {
 			typedef void (*Fn)(void*, float);
 			return getVirtualFunc<Fn>(this, 18)(this, value);
 		}
 	}
 
 	void SetValue(int value) {
-		if (CONFIGBOOL("Misc>Misc>Misc>Enable Setting Cvars")) {
+		if (!CONFIGBOOL("Misc>Misc>Misc>Disable Setting Cvars")) {
 			typedef void (*Fn)(void*, int);
 			return getVirtualFunc<Fn>(this, 19)(this, value);
 		}
