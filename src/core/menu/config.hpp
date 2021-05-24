@@ -332,6 +332,7 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Clantag>Bee Movie Clantag", false),
             CONFIGITEM("Misc>Misc>Misc>Spectators", false),
             CONFIGITEM("Misc>Misc>Misc>Player List", false),
+            CONFIGITEM("Misc>Misc>Misc>Player List Only When Menu Open", false),
             CONFIGITEM("Misc>Misc>Misc>Flappy Birb", false),
             CONFIGITEM("Misc>Misc>Misc>Auto Accept", false),
             CONFIGITEM("Misc>Misc>Misc>Auto Defuse", false),
