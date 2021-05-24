@@ -1,6 +1,7 @@
 #include "../../includes.hpp"
 #include <cstring>
 #include <unistd.h>
+#include <pwd.h>
 
 // p100 flex ur distro
 char distro[32];
