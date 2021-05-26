@@ -109,15 +109,9 @@ void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const M
                                 for (Features::Backtrack::BackTrackTick tick : Features::Backtrack::backtrackTicks) {
                                     if (tick.tickCount % 2 == 0) { // only draw every other tick to reduce lag
                                         if (tick.players.find(p->index()) != tick.players.end()) {
-                                            // Check for velocity and origin diff so we don't stop
-                                            // drawing if the player walks back and forth
-                                            // Also checking for jumping as a fix for more oddities
-                                            if ((tick.players.at(p->index()).playerHeadPos.Length() - p->getBonePos(8).Length() < 0.2f) &&
-                                                    tick.players.at(p->index()).playerVelocity < 0.1f &&
-                                                    tick.players.at(p->index()).playerFlags & (1 << 0)) {
-                                                return;
+                                            if (abs((tick.players.at(p->index()).playerHeadPos - p->getBonePos(8)).Length()) > 2) {
+                                                cham(thisptr, ctx, state, pInfo, tick.players.at(p->index()).boneMatrix, CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), false);
                                             }
-                                            cham(thisptr, ctx, state, pInfo, tick.players.at(p->index()).boneMatrix, CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), false);
                                         }
                                     }
                                 }
@@ -125,15 +119,9 @@ void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const M
                             else {
                                 Features::Backtrack::BackTrackTick tick = Features::Backtrack::backtrackTicks.at(Features::Backtrack::backtrackTicks.size()-1);
                                 if (tick.players.find(p->index()) != tick.players.end()) {
-                                    // Check for velocity and origin diff so we don't stop
-                                    // drawing if the player walks back and forth
-                                    // Also checking for jumping as a fix for more oddities
-                                    if ((tick.players.at(p->index()).playerHeadPos.Length() - p->getBonePos(8).Length() < 0.2f) &&
-                                            tick.players.at(p->index()).playerVelocity < 0.1f &&
-                                            tick.players.at(p->index()).playerFlags & (1 << 0)) {
-                                        return;
+                                    if (abs((tick.players.at(p->index()).playerHeadPos - p->getBonePos(8)).Length()) > 2) {
+                                        cham(thisptr, ctx, state, pInfo, tick.players.at(p->index()).boneMatrix, CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), false);
                                     }
-                                    cham(thisptr, ctx, state, pInfo, tick.players.at(p->index()).boneMatrix, CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), false);
                                 }
                             }
                         }

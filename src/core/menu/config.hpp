@@ -332,6 +332,7 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Clantag>Bee Movie Clantag", false),
             CONFIGITEM("Misc>Misc>Misc>Spectators", false),
             CONFIGITEM("Misc>Misc>Misc>Player List", false),
+            CONFIGITEM("Misc>Misc>Misc>Player List Only When Menu Open", false),
             CONFIGITEM("Misc>Misc>Misc>Flappy Birb", false),
             CONFIGITEM("Misc>Misc>Misc>Auto Accept", false),
             CONFIGITEM("Misc>Misc>Misc>Auto Defuse", false),
@@ -339,7 +340,7 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Misc>Chat Filter Bypass", false),
             CONFIGITEM("Misc>Misc>Misc>Use Spam", false),
             CONFIGITEM("Misc>Misc>Misc>Use Spam Key", 0),
-            CONFIGITEM("Misc>Misc>Misc>Enable Setting Cvars", false),
+            CONFIGITEM("Misc>Misc>Misc>Disable Setting Cvars", false),
 
             CONFIGITEM("Misc>Skins>Skins>PaintKit", 0),
             CONFIGITEM("Misc>Skins>Skins>Wear", 0),

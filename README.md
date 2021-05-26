@@ -50,7 +50,7 @@ An open source cheat for Counter-Strike: Global Offensive on Linux.
 
 ### Arch / Manjaro required packages:
 
-`sudo pacman -S base-devel git cmake gdb sdl2 git clang`
+`sudo pacman -S --needed base-devel git cmake gdb sdl2 git clang`
 
 ### Fedora required packages:
 

@@ -17,6 +17,10 @@ void Menu::drawMiscTab() {
 
                 ImGui::Checkbox("Spectators", &CONFIGBOOL("Misc>Misc>Misc>Spectators"));
                 ImGui::Checkbox("Player List", &CONFIGBOOL("Misc>Misc>Misc>Player List"));
+                if (CONFIGBOOL("Misc>Misc>Misc>Player List")) {
+                    ImGui::SameLine();
+                    ImGui::Checkbox("Only When Menu Open", &CONFIGBOOL("Misc>Misc>Misc>Player List Only When Menu Open"));
+                }
                 ImGui::Checkbox("Flappy Birb", &CONFIGBOOL("Misc>Misc>Misc>Flappy Birb"));
                 ImGui::Checkbox("Auto Accept", &CONFIGBOOL("Misc>Misc>Misc>Auto Accept"));
                 ImGui::Checkbox("Auto Defuse", &CONFIGBOOL("Misc>Misc>Misc>Auto Defuse"));
@@ -31,7 +35,7 @@ void Menu::drawMiscTab() {
                     ImGui::SameLine();
                 }
                 ImGui::Checkbox("Use Spam", &CONFIGBOOL("Misc>Misc>Misc>Use Spam"));
-                ImGui::Checkbox("Enable Setting Cvars", &CONFIGBOOL("Misc>Misc>Misc>Enable Setting Cvars"));
+                ImGui::Checkbox("Disable Setting Cvars", &CONFIGBOOL("Misc>Misc>Misc>Disable Setting Cvars"));
                 ImGui::EndChild();
             }
 
