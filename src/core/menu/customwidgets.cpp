@@ -11,7 +11,9 @@ void Menu::CustomWidgets::drawKeyBinder(const char* label, int* key, bool* toggl
         snprintf(l, sizeof(l), "%s: %s", label, (*key >= 0) ? SDL_GetKeyName(SDL_GetKeyFromScancode((SDL_Scancode) *key)) :
                                                 (*key == -1) ? "Mouse1" : 
                                                 (*key == -2) ? "Mouse2" :
-                                                (*key == -3) ? "Mouse3" : "");
+                                                (*key == -3) ? "Mouse3" : 
+                                                (*key == -4) ? "Mouse4" :
+                                                (*key == -5) ? "Mouse5" : "");
     }
 
     // Draw button
@@ -43,6 +45,14 @@ void Menu::CustomWidgets::drawKeyBinder(const char* label, int* key, bool* toggl
             *key = -3;
             *toggled = false;
         }
+        else if (ImGui::IsMouseDown(3)) {
+            *key = -4;
+            *toggled = false;
+        }
+        else if (ImGui::IsMouseDown(4)) {
+            *key = -5;
+            *toggled = false;
+        }
         // TODO: Mouse4 & Mouse5
     }
 }
@@ -55,6 +65,8 @@ bool Menu::CustomWidgets::isKeyDown(int key) {
         case -1: return ImGui::IsMouseDown(0);
         case -2: return ImGui::IsMouseDown(1);
         case -3: return ImGui::IsMouseDown(2);
+        case -4: return ImGui::IsMouseDown(3);
+        case -5: return ImGui::IsMouseDown(4);
     }
     return 0;
 }
