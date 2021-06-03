@@ -137,7 +137,9 @@ void drawPlayer(Player* p) {
 
                             if (CONFIGBOOL("Visuals>Players>Enemies>Armor"))
                                 rightText << (p->helmet() ? "H" : "") << (p->armor() ? "K" : "") << "\n";
-                            
+                            if(CONFIGBOOL("Visuals>Players>Enemies>Flashed") && p->flashDuration() > 5) //This value is quite strange
+                                rightText << ("Flashed") << "\n";
+
                             if (CONFIGBOOL("Visuals>Players>Enemies>Weapon")) {
                                 Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)p->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
                                 if (weapon) {
