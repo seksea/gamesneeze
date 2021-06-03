@@ -18,7 +18,8 @@ void Features::RageBot::createMove(CUserCmd* cmd) {
                         matrix3x4_t boneMatrix[128];
                         if (p->getAnythingBones(boneMatrix)) {
                             Vector localPlayerEyePos = Globals::localPlayer->eyePos();
-                            Vector targetBonePos;
+                            Vector targetBonePos = p->getBonePos(8);
+                            
                             //TODO check which bone would be exposed sooner with engine prediction and which would do more damage.
                             if(CONFIGBOOL("Rage>RageBot>Default>ForceBaim")) {
                                 if(p->health() <= CONFIGINT("Rage>RageBot>Default>ForceBaimValue")) {
