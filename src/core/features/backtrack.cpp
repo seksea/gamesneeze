@@ -15,10 +15,10 @@ void Features::Backtrack::store(CUserCmd *cmd) {
                     player.playerIndex = i;
                     player.playerFlags = p->flags();
                     player.playerVelocity = p->velocity().Length2D();
-                    player.playerHeadPos = p->getBonePos(8);
                     if (p->getAnythingBones(player.boneMatrix)) {
                         currentTick.players.insert(std::pair<int, BacktrackPlayer>(i, player));
                     }
+                    player.playerHeadPos = Vector(player.boneMatrix[8][0][3], player.boneMatrix[8][1][3], player.boneMatrix[8][2][3]);
                 }
                 else {
                     if (currentTick.players.find(i) != currentTick.players.end()) {
