@@ -2,11 +2,11 @@
 
 const char* chamsMaterials[] = {"None", "Shaded", "Flat", "Screen Pulse", "Energy Ball", "Glow", "Plastic", "Darude", "Oil"};
 
-void drawChamsWidget(const char* label, 
-                    int* material, ImColor* color, 
+void drawChamsWidget(const char* label,
+                    int* material, ImColor* color,
                     int* overlayMaterial, ImColor* overlayColor,
                     bool occluded = false, int* occludedMaterial = nullptr, ImColor* occludedColor = nullptr,
-                    bool backtrack = false, int* backtrackMaterial = nullptr, ImColor* backtrackColor = nullptr, bool* backtrackTrail = nullptr, 
+                    bool backtrack = false, int* backtrackMaterial = nullptr, ImColor* backtrackColor = nullptr, bool* backtrackTrail = nullptr,
                     bool* wireframe = nullptr, bool* overlayWireframe = nullptr) {
     char btnLabel[64];
     snprintf(btnLabel, sizeof(btnLabel), "Chams##%s", label);
@@ -90,10 +90,10 @@ void Menu::drawVisualsTab() {
                 ImGui::Checkbox("Weapon", &CONFIGBOOL("Visuals>Players>Teammates>Weapon"));
                 ImGui::Checkbox("Only When Dead", &CONFIGBOOL("Visuals>Players>Teammates>Only When Dead"));
 
-                drawChamsWidget("Teammates", 
-                    &CONFIGINT("Visuals>Players>Teammates>Chams>Visible Material"), &CONFIGCOL("Visuals>Players>Teammates>Chams>Visible Color"), 
-                    &CONFIGINT("Visuals>Players>Teammates>Chams>Visible Overlay Material"), &CONFIGCOL("Visuals>Players>Teammates>Chams>Visible Overlay Color"), 
-                    true, &CONFIGINT("Visuals>Players>Teammates>Chams>Occluded Material"), &CONFIGCOL("Visuals>Players>Teammates>Chams>Occluded Color"), 
+                drawChamsWidget("Teammates",
+                    &CONFIGINT("Visuals>Players>Teammates>Chams>Visible Material"), &CONFIGCOL("Visuals>Players>Teammates>Chams>Visible Color"),
+                    &CONFIGINT("Visuals>Players>Teammates>Chams>Visible Overlay Material"), &CONFIGCOL("Visuals>Players>Teammates>Chams>Visible Overlay Color"),
+                    true, &CONFIGINT("Visuals>Players>Teammates>Chams>Occluded Material"), &CONFIGCOL("Visuals>Players>Teammates>Chams>Occluded Color"),
                     false, nullptr, nullptr, nullptr,
                     &CONFIGBOOL("Visuals>Players>Teammates>Chams>Visible Wireframe"), &CONFIGBOOL("Visuals>Players>Teammates>Chams>Visible Overlay Wireframe"));
 
@@ -136,10 +136,10 @@ void Menu::drawVisualsTab() {
                 ImGui::Checkbox("Vis Check", &CONFIGBOOL("Visuals>Players>Enemies>Vis Check"));
                 ImGui::Checkbox("Only When Dead", &CONFIGBOOL("Visuals>Players>Enemies>Only When Dead"));
 
-                drawChamsWidget("Enemies", 
-                    &CONFIGINT("Visuals>Players>Enemies>Chams>Visible Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Visible Color"), 
-                    &CONFIGINT("Visuals>Players>Enemies>Chams>Visible Overlay Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Visible Overlay Color"), 
-                    true, &CONFIGINT("Visuals>Players>Enemies>Chams>Occluded Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Occluded Color"), 
+                drawChamsWidget("Enemies",
+                    &CONFIGINT("Visuals>Players>Enemies>Chams>Visible Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Visible Color"),
+                    &CONFIGINT("Visuals>Players>Enemies>Chams>Visible Overlay Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Visible Overlay Color"),
+                    true, &CONFIGINT("Visuals>Players>Enemies>Chams>Occluded Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Occluded Color"),
                     true, &CONFIGINT("Visuals>Players>Enemies>Chams>Backtrack Material"), &CONFIGCOL("Visuals>Players>Enemies>Chams>Backtrack Color"), &CONFIGBOOL("Visuals>Players>Enemies>Chams>Trail"),
                     &CONFIGBOOL("Visuals>Players>Enemies>Chams>Visible Wireframe"), &CONFIGBOOL("Visuals>Players>Enemies>Chams>Visible Overlay Wireframe"));
 
@@ -152,27 +152,27 @@ void Menu::drawVisualsTab() {
 
                 ImGui::Text("Arms");
                 drawChamsWidget("Arm",
-                    &CONFIGINT("Visuals>Players>LocalPlayer>Arms Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Arms Color"), 
-                    &CONFIGINT("Visuals>Players>LocalPlayer>Arms Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Arms Overlay Color"), 
-                    false, nullptr, nullptr, 
+                    &CONFIGINT("Visuals>Players>LocalPlayer>Arms Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Arms Color"),
+                    &CONFIGINT("Visuals>Players>LocalPlayer>Arms Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Arms Overlay Color"),
+                    false, nullptr, nullptr,
                     false, nullptr, nullptr, nullptr,
                     &CONFIGBOOL("Visuals>Players>LocalPlayer>Arms Wireframe"), &CONFIGBOOL("Visuals>Players>LocalPlayer>Arms Overlay Wireframe"));
                 ImGui::Separator();
 
                 ImGui::Text("Sleeve");
                 drawChamsWidget("Sleeve",
-                    &CONFIGINT("Visuals>Players>LocalPlayer>Sleeve Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Sleeve Color"), 
-                    &CONFIGINT("Visuals>Players>LocalPlayer>Sleeve Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Sleeve Overlay Color"), 
-                    false, nullptr, nullptr, 
+                    &CONFIGINT("Visuals>Players>LocalPlayer>Sleeve Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Sleeve Color"),
+                    &CONFIGINT("Visuals>Players>LocalPlayer>Sleeve Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Sleeve Overlay Color"),
+                    false, nullptr, nullptr,
                     false, nullptr, nullptr, nullptr,
                     &CONFIGBOOL("Visuals>Players>LocalPlayer>Sleeve Wireframe"), &CONFIGBOOL("Visuals>Players>LocalPlayer>Sleeve Overlay Wireframe"));
                 ImGui::Separator();
 
                 ImGui::Text("Weapons");
                 drawChamsWidget("Weapon",
-                    &CONFIGINT("Visuals>Players>LocalPlayer>Weapon Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Weapon Color"), 
-                    &CONFIGINT("Visuals>Players>LocalPlayer>Weapon Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Weapon Overlay Color"), 
-                    false, nullptr, nullptr, 
+                    &CONFIGINT("Visuals>Players>LocalPlayer>Weapon Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Weapon Color"),
+                    &CONFIGINT("Visuals>Players>LocalPlayer>Weapon Overlay Material"), &CONFIGCOL("Visuals>Players>LocalPlayer>Weapon Overlay Color"),
+                    false, nullptr, nullptr,
                     false, nullptr, nullptr, nullptr,
                     &CONFIGBOOL("Visuals>Players>LocalPlayer>Weapon Wireframe"), &CONFIGBOOL("Visuals>Players>LocalPlayer>Weapon Overlay Wireframe"));
 
@@ -199,7 +199,7 @@ void Menu::drawVisualsTab() {
                 ImGui::Text("World");
                 ImGui::Separator();
                 if (
-                  ImGui::ColorEdit4("World Color Modulation", (float*)&CONFIGCOL("Visuals>World>World>World Color Modulation"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_PickerHueWheel) || 
+                  ImGui::ColorEdit4("World Color Modulation", (float*)&CONFIGCOL("Visuals>World>World>World Color Modulation"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_PickerHueWheel) ||
                   ImGui::Button("Update Color Modulation")) {
                     Features::WorldColorModulate::updateColorModulation();
                 }
@@ -210,9 +210,12 @@ void Menu::drawVisualsTab() {
                 ImGui::Text("Skybox");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::Combo("##Skybox", &CONFIGINT("Visuals>World>World>Skybox"), skyboxes, IM_ARRAYSIZE(skyboxes));
-                ImGui::Text("FOV");
+                ImGui::Text("Camera FOV");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
-                ImGui::SliderInt("##FOV", &CONFIGINT("Visuals>World>World>FOV"), 70, 120);
+                ImGui::SliderInt("##Camera FOV", &CONFIGINT("Visuals>World>World>FOV"), 70, 120);
+                ImGui::Text("Viewmodel FOV");
+                ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                ImGui::SliderInt("##Viewmodel FOV", &CONFIGINT("Visuals>World>World>Viewmodel FOV"), 0, 130);
                 ImGui::Checkbox("Third Person", &CONFIGBOOL("Visuals>World>World>Third Person"));
                 ImGui::Checkbox("Third Person Shows Fake", &CONFIGBOOL("Visuals>World>World>Third Person Shows Fake"));
                 ImGui::Checkbox("No Flash", &CONFIGBOOL("Visuals>World>World>No Flash"));
