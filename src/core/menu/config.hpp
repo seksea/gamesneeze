@@ -278,6 +278,7 @@ namespace Config {
                 CONFIGITEM("Visuals>World>World>Nightmode", 0),
                 CONFIGITEM("Visuals>World>World>Skybox", 0),
                 CONFIGITEM("Visuals>World>World>FOV", 90),
+                CONFIGITEM("Visuals>World>World>Viewmodel FOV", 0),
                 CONFIGITEM("Visuals>World>World>Third Person", false),
                 CONFIGITEM("Visuals>World>World>Third Person Shows Fake", false),
                 CONFIGITEM("Visuals>World>World>No Flash", false),
