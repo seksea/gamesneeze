@@ -210,9 +210,9 @@ void Menu::drawVisualsTab() {
                 ImGui::Text("Skybox");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::Combo("##Skybox", &CONFIGINT("Visuals>World>World>Skybox"), skyboxes, IM_ARRAYSIZE(skyboxes));
-                ImGui::Text("Player FOV");
+                ImGui::Text("Camera FOV");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
-                ImGui::SliderInt("##Player FOV", &CONFIGINT("Visuals>World>World>FOV"), 70, 120);
+                ImGui::SliderInt("##Camera FOV", &CONFIGINT("Visuals>World>World>FOV"), 70, 120);
                 ImGui::Text("Viewmodel FOV");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Viewmodel FOV", &CONFIGINT("Visuals>World>World>Viewmodel FOV"), 0, 130);
