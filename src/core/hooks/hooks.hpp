@@ -46,6 +46,11 @@ namespace Hooks {
         inline func original;
         void hook(void* thisptr, ViewSetup* setup);
     }
+    namespace GetViewmodelFOV {
+        using func = float(*)(void* thisptr);
+        inline func original;
+        float hook(void* thisptr);
+    }
 
     /* EVENT MANAGER */
     namespace Events {

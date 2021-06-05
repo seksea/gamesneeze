@@ -40,6 +40,9 @@ bool Hooks::init() {
     Log::log(LOG, " Hooking OverrideView...");
     OverrideView::original = (OverrideView::func)VMT::hook(Interfaces::clientMode, (void*)OverrideView::hook, 19);
 
+    Log::log(LOG, " Hooking GetViewmodelFOV... ");
+    GetViewmodelFOV::original = (GetViewmodelFOV::func)VMT::hook(Interfaces::clientMode, (void*)GetViewmodelFOV::hook, 36);
+
     eventListener = new Events::EventListener;
 
     Log::log(LOG, "Initialised hooks!");
