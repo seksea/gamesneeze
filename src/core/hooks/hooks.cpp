@@ -83,6 +83,9 @@ bool Hooks::unload() {
     Log::log(LOG, " Unhooking OverrideView...");
     VMT::hook(Interfaces::clientMode, (void*)OverrideView::original, 19);
 
+    Log::log(LOG, " Unhooking GetViewmodelFOV...");
+    VMT::hook(Interfaces::clientMode, (void*)GetViewmodelFOV::original, 36);
+
     delete eventListener;
 
     Log::log(LOG, "Unloaded hooks!");
