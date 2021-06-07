@@ -106,9 +106,9 @@ void Menu::drawMiscTab() {
                     ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                     ImGui::SliderInt("##Bhop Max Hops Hit", &CONFIGINT("Misc>Misc>Movement>Bhop Max Hops Hit"), 0, 16);
                 }
-                if (CONFIGBOOL("Misc>Misc>Misc>Edge Jump")) {
+                if (CONFIGBOOL("Misc>Misc>Movement>Edge Jump")) {
                     static bool toggled = false;
-                    Menu::CustomWidgets::drawKeyBinder("Key", &CONFIGINT("Misc>Misc>Misc>Edge Jump Key"), &toggled);
+                    Menu::CustomWidgets::drawKeyBinder("Key", &CONFIGINT("Misc>Misc>Movement>Edge Jump Key"), &toggled);
                     ImGui::SameLine();
                 }
                 ImGui::Checkbox("Edge Jump", &CONFIGBOOL("Misc>Misc>Movement>Edge Jump"));
