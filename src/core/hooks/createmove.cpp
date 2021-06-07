@@ -17,7 +17,8 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
             Features::AutoHop::createMove(cmd);
             Features::FastDuck::createMove(cmd);
             Features::UseSpam::createMove(cmd);
-            
+            Features::EdgeJump::prePredCreateMove(cmd);
+
             Features::Prediction::start(cmd);
                 if (CONFIGBOOL("Rage>Enabled")) {
                     Features::RageBot::createMove(cmd);
@@ -32,6 +33,8 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
                 }
             Features::Prediction::end();
 
+            Features::EdgeJump::postPredCreateMove(cmd);
+
             if (Features::AutoDefuse::shouldDefuse) {
                 cmd->buttons |= (1 << 5);
             }
@@ -40,7 +43,7 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
         cmd->forwardmove = std::clamp(cmd->forwardmove, -450.0f, 450.0f);
         cmd->sidemove = std::clamp(cmd->sidemove, -450.0f, 450.0f);
         cmd->upmove = std::clamp(cmd->upmove, -320.0f, 320.0f);
-	
+
         normalizeAngles(cmd->viewangles);
         cmd->viewangles.x = std::clamp(cmd->viewangles.x, -89.0f, 89.0f);
         cmd->viewangles.y = std::clamp(cmd->viewangles.y, -180.0f, 180.0f);
