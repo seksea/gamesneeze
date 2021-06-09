@@ -202,7 +202,7 @@ void Menu::drawVisualsTab() {
                   ImGui::ColorEdit4("World Color Modulation", (float*)&CONFIGCOL("Visuals>World>World>World Color Modulation"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_PickerHueWheel) ||
                   ImGui::ColorEdit4("SkyBox Color Modulation", (float*)&CONFIGCOL("Visuals>World>World>SkyBox Color Modulation"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_PickerHueWheel) ||
                   ImGui::Button("Update Color Modulation")) {
-                    Features::WorldColorModulate::updateColorModulation();
+                    Features::ColorModulation::updateColorModulation();
                 }
 
                 ImGui::Text("NightMode");

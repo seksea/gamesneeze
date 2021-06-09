@@ -1,6 +1,6 @@
 #include "features.hpp"
 
-void Features::WorldColorModulate::updateColorModulation() {
+void Features::ColorModulation::updateColorModulation() {
     for(auto i = Interfaces::materialSystem->FirstMaterial(); i != Interfaces::materialSystem->InvalidMaterial(); i = Interfaces::materialSystem->NextMaterial(i)) {
         IMaterial* material = Interfaces::materialSystem->GetMaterial(i);
         if (material && strstr(material->GetTextureGroupName(), "World")) {
