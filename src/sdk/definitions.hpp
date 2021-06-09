@@ -3,7 +3,7 @@
 #include <map>
 
 inline const char* skyboxes[] = {
-        "None",
+        	"None",
 		"Black", // sky_l4d_rural02_ldr
 		"cs_baggage_skybox_",
 		"cs_tibet",
