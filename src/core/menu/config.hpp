@@ -319,6 +319,8 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Movement>Bhop Hitchance", 100),
             CONFIGITEM("Misc>Misc>Movement>Bhop Max Misses", 0),
             CONFIGITEM("Misc>Misc>Movement>Bhop Max Hops Hit", 0),
+            CONFIGITEM("Misc>Misc>Movement>Edge Jump", false),
+            CONFIGITEM("Misc>Misc>Movement>Edge Jump Key", 0),
             CONFIGITEM("Misc>Misc>Movement>Fast Duck", false),
 
             CONFIGITEM("Misc>Misc>Hitmarkers>Hitlogs", false),

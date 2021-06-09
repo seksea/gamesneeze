@@ -131,4 +131,8 @@ namespace Features {
     namespace BulletTracers {
         void event(IGameEvent* event);
     }
+    namespace EdgeJump {
+        void prePredCreateMove(CUserCmd* cmd);
+        void postPredCreateMove(CUserCmd* cmd);
+    }
 }
