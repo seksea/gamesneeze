@@ -56,7 +56,7 @@ namespace Features {
     namespace Forwardtrack {
         void createMove(CUserCmd* cmd);
     }
-    namespace WorldColorModulate {
+    namespace ColorModulation {
         void updateColorModulation();
     }
     namespace ClantagChanger {

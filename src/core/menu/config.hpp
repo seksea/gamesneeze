@@ -275,6 +275,7 @@ namespace Config {
                 CONFIGITEM("Visuals>Players>LocalPlayer>Crosshair Border Color", ImColor(200, 200, 200, 100)),
 
                 CONFIGITEM("Visuals>World>World>World Color Modulation", ImColor(255, 255, 255, 255)),
+                CONFIGITEM("Visuals>World>World>SkyBox Color Modulation", ImColor(255, 255, 255, 255)),
                 CONFIGITEM("Visuals>World>World>Nightmode", 0),
                 CONFIGITEM("Visuals>World>World>Skybox", 0),
                 CONFIGITEM("Visuals>World>World>FOV", 90),
