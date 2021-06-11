@@ -12,8 +12,12 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
         asm volatile("mov %%rbp, %0" : "=r" (rbp));
         Globals::sendPacket = ((*(bool **)rbp) - 0x18); //https://www.unknowncheats.me/forum/counterstrike-global-offensive/290258-updating-bsendpacket-linux.html
 
-        if (Interfaces::engine->IsInGame())
-            Interfaces::convar->FindVar("mat_postprocess_enable")->SetValue(!CONFIGBOOL("Misc>Misc>Misc>Disable Post Processing"));
+        if (Interfaces::engine->IsInGame()) {
+            static ConVar* mat_postprocess_enable = Interfaces::convar->FindVar("mat_postprocess_enable");
+            if (mat_postprocess_enable) {
+                mat_postprocess_enable->SetValue(!CONFIGBOOL("Misc>Misc>Misc>Disable Post Processing"));
+            }
+        }
 
         startMovementFix(cmd);
             Features::RankReveal::createMove(cmd);
