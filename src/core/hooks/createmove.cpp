@@ -25,6 +25,7 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
             Features::FastDuck::createMove(cmd);
             Features::UseSpam::createMove(cmd);
             Features::EdgeJump::prePredCreateMove(cmd);
+            Features::JumpBug::createMove(cmd);
 
             Features::Prediction::start(cmd);
                 if (CONFIGBOOL("Rage>Enabled")) {

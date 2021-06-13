@@ -135,4 +135,7 @@ namespace Features {
         void prePredCreateMove(CUserCmd* cmd);
         void postPredCreateMove(CUserCmd* cmd);
     }
+    namespace JumpBug {
+        void createMove(CUserCmd* cmd);
+    }
 }
