@@ -136,4 +136,7 @@ namespace Features {
         void postPredCreateMove(CUserCmd* cmd);
         inline int flagsBackup;
     }
+    namespace JumpBug {
+        void createMove(CUserCmd* cmd);
+    }
 }
