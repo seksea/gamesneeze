@@ -19,6 +19,8 @@
 #include "igameevent.hpp"
 #include "playerResource.hpp"
 #include "icvar.hpp"
+#include "iinputsystem.hpp"
+#include "iappsystem.hpp"
 
 #include "iclientmode.hpp"
 #include "globalvars.hpp"
@@ -45,6 +47,7 @@ namespace Interfaces {
     inline IPrediction* prediction;
     inline IGameEventManager2* eventManager;
     inline ICvar* convar;
+    inline IInputSystem* inputSystem;
 
     inline IClientMode* clientMode;
     inline CGlobalVars* globals;
@@ -71,7 +74,7 @@ namespace Interfaces {
             // loop through each interface in interfaceReg linked list
             for (InterfaceReg* cur = interfaceReg; cur; cur = cur->m_pNext) {
                 // If current interface equals input name without the 3 version numbers so if an interface version changes we dont have to care
-                if ((strstr(cur->m_pName, name) && strlen(cur->m_pName)-3 == strlen(name)) || 
+                if ((strstr(cur->m_pName, name) && strlen(cur->m_pName)-3 == strlen(name)) ||
                     (includeVersion && (strstr(cur->m_pName, name) && strlen(cur->m_pName) == strlen(name)))) {
                     T* iface = reinterpret_cast<T*>(cur->m_CreateFn());
                     Log::log(LOG, " %s (%s) %lx", name, cur->m_pName, (uintptr_t)iface);
