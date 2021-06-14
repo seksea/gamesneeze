@@ -35,10 +35,8 @@ void Features::JumpBug::createMove(CUserCmd* cmd) {
                     float dist = distToGround(start);
                     if (dist <= 4.f) { // Un-duck 4 units above the ground
                         cmd->buttons &= ~IN_DUCK;
-                        cmd->buttons |= IN_JUMP;
                     } else if (dist > 4.f && dist <= 8.f) { // Duck when we are just above 4 units from the ground
                         cmd->buttons |= IN_DUCK;
-                        cmd->buttons &= ~IN_JUMP;
                     }
                 }
             }
