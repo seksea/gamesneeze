@@ -1,5 +1,6 @@
 #pragma once
-#include "interfaces.hpp"
+#include "../../utils/utils.hpp"
+#include "iappsystem.hpp"
 
 #define MAX_SPLITSCREEN_CLIENT_BITS 2
 // this should == MAX_JOYSTICKS in InputEnums.h
@@ -248,47 +249,39 @@ enum MouseCodeState_t
 	BUTTON_DOUBLECLICKED,
 };
 
-class IInputSystem : public IAppSystem
-{
+class IInputSystem : public IAppSystem {
 public:
-	void EnableInput(bool bEnable)
-	{
+	void EnableInput(bool bEnable) {
 		typedef void (*Fn)(void*, bool);
 		return getVirtualFunc<Fn>(this, 11)(this, bEnable);
 	}
 
-	bool IsButtonDown(ButtonCode_t code)
-	{
+	bool IsButtonDown(ButtonCode_t code) {
 		typedef bool (*Fn)(void*, ButtonCode_t);
 		return getVirtualFunc<Fn>(this, 15)(this, code);
 	}
 
-	void ResetInputState()
-	{
+	void ResetInputState() {
 		typedef void (*Fn)(void*);
 		return getVirtualFunc<Fn>(this, 39)(this);
 	}
 
-	const char* ButtonCodeToString(ButtonCode_t code)
-	{
+	const char* ButtonCodeToString(ButtonCode_t code) {
 		typedef const char* (*Fn)(void*, ButtonCode_t);
 		return getVirtualFunc<Fn>(this, 40)(this, code);
 	}
 
-	ButtonCode_t VirtualKeyToButtonCode(int nVirtualKey)
-	{
+	ButtonCode_t VirtualKeyToButtonCode(int nVirtualKey) {
 		typedef ButtonCode_t (*Fn)(void*, int);
 		return getVirtualFunc<Fn>(this, 44)(this, nVirtualKey);
 	}
 
-	int ButtonCodeToVirtualKey(ButtonCode_t code)
-	{
+	int ButtonCodeToVirtualKey(ButtonCode_t code) {
 		typedef int (*Fn)(void*, ButtonCode_t);
 		return getVirtualFunc<Fn>(this, 45)(this, code);
 	}
 
-	void GetCursorPosition(int* m_pX, int* m_pY)
-	{
+	void GetCursorPosition(int* m_pX, int* m_pY) {
 		typedef void (*Fn)(void*, int*, int*);
 		return getVirtualFunc<Fn>(this, 56)(this, m_pX, m_pY);
 	}
