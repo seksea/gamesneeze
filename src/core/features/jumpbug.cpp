@@ -30,7 +30,7 @@ void Features::JumpBug::createMove(CUserCmd* cmd) {
                 int step = 28; // 360 / step = number of traces we will do
                 for (int i = 0; i < 360; i += step) {
                     Vector origin = Globals::localPlayer->origin();
-                    float radius = 2; // How far out we will trace
+                    float radius = 4; // How far out we will trace
                     Vector start = Vector(radius * cos(rad(i)) + origin.x, radius * sin(rad(i)) + origin.y, origin.z);
                     float dist = distToGround(start);
                     if (dist <= 4.f) { // Un-duck 4 units above the ground
