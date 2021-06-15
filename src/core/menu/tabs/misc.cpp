@@ -113,6 +113,13 @@ void Menu::drawMiscTab() {
                     ImGui::SameLine();
                 }
                 ImGui::Checkbox("Edge Jump", &CONFIGBOOL("Misc>Misc>Movement>Edge Jump"));
+                if (CONFIGBOOL("Misc>Misc>Movement>Jump Bug")) {
+                    static bool toggled = false;
+                    Menu::CustomWidgets::drawKeyBinder("Key", &CONFIGINT("Misc>Misc>Movement>Jump Bug Key"), &toggled);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Set to none for always on");
+                    ImGui::SameLine();
+                }
                 ImGui::Checkbox("Jump Bug", &CONFIGBOOL("Misc>Misc>Movement>Jump Bug"));
                 ImGui::Checkbox("Fast Duck", &CONFIGBOOL("Misc>Misc>Movement>Fast Duck"));
                 ImGui::SameLine();
