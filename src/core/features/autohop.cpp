@@ -1,7 +1,7 @@
 #include "features.hpp"
 
 void Features::AutoHop::createMove(CUserCmd* cmd) {
-    if (Globals::localPlayer) {
+    if (Globals::localPlayer && !CONFIGBOOL("Misc>Misc>Movement>Jump Bug")) { // Using bhop and jumpbug causes jumpbug to not work
         if (CONFIGBOOL("Misc>Misc>Movement>Auto Hop")) {
             if (Globals::localPlayer->moveType() == 9) return;
             if (CONFIGBOOL("Misc>Misc>Movement>Humanised Bhop")) {
