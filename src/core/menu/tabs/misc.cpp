@@ -116,8 +116,6 @@ void Menu::drawMiscTab() {
                 if (CONFIGBOOL("Misc>Misc>Movement>Jump Bug")) {
                     static bool toggled = false;
                     Menu::CustomWidgets::drawKeyBinder("Key", &CONFIGINT("Misc>Misc>Movement>Jump Bug Key"), &toggled);
-                    if (ImGui::IsItemHovered())
-                        ImGui::SetTooltip("Set to none for always on");
                     ImGui::SameLine();
                 }
                 ImGui::Checkbox("Jump Bug", &CONFIGBOOL("Misc>Misc>Movement>Jump Bug"));
