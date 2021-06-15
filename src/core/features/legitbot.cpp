@@ -74,7 +74,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
             for (int i = 1; i < Interfaces::globals->maxClients; i++) {
                 Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
                 if (p && p != Globals::localPlayer) {
-                    if (p->health() > 0 && !p->dormant() && p->team() != Globals::localPlayer->team() && p->visible()) {
+                    if (p->health() > 0 && !p->dormant() && p->isEnemy() && p->visible()) {
 
                         // TODO: There is probably a better way to do this,
                         //       but when I tried making a timer with curtime

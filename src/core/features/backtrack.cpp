@@ -10,7 +10,7 @@ void Features::Backtrack::store(CUserCmd *cmd) {
         for (int i = 1; i < Interfaces::globals->maxClients; i++) {
             Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
             if (p) {
-                if (p->health() > 0 && !p->dormant() && p != Globals::localPlayer && p->team() != Globals::localPlayer->team()) {
+                if (p->health() > 0 && !p->dormant() && p != Globals::localPlayer && p->isEnemy()) {
                     BacktrackPlayer player;
                     player.playerIndex = i;
                     player.playerFlags = p->flags();

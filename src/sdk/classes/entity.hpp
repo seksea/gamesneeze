@@ -91,6 +91,7 @@ public:
 	NETVAR("DT_CSPlayer", "m_flFlashMaxAlpha", maxFlashAlpha, float);
 	NETVAR("DT_CSPlayer", "m_bHasHelmet", helmet, bool);
 	NETVAR("DT_CSPlayer", "m_ArmorValue", armor, int);
+	NETVAR("DT_CSPlayer", "m_nSurvivalTeam", survivalTeam, int);
 
 	AnimState* animState() {
 		return *reinterpret_cast<AnimState **>((uintptr_t)
@@ -113,6 +114,7 @@ public:
 		return *reinterpret_cast<int*>((uintptr_t)this + GETNETVAROFFSET("DT_BaseEntity", "m_nRenderMode") + 1);
 	}
 
+	bool isEnemy();
 	bool getHitboxBones(matrix3x4_t* boneMatrix);
 	bool getAnythingBones(matrix3x4_t* boneMatrix);
 	Vector getBonePos(int bone);

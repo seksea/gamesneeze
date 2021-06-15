@@ -125,7 +125,7 @@ void drawPlayer(Player* p) {
                 player_info_t info;
                 Interfaces::engine->GetPlayerInfo(p->index(), &info);
 
-                if (p->team() != Globals::localPlayer->team()) {
+                if (p->isEnemy()) {
                     
                     if (CONFIGBOOL("Visuals>Players>Enemies>Vis Check") ? (Globals::localPlayer->health() > 0 ? p->visible() : true) : true) {
                         if (CONFIGBOOL("Visuals>Players>Enemies>Only When Dead") ? (Globals::localPlayer->health() == 0) : true) {
@@ -165,7 +165,7 @@ void drawPlayer(Player* p) {
                         }
                     }
                 }
-                else if (p->team() == Globals::localPlayer->team() && 
+                else if (!p->isEnemy() && 
                         ((Globals::localPlayer->health() == 0 && CONFIGBOOL("Visuals>Players>Teammates>Only When Dead")) || !CONFIGBOOL("Visuals>Players>Teammates>Only When Dead"))) {
                     std::stringstream rightText;
                     if (CONFIGBOOL("Visuals>Players>Teammates>Health"))

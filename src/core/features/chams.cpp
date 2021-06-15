@@ -90,7 +90,7 @@ void chamPlayer(void* thisptr, void* ctx, const DrawModelState_t &state, const M
     Player* p = (Player*)Interfaces::entityList->GetClientEntity(pInfo.entity_index);
     if (Globals::localPlayer) {
         if (p->health() > 0) {
-            if (p->team() != Globals::localPlayer->team()) {
+            if (p->isEnemy()) {
                 /* Ignorez Enemy */
                 if (CONFIGINT("Visuals>Players>Enemies>Chams>Occluded Material")) {
                     cham(thisptr, ctx, state, pInfo, pCustomBoneToWorld, CONFIGCOL("Visuals>Players>Enemies>Chams>Occluded Color"), CONFIGINT("Visuals>Players>Enemies>Chams>Occluded Material"), true);

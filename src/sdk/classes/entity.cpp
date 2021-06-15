@@ -3,6 +3,13 @@
 #include "vector.h"
 #include <vector>
 
+bool Player::isEnemy() { // team check that accounts for dangerzone teams
+    if (strstr(Offsets::getLocalClient(-1)->m_szLevelNameShort, "dz_")) {
+        return (Globals::localPlayer->survivalTeam() == -1) ? true : (Globals::localPlayer->survivalTeam() != this->survivalTeam());
+    }
+	return this->team() != Globals::localPlayer->team();
+}
+
 bool visCheck(Player* player) {
     matrix3x4_t boneMatrix[128];
     if (player->getAnythingBones(boneMatrix)) {

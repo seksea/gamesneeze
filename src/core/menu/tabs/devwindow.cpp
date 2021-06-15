@@ -11,6 +11,8 @@ void Menu::drawDevWindow() {
         Features::Notifications::addNotification(ImColor(30, 255, 30), "[gs] Test notification! %f", Interfaces::globals->realtime);
     }
 
+    ImGui::Text("Is in dangerzone: %s", strstr(Offsets::getLocalClient(-1)->m_szLevelNameShort, "dz_") ? "true" : "false");
+
     if (ImGui::TreeNode("Interfaces")) {
         if (ImGui::TreeNode("Engine")) {
             int windowW, windowH;
