@@ -230,6 +230,21 @@ void Menu::drawVisualsTab() {
                     ImGui::SameLine();
                     ImGui::Checkbox("Laser", &CONFIGBOOL("Visuals>World>World>Bullet Tracers Laser"));
                 }
+
+                ImGui::Separator();
+                ImGui::Text("Fog");
+                ImGui::Checkbox("Fog Override", &CONFIGBOOL("Visuals>World>World>Override Fog"));
+                ImGui::Text("Fog Start");
+                ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                ImGui::SliderInt("##Fog Start", &CONFIGINT("Visuals>World>World>Fog Start"), 0, 30000);
+                ImGui::Text("Fog End");
+                ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                ImGui::SliderInt("##Fog End", &CONFIGINT("Visuals>World>World>Fog End"), 0, 30000);
+                ImGui::Text("Fog Density");
+                ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                ImGui::SliderInt("##Fog Density", &CONFIGINT("Visuals>World>World>Fog Density"), 0, 100);
+                ImGui::ColorEdit4("Fog Color", (float*)&CONFIGCOL("Visuals>World>World>Fog Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_PickerHueWheel);
+
                 ImGui::EndChild();
             }
             ImGui::SameLine();

@@ -85,7 +85,11 @@ void cachePlayers() {
                                 entityDistanceMap.erase(item.first);
                             }
                         }
-                        entityDistanceMap.insert(std::pair<float, int>(getDistance(Globals::localPlayer->origin(), p->origin()), i));
+
+                                    // This line contains a really hacky way of ensuring the fog controller stays in the entity distance map 
+                                    // as there are other entities that are also at 0, 0, 0 so we just move fog controller to -1, -1, -1
+                        entityDistanceMap.insert(std::pair<float, int>(getDistance(Globals::localPlayer->origin(), 
+                                                p->clientClass()->m_ClassID == EClassIds::CFogController ? Vector(-1, -1, -1) : p->origin()), i));
                     }
                 }
             }

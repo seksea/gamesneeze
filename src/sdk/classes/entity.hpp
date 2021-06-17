@@ -159,3 +159,12 @@ public:
 	NETVAR("DT_EnvTonemapController", "m_flCustomAutoExposureMin", exposureMin, float);
 	NETVAR("DT_EnvTonemapController", "m_flCustomAutoExposureMax", exposureMax, float);
 };
+
+class FogController {
+public:
+	NETVAR("DT_FogController", "m_fog.enable", enable, bool);
+	NETVAR("DT_FogController", "m_fog.start", start, float);
+	NETVAR("DT_FogController", "m_fog.end", end, float);
+	NETVAR("DT_FogController", "m_fog.maxdensity", maxDensity, float);
+	NETVAR("DT_FogController", "m_fog.colorPrimary", colorPrimary, int);
+};

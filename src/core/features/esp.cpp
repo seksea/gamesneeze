@@ -299,6 +299,14 @@ void Features::ESP::draw() {
                             drawGenericEnt(ent, CONFIGBOOL("Visuals>World>Items>Fish Box"), CONFIGCOL("Visuals>World>Items>Fish Box Color"), CONFIGBOOL("Visuals>World>Items>Fish Label") ? "Fish" : "");
                         }
 
+                        else if (clientClass->m_ClassID == EClassIds::CFogController && CONFIGBOOL("Visuals>World>World>Override Fog")) {
+                            *((FogController*)ent)->enable_ptr() = true;
+                            *((FogController*)ent)->start_ptr() = (float)CONFIGINT("Visuals>World>World>Fog Start");
+                            *((FogController*)ent)->end_ptr() = (float)CONFIGINT("Visuals>World>World>Fog End");
+                            *((FogController*)ent)->maxDensity_ptr() = ((float)CONFIGINT("Visuals>World>World>Fog Density"))/100;
+                            *((FogController*)ent)->colorPrimary_ptr() = ImGui::ColorConvertFloat4ToU32(CONFIGCOL("Visuals>World>World>Fog Color").Value);
+                        }
+
                         /* Debug ESP Everything*/
                         else if (CONFIGBOOL("Visuals>World>Items>ESP Quite literally everything")) {
                             char label[128] = "";

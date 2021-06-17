@@ -57,6 +57,13 @@ namespace Netvar {
 
         /* Player Resource */
         {std::make_pair("DT_PlayerResource", "m_iPing"), 0},
+
+        /* Fog Controller */
+        {std::make_pair("DT_FogController", "m_fog.enable"), 0},
+        {std::make_pair("DT_FogController", "m_fog.start"), 0},
+        {std::make_pair("DT_FogController", "m_fog.end"), 0},
+        {std::make_pair("DT_FogController", "m_fog.maxdensity"), 0},
+        {std::make_pair("DT_FogController", "m_fog.colorPrimary"), 0},
     };
     bool init();
 }

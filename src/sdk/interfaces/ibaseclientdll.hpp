@@ -36,9 +36,19 @@ struct RecvTable{
 
 typedef void (*RecvVarProxyFn) (const CRecvProxyData *pData, void *pStruct, void *pOut);
 
+enum SendPropType {
+	DPT_Int=0,
+	DPT_Float,
+	DPT_Vector,
+	DPT_VectorXY, // Only encodes the XY of a vector, ignores Z
+	DPT_String,
+	DPT_Array,	// An array of the base types (can't be of datatables).
+	DPT_DataTable
+};
+
 struct RecvProp {
 	char *m_pVarName;
-	int m_RecvType;
+	SendPropType m_RecvType;
 	int m_Flags;
 	int m_StringBufferSize;
 	bool m_bInsideArray;

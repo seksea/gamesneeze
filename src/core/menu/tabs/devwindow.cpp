@@ -1,4 +1,20 @@
 #include "../menu.hpp"
+#include <map>
+#include <vector>
+
+
+
+std::map<std::string_view, std::vector<RecvProp>> netvars;
+
+uintptr_t getNetvars() {
+    for (ClientClass* cur = Interfaces::client->GetAllClasses(); cur; cur = cur->m_pNext) {
+        for (int i = 0; i < cur->m_pRecvTable->m_nProps; i++) {
+            RecvProp prop = cur->m_pRecvTable->m_pProps[i];
+            netvars[cur->m_pRecvTable->m_pNetTableName].push_back(prop);
+        }
+    }
+    return 0;
+}
 
 void Menu::drawDevWindow() {
     ImGui::SetNextWindowSize(ImVec2{500, 700});
@@ -12,6 +28,36 @@ void Menu::drawDevWindow() {
     }
 
     ImGui::Text("Is in dangerzone: %s", strstr(Offsets::getLocalClient(-1)->m_szLevelNameShort, "dz_") ? "true" : "false");
+
+    static bool gotNetvars = false;
+    if (!gotNetvars) {
+        getNetvars();
+        gotNetvars = true;
+    }
+
+    if (ImGui::TreeNode("Netvars")) {
+        for (auto table : netvars) {
+            if (ImGui::TreeNode(table.first.data())) {
+                for (auto prop : table.second) {
+                    if (ImGui::TreeNode(prop.m_pVarName)) {
+                        ImGui::Text("Parent: %s", table.first.data());
+                        ImGui::Text("Flags: %x", prop.m_Flags);
+                        ImGui::Text("Offset: %x", prop.m_Offset);
+                        ImGui::Text("RecvType: %s", prop.m_RecvType == DPT_Int ? "Int" :
+                                                    prop.m_RecvType == DPT_Float ? "Float" :
+                                                    prop.m_RecvType == DPT_Vector ? "Vector" :
+                                                    prop.m_RecvType == DPT_VectorXY ? "VectorXY" :
+                                                    prop.m_RecvType == DPT_String ? "String" :
+                                                    prop.m_RecvType == DPT_Array ? "Array" :
+                                                    prop.m_RecvType == DPT_DataTable ? "DataTable" : "Unknown Type");
+                        ImGui::TreePop();
+                    }
+                }
+                ImGui::TreePop();
+            }
+        }
+        ImGui::TreePop();
+    }
 
     if (ImGui::TreeNode("Interfaces")) {
         if (ImGui::TreeNode("Engine")) {

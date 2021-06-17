@@ -287,6 +287,12 @@ namespace Config {
                 CONFIGITEM("Visuals>World>World>Bullet Tracers Laser", false),
                 CONFIGITEM("Visuals>World>World>Bullet Tracers Color", ImColor(255, 255, 255, 255)),
 
+                CONFIGITEM("Visuals>World>World>Override Fog", false),
+                CONFIGITEM("Visuals>World>World>Fog Start", 0),
+                CONFIGITEM("Visuals>World>World>Fog End", 0),
+                CONFIGITEM("Visuals>World>World>Fog Density", 50),
+                CONFIGITEM("Visuals>World>World>Fog Color", ImColor(255, 255, 255)),
+
                 CONFIGITEM("Visuals>World>Items>Weapon Box", false),
                 CONFIGITEM("Visuals>World>Items>Weapon Box Color", ImColor(255, 255, 255, 255)),
                 CONFIGITEM("Visuals>World>Items>Weapon Label", false),
