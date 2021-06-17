@@ -218,7 +218,6 @@ void Menu::drawVisualsTab() {
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Viewmodel FOV", &CONFIGINT("Visuals>World>World>Viewmodel FOV"), 0, 130);
                 ImGui::Checkbox("Third Person", &CONFIGBOOL("Visuals>World>World>Third Person"));
-                ImGui::Checkbox("Third Person Shows Fake", &CONFIGBOOL("Visuals>World>World>Third Person Shows Fake"));
                 ImGui::Checkbox("No Flash", &CONFIGBOOL("Visuals>World>World>No Flash"));
                 ImGui::Checkbox("Ragdoll Gravity", &CONFIGBOOL("Visuals>World>World>Ragdoll Gravity"));
                 if (CONFIGBOOL("Visuals>World>World>Bullet Tracers")) {

@@ -281,7 +281,6 @@ namespace Config {
                 CONFIGITEM("Visuals>World>World>FOV", 90),
                 CONFIGITEM("Visuals>World>World>Viewmodel FOV", 0),
                 CONFIGITEM("Visuals>World>World>Third Person", false),
-                CONFIGITEM("Visuals>World>World>Third Person Shows Fake", false),
                 CONFIGITEM("Visuals>World>World>No Flash", false),
                 CONFIGITEM("Visuals>World>World>Bullet Tracers", false),
                 CONFIGITEM("Visuals>World>World>Bullet Tracers Laser", false),
