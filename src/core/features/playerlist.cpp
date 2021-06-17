@@ -52,7 +52,7 @@ void Features::PlayerList::draw() {
                         nameConvar->fnChangeCallback = 0;
                         
                         char* name = selectedPlayerInfo.name;
-                        strcat(name, "\xAD");
+                        strcat(name, " ");
                         nameConvar->SetValue(name);
                     }
                     ImGui::Text("GUID: %s", selectedPlayerInfo.guid);
