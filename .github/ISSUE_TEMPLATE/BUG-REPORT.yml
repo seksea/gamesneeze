@@ -1,0 +1,39 @@
+name: Bug Report
+description: Create a report to help us improve and fix bugs.
+title: "[Bug]: "
+labels: [bug]
+# assignees:
+#   - seksea
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If you are new to cheating or this cheat our issue tracker is **ONLY** used for reporting bugs or requesting features. Please use [our discord server](https://discord.gg/SCHsWHFJMb) for general support.
+        If you're modifying source too, you should know what you're doing. If you don't, redownload the cheats source and see if your pasted changes are causing the crash. If you haven't done this, we reserve the right to scold you and mute you for not being able to read or use your common sense.
+  - type: checkboxes
+    id: preliminaries
+    attributes:
+      label: 
+      description: "By submitting this issue, you have made sure that you have done the following:"
+      options:
+        - label: read this document fully before sending the issue off.
+          required: true
+        - label: are running the latest commit from this repository clean without any modification.
+          required: true
+        - label: and I have installed all requirements for this project as required to run. (even if you have gdb/gcc/g++, you need at the least the version we have selected in the appropriate requirement installation commands in the README.)
+          required: true
+  - type: textarea
+    id: whatsup
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen? If appropriate, supply reproduction steps/settings.
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output or backtraces.
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks. A gdb backtrace can be made by doing ./toolbox.sh -u -bd -ld to create a debug version of the cheat. Press c to continue (until there is no `( gdb )` prompt), and then reproduce the bug/crash, when it crashes, do c to continue, and then bt in gdb to produce a backtrace.
+      render: shell
