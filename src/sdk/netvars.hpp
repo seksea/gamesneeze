@@ -62,6 +62,7 @@ namespace Netvar {
         {std::make_pair("DT_FogController", "m_fog.enable"), 0},
         {std::make_pair("DT_FogController", "m_fog.start"), 0},
         {std::make_pair("DT_FogController", "m_fog.end"), 0},
+        {std::make_pair("DT_FogController", "m_fog.farz"), 0},
         {std::make_pair("DT_FogController", "m_fog.maxdensity"), 0},
         {std::make_pair("DT_FogController", "m_fog.colorPrimary"), 0},
     };

@@ -304,6 +304,7 @@ void Features::ESP::draw() {
                             *((FogController*)ent)->start_ptr() = (float)CONFIGINT("Visuals>World>World>Fog Start");
                             *((FogController*)ent)->end_ptr() = (float)CONFIGINT("Visuals>World>World>Fog End");
                             *((FogController*)ent)->maxDensity_ptr() = ((float)CONFIGINT("Visuals>World>World>Fog Density"))/1000;
+                            *((FogController*)ent)->farz_ptr() = (float)CONFIGINT("Visuals>World>World>Fog Farz");
                             *((FogController*)ent)->colorPrimary_ptr() = ImGui::ColorConvertFloat4ToU32(CONFIGCOL("Visuals>World>World>Fog Color").Value);
                         }
 

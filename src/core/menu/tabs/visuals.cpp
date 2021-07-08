@@ -242,6 +242,9 @@ void Menu::drawVisualsTab() {
                 ImGui::Text("Fog Density");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Fog Density", &CONFIGINT("Visuals>World>World>Fog Density"), 0, 1000);
+                ImGui::Text("Fog Farz");
+                ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+                ImGui::SliderInt("##Fog Farz", &CONFIGINT("Visuals>World>World>Fog Farz"), 0, 30000);
                 ImGui::ColorEdit4("Fog Color", (float*)&CONFIGCOL("Visuals>World>World>Fog Color"), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_PickerHueWheel);
 
                 ImGui::EndChild();

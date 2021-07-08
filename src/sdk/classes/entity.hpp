@@ -165,6 +165,7 @@ public:
 	NETVAR("DT_FogController", "m_fog.enable", enable, bool);
 	NETVAR("DT_FogController", "m_fog.start", start, float);
 	NETVAR("DT_FogController", "m_fog.end", end, float);
+	NETVAR("DT_FogController", "m_fog.farz", farz, float);
 	NETVAR("DT_FogController", "m_fog.maxdensity", maxDensity, float);
 	NETVAR("DT_FogController", "m_fog.colorPrimary", colorPrimary, int);
 };
