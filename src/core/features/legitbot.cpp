@@ -64,7 +64,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
             }
 
             float closestDelta = FLT_MAX;
-            QAngle angleToClosestBone = {0,0,0};
+            QAngle angleToClosestBone = {0, 0, 0};
 
             // NOTE: We should really be using returns more, it cleans up
             //       the code a good bit, and makes it easier to understand
