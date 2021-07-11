@@ -8,7 +8,7 @@ void Features::RageBot::createMove(CUserCmd* cmd) {
             float FOV = CONFIGINT("Rage>RageBot>Default>FOV")/10.f;
 
             float closestDelta = FLT_MAX;
-            QAngle angleToClosestPlayer;
+            QAngle angleToClosestPlayer = {0,0,0};
 
             // Enumerate over players and get angle to the closest player to crosshair
             for (int i = 1; i < Interfaces::globals->maxClients; i++) {
