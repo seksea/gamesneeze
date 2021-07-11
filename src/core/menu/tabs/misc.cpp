@@ -123,7 +123,7 @@ void Menu::drawMiscTab() {
             ImGui::Columns(1);
             ImGui::TextDisabled("Credits!");
             if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("sekc (ofcourse)\nAll other contributors on GitHub (allbombson, cristeigabriel, crazily, luk1337, tango1337 & xXx-sans-xXx)\nand ocornut for his great ImGui UI framework");
+                ImGui::SetTooltip("sekc (ofcourse)\nAll other contributors on GitHub (allbombson, cristeigabriel, crazily, keenan, u2oos luk1337, tango1337 & xXx-sans-xXx)\nand ocornut for his great ImGui UI framework");
             ImGui::EndTabItem();
         }
 
