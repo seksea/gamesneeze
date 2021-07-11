@@ -8,7 +8,7 @@ void Features::RageBot::createMove(CUserCmd* cmd) {
             float FOV = CONFIGINT("Rage>RageBot>Default>FOV")/10.f;
 
             float closestDelta = FLT_MAX;
-            QAngle angleToClosestPlayer;
+            QAngle angleToClosestPlayer = QAngle(0, 0, 0);
 
             // Enumerate over players and get angle to the closest player to crosshair
             for (int i = 1; i < Interfaces::globals->maxClients; i++) {
@@ -19,7 +19,7 @@ void Features::RageBot::createMove(CUserCmd* cmd) {
                         if (p->getAnythingBones(boneMatrix)) {
                             Vector localPlayerEyePos = Globals::localPlayer->eyePos();
                             Vector targetBonePos = p->getBonePos(8);
-                            
+
                             //TODO check which bone would be exposed sooner with engine prediction and which would do more damage.
                             if(CONFIGBOOL("Rage>RageBot>Default>ForceBaim")) {
                                 if(p->health() <= CONFIGINT("Rage>RageBot>Default>ForceBaimValue")) {
