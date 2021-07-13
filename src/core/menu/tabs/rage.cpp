@@ -20,7 +20,7 @@ void Menu::drawRageTab() {
                 if(CONFIGBOOL("Rage>RageBot>Default>ForceBaim")) {
                     ImGui::Text("Health");
                     ImGui::SliderInt("##HEALTH", &CONFIGINT("Rage>RageBot>Default>ForceBaimValue"), 1, 100);
-                }
+                } //This is really fucking shit code dude, I've never made my own resolver that isn't math.random(50,50) but still dude, what the fuck
                 ImGui::Text("FOV (x10)");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##FOV", &CONFIGINT("Rage>RageBot>Default>FOV"), 0, 1800);
