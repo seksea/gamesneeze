@@ -9,10 +9,9 @@
   <a href="https://discord.gg/SCHsWHFJMb"><img src="https://img.shields.io/badge/Chat-Discord-blue.svg" alt="Discord"></a>
 </p>
 
-An open source cheat for Counter-Strike: Global Offensive on Linux.
+An open source training utility for Counter-Strike: Global Offensive on Linux.
 
 ## :warning: :warning: THIS IS A CHEAT FOR LINUX, IT WILL NOT INJECT IF YOU ARE ON WINDOWS, AND I'M NOT PLANNING ON PORTING ANYTIME SOON, DO NOT JOIN THE DISCORD ASKING FOR DLL :warning: :warning:
-
 
 ## Current Features
 
@@ -38,27 +37,27 @@ An open source cheat for Counter-Strike: Global Offensive on Linux.
  - Nightmode
  - Skybox changer
  - Skinchanger
- - Ragebot (currently in development and doesnt have awall so no mindmg/hitchance/autoshoot)
- - AntiAim (currently sways, need to fix lby breaker)
+ - Ragebot (currently in development and doesn't have awall/bulletsim so no mindmg/hitchance/autoshoot)
+ - AntiAim (currently sways, need to fix LBY breaker)
 
 
 ## How to use
 
 ### Debian / Ubuntu / Pop OS / Linux Mint required packages:
 
-`sudo apt install -y libsdl2-dev cmake git gcc-10 g++-10 gdb clang`
+```sudo apt install -y libsdl2-dev cmake git gcc-10 g++-10 gdb clang```
 
 ### Arch / Manjaro required packages:
 
-`sudo pacman -S --needed base-devel git cmake gdb sdl2 git clang`
+```sudo pacman -S --needed base-devel git cmake gdb sdl2 clang```
 
 ### Fedora required packages:
 
-`sudo dnf install gcc-g++ gdb SDL2-devel cmake git clang`
+```sudo dnf install gcc-g++ gdb SDL2-devel cmake git clang```
 
 ### OpenSUSE required packages:
 
-`sudo zypper install gcc gdb SDL2-devel cmake git llvm-clang llvm-gold`
+```sudo zypper install gcc gdb SDL2-devel cmake git llvm-clang llvm-gold```
 
 ```sh
 git clone https://github.com/seksea/gamesneeze
@@ -88,7 +87,7 @@ All args are executed in the order they are written in, for example, "-u -b -l" 
  - [Create a pull request](https://github.com/seksea/gamesneeze/compare) ([tutorial](https://github.com/yangsu/pull-request-tutorial))
  - [Report a bug](https://github.com/seksea/gamesneeze/issues/new)
 
-## [Todo](https://github.com/seksea/gamesneeze/projects/1)
+## [To-do](https://github.com/seksea/gamesneeze/projects/1)
 
 ## Screenshots
 
