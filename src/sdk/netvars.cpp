@@ -47,47 +47,47 @@ bool Netvar::init() {
 
     Log::log(LOG, "Initialising offsets");
 
-    Offsets::sendClantag = (Offsets::SendClantag)PatternScan::findFirstInModule("engine_client.so",
-            "55 48 89 E5 41 55 49 89 FD 41 54 BF");
+    Offsets::sendClantag = (Offsets::SendClantag)PatternScan::find("engine_client.so",
+            stoba::make<"55 48 89 E5 41 55 49 89 FD 41 54 BF">());
     Log::log(LOG, " sendClantag | %lx", Offsets::sendClantag);
 
-    Offsets::setPlayerReady = (Offsets::SetPlayerReady)PatternScan::findFirstInModule("/client_client.so",
-            "55 48 89 F7 48 8D 35 ? ? ? ? 48 89 E5 E8 ? ? ? ? 85 C0");
+    Offsets::setPlayerReady = (Offsets::SetPlayerReady)PatternScan::find("/client_client.so",
+            stoba::make<"55 48 89 F7 48 8D 35 ? ? ? ? 48 89 E5 E8 ? ? ? ? 85 C0">());
     Log::log(LOG, " setPlayerReady | %lx", Offsets::setPlayerReady);
 
-    Offsets::radarIsHltvCheck = PatternScan::findFirstInModule("/client_client.so", "84 C0 74 50 31 F6");
+    Offsets::radarIsHltvCheck = PatternScan::find("/client_client.so", stoba::make<"84 C0 74 50 31 F6">());
     Log::log(LOG, " radarIsHltvCheck | %lx", Offsets::radarIsHltvCheck);
 
-    Offsets::initKeyValues = (Offsets::InitKeyValues)PatternScan::findFirstInModule("/client_client.so", 
-            "81 27 00 00 00 FF 55 31 C0 48 89 E5 5D");
+    Offsets::initKeyValues = (Offsets::InitKeyValues)PatternScan::find("/client_client.so", 
+            stoba::make<"81 27 00 00 00 FF 55 31 C0 48 89 E5 5D">());
     Log::log(LOG, " initKeyValues | %lx", Offsets::initKeyValues);
 
-    Offsets::loadFromBuffer = (Offsets::LoadFromBuffer)PatternScan::findFirstInModule("/client_client.so", 
-            "55 48 89 E5 41 57 41 56 41 55 41 54 49 89 D4 53 48 81 EC ? ? ? ? 48 85"),
+    Offsets::loadFromBuffer = (Offsets::LoadFromBuffer)PatternScan::find("/client_client.so", 
+            stoba::make<"55 48 89 E5 41 57 41 56 41 55 41 54 49 89 D4 53 48 81 EC ? ? ? ? 48 85">()),
     Log::log(LOG, " loadFromBuffer | %lx", Offsets::loadFromBuffer);
 
-    Offsets::setNamedSkybox = (Offsets::SetNamedSkybox)PatternScan::findFirstInModule("engine_client.so", 
-            "55 4C 8D 05 ? ? ? ? 48 89 E5 41");
+    Offsets::setNamedSkybox = (Offsets::SetNamedSkybox)PatternScan::find("engine_client.so", 
+            stoba::make<"55 4C 8D 05 ? ? ? ? 48 89 E5 41">());
     Log::log(LOG, " setNamedSkybox | %lx", Offsets::setNamedSkybox);
 
-    Offsets::lineGoesThroughSmoke = (Offsets::LineGoesThroughSmoke)PatternScan::findFirstInModule("/client_client.so", 
-            "40 0F B6 FF 55");
+    Offsets::lineGoesThroughSmoke = (Offsets::LineGoesThroughSmoke)PatternScan::find("/client_client.so", 
+            stoba::make<"40 0F B6 FF 55">());
     Log::log(LOG, " lineGoesThroughSmoke | %lx", Offsets::lineGoesThroughSmoke);
 
-    Offsets::moveData = **reinterpret_cast<CMoveData***>(getAbsoluteAddress(PatternScan::findFirstInModule("/client_client.so", 
-            "48 8B 0D ? ? ? ? 4C 89 EA"), 3, 7));
+    Offsets::moveData = **reinterpret_cast<CMoveData***>(getAbsoluteAddress(PatternScan::find("/client_client.so", 
+            stoba::make<"48 8B 0D ? ? ? ? 4C 89 EA">()), 3, 7));
     Log::log(LOG, " moveData | %lx", Offsets::moveData);
 
-    Interfaces::moveHelper = *reinterpret_cast<IMoveHelper **>(getAbsoluteAddress(PatternScan::findFirstInModule("/client_client.so", 
-            "00 48 89 3D ? ? ? ? C3") + 1, 3, 7));
+    Interfaces::moveHelper = *reinterpret_cast<IMoveHelper **>(getAbsoluteAddress(PatternScan::find("/client_client.so", 
+            stoba::make<"00 48 89 3D ? ? ? ? C3">()) + 1, 3, 7));
     Log::log(LOG, " moveHelper | %lx", Interfaces::moveHelper);
 
-    Offsets::predictionSeed = *reinterpret_cast<int **>(getAbsoluteAddress(PatternScan::findFirstInModule("/client_client.so", 
-            "48 8B 05 ? ? ? ? 8B 38 E8 ? ? ? ? 89 C7"), 3, 7));
+    Offsets::predictionSeed = *reinterpret_cast<int **>(getAbsoluteAddress(PatternScan::find("/client_client.so", 
+            stoba::make<"48 8B 05 ? ? ? ? 8B 38 E8 ? ? ? ? 89 C7">()), 3, 7));
     Log::log(LOG, " predictionSeed | %lx", Offsets::predictionSeed);
 
-	Offsets::animState = *reinterpret_cast<unsigned int*>(PatternScan::findFirstInModule("/client_client.so",
-			"55 48 89 E5 53 48 89 FB 48 83 EC 28 48 8B 05 ? ? ? ? 48 8B 00") + 52);
+	Offsets::animState = *reinterpret_cast<unsigned int*>(PatternScan::find("/client_client.so",
+			stoba::make<"55 48 89 E5 53 48 89 FB 48 83 EC 28 48 8B 05 ? ? ? ? 48 8B 00">()) + 52);
     Log::log(LOG, " animState | %lx", Offsets::animState);
 
 	uintptr_t GetLocalPlayer = reinterpret_cast<uintptr_t>(getVTable(Interfaces::engine)[12]);
