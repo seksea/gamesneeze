@@ -282,6 +282,7 @@ namespace Config {
                 CONFIGITEM("Visuals>World>World>Viewmodel FOV", 0),
                 CONFIGITEM("Visuals>World>World>Third Person", false),
                 CONFIGITEM("Visuals>World>World>No Flash", false),
+                CONFIGITEM("Visuals>World>World>No Flash Amount", 0),
                 CONFIGITEM("Visuals>World>World>Bullet Tracers", false),
                 CONFIGITEM("Visuals>World>World>Bullet Tracers Laser", false),
                 CONFIGITEM("Visuals>World>World>Bullet Tracers Color", ImColor(255, 255, 255, 255)),
