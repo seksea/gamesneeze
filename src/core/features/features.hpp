@@ -134,5 +134,9 @@ namespace Features {
     namespace EdgeJump {
         void prePredCreateMove(CUserCmd* cmd);
         void postPredCreateMove(CUserCmd* cmd);
+        inline int flagsBackup;
+    }
+    namespace JumpBug {
+        void createMove(CUserCmd* cmd);
     }
 }

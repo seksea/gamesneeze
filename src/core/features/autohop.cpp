@@ -1,9 +1,11 @@
 #include "features.hpp"
 
 void Features::AutoHop::createMove(CUserCmd* cmd) {
-    if (Globals::localPlayer) {
+    if (Globals::localPlayer) { // Using bhop and jumpbug causes jumpbug to not work
         if (CONFIGBOOL("Misc>Misc>Movement>Auto Hop")) {
             if (Globals::localPlayer->moveType() == 9) return;
+            if (CONFIGBOOL("Misc>Misc>Movement>Jump Bug") &&
+                Menu::CustomWidgets::isKeyDown(CONFIGINT("Misc>Misc>Movement>Jump Bug Key"))) return;
             if (CONFIGBOOL("Misc>Misc>Movement>Humanised Bhop")) {
                 // https://www.unknowncheats.me/forum/counterstrike-global-offensive/333797-humanised-bhop.html
                     static int hopsRestricted = 0;
@@ -25,8 +27,8 @@ void Features::AutoHop::createMove(CUserCmd* cmd) {
                     }
             }
             else {
-                if (!(Globals::localPlayer->flags() & (1<<0))) { // need to make macro for FL_*
-                    cmd->buttons &= ~(1<<1); // need to make macro for IN_*
+                if (!(Globals::localPlayer->flags() & FL_ONGROUND)) {
+                    cmd->buttons &= ~IN_JUMP;
                 }
             }
         }

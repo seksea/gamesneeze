@@ -38,6 +38,7 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
                     Features::Backtrack::createMove(cmd);
                     Features::Forwardtrack::createMove(cmd);
                 }
+                Features::JumpBug::createMove(cmd);
             Features::Prediction::end();
 
             Features::EdgeJump::postPredCreateMove(cmd);
