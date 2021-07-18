@@ -4,6 +4,7 @@
 
 namespace Features {
     namespace Prediction {
+        bool isInPrediction();
         void start(CUserCmd *cmd);
         void end();
     }
@@ -78,9 +79,6 @@ namespace Features {
     namespace FlappyBird {
         void draw();
     }
-    namespace AutoHop {
-        void createMove(CUserCmd* cmd);
-    }
     namespace UseSpam {
         void createMove(CUserCmd* cmd);
     }
@@ -131,8 +129,9 @@ namespace Features {
     namespace BulletTracers {
         void event(IGameEvent* event);
     }
-    namespace EdgeJump {
+    namespace Movement {
         void prePredCreateMove(CUserCmd* cmd);
         void postPredCreateMove(CUserCmd* cmd);
+        void edgeBugPredictor(CUserCmd* cmd);
     }
 }
