@@ -3,11 +3,6 @@
 
 float m_flOldCurtime;
 float m_flOldFrametime;
-bool inPrediction;
-
-bool Features::Prediction::isInPrediction() {
-    return inPrediction;
-}
 
 void Features::Prediction::start(CUserCmd* cmd) {
     inPrediction = true;

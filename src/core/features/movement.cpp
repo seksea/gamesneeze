@@ -1,14 +1,6 @@
 #include "../../includes.hpp"
 #include "features.hpp"
 
-int flagsBackup = 0;
-Vector velBackup;
-int buttBackup;
-QAngle viewBackup;
-Vector2D moveBackup;
-bool allowBhop = true;
-bool shouldEdgebug;
-
 void bhop(CUserCmd* cmd) {
     if (CONFIGBOOL("Misc>Misc>Movement>Auto Hop")) {
         if (Globals::localPlayer->moveType() == 9)
@@ -44,7 +36,7 @@ void bhop(CUserCmd* cmd) {
 void edgeJump(CUserCmd* cmd) {
     if (CONFIGBOOL("Misc>Misc>Movement>Edge Jump") &&
             Menu::CustomWidgets::isKeyDown(CONFIGINT("Misc>Misc>Movement>Edge Jump Key")) &&
-            flagsBackup & FL_ONGROUND &&
+            Features::Movement::flagsBackup & FL_ONGROUND &&
             !(Globals::localPlayer->flags() & FL_ONGROUND))
         cmd->buttons |= IN_JUMP;
 }
@@ -52,30 +44,34 @@ void edgeJump(CUserCmd* cmd) {
 void jumpBug(CUserCmd* cmd) {
     if (CONFIGBOOL("Misc>Misc>Movement>JumpBug") &&
             Menu::CustomWidgets::isKeyDown(CONFIGINT("Misc>Misc>Movement>JumpBug Key")) &&
-            !(flagsBackup & FL_ONGROUND || flagsBackup & FL_PARTIALGROUND) &&
+            !(Features::Movement::flagsBackup & FL_ONGROUND || Features::Movement::flagsBackup & FL_PARTIALGROUND) &&
             (Globals::localPlayer->flags() & FL_ONGROUND || Globals::localPlayer->flags() & FL_PARTIALGROUND)) {
         cmd->buttons |= IN_DUCK;
         cmd->buttons &= ~IN_JUMP;
-        allowBhop = false;
+        Features::Movement::allowBhop = false;
     }
     else {
-        allowBhop = true;
+        Features::Movement::allowBhop = true;
     }
 }
 
 bool checkEdgebug(){ // need to find/get a better edgebug detection method, unsure if this will work on 128tick
-    return !(velBackup.z >= -7 || 
+    return !(Features::Movement::velBackup.z >= -7 || 
             floor(Globals::localPlayer->velocity().z) != -7 || 
             (Globals::localPlayer->flags() & FL_ONGROUND)) && 
-            Globals::localPlayer->velocity().Length2D() >= velBackup.Length2D();
+            Globals::localPlayer->velocity().Length2D() >= Features::Movement::velBackup.Length2D();
 }
 
 void edgeBugEnforcer(CUserCmd* cmd) {
+    static int buttBackup;
+    static QAngle viewBackup;
+    static Vector2D moveBackup;
+
     if (!CONFIGBOOL("Misc>Misc>Movement>EdgeBug") ||
             !Menu::CustomWidgets::isKeyDown(CONFIGINT("Misc>Misc>Movement>EdgeBug Key")))
         return;
 
-    if (shouldEdgebug) {
+    if (Features::Movement::shouldEdgebug) {
         cmd->buttons = buttBackup;
         cmd->viewangles = viewBackup; // kinda need to block mouse input properly, but this is ok for now
         cmd->sidemove = moveBackup.x;

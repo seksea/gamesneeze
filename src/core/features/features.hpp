@@ -4,7 +4,7 @@
 
 namespace Features {
     namespace Prediction {
-        bool isInPrediction();
+        inline bool inPrediction;
         void start(CUserCmd *cmd);
         void end();
     }
@@ -130,6 +130,10 @@ namespace Features {
         void event(IGameEvent* event);
     }
     namespace Movement {
+        inline int flagsBackup;
+        inline Vector velBackup;
+        inline bool allowBhop = true;
+        inline bool shouldEdgebug;
         void prePredCreateMove(CUserCmd* cmd);
         void postPredCreateMove(CUserCmd* cmd);
         void edgeBugPredictor(CUserCmd* cmd);
