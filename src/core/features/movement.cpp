@@ -122,6 +122,9 @@ void Features::Movement::edgeBugPredictor(CUserCmd* cmd) {
         if (shouldEdgebug)
             break;
         Features::Prediction::start(cmd);
+        if (Globals::localPlayer->flags() & FL_ONGROUND) {
+            break;
+        }
         shouldEdgebug = checkEdgebug();
         edgebugPos = Globals::localPlayer->origin();
         Features::Prediction::end();
