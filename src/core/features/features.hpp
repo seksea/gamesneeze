@@ -134,8 +134,10 @@ namespace Features {
         inline Vector velBackup;
         inline bool allowBhop = true;
         inline bool shouldEdgebug;
+        inline Vector edgebugPos;
         void prePredCreateMove(CUserCmd* cmd);
         void postPredCreateMove(CUserCmd* cmd);
         void edgeBugPredictor(CUserCmd* cmd);
+        void draw();
     }
 }

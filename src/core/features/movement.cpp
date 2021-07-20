@@ -68,8 +68,10 @@ void edgeBugEnforcer(CUserCmd* cmd) {
     static Vector2D moveBackup;
 
     if (!CONFIGBOOL("Misc>Misc>Movement>EdgeBug") ||
-            !Menu::CustomWidgets::isKeyDown(CONFIGINT("Misc>Misc>Movement>EdgeBug Key")))
+            !Menu::CustomWidgets::isKeyDown(CONFIGINT("Misc>Misc>Movement>EdgeBug Key"))) {
+        Features::Movement::shouldEdgebug = false;
         return;
+    }
 
     if (Features::Movement::shouldEdgebug) {
         cmd->buttons = buttBackup;
@@ -115,12 +117,26 @@ void Features::Movement::edgeBugPredictor(CUserCmd* cmd) {
 
     edgeBugEnforcer(cmd);
     shouldEdgebug = checkEdgebug();
-    int predictAmount = 32; // TODO: make amount configurable
+    int predictAmount = 128; // TODO: make amount configurable
     for (int i = 0; i < predictAmount; i++) { // this is roughly the famous 'clarity' edgebug (lol)
         if (shouldEdgebug)
             break;
         Features::Prediction::start(cmd);
         shouldEdgebug = checkEdgebug();
+        edgebugPos = Globals::localPlayer->origin();
         Features::Prediction::end();
+    }
+}
+
+void Features::Movement::draw() {
+    if (Features::Movement::shouldEdgebug) {
+        Globals::drawList->AddText(ImVec2((Globals::screenSizeX / 2) - (ImGui::CalcTextSize("EdgeBug").x / 2) + 1, (Globals::screenSizeY / 2) + 31), ImColor(0, 0, 0, 255), "EdgeBug");
+        Globals::drawList->AddText(ImVec2((Globals::screenSizeX / 2) - (ImGui::CalcTextSize("EdgeBug").x / 2), (Globals::screenSizeY / 2) + 30), ImColor(255, 255, 255, 255), "EdgeBug");
+
+        Vector edgebugPos2D;
+        if (worldToScreen(edgebugPos, edgebugPos2D)) {
+            Globals::drawList->AddText(ImVec2(edgebugPos2D.x - (ImGui::CalcTextSize("EdgeBug").x / 2) + 1, edgebugPos2D.y + 1), ImColor(0, 0, 0, 255), "gaming");
+            Globals::drawList->AddText(ImVec2(edgebugPos2D.x - (ImGui::CalcTextSize("EdgeBug").x / 2), edgebugPos2D.y), ImColor(255, 255, 255, 255), "gaming");
+        }
     }
 }
