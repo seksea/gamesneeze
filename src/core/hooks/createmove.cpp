@@ -21,10 +21,9 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
 
         startMovementFix(cmd);
             Features::RankReveal::createMove(cmd);
-            Features::AutoHop::createMove(cmd);
             Features::FastDuck::createMove(cmd);
             Features::UseSpam::createMove(cmd);
-            Features::EdgeJump::prePredCreateMove(cmd);
+            Features::Movement::prePredCreateMove(cmd);
 
             Features::Prediction::start(cmd);
                 if (CONFIGBOOL("Rage>Enabled")) {
@@ -40,13 +39,14 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
                 }
             Features::Prediction::end();
 
-            Features::EdgeJump::postPredCreateMove(cmd);
+            Features::Movement::postPredCreateMove(cmd);
 
             if (Features::AutoDefuse::shouldDefuse) {
                 cmd->buttons |= (1 << 5);
             }
         endMovementFix(cmd);
 	    Features::SlowWalk::createMove(cmd);
+        Features::Movement::edgeBugPredictor(cmd);
         cmd->forwardmove = std::clamp(cmd->forwardmove, -450.0f, 450.0f);
         cmd->sidemove = std::clamp(cmd->sidemove, -450.0f, 450.0f);
         cmd->upmove = std::clamp(cmd->upmove, -320.0f, 320.0f);

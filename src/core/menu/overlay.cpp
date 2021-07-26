@@ -47,4 +47,6 @@ void Menu::drawOverlay(ImDrawList* drawList) {
     Features::FlappyBird::draw();
     Features::Notifications::draw();
     Features::Hitmarkers::draw();
+
+    Features::Movement::draw();
 }

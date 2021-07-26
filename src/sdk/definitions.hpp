@@ -509,6 +509,7 @@ enum MoveType_t
 #define FL_ATCONTROLS			(1<<6)	// Player can't move, but keeps key inputs for controlling another entity
 #define FL_CLIENT				(1<<7)	// Is a player
 #define FL_FAKECLIENT			(1<<8)	// Fake client, simulated server side; don't send network messages to them
+#define FL_PARTIALGROUND		(1<<18) // Partially on the ground
 // NON-PLAYER SPECIFIC (i.e., not used by GameMovement or the client .dll ) -- Can still be applied to players, though
 #define FL_INWATER				(1<<9)	// In water
 
