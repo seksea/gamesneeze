@@ -675,3 +675,10 @@ const std::map<ItemIndex, const char*> itemIndexMap = {
 		{ ItemIndex::WEAPON_FRAG_GRENADE,         "Grenade"},
 		{ ItemIndex::WEAPON_BUMPMINE, 			"Bump Mine"}
 };
+
+inline const char* getNameFromItemIndex(ItemIndex index) {
+	if (itemIndexMap.find(index) != itemIndexMap.end()) {
+		return itemIndexMap.at(index);
+	}
+	return "invalid item";
+}

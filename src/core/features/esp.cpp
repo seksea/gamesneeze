@@ -143,12 +143,7 @@ void drawPlayer(Player* p) {
                             if (CONFIGBOOL("Visuals>Players>Enemies>Weapon")) {
                                 Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)p->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
                                 if (weapon) {
-                                    try {
-                                        rightText << itemIndexMap.at(weapon->itemIndex()) << "\n";
-                                    }
-                                    catch(const std::exception & e) {
-                                        //Log::log(WARN, "itemDefinitionIndex %d not found!", ((Weapon*)ent)->itemIndex());
-                                    }
+                                    rightText << getNameFromItemIndex((ItemIndex)(weapon->itemIndex() & 0xFFF)) << "\n";
                                 }
                             }
                             
@@ -179,12 +174,7 @@ void drawPlayer(Player* p) {
                     if (CONFIGBOOL("Visuals>Players>Teammates>Weapon")) {
                         Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)p->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
                         if (weapon) {
-                            try {
-                                rightText << itemIndexMap.at(weapon->itemIndex()) << "\n";
-                            }
-                            catch(const std::exception & e) {
-                                //Log::log(WARN, "itemDefinitionIndex %d not found!", ((Weapon*)ent)->itemIndex());
-                            }
+                            rightText << getNameFromItemIndex((ItemIndex)(weapon->itemIndex() & 0xFFF)) << "\n";
                         }
                     }
                     
@@ -226,12 +216,7 @@ void Features::ESP::draw() {
                         /* Weapon ESP */
                         else if ((clientClass->m_ClassID != EClassIds::CBaseWeaponWorldModel && strstr(clientClass->m_pNetworkName, "Weapon")) || clientClass->m_ClassID == EClassIds::CDEagle || clientClass->m_ClassID == EClassIds::CC4 || clientClass->m_ClassID == EClassIds::CAK47) {
                             if (((Weapon*)ent)->owner() == -1) {
-                                try {
-                                    drawGenericEnt(ent, CONFIGBOOL("Visuals>World>Items>Weapon Box"), CONFIGCOL("Visuals>World>Items>Weapon Box Color"), CONFIGBOOL("Visuals>World>Items>Weapon Label") ? itemIndexMap.at(((Weapon*)ent)->itemIndex()) : "");
-                                }
-                                catch(const std::exception & e) {
-                                    //Log::log(WARN, "itemDefinitionIndex %d not found!", ((Weapon*)ent)->itemIndex());
-                                }
+                                drawGenericEnt(ent, CONFIGBOOL("Visuals>World>Items>Weapon Box"), CONFIGCOL("Visuals>World>Items>Weapon Box Color"), CONFIGBOOL("Visuals>World>Items>Weapon Label") ? getNameFromItemIndex((ItemIndex)(((Weapon*)ent)->itemIndex() & 0xFFF)) : "");
                             }
                         }
 
