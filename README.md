@@ -79,6 +79,7 @@ chmod +x toolbox.sh
 | -ld (--load_debug) | Load/inject the cheat and debug via gdb |
 | -b (--build)       | Build to the build/ dir                 |
 | -bd (--build_debug)| Build to the build/ dir as debug        |
+| -r (--random_name) | Use random build name.                  |
 | -p (--pull)        | Update the cheat                        |
 | -h (--help)        | Show help                               |
 
