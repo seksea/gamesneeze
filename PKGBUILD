@@ -6,7 +6,7 @@ pkgdesc="An open source training utility for Counter-Strike: Global Offensive on
 arch=('x86_64')
 url="https://github.com/seksea/gamesneeze"
 license=('MIT')
-depends=('base-devel git cmake gdb sdl2 clang')
+depends=('base-devel' 'git' 'cmake' 'gdb' 'sdl2' 'clang')
 optdepends=('steam: downloading csgo with steam'
             'steam-native-runtime: downloading csgo with steam from native library')
 source=("git+https://github.com/seksea/gamesneeze.git")
