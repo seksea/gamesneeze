@@ -1,6 +1,6 @@
 # Maintainer: vanillamilkk <vanilla@kcml.my.id>
-pkgname=gamesneeze
-pkgver=2021.09.03
+pkgname=gamesneeze-git
+pkgver=r537.f5bac9c
 pkgrel=1
 pkgdesc="An open source training utility for Counter-Strike: Global Offensive on Linux."
 arch=('x86_64')
@@ -13,7 +13,8 @@ source=("git+https://github.com/seksea/gamesneeze.git")
 sha256sums=('SKIP')
 
 pkgver() {
-  date "+%Y.%m.%d" | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  cd "$pkgname"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 build() {
