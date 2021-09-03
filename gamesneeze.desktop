@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=/opt/gamesneeze/toolbox.sh -u -l
+Path=/opt/gamesneeze
+Icon=gamesneeze
+Name=gamesneeze
+GenericName=CS:GO Training Utility
+Categories=Utility
+Description=An open source training utility for Counter-Strike: Global Offensive on Linux.
+Comment=gamesneeze-linux
