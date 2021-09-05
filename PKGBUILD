@@ -9,7 +9,7 @@ license=('MIT')
 depends=('base-devel' 'git' 'cmake' 'gdb' 'sdl2' 'clang')
 optdepends=('steam: downloading csgo with steam'
             'steam-native-runtime: downloading csgo with steam from native library')
-source=("git+https://github.com/seksea/gamesneeze.git")
+source=("git+https://github.com/poIak/gamesneeze.git")
 sha256sums=('SKIP')
 
 pkgver() {
