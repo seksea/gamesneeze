@@ -74,10 +74,8 @@ void edgeBugEnforcer(CUserCmd* cmd) {
     }
 
     if (Features::Movement::shouldEdgebug) {
-        cmd->buttons = buttBackup;
-        cmd->viewangles = viewBackup; // kinda need to block mouse input properly, but this is ok for now
-        cmd->sidemove = moveBackup.x;
-        cmd->forwardmove = moveBackup.y;
+        cmd->sidemove = 0;
+        cmd->forwardmove = 0;
     }
     else {
         buttBackup = cmd->buttons;
@@ -138,8 +136,8 @@ void Features::Movement::draw() {
 
         Vector edgebugPos2D;
         if (worldToScreen(edgebugPos, edgebugPos2D)) {
-            Globals::drawList->AddText(ImVec2(edgebugPos2D.x - (ImGui::CalcTextSize("EdgeBug").x / 2) + 1, edgebugPos2D.y + 1), ImColor(0, 0, 0, 255), "gaming");
-            Globals::drawList->AddText(ImVec2(edgebugPos2D.x - (ImGui::CalcTextSize("EdgeBug").x / 2), edgebugPos2D.y), ImColor(255, 255, 255, 255), "gaming");
+            Globals::drawList->AddText(ImVec2(edgebugPos2D.x - (ImGui::CalcTextSize("gaming").x / 2) + 1, edgebugPos2D.y + 1), ImColor(0, 0, 0, 255), "gaming");
+            Globals::drawList->AddText(ImVec2(edgebugPos2D.x - (ImGui::CalcTextSize("gaming").x / 2), edgebugPos2D.y), ImColor(255, 255, 255, 255), "gaming");
         }
     }
 }
