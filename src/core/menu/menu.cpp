@@ -110,8 +110,7 @@ void Menu::onSwapWindow(SDL_Window* window) {
         io.MouseDrawCursor = false;
     }
 
-
-    if (ImGui::IsKeyPressed(SDL_SCANCODE_INSERT, false)) {
+    if (ImGui::IsKeyPressed(SDL_SCANCODE_INSERT, false) || (ImGui::IsKeyPressed(SDL_SCANCODE_ESCAPE, false) && Menu::open)) {
         Config::reloadCfgList();
         Menu::open = !Menu::open;
     }
