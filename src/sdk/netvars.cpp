@@ -71,7 +71,7 @@ bool Netvar::init() {
     Log::log(LOG, " setNamedSkybox | %lx", Offsets::setNamedSkybox);
 
     Offsets::lineGoesThroughSmoke = (Offsets::LineGoesThroughSmoke)PatternScan::findFirstInModule("/client_client.so", 
-            "40 0F B6 FF 55");
+            "55 48 89 E5 41 56 41 55 41 54 53 48 83 EC 30 66 0F D6 45 D0");
     Log::log(LOG, " lineGoesThroughSmoke | %lx", Offsets::lineGoesThroughSmoke);
 
     Offsets::moveData = **reinterpret_cast<CMoveData***>(getAbsoluteAddress(PatternScan::findFirstInModule("/client_client.so", 
