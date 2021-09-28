@@ -14,6 +14,7 @@ fi
 
 rm -rf /tmp/dumps
 mkdir -p --mode=000 /tmp/dumps
+sysctl kernel.core_pattern=core
 
 function unload {
     echo "Unloading cheat..."
