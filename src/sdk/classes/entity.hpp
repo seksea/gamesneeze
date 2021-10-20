@@ -138,12 +138,12 @@ public:
 
 	float GetSpread() {
 		typedef float (*Fn)(void*);
-		return getVirtualFunc<Fn>(this, 520)(this);
+		return getVirtualFunc<Fn>(this, 521)(this);
 	}
 
 	float GetInaccuracy() {
 		typedef float (*Fn)(void*);
-		return getVirtualFunc<Fn>(this, 550)(this);
+		return getVirtualFunc<Fn>(this, 551)(this);
 	}
 };
 
