@@ -97,6 +97,15 @@ namespace Offsets {
     inline unsigned int animState;
     inline CMoveData* moveData;
 
+    typedef void (*SaveData)(void*, const char*, int , int);
+    inline SaveData saveData;
+
+    typedef void (*RestoreData)(void*, const char*, int , int);
+    inline RestoreData restoreData;
+
+    typedef void (*OnPostRestoreData)(void*);
+    inline OnPostRestoreData onPostRestoreData;
+
 }
 
 #define GETNETVAROFFSET(table, prop) Netvar::offsets.at({table, prop})

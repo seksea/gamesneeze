@@ -94,5 +94,17 @@ bool Netvar::init() {
 	Offsets::getLocalClient = reinterpret_cast<Offsets::GetLocalClient>(getAbsoluteAddress(GetLocalPlayer + 9, 1, 5));
     Log::log(LOG, " getLocalClient | %lx", Offsets::getLocalClient);
 
+    Offsets::saveData = (Offsets::SaveData)PatternScan::findFirstInModule("/client_client.so",
+        "55 48 89 E5 41 57 41 89 CF 41 56 41 55 41 89 D5 41 54 53 48 89 FB 48 81 EC");
+    Log::log(LOG, " saveData | %lx", Offsets::saveData);
+
+    Offsets::restoreData = (Offsets::RestoreData)PatternScan::findFirstInModule("/client_client.so",
+        "E9 ? ? ? ? 90 55 48 63 F6");
+    Log::log(LOG, " restoreData | %lx", Offsets::restoreData);
+
+    Offsets::onPostRestoreData = (Offsets::OnPostRestoreData)PatternScan::findFirstInModule("/client_client.so",
+        "55 BE ? ? ? ? 48 89 E5 41 54 53 48 89 FB E8");
+    Log::log(LOG, " onPostRestoreData | %lx", Offsets::onPostRestoreData);
+
     return true;
 }

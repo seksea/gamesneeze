@@ -114,6 +114,18 @@ public:
 		return *reinterpret_cast<int*>((uintptr_t)this + GETNETVAROFFSET("DT_BaseEntity", "m_nRenderMode") + 1);
 	}
 
+	void saveData(const char *context, int slot, int type) {
+		Offsets::saveData(this, context, slot, type);
+	}
+
+	void restoreData (const char *context, int slot, int type) {
+		Offsets::restoreData(this, context, slot, type);
+	}
+
+	void onPostRestoreData() {
+		Offsets::onPostRestoreData(this);
+	}
+
 	bool isEnemy();
 	bool getHitboxBones(matrix3x4_t* boneMatrix);
 	bool getAnythingBones(matrix3x4_t* boneMatrix);
