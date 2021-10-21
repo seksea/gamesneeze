@@ -106,6 +106,8 @@ namespace Offsets {
     typedef void (*OnPostRestoreData)(void*);
     inline OnPostRestoreData onPostRestoreData;
 
+    typedef void (*RestoreEntityToPredictedFrame)(void*, int, int);
+    inline RestoreEntityToPredictedFrame restoreEntityToPredictedFrame;
 }
 
 #define GETNETVAROFFSET(table, prop) Netvar::offsets.at({table, prop})

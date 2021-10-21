@@ -7,6 +7,7 @@ namespace Features {
         inline bool inPrediction;
         void start(CUserCmd *cmd);
         void end();
+        void restoreEntityToPredictedFrame(int predicted_frame);
     }
     namespace ESP {
         void draw();

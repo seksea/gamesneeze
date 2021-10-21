@@ -74,7 +74,6 @@ void Features::Movement::prePredCreateMove(CUserCmd *cmd) {
     if (!Globals::localPlayer)
         return;
 
-    Globals::localPlayer->saveData("edgybaka", -420, 2);
     flagsBackup = Globals::localPlayer->flags();
     velBackup = Globals::localPlayer->velocity();
 
@@ -95,7 +94,8 @@ void Features::Movement::postPredCreateMove(CUserCmd *cmd) {
 
 void Features::Movement::edgeBugPredictor(CUserCmd *cmd) {
     if (!CONFIGBOOL("Misc>Misc>Movement>EdgeBug") ||
-        !Menu::CustomWidgets::isKeyDown(CONFIGINT("Misc>Misc>Movement>EdgeBug Key")))
+        !Menu::CustomWidgets::isKeyDown(CONFIGINT("Misc>Misc>Movement>EdgeBug Key")) ||
+        !Globals::localPlayer->health())
         return;
 
     struct MovementVars {
@@ -115,10 +115,11 @@ void Features::Movement::edgeBugPredictor(CUserCmd *cmd) {
     if (!shouldEdgebug)
         backup_move = original_move;
 
+    int nCmdsPred = Interfaces::prediction->Split->nCommandsPredicted;
+
     int predictAmount = 128; // TODO: make amount configurable
     for (int t = 0; t < 4; t++) {
-        Globals::localPlayer->restoreData("edgybaka", -420, 2);
-        Globals::localPlayer->onPostRestoreData();
+        Features::Prediction::restoreEntityToPredictedFrame(nCmdsPred - 1);
 
         bool doStrafe = (t % 2 == 0);
         bool doDuck = t > 1;

@@ -106,5 +106,9 @@ bool Netvar::init() {
         "55 BE ? ? ? ? 48 89 E5 41 54 53 48 89 FB E8");
     Log::log(LOG, " onPostRestoreData | %lx", Offsets::onPostRestoreData);
 
+    Offsets::restoreEntityToPredictedFrame = (Offsets::RestoreEntityToPredictedFrame)PatternScan::findFirstInModule("/client_client.so",
+        "55 48 89 E5 41 57 41 89 D7 41 56 41 55 41 89 F5 41 54 53 48 83 EC 18");
+    Log::log(LOG, " restoreEntityToPredictedFrame | %lx", Offsets::restoreEntityToPredictedFrame);
+
     return true;
 }

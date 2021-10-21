@@ -36,3 +36,7 @@ void Features::Prediction::end() {
     }
     inPrediction = false;
 }
+
+void Features::Prediction::restoreEntityToPredictedFrame(int predicted_frame) {
+    Offsets::restoreEntityToPredictedFrame(Interfaces::prediction, 0, predicted_frame);
+}
