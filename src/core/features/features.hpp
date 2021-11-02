@@ -7,6 +7,7 @@ namespace Features {
         inline bool inPrediction;
         void start(CUserCmd *cmd);
         void end();
+        void restoreEntityToPredictedFrame(int predicted_frame);
     }
     namespace ESP {
         void draw();
@@ -132,8 +133,8 @@ namespace Features {
     namespace Movement {
         inline int flagsBackup;
         inline Vector velBackup;
-        inline bool allowBhop = true;
         inline bool shouldEdgebug;
+        inline bool shouldDuckNext;
         inline Vector edgebugPos;
         void prePredCreateMove(CUserCmd* cmd);
         void postPredCreateMove(CUserCmd* cmd);

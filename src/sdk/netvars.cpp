@@ -71,7 +71,7 @@ bool Netvar::init() {
     Log::log(LOG, " setNamedSkybox | %lx", Offsets::setNamedSkybox);
 
     Offsets::lineGoesThroughSmoke = (Offsets::LineGoesThroughSmoke)PatternScan::findFirstInModule("/client_client.so", 
-            "40 0F B6 FF 55");
+            "55 48 89 E5 41 56 41 55 41 54 53 48 83 EC 30 66 0F D6 45 D0");
     Log::log(LOG, " lineGoesThroughSmoke | %lx", Offsets::lineGoesThroughSmoke);
 
     Offsets::moveData = **reinterpret_cast<CMoveData***>(getAbsoluteAddress(PatternScan::findFirstInModule("/client_client.so", 
@@ -93,6 +93,22 @@ bool Netvar::init() {
 	uintptr_t GetLocalPlayer = reinterpret_cast<uintptr_t>(getVTable(Interfaces::engine)[12]);
 	Offsets::getLocalClient = reinterpret_cast<Offsets::GetLocalClient>(getAbsoluteAddress(GetLocalPlayer + 9, 1, 5));
     Log::log(LOG, " getLocalClient | %lx", Offsets::getLocalClient);
+
+    Offsets::saveData = (Offsets::SaveData)PatternScan::findFirstInModule("/client_client.so",
+        "55 48 89 E5 41 57 41 89 CF 41 56 41 55 41 89 D5 41 54 53 48 89 FB 48 81 EC");
+    Log::log(LOG, " saveData | %lx", Offsets::saveData);
+
+    Offsets::restoreData = (Offsets::RestoreData)PatternScan::findFirstInModule("/client_client.so",
+        "E9 ? ? ? ? 90 55 48 63 F6");
+    Log::log(LOG, " restoreData | %lx", Offsets::restoreData);
+
+    Offsets::onPostRestoreData = (Offsets::OnPostRestoreData)PatternScan::findFirstInModule("/client_client.so",
+        "55 BE ? ? ? ? 48 89 E5 41 54 53 48 89 FB E8");
+    Log::log(LOG, " onPostRestoreData | %lx", Offsets::onPostRestoreData);
+
+    Offsets::restoreEntityToPredictedFrame = (Offsets::RestoreEntityToPredictedFrame)PatternScan::findFirstInModule("/client_client.so",
+        "55 48 89 E5 41 57 41 89 D7 41 56 41 55 41 89 F5 41 54 53 48 83 EC 18");
+    Log::log(LOG, " restoreEntityToPredictedFrame | %lx", Offsets::restoreEntityToPredictedFrame);
 
     return true;
 }
