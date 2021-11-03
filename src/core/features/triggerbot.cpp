@@ -16,6 +16,11 @@ void Features::Triggerbot::createMove(CUserCmd* cmd) {
     if (Globals::localPlayer && CONFIGBOOL("Legit>Triggerbot>Triggerbot") && Menu::CustomWidgets::isKeyDown(CONFIGINT("Legit>Triggerbot>Key"))) {
         Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)Globals::localPlayer->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
         if (weapon) {
+            static auto initialTime = 0.0f;
+            const auto now = Interfaces::globals->realtime;
+
+            if(now - initialTime < (CONFIGINT("Legit>Triggerbot>Delay") / 1000.0f)) return;
+
             QAngle viewAngles = cmd->viewangles;
             viewAngles += Globals::localPlayer->aimPunch() * 2;
             
@@ -48,6 +53,8 @@ void Features::Triggerbot::createMove(CUserCmd* cmd) {
                         default:
                             break;
                     }
+                } else {
+                    initialTime = now;
                 }
             }
             

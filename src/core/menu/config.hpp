@@ -139,6 +139,7 @@ namespace Config {
                 CONFIGITEM("Legit>Triggerbot>Triggerbot", false),
                 CONFIGITEM("Legit>Triggerbot>Head Hitchance", 0),
                 CONFIGITEM("Legit>Triggerbot>Body Hitchance", 0),
+                CONFIGITEM("Legit>Triggerbot>Delay", 0),
                 CONFIGITEM("Legit>Triggerbot>Magnetic", false),
             // }
         // }

@@ -175,6 +175,10 @@ void Menu::drawLegitTab() {
             ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
             ImGui::SliderInt("##Body Hitchance", &CONFIGINT("Legit>Triggerbot>Body Hitchance"), 0, 100);
 
+            ImGui::Text("Triggerbot Delay");
+            ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
+            ImGui::SliderInt("##Triggerbot Delay", &CONFIGINT("Legit>Triggerbot>Delay"), 0, 500);
+
             ImGui::Checkbox("Magnetic", &CONFIGBOOL("Legit>Triggerbot>Magnetic"));
         }
 
