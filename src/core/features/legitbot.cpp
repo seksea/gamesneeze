@@ -3,8 +3,7 @@
 #include <algorithm>
 
 void Features::LegitBot::createMove(CUserCmd* cmd) {
-    if ((Menu::CustomWidgets::isKeyDown(CONFIGINT("Legit>LegitBot>Default>Key")) || CONFIGBOOL("Legit>LegitBot>Default>Always on")) &&
-            Interfaces::engine->IsInGame() && Globals::localPlayer && Globals::localPlayer->health() > 0) {
+    if ((Menu::CustomWidgets::isKeyDown(CONFIGINT("Legit>LegitBot>Default>Key")) || CONFIGBOOL("Legit>LegitBot>Default>Always on")) || (Menu::CustomWidgets::isKeyDown(CONFIGINT("Legit>Triggerbot>Key")) && CONFIGBOOL("Legit>Triggerbot>Magnetic")) && Interfaces::engine->IsInGame() && Globals::localPlayer && Globals::localPlayer->health() > 0) {
         Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)Globals::localPlayer->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
         if (weapon) {
             int hitboxes = CONFIGINT("Legit>LegitBot>Default>Hitboxes");

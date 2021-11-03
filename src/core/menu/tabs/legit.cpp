@@ -174,6 +174,8 @@ void Menu::drawLegitTab() {
             ImGui::Text("Body Hitchance");
             ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
             ImGui::SliderInt("##Body Hitchance", &CONFIGINT("Legit>Triggerbot>Body Hitchance"), 0, 100);
+
+            ImGui::Checkbox("Magnetic", &CONFIGBOOL("Legit>Triggerbot>Magnetic"));
         }
 
         ImGui::EndChild();
