@@ -62,6 +62,10 @@ void Hooks::Events::EventListener::FireGameEvent(IGameEvent *event) {
             if (CONFIGBOOL("Misc>Misc>Hitmarkers>Hitlogs")) {
                 Features::Notifications::addNotification(ImColor(220, 40, 40), "[gs] killed %s", info.name);
             }
+
+            if (CONFIGBOOL("Misc>Misc>Hitmarkers>Killsound")) {
+                Interfaces::engine->ExecuteClientCmd("play buttons/arena_switch_press_02"); // TODO: play sound via a better method
+            }
         }
     }
     Features::BulletTracers::event(event);
