@@ -33,6 +33,7 @@ An open source training utility for Counter-Strike: Global Offensive on Linux.
  - Backtrack Chams
  - Flappy Bird clone
  - Legitbot
+ - Triggerbot
  - Hitmarkers
  - Nightmode
  - Skybox changer
