@@ -141,6 +141,7 @@ namespace Config {
                 CONFIGITEM("Legit>Triggerbot>Body Hitchance", 0),
                 CONFIGITEM("Legit>Triggerbot>Delay", 0),
                 CONFIGITEM("Legit>Triggerbot>Magnetic", false),
+                CONFIGITEM("Legit>Triggerbot>Safe", true),
             // }
         // }
         // RageBot {

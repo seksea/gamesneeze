@@ -180,6 +180,7 @@ void Menu::drawLegitTab() {
             ImGui::SliderInt("##Triggerbot Delay", &CONFIGINT("Legit>Triggerbot>Delay"), 0, 500);
 
             ImGui::Checkbox("Magnetic", &CONFIGBOOL("Legit>Triggerbot>Magnetic"));
+            ImGui::Checkbox("Safe", &CONFIGBOOL("Legit>Triggerbot>Safe"));
         }
 
         ImGui::EndChild();
