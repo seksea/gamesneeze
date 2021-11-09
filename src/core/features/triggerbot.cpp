@@ -13,11 +13,13 @@ Entity* findPlayerThatRayHits(Vector start, Vector end, Trace* traceToPlayer) {
 }
 
 void Features::Triggerbot::createMove(CUserCmd* cmd) {
+    static auto initialTime = 0.0f;
+    static bool waiting = false;
     if (Globals::localPlayer && CONFIGBOOL("Legit>Triggerbot>Triggerbot") && Menu::CustomWidgets::isKeyDown(CONFIGINT("Legit>Triggerbot>Key"))) {
         Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t)Globals::localPlayer->activeWeapon() & 0xFFF); // GetClientEntityFromHandle is being gay
         if (weapon) {
             if(CONFIGBOOL("Legit>Triggerbot>Safe")) {
-                static auto initialTime = 0.0f;
+                initialTime = 0.0f;
                 const auto now = Interfaces::globals->realtime;
 
                 if(now - initialTime < (CONFIGINT("Legit>Triggerbot>Delay") / 1000.0f)) return;
@@ -73,9 +75,7 @@ void Features::Triggerbot::createMove(CUserCmd* cmd) {
                 }
             } else {
                 const auto now = Interfaces::globals->realtime;
-                static auto initialTime = now;
                 static bool shotLastTick = false;
-                static bool waiting = false;
 
                 if(now - initialTime > (CONFIGINT("Legit>Triggerbot>Delay") / 1000.0f) && waiting) {
                     cmd->buttons |= (1 << 0);
@@ -126,5 +126,8 @@ void Features::Triggerbot::createMove(CUserCmd* cmd) {
                 if(!waiting) initialTime = now;
             } 
         }
+    } else {
+        if(CONFIGBOOL("Legit>Triggerbot>Safe")) initialTime = Interfaces::globals->realtime;
+        else waiting = false;
     }
 }
