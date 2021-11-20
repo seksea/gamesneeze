@@ -3,8 +3,8 @@
   <a href="/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License"></a>
   <a><img src="https://img.shields.io/badge/OS-Linux-green.svg" alt="Linux"></a>
   <a><img src="https://img.shields.io/badge/Cheat-CS:GO-green.svg" alt="CS:GO cheat"></a>
-  <a><img src="https://img.shields.io/badge/State-Unfinished-red.svg" alt="Unfinished"></a>
-  <a><img src="https://img.shields.io/badge/Detection-Undetected-green.svg" alt="Detection: Unknown"></a>
+  <a><img src="https://img.shields.io/badge/State-Maintained-green.svg" alt="Maintained"></a>
+  <a><img src="https://img.shields.io/badge/Detection-Undetected-green.svg" alt="Detection: Undetected"></a>
   <a href="https://gitter.im/gamesneeze/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link"><img src="https://img.shields.io/badge/Chat-Gitter-green.svg" alt="Gitter"></a>
   <a href="https://discord.gg/SCHsWHFJMb"><img src="https://img.shields.io/badge/Chat-Discord-blue.svg" alt="Discord"></a>
 </p>
@@ -12,6 +12,20 @@
 An open source training utility for Counter-Strike: Global Offensive on Linux.
 
 ## :warning: :warning: THIS IS A CHEAT FOR LINUX, IT WILL NOT INJECT IF YOU ARE ON WINDOWS, AND I'M NOT PLANNING ON PORTING ANYTIME SOON, DO NOT JOIN THE DISCORD ASKING FOR DLL :warning: :warning:
+
+## Donations
+
+Donations are accepted in BTC and Monero
+
+##### If sending more than 5 usd contact me on discord letting me know and I will add you to the credits as a donor along with the amount donated.
+
+```
+BTC:
+bc1qwrqhhlam4rl7yh2a09ntgdduw3vg9er3ce8rjq
+
+Monero:
+86xJi2jQEocYZ7o6BTrbmTPJKLxbfHAdKdPcTgro3PAw6z3MCcYLq28Ehg4tzRUCPFKDQM1SKbp4RRygnk9FCBux3uxXCDN
+```
 
 ## Current Features
 
