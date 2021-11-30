@@ -17,74 +17,32 @@ void Features::PlayerList::draw() {
             ImGui::NextColumn();
             static Player* selectedPlayer;
             static player_info_t selectedPlayerInfo;
-
-            // some of the worst code ive ever written but i cant think of a better way
-            std::vector<int> ts;
-            std::vector<int> cts;
-            
             for (int i = 1; i < Interfaces::globals->maxClients; i++) {
                 Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
                 if (p) {
-                    if(p->team() == 2) {
-                        ts.push_back(i);
-                    } else {
-                        cts.push_back(i);
+                    ImGui::Separator();
+                    player_info_t info;
+                    Interfaces::engine->GetPlayerInfo(i, &info);
+
+                    ImGui::TextColored(p->team() == 2 ? ImColor(229, 189, 94, 255) : ImColor(110, 149, 215, 255), "%s", info.name);
+                    if (ImGui::IsItemClicked()) {
+                        selectedPlayer = p;
+                        selectedPlayerInfo = info;
+                        ImGui::OpenPopup("Player Popup");
                     }
+                    if (ImGui::IsItemHovered()) {
+                        ImGui::SetTooltip("Click for player settings!");
+                    }
+
+                    ImGui::NextColumn();
+                    ImColor healthColor = ImColor(0, 255, 0);
+                    ImGui::ColorConvertHSVtoRGB(((float)p->health()-20.f)/255.f, 1.f, 1.f, healthColor.Value.x, healthColor.Value.y, healthColor.Value.z);
+                    ImGui::TextColored(healthColor, "%d", p->health());
+                    ImGui::NextColumn();
+                    ImGui::TextColored(ImColor(100, 200, 0, 255), "$%d", p->money());
+                    ImGui::NextColumn();
                 }
             }
-
-            for(auto & i : ts) {
-                Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
-                if(!p) return;
-                ImGui::Separator();
-                    player_info_t info;
-                    Interfaces::engine->GetPlayerInfo(i, &info);
-
-                    ImGui::TextColored(ImColor(229, 189, 94, 255), "%s", info.name);
-                    if (ImGui::IsItemClicked()) {
-                        selectedPlayer = p;
-                        selectedPlayerInfo = info;
-                        ImGui::OpenPopup("Player Popup");
-                    }
-                    if (ImGui::IsItemHovered()) {
-                        ImGui::SetTooltip("Click for player settings!");
-                    }
-
-                    ImGui::NextColumn();
-                    ImColor healthColor = ImColor(0, 255, 0);
-                    ImGui::ColorConvertHSVtoRGB(((float)p->health()-20.f)/255.f, 1.f, 1.f, healthColor.Value.x, healthColor.Value.y, healthColor.Value.z);
-                    ImGui::TextColored(healthColor, "%d", p->health());
-                    ImGui::NextColumn();
-                    ImGui::TextColored(ImColor(100, 200, 0, 255), "$%d", p->money());
-                    ImGui::NextColumn();
-            }
-
-            for(auto & i : cts) {
-                Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
-                if(!p) return;
-                ImGui::Separator();
-                    player_info_t info;
-                    Interfaces::engine->GetPlayerInfo(i, &info);
-
-                    ImGui::TextColored(ImColor(110, 149, 215, 255), "%s", info.name);
-                    if (ImGui::IsItemClicked()) {
-                        selectedPlayer = p;
-                        selectedPlayerInfo = info;
-                        ImGui::OpenPopup("Player Popup");
-                    }
-                    if (ImGui::IsItemHovered()) {
-                        ImGui::SetTooltip("Click for player settings!");
-                    }
-
-                    ImGui::NextColumn();
-                    ImColor healthColor = ImColor(0, 255, 0);
-                    ImGui::ColorConvertHSVtoRGB(((float)p->health()-20.f)/255.f, 1.f, 1.f, healthColor.Value.x, healthColor.Value.y, healthColor.Value.z);
-                    ImGui::TextColored(healthColor, "%d", p->health());
-                    ImGui::NextColumn();
-                    ImGui::TextColored(ImColor(100, 200, 0, 255), "$%d", p->money());
-                    ImGui::NextColumn();
-            }
-
             if (ImGui::BeginPopup("Player Popup")){
                 ImGui::Text("Player Options | %s", selectedPlayerInfo.name);
                 ImGui::Separator();

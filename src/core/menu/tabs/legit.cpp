@@ -54,7 +54,6 @@ void Menu::drawLegitTab() {
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Default>Smoothing"), 0, 100);
                 ImGui::Checkbox("Recoil Compensation", &CONFIGBOOL("Legit>LegitBot>Default>Recoil Compensation"));
                 ImGui::Checkbox("Aim While Blind", &CONFIGBOOL("Legit>LegitBot>Default>Aim While Blind"));
-                ImGui::Checkbox("Experimental Snap", &CONFIGBOOL("Legit>LegitBot>Default>Snap"));
 
 
                 ImGui::EndTabItem();
@@ -69,7 +68,6 @@ void Menu::drawLegitTab() {
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Pistol>Smoothing"), 0, 100);
                 ImGui::Checkbox("Aim While Blind", &CONFIGBOOL("Legit>LegitBot>Pistol>Aim While Blind"));
-                ImGui::Checkbox("Experimental Snap", &CONFIGBOOL("Legit>LegitBot>AWP>Snap"));
 
                 ImGui::EndTabItem();
             }
@@ -83,7 +81,6 @@ void Menu::drawLegitTab() {
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Heavy Pistol>Smoothing"), 0, 100);
                 ImGui::Checkbox("Aim While Blind", &CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Aim While Blind"));
-                ImGui::Checkbox("Experimental Snap", &CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Snap"));
 
                 ImGui::EndTabItem();
             }
@@ -98,7 +95,6 @@ void Menu::drawLegitTab() {
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Rifle>Smoothing"), 0, 100);
                 ImGui::Checkbox("Recoil Compensation", &CONFIGBOOL("Legit>LegitBot>Rifle>Recoil Compensation"));
                 ImGui::Checkbox("Aim While Blind", &CONFIGBOOL("Legit>LegitBot>Rifle>Aim While Blind"));
-                ImGui::Checkbox("Experimental Snap", &CONFIGBOOL("Legit>LegitBot>Rifle>Snap"));
 
                 ImGui::EndTabItem();
             }
@@ -113,7 +109,6 @@ void Menu::drawLegitTab() {
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>SMG>Smoothing"), 0, 100);
                 ImGui::Checkbox("Recoil Compensation", &CONFIGBOOL("Legit>LegitBot>SMG>Recoil Compensation"));
                 ImGui::Checkbox("Aim While Blind", &CONFIGBOOL("Legit>LegitBot>SMG>Aim While Blind"));
-                ImGui::Checkbox("Experimental Snap", &CONFIGBOOL("Legit>LegitBot>SMG>Snap"));
 
                 ImGui::EndTabItem();
             }
@@ -127,7 +122,6 @@ void Menu::drawLegitTab() {
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Scout>Smoothing"), 0, 100);
                 ImGui::Checkbox("Aim While Blind", &CONFIGBOOL("Legit>LegitBot>Scout>Aim While Blind"));
-                ImGui::Checkbox("Experimental Snap", &CONFIGBOOL("Legit>LegitBot>Scout>Snap"));
 
                 ImGui::EndTabItem();
             }
@@ -141,7 +135,6 @@ void Menu::drawLegitTab() {
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>AWP>Smoothing"), 0, 100);
                 ImGui::Checkbox("Aim While Blind", &CONFIGBOOL("Legit>LegitBot>AWP>Aim While Blind"));
-                ImGui::Checkbox("Experimental Snap", &CONFIGBOOL("Legit>LegitBot>AWP>Snap"));
 
                 ImGui::EndTabItem();
             }
@@ -156,7 +149,6 @@ void Menu::drawLegitTab() {
                 ImGui::SliderInt("##Smoothing", &CONFIGINT("Legit>LegitBot>Heavy>Smoothing"), 0, 100);
                 ImGui::Checkbox("Recoil Compensation", &CONFIGBOOL("Legit>LegitBot>Heavy>Recoil Compensation"));
                 ImGui::Checkbox("Aim While Blind", &CONFIGBOOL("Legit>LegitBot>Heavy>Aim While Blind"));
-                ImGui::Checkbox("Experimental Snap", &CONFIGBOOL("Legit>LegitBot>Heavy>Snap"));
 
                 ImGui::EndTabItem();
             }

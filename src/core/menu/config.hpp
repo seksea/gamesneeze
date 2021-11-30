@@ -73,7 +73,6 @@ namespace Config {
                     CONFIGITEM("Legit>LegitBot>Default>Smoothing", 0),
                     CONFIGITEM("Legit>LegitBot>Default>Recoil Compensation", false),
                     CONFIGITEM("Legit>LegitBot>Default>Aim While Blind", false),
-                    CONFIGITEM("Legit>LegitBot>Default>Snap", false),
                 //}
                 // Pistol {
                     CONFIGITEM("Legit>LegitBot>Pistol>Hitboxes", 1),
@@ -81,7 +80,6 @@ namespace Config {
                     CONFIGITEM("Legit>LegitBot>Pistol>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Pistol>Smoothing", 0),
                     CONFIGITEM("Legit>LegitBot>Pistol>Aim While Blind", false),
-                    CONFIGITEM("Legit>LegitBot>Pistol>Snap", false),
                 //}
                 // Heavy Pistol {
                     CONFIGITEM("Legit>LegitBot>Heavy Pistol>Hitboxes", 1),
@@ -89,7 +87,6 @@ namespace Config {
                     CONFIGITEM("Legit>LegitBot>Heavy Pistol>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Heavy Pistol>Smoothing", 0),
                     CONFIGITEM("Legit>LegitBot>Heavy Pistol>Aim While Blind", false),
-                    CONFIGITEM("Legit>LegitBot>Heavy Pistol>Snap", false),
                 //}
                 // Rifle {
                     CONFIGITEM("Legit>LegitBot>Rifle>Hitboxes", 1),
@@ -98,7 +95,6 @@ namespace Config {
                     CONFIGITEM("Legit>LegitBot>Rifle>Smoothing", 0),
                     CONFIGITEM("Legit>LegitBot>Rifle>Recoil Compensation", false),
                     CONFIGITEM("Legit>LegitBot>Rifle>Aim While Blind", false),
-                    CONFIGITEM("Legit>LegitBot>Rifle>Snap", false),
                 //}
                 // SMG {
                     CONFIGITEM("Legit>LegitBot>SMG>Hitboxes", 1),
@@ -107,7 +103,6 @@ namespace Config {
                     CONFIGITEM("Legit>LegitBot>SMG>Smoothing", 0),
                     CONFIGITEM("Legit>LegitBot>SMG>Recoil Compensation", false),
                     CONFIGITEM("Legit>LegitBot>SMG>Aim While Blind", false),
-                    CONFIGITEM("Legit>LegitBot>SMG>Snap", false),
                 //}
                 // Scout {
                     CONFIGITEM("Legit>LegitBot>Scout>Hitboxes", 1),
@@ -115,7 +110,6 @@ namespace Config {
                     CONFIGITEM("Legit>LegitBot>Scout>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>Scout>Smoothing", 0),
                     CONFIGITEM("Legit>LegitBot>Scout>Aim While Blind", false),
-                    CONFIGITEM("Legit>LegitBot>Scout>Snap", false),
                 //}
                 // AWP {
                     CONFIGITEM("Legit>LegitBot>AWP>Hitboxes", 1),
@@ -123,7 +117,6 @@ namespace Config {
                     CONFIGITEM("Legit>LegitBot>AWP>FOV", 0),
                     CONFIGITEM("Legit>LegitBot>AWP>Smoothing", 0),
                     CONFIGITEM("Legit>LegitBot>AWP>Aim While Blind", false),
-                    CONFIGITEM("Legit>LegitBot>AWP>Snap", false),
                 //}
                 // Heavy {
                     CONFIGITEM("Legit>LegitBot>Heavy>Hitboxes", 1),
@@ -132,7 +125,6 @@ namespace Config {
                     CONFIGITEM("Legit>LegitBot>Heavy>Smoothing", 0),
                     CONFIGITEM("Legit>LegitBot>Heavy>Recoil Compensation", false),
                     CONFIGITEM("Legit>LegitBot>Heavy>Aim While Blind", false),
-                    CONFIGITEM("Legit>LegitBot>Heavy>Snap", false),
                 //}
             // }
 
@@ -349,7 +341,6 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Hitmarkers>Hitlogs", false),
             CONFIGITEM("Misc>Misc>Hitmarkers>Hitmarkers", false),
             CONFIGITEM("Misc>Misc>Hitmarkers>Hitsound", false),
-            CONFIGITEM("Misc>Misc>Hitmarkers>Killsound", false),
             CONFIGITEM("Misc>Misc>Hitmarkers>Damage Markers", false),
 
             CONFIGITEM("Misc>Misc>Misc>Disable Watermark", false),
