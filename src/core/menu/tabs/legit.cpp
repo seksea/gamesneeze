@@ -36,7 +36,7 @@ void hitboxSelectBox(const char* configVarName) {
 }
 
 void Menu::drawLegitTab() {
-    ImGui::BeginChild("LegitBot", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 260), true); {
+    ImGui::BeginChild("LegitBot", ImVec2(ImGui::GetWindowContentRegionWidth() * 0.65f, 300), true); {
         ImGui::Text("LegitBot");
         ImGui::Separator();
         if (ImGui::BeginTabBar("Aim Weapons Tabbar")) {
@@ -165,7 +165,7 @@ void Menu::drawLegitTab() {
         ImGui::EndChild();
     }
     ImGui::SameLine();
-    ImGui::BeginChild("Triggerbot", ImVec2(0, 260), true); {
+    ImGui::BeginChild("Triggerbot", ImVec2(0, 300), true); {
         ImGui::Text("Triggerbot");
         ImGui::Separator();
         if (CONFIGBOOL("Legit>Triggerbot>Triggerbot")) {
