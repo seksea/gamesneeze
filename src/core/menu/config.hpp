@@ -145,6 +145,7 @@ namespace Config {
             // Triggerbot {
                 CONFIGITEM("Legit>Triggerbot>Key", 0),
                 CONFIGITEM("Legit>Triggerbot>Triggerbot", false),
+                CONFIGITEM("Legit>Triggerbot>Trigger On Teammates", false),
                 CONFIGITEM("Legit>Triggerbot>Head Hitchance", 0),
                 CONFIGITEM("Legit>Triggerbot>Body Hitchance", 0),
             // }

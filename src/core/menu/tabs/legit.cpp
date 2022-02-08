@@ -175,6 +175,7 @@ void Menu::drawLegitTab() {
         }
         ImGui::Checkbox("Triggerbot", &CONFIGBOOL("Legit>Triggerbot>Triggerbot"));
         if (CONFIGBOOL("Legit>Triggerbot>Triggerbot")) {
+        	ImGui::Checkbox("Trigger On Teammates", &CONFIGBOOL("Legit>Triggerbot>Trigger On Teammates"));
             ImGui::Text("Head Hitchance");
             ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
             ImGui::SliderInt("##Head Hitchance", &CONFIGINT("Legit>Triggerbot>Head Hitchance"), 0, 100);

@@ -36,7 +36,13 @@ void Features::Triggerbot::createMove(CUserCmd* cmd) {
                 endPos = Globals::localPlayer->eyePos() + (endPos*4096);
 
                 Entity* ent = findPlayerThatRayHits(Globals::localPlayer->eyePos(), endPos, &traceToPlayer);
-                if (ent && ent->clientClass()->m_ClassID == CCSPlayer && !ent->dormant() && ((Player*)ent)->isEnemy()) {
+
+				bool triggerOnTeammates = CONFIGBOOL("Legit>Triggerbot>Trigger On Teammates");
+				bool isTeammate = !((Player*)ent)->isEnemy();
+				if(isTeammate && !triggerOnTeammates)
+					return;
+                
+                if (ent && ent->clientClass()->m_ClassID == CCSPlayer && !ent->dormant()) {
                     switch (traceToPlayer.hitgroup) {
                         case HITGROUP_HEAD:
                             headHitchance++;
