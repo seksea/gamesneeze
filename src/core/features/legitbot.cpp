@@ -12,6 +12,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
             float FOV = CONFIGINT("Legit>LegitBot>Default>FOV")/10.f;
             bool recoilCompensation = CONFIGBOOL("Legit>LegitBot>Default>Recoil Compensation");
             bool aimWhileBlind = CONFIGBOOL("Legit>LegitBot>Default>Aim While Blind");
+            bool aimAtTeammates = CONFIGBOOL("Legit>LegitBot>Default>Aim At Teammates");
 
             if ((std::find(std::begin(pistols), std::end(pistols), weapon->itemIndex() & 0xFFF) != std::end(pistols)) && CONFIGBOOL("Legit>LegitBot>Pistol>Override")) {
                 hitboxes = CONFIGINT("Legit>LegitBot>Pistol>Hitboxes");
@@ -19,6 +20,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 FOV = CONFIGINT("Legit>LegitBot>Pistol>FOV")/10.f;
                 recoilCompensation = false;
                 aimWhileBlind = CONFIGBOOL("Legit>LegitBot>Pistol>Aim While Blind");
+                aimAtTeammates = CONFIGBOOL("Legit>LegitBot>Pistol>Aim At Teammates");
             }
             else if ((std::find(std::begin(heavyPistols), std::end(heavyPistols), weapon->itemIndex() & 0xFFF) != std::end(heavyPistols)) && CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Override")) {
                 hitboxes = CONFIGINT("Legit>LegitBot>Heavy Pistol>Hitboxes");
@@ -26,6 +28,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 FOV = CONFIGINT("Legit>LegitBot>Heavy Pistol>FOV")/10.f;
                 recoilCompensation = false;
                 aimWhileBlind = CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Aim While Blind");
+                aimAtTeammates = CONFIGBOOL("Legit>LegitBot>Heavy Pistol>Aim At Teammates");
             }
             else if ((std::find(std::begin(rifles), std::end(rifles), weapon->itemIndex() & 0xFFF) != std::end(rifles)) && CONFIGBOOL("Legit>LegitBot>Rifle>Override")) {
                 hitboxes = CONFIGINT("Legit>LegitBot>Rifle>Hitboxes");
@@ -33,6 +36,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 FOV = CONFIGINT("Legit>LegitBot>Rifle>FOV")/10.f;
                 recoilCompensation = CONFIGINT("Legit>LegitBot>Rifle>Recoil Compensation");
                 aimWhileBlind = CONFIGBOOL("Legit>LegitBot>Rifle>Aim While Blind");
+                aimAtTeammates = CONFIGBOOL("Legit>LegitBot>Rifle>Aim At Teammates");
             }
             else if ((std::find(std::begin(smgs), std::end(smgs), weapon->itemIndex() & 0xFFF) != std::end(smgs)) && CONFIGBOOL("Legit>LegitBot>SMG>Override")) {
                 hitboxes = CONFIGINT("Legit>LegitBot>SMG>Hitboxes");
@@ -40,6 +44,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 FOV = CONFIGINT("Legit>LegitBot>SMG>FOV")/10.f;
                 recoilCompensation = CONFIGINT("Legit>LegitBot>SMG>Recoil Compensation");
                 aimWhileBlind = CONFIGBOOL("Legit>LegitBot>SMG>Aim While Blind");
+                aimAtTeammates = CONFIGBOOL("Legit>LegitBot>SMG>Aim At Teammates");
             }
             else if (((weapon->itemIndex() & 0xFFF) == WEAPON_SSG08) && CONFIGBOOL("Legit>LegitBot>Scout>Override")) {
                 hitboxes = CONFIGINT("Legit>LegitBot>Scout>Hitboxes");
@@ -47,6 +52,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 FOV = CONFIGINT("Legit>LegitBot>Scout>FOV")/10.f;
                 recoilCompensation = false;
                 aimWhileBlind = CONFIGBOOL("Legit>LegitBot>Scout>Aim While Blind");
+                aimAtTeammates = CONFIGBOOL("Legit>LegitBot>Scout>Aim At Teammates");
             }
             else if (((weapon->itemIndex() & 0xFFF) == WEAPON_AWP) && CONFIGBOOL("Legit>LegitBot>AWP>Override")) {
                 hitboxes = CONFIGINT("Legit>LegitBot>AWP>Hitboxes");
@@ -54,6 +60,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 FOV = CONFIGINT("Legit>LegitBot>AWP>FOV")/10.f;
                 recoilCompensation = false;
                 aimWhileBlind = CONFIGBOOL("Legit>LegitBot>AWP>Aim While Blind");
+                aimAtTeammates = CONFIGBOOL("Legit>LegitBot>AWP>Aim At Teammates");
             }
             else if ((std::find(std::begin(heavyWeapons), std::end(heavyWeapons), weapon->itemIndex() & 0xFFF) != std::end(heavyWeapons)) && CONFIGBOOL("Legit>LegitBot>Heavy>Override")) {
                 hitboxes = CONFIGINT("Legit>LegitBot>Heavy>Hitboxes");
@@ -61,6 +68,7 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
                 FOV = CONFIGINT("Legit>LegitBot>Heavy>FOV")/10.f;
                 recoilCompensation = CONFIGINT("Legit>LegitBot>Heavy>Recoil Compensation");
                 aimWhileBlind = CONFIGBOOL("Legit>LegitBot>Heavy>Aim While Blind");
+                aimAtTeammates = CONFIGBOOL("Legit>LegitBot>Heavy>Aim At Teammates");
             }
 
             float closestDelta = FLT_MAX;
@@ -74,7 +82,11 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
             for (int i = 1; i < Interfaces::globals->maxClients; i++) {
                 Player* p = (Player*)Interfaces::entityList->GetClientEntity(i);
                 if (p && p != Globals::localPlayer) {
-                    if (p->health() > 0 && !p->dormant() && p->isEnemy() && p->visible()) {
+                	bool isTeammate = !p->isEnemy();
+                	if(isTeammate && !aimAtTeammates)
+                		continue;
+                				
+                    if (p->health() > 0 && !p->dormant() && p->visible()) {
 
                         // TODO: There is probably a better way to do this,
                         //       but when I tried making a timer with curtime
