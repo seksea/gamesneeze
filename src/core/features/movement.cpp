@@ -117,7 +117,7 @@ void Features::Movement::edgeBugPredictor(CUserCmd *cmd) {
 
     int nCmdsPred = Interfaces::prediction->Split->nCommandsPredicted;
 
-    int predictAmount = CONFIGINT("Misc>Misc>Movement>EdgeBug Predict Amount"); // TODO: make amount configurable
+    int predictAmount = CONFIGINT("Misc>Misc>Movement>EdgeBug Predict Amount");
     for (int t = 0; t < 4; t++) {
         Features::Prediction::restoreEntityToPredictedFrame(nCmdsPred - 1);
 
