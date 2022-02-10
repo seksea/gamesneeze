@@ -56,6 +56,7 @@ Monero:
  - JumpBug
  - EdgeBug
  - Edge Jump
+ - Block Bot
 
 
 ## How to use
