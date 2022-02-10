@@ -3,8 +3,6 @@
 #include <algorithm>
 #include <cstdint>
 
-
-
 bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* cmd) {
     original(thisptr, flInputSampleTime, cmd);
     if (cmd->tick_count != 0) {
@@ -49,6 +47,7 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
 
         auto view_backup = cmd->viewangles;
         Features::Movement::edgeBugPredictor(cmd);
+        Features::BlockBot::createMove(cmd);
         startMovementFix(cmd);
         cmd->viewangles = view_backup;
         endMovementFix(cmd);

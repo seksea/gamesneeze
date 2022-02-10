@@ -141,4 +141,7 @@ namespace Features {
         void edgeBugPredictor(CUserCmd* cmd);
         void draw();
     }
+    namespace BlockBot {
+    	void createMove(CUserCmd* cmd);
+    }
 }

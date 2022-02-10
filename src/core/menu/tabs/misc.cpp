@@ -37,6 +37,12 @@ void Menu::drawMiscTab() {
                 ImGui::Checkbox("Use Spam", &CONFIGBOOL("Misc>Misc>Misc>Use Spam"));
                 ImGui::Checkbox("Disable Setting Cvars", &CONFIGBOOL("Misc>Misc>Misc>Disable Setting Cvars"));
                 ImGui::Checkbox("Disable Post Processing", &CONFIGBOOL("Misc>Misc>Misc>Disable Post Processing"));
+                if (CONFIGBOOL("Misc>Misc>Misc>Block Bot")) {
+                	static bool toggled = false;
+                	Menu::CustomWidgets::drawKeyBinder("Key", &CONFIGINT("Misc>Misc>Misc>Block Bot Key"), &toggled);
+                	ImGui::SameLine();
+                }
+                ImGui::Checkbox("Block Bot", &CONFIGBOOL("Misc>Misc>Misc>Block Bot"));
                 ImGui::EndChild();
             }
 
