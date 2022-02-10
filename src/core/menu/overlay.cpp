@@ -2,6 +2,7 @@
 #include <cstring>
 #include <unistd.h>
 #include <pwd.h>
+#include <ctime>
 
 // p100 flex ur distro
 char distro[32];
@@ -28,8 +29,14 @@ void Menu::drawOverlay(ImDrawList* drawList) {
     gethostname(hostname, 64);
     Globals::drawList = drawList;
     if(!CONFIGBOOL("Misc>Misc>Misc>Disable Watermark")) {
-        char watermarkText[64];
-        sprintf(watermarkText, "gamesneeze (%s - %s@%s) | %.1f FPS | %i ms", distro, getpwuid(getuid())->pw_name, hostname, ImGui::GetIO().Framerate, (Interfaces::engine->IsInGame() && playerResource) ? playerResource->GetPing(Interfaces::engine->GetLocalPlayer()) : 0);
+        char watermarkText[128];
+        time_t currentTime;
+        tm* currentTm;
+        char timeStr[12];
+        time(&currentTime);
+        currentTm = localtime(&currentTime);
+        strftime(timeStr, 12, "%T", currentTm);
+        sprintf(watermarkText, "gamesneeze (%s - %s@%s) | %s | %.1f FPS | %i ms", distro, getpwuid(getuid())->pw_name, hostname, timeStr, ImGui::GetIO().Framerate, (Interfaces::engine->IsInGame() && playerResource) ? playerResource->GetPing(Interfaces::engine->GetLocalPlayer()) : 0);
         // Hacky way to do black shadow but it works
         Globals::drawList->AddText(ImVec2(4, 4), ImColor(0, 0, 0, 255), watermarkText);
         Globals::drawList->AddText(ImVec2(3, 3), ImColor(255, 255, 255, 255), watermarkText);
