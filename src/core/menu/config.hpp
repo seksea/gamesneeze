@@ -357,6 +357,7 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Clantag>Clantag Marquee", false),
             CONFIGITEM("Misc>Misc>Clantag>Bee Movie Clantag", false),
             CONFIGITEM("Misc>Misc>Misc>Spectators", false),
+            CONFIGITEM("Misc>Misc>Misc>Show All Spectators", false),
             CONFIGITEM("Misc>Misc>Misc>Player List", false),
             CONFIGITEM("Misc>Misc>Misc>Player List Only When Menu Open", false),
             CONFIGITEM("Misc>Misc>Misc>Flappy Birb", false),
@@ -370,6 +371,8 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Misc>Disable Post Processing", false),
             CONFIGITEM("Misc>Misc>Misc>Block Bot", false),
             CONFIGITEM("Misc>Misc>Misc>Block Bot Key", 0),
+            CONFIGITEM("Misc>Misc>Misc>Vote Revealer", false),
+            CONFIGITEM("Misc>Misc>Misc>Enemy Vote Revealer", false),
 
             CONFIGITEM("Misc>Skins>Skins>PaintKit", 0),
             CONFIGITEM("Misc>Skins>Skins>Wear", 0),

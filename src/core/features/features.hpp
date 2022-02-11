@@ -144,4 +144,7 @@ namespace Features {
     namespace BlockBot {
     	void createMove(CUserCmd* cmd);
     }
+    namespace VoteRevealer {
+    	void event(IGameEvent* event);
+    }
 }

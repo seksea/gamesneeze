@@ -16,6 +16,10 @@ void Menu::drawMiscTab() {
                 ImGui::Checkbox("Rank Revealer", &CONFIGBOOL("Misc>Misc>Misc>Rank Revealer"));
 
                 ImGui::Checkbox("Spectators", &CONFIGBOOL("Misc>Misc>Misc>Spectators"));
+                if (CONFIGBOOL("Misc>Misc>Misc>Spectators")) {
+                	ImGui::SameLine();
+                	ImGui::Checkbox("Show All", &CONFIGBOOL("Misc>Misc>Misc>Show All Spectators"));
+                }
                 ImGui::Checkbox("Player List", &CONFIGBOOL("Misc>Misc>Misc>Player List"));
                 if (CONFIGBOOL("Misc>Misc>Misc>Player List")) {
                     ImGui::SameLine();
@@ -43,6 +47,11 @@ void Menu::drawMiscTab() {
                 	ImGui::SameLine();
                 }
                 ImGui::Checkbox("Block Bot", &CONFIGBOOL("Misc>Misc>Misc>Block Bot"));
+                ImGui::Checkbox("Vote Revealer", &CONFIGBOOL("Misc>Misc>Misc>Vote Revealer"));
+                if (CONFIGBOOL("Misc>Misc>Misc>Vote Revealer")) {
+                	ImGui::SameLine();
+                	ImGui::Checkbox("Reveal Enemy Votes", &CONFIGBOOL("Misc>Misc>Misc>Enemy Vote Revealer"));
+                }
                 ImGui::EndChild();
             }
 
