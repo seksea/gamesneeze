@@ -127,7 +127,9 @@ void Menu::drawMenu() {
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 4));
     ImGui::Text("game"); ImGui::SameLine(); ImGui::PopStyleVar();
     if (ImGui::IsItemClicked()) {
-        system("xdg-open https://discord.gg/SCHsWHFJMb &"); //if it works it works lmao
+        int status = system("xdg-open https://discord.gg/SCHsWHFJMb &"); //if it works it works lmao
+        if(status != 0)
+        	Features::Notifications::addNotification(ImColor(255, 0, 0), "[gs] system() failed. Return value: %d", status);
     }
     if (ImGui::IsItemHovered()) {
         ImGui::SetTooltip("Click for discord!");
@@ -135,7 +137,9 @@ void Menu::drawMenu() {
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(490, 5));
     ImGui::TextColored(ImColor(108, 195, 18, 255), "sneeze");
     if (ImGui::IsItemClicked()) {
-        system("xdg-open https://discord.gg/SCHsWHFJMb &"); //if it works it works lmao
+        int status = system("xdg-open https://discord.gg/SCHsWHFJMb &"); //if it works it works lmao
+        if(status != 0)
+	       	Features::Notifications::addNotification(ImColor(255, 0, 0), "[gs] system() failed. Return value: %d", status);
     }
     if (ImGui::IsItemHovered()) {
         ImGui::SetTooltip("Click for discord!");

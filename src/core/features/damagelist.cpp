@@ -47,7 +47,7 @@ void Features::DamageList::event(IGameEvent* event) {
 	if(!attacker || !victim) 
     	return;
 
-    if(attacker == victim)
+	if(attacker == victim)
     	return;
 
 	if(attacker->isEnemy() || victim->isEnemy())
