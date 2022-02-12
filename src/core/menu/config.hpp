@@ -373,6 +373,8 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Misc>Block Bot Key", 0),
             CONFIGITEM("Misc>Misc>Misc>Vote Revealer", false),
             CONFIGITEM("Misc>Misc>Misc>Enemy Vote Revealer", false),
+            CONFIGITEM("Misc>Misc>Misc>Damage List", false),
+            CONFIGITEM("Misc>Misc>Misc>Damage List Only When Menu Open", false),
 
             CONFIGITEM("Misc>Skins>Skins>PaintKit", 0),
             CONFIGITEM("Misc>Skins>Skins>Wear", 0),

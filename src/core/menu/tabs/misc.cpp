@@ -52,6 +52,11 @@ void Menu::drawMiscTab() {
                 	ImGui::SameLine();
                 	ImGui::Checkbox("Reveal Enemy Votes", &CONFIGBOOL("Misc>Misc>Misc>Enemy Vote Revealer"));
                 }
+                ImGui::Checkbox("Damage List", &CONFIGBOOL("Misc>Misc>Misc>Damage List"));
+                if (CONFIGBOOL("Misc>Misc>Misc>Damage List")) {
+                    ImGui::SameLine();
+                    ImGui::Checkbox("Only When Menu Open", &CONFIGBOOL("Misc>Misc>Misc>Damage List Only When Menu Open"));
+                }
                 ImGui::EndChild();
             }
 

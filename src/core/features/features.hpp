@@ -147,4 +147,8 @@ namespace Features {
     namespace VoteRevealer {
     	void event(IGameEvent* event);
     }
+    namespace DamageList {
+    	void event(IGameEvent* event);
+    	void draw();
+    }
 }

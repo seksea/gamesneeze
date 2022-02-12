@@ -65,6 +65,7 @@ void Hooks::Events::EventListener::FireGameEvent(IGameEvent *event) {
             }
         }
     }
+   	Features::DamageList::event(event);
    	Features::VoteRevealer::event(event);
     Features::BulletTracers::event(event);
 }
