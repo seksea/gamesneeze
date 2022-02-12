@@ -25,6 +25,10 @@ void addToList(int player_idx, int damage, int kills) {
 			.kills = kills
 		};
 		top_idx++;
+		if(top_idx >= PLAYERDAMAGE_SIZE) {
+			Features::Notifications::addNotification(ImColor(255, 0, 0), "[gs] WARNING: TOO MANY TEAMDAMAGE LIST ENTRIES. PLEASE CLEAR!");
+			top_idx = PLAYERDAMAGE_SIZE - 1;
+		}
 	} else {
 		playerDamage[idx].damage += damage;
 		playerDamage[idx].kills += kills;
@@ -103,4 +107,8 @@ void Features::DamageList::draw() {
 	}
 
 	ImGui::End();
+}
+
+void Features::DamageList::clearList() {
+	top_idx = 0;
 }

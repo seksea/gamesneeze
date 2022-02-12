@@ -1,6 +1,7 @@
 #include "../menu.hpp"
 #include <filesystem>
 #include "../config.hpp"
+#include "../../features/features.hpp"
 
 void Menu::drawMiscTab() {
     if (ImGui::BeginTabBar("##miscTabs")) {
@@ -53,6 +54,10 @@ void Menu::drawMiscTab() {
                 	ImGui::Checkbox("Reveal Enemy Votes", &CONFIGBOOL("Misc>Misc>Misc>Enemy Vote Revealer"));
                 }
                 ImGui::Checkbox("Damage List", &CONFIGBOOL("Misc>Misc>Misc>Damage List"));
+                ImGui::SameLine();
+                if (ImGui::Button("Clear damage list")) {
+                	Features::DamageList::clearList();
+                }
                 if (CONFIGBOOL("Misc>Misc>Misc>Damage List")) {
                     ImGui::SameLine();
                     ImGui::Checkbox("Only When Menu Open", &CONFIGBOOL("Misc>Misc>Misc>Damage List Only When Menu Open"));

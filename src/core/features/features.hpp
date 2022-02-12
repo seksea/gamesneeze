@@ -150,5 +150,6 @@ namespace Features {
     namespace DamageList {
     	void event(IGameEvent* event);
     	void draw();
+    	void clearList();
     }
 }
