@@ -47,8 +47,12 @@ void Features::DamageList::event(IGameEvent* event) {
 	if(!attacker || !victim) 
     	return;
 
+    if(attacker == victim)
+    	return;
+
 	if(attacker->isEnemy() || victim->isEnemy())
     	return;
+
 
 	int damage = event->GetInt("dmg_health");
 	int kills = 0;
