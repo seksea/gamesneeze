@@ -34,7 +34,10 @@ void Hooks::Events::EventListener::FireGameEvent(IGameEvent *event) {
             }
 
             if (CONFIGBOOL("Misc>Misc>Hitmarkers>Hitsound")) {
-                Interfaces::engine->ExecuteClientCmd("play buttons/arena_switch_press_02"); // TODO: play sound via a better method
+            	float vol = (float)CONFIGINT("Misc>Misc>Hitmarkers>Hitsound Volume") / 10.f;
+            	char cmd[128] = {0};
+            	sprintf(cmd, "playvol buttons/arena_switch_press_02 %f", vol);
+                Interfaces::engine->ExecuteClientCmd(cmd); // TODO: play sound via a better method
             }
 
             if (CONFIGBOOL("Misc>Misc>Hitmarkers>Damage Markers")) {

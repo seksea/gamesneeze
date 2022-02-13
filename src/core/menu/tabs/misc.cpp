@@ -71,6 +71,10 @@ void Menu::drawMiscTab() {
                 ImGui::Checkbox("Hitlogs", &CONFIGBOOL("Misc>Misc>Hitmarkers>Hitlogs"));
                 ImGui::Checkbox("Hitmarkers", &CONFIGBOOL("Misc>Misc>Hitmarkers>Hitmarkers"));
                 ImGui::Checkbox("Hitsound", &CONFIGBOOL("Misc>Misc>Hitmarkers>Hitsound"));
+                if(CONFIGBOOL("Misc>Misc>Hitmarkers>Hitsound")) {
+                	ImGui::SameLine();
+                	ImGui::SliderInt("##Volume", &CONFIGINT("Misc>Misc>Hitmarkers>Hitsound Volume"), 1, 10);
+                }
                 ImGui::Checkbox("Damage Markers", &CONFIGBOOL("Misc>Misc>Hitmarkers>Damage Markers"));
                 ImGui::EndChild();
             }

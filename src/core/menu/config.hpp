@@ -348,6 +348,7 @@ namespace Config {
             CONFIGITEM("Misc>Misc>Hitmarkers>Hitlogs", false),
             CONFIGITEM("Misc>Misc>Hitmarkers>Hitmarkers", false),
             CONFIGITEM("Misc>Misc>Hitmarkers>Hitsound", false),
+            CONFIGITEM("Misc>Misc>Hitmarkers>Hitsound Volume", 10),
             CONFIGITEM("Misc>Misc>Hitmarkers>Damage Markers", false),
 
             CONFIGITEM("Misc>Misc>Misc>Disable Watermark", false),
