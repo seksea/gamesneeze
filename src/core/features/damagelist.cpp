@@ -59,6 +59,8 @@ void Features::DamageList::event(IGameEvent* event) {
 	if(strstr(event->GetName(), "player_death")) {
 		kills = 1;
 		damage = victim->health();
+		if(damage == 0)
+			damage = 100;
 	} else {
 		if(event->GetInt("dmg_health") < victim->health())
 			damage = event->GetInt("dmg_health");
