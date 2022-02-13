@@ -50,7 +50,7 @@ void Features::DamageList::event(IGameEvent* event) {
 	if(attacker == victim)
     	return;
 
-	if(attacker->isEnemy() || victim->isEnemy())
+	if(attacker->team() != Globals::localPlayer->team() || victim->team() != Globals::localPlayer->team())
     	return;
 
 
@@ -86,6 +86,9 @@ void Features::DamageList::draw() {
 		PlayerDamageInfo* damageInfo = &playerDamage[i];
 		Player* player = (Player*)Interfaces::entityList->GetClientEntity(damageInfo->player_idx);
 		if(!player)
+			continue;
+
+		if(player->isEnemy())
 			continue;
 
 		ImGui::Separator();
