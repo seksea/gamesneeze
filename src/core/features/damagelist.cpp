@@ -54,10 +54,15 @@ void Features::DamageList::event(IGameEvent* event) {
     	return;
 
 
-	int damage = std::min(event->GetInt("dmg_health"), victim->health());
+	int damage = 0;
 	int kills = 0;
-	if(strstr(event->GetName(), "player_death")) 
+	if(strstr(event->GetName(), "player_death")) {
 		kills = 1;
+		damage = victim->health();
+	} else {
+		if(event->GetInt("dmg_health") < victim->health())
+			damage = event->GetInt("dmg_health");
+	}
 
 	addToList(attacker_idx, damage, kills);
 }	
