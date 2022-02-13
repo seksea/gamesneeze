@@ -34,7 +34,10 @@ void Features::Spectators::draw() {
 	                    Interfaces::engine->GetPlayerInfo(i, &observer_info);
 	                    Interfaces::engine->GetPlayerInfo(target_idx, &target_info);
 	                    
-	                    ImGui::Text("%s -> %s", observer_local ? "you" : observer_info.name, target_local ? "you" : target_info.name);
+	                    ImGui::TextColored(observer_local || target_local ? ImColor(128, 0, 255) : ImColor(255, 255, 255),
+	                    				   "%s -> %s",
+	                    				   observer_local ? "you" : observer_info.name, 
+	                    				   target_local ? "you" : target_info.name);
                     } else {
                     	if (target_idx != local_idx) 
 							continue;
