@@ -54,7 +54,7 @@ void Features::DamageList::event(IGameEvent* event) {
     	return;
 
 
-	int damage = event->GetInt("dmg_health");
+	int damage = std::min(event->GetInt("dmg_health"), victim->health());
 	int kills = 0;
 	if(strstr(event->GetName(), "player_death")) 
 		kills = 1;
