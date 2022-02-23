@@ -14,6 +14,11 @@ void Features::LegitBot::createMove(CUserCmd* cmd) {
             bool aimWhileBlind = CONFIGBOOL("Legit>LegitBot>Default>Aim While Blind");
             bool aimAtTeammates = CONFIGBOOL("Legit>LegitBot>Default>Aim At Teammates");
 
+
+			if ((std::find(std::begin(knives), std::end(knives), weapon->itemIndex() & 0xFFF) != std::end(knives)) || 
+				(std::find(std::begin(grenades), std::end(grenades), weapon->itemIndex() & 0xFFF) != std::end(grenades)))
+				return;
+
             if ((std::find(std::begin(pistols), std::end(pistols), weapon->itemIndex() & 0xFFF) != std::end(pistols)) && CONFIGBOOL("Legit>LegitBot>Pistol>Override")) {
                 hitboxes = CONFIGINT("Legit>LegitBot>Pistol>Hitboxes");
                 smoothing = 1.f + (CONFIGINT("Legit>LegitBot>Pistol>Smoothing")/5.f);
