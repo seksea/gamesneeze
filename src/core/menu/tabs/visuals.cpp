@@ -218,6 +218,11 @@ void Menu::drawVisualsTab() {
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());
                 ImGui::SliderInt("##Viewmodel FOV", &CONFIGINT("Visuals>World>World>Viewmodel FOV"), 0, 130);
                 ImGui::Checkbox("Third Person", &CONFIGBOOL("Visuals>World>World>Third Person"));
+                if(CONFIGBOOL("Visuals>World>World>Third Person")) {
+                	ImGui::SameLine();
+                	static bool keybindToggled;
+                	Menu::CustomWidgets::drawKeyBinder("Key", &CONFIGINT("Visuals>World>World>Third Person Key"), &keybindToggled);
+                }
                 ImGui::Checkbox("No Flash", &CONFIGBOOL("Visuals>World>World>No Flash"));
                 ImGui::Text("Flash Amount");
                 ImGui::SetNextItemWidth(ImGui::GetWindowContentRegionWidth());

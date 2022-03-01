@@ -2,7 +2,6 @@
 #include "hooks.hpp"
 #include "../features/features.hpp"
 
-
 void Hooks::OverrideView::hook(void* thisptr, ViewSetup* setup) {
     if (Interfaces::engine->IsInGame() && Globals::localPlayer && Globals::localPlayer->health() > 0 && !Globals::localPlayer->scoped()) {
         setup->fov = CONFIGINT("Visuals>World>World>FOV");
@@ -20,10 +19,10 @@ void Hooks::OverrideView::hook(void* thisptr, ViewSetup* setup) {
         traceFilter.pSkip = Globals::localPlayer;
         Interfaces::trace->TraceRay(traceRay, 0x1, &traceFilter, &tr);
 
-        if (CONFIGBOOL("Visuals>World>World>Third Person"))
-        Interfaces::input->m_vecCameraOffset = Vector(viewAngles.x, viewAngles.y, 100 * ((tr.fraction < 1.0f) ? tr.fraction : 1.0f) );
-        Interfaces::input->m_fCameraInThirdPerson = CONFIGBOOL("Visuals>World>World>Third Person");
-
+		if(CONFIGBOOL("Visuals>World>World>Third Person") && (Menu::CustomWidgets::isKeyDown(CONFIGINT("Visuals>World>World>Third Person Key")) || !CONFIGINT("Visuals>World>World>Third Person Key"))) {
+			Interfaces::input->m_vecCameraOffset = Vector(viewAngles.x, viewAngles.y, 100 * ((tr.fraction < 1.0f) ? tr.fraction : 1.0f) );
+			Interfaces::input->m_fCameraInThirdPerson = CONFIGBOOL("Visuals>World>World>Third Person");
+		}
 
         Weapon *weapon = (Weapon *) Interfaces::entityList->GetClientEntity((uintptr_t) Globals::localPlayer->activeWeapon() & 0xFFF);
         if(weapon) {
