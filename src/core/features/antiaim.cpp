@@ -32,35 +32,35 @@ void Features::AntiAim::createMove(CUserCmd* cmd) {
                                 
                                 cmd->viewangles.x = CONFIGINT("Rage>AntiAim>Pitch");
 
-                                int real = 0;
+                                int real = cmd->viewangles.y;
                                 int fake = 0;
 
                                 switch (CONFIGINT("Rage>AntiAim>Type")) {
                                     case 1: { // Static 
-                                        real = cmd->viewangles.y + CONFIGINT("Rage>AntiAim>Offset");
+                                        real += CONFIGINT("Rage>AntiAim>Offset");
                                         fake = CONFIGINT("Rage>AntiAim>Static>Desync");
                                         break;
                                     }
                                     case 2: { // Jitter
                                         int jitterAmt = (((cmd->tick_count % CONFIGINT("Rage>AntiAim>Jitter>Jitter Delay")) < CONFIGINT("Rage>AntiAim>Jitter>Jitter Delay") / 2) ? 1 : -1) * (CONFIGINT("Rage>AntiAim>Jitter>Jitter Amount") - (CONFIGINT("Rage>AntiAim>Jitter>Jitter Amount")/2));
-                                        real = cmd->viewangles.y + CONFIGINT("Rage>AntiAim>Offset") + jitterAmt;
+                                        real += CONFIGINT("Rage>AntiAim>Offset") + jitterAmt;
                                         fake = CONFIGINT("Rage>AntiAim>Jitter>Desync");
                                         break;
                                     }
                                     case 3: { // Fake Jitter
                                         int jitterAmt = (((cmd->tick_count % CONFIGINT("Rage>AntiAim>Fake Jitter>Jitter Delay")) < CONFIGINT("Rage>AntiAim>Fake Jitter>Jitter Delay") / 2) ? 1 : -1) * (CONFIGINT("Rage>AntiAim>Fake Jitter>Jitter Amount") - (CONFIGINT("Rage>AntiAim>Fake Jitter>Jitter Amount")/2));
-                                        real = cmd->viewangles.y + CONFIGINT("Rage>AntiAim>Offset");
+                                        real += CONFIGINT("Rage>AntiAim>Offset");
                                         fake = jitterAmt;
                                         break;
                                     }
                                     case 4: { // Real Jitter 
                                         int jitterAmt = (((cmd->tick_count % CONFIGINT("Rage>AntiAim>Real Jitter>Jitter Delay")) < CONFIGINT("Rage>AntiAim>Real Jitter>Jitter Delay") / 2) ? 1 : -1) * (CONFIGINT("Rage>AntiAim>Real Jitter>Jitter Amount") - (CONFIGINT("Rage>AntiAim>Real Jitter>Jitter Amount")/2));
-                                        real = cmd->viewangles.y + CONFIGINT("Rage>AntiAim>Offset") + jitterAmt;
+                                        real += CONFIGINT("Rage>AntiAim>Offset") + jitterAmt;
                                         fake = CONFIGINT("Rage>AntiAim>Static>Desync") - jitterAmt;
                                         break;
                                     }
                                     case 5: { // Spin 
-                                        real = cmd->viewangles.y + (cmd->tick_count * CONFIGINT("Rage>AntiAim>Offset"));
+                                        real += (cmd->tick_count * CONFIGINT("Rage>AntiAim>Offset"));
                                         fake = CONFIGINT("Rage>AntiAim>Spin>Desync");
                                         break;
                                     }
