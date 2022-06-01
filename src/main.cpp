@@ -57,6 +57,7 @@ void __attribute__((destructor)) Unload() {
     if (!Interfaces::unload()) {
         Log::log(ERR, "Failed to unload interfaces!");
     }
+	CONFIGINT("Visuals>World>World>Nightmode") = 0; // not tested
 
     Log::log(LOG, "Uninjected!\n");
 }
