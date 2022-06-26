@@ -15,7 +15,7 @@ IMaterial* oilMaterial;
 IMaterial* createMaterial(const char* materialName, const char* materialType, const char* material) {
 	KeyValues* keyValues = new KeyValues(materialName);
 
-	Offsets::initKeyValues(keyValues, materialType);
+	Offsets::initKeyValues(keyValues, materialType, 0, 0);
 	Offsets::loadFromBuffer(keyValues, materialName, material, nullptr, nullptr, nullptr);
 
 	return Interfaces::materialSystem->CreateMaterial(materialName, keyValues);
