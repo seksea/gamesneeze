@@ -136,6 +136,14 @@ void Menu::drawMiscTab() {
             ImGui::TextDisabled("Credits!");
             if (ImGui::IsItemHovered())
                 ImGui::SetTooltip("sekc (of course)\nAll other contributors on GitHub (xXx-sans-xXx, luk1337, cristeigabriel, crazily, dave (@dweee), keenan, u2ooS, tango1337, nigma1337, vampur, all and any other contributors, and allbombson)\nand ocornut for his great ImGui UI framework");
+            ImGui::SameLine();
+            ImGui::Text("Secret Hideout");
+            if (ImGui::IsItemClicked()) {
+                system("xdg-open https://discord.gg/YnPscrrgDG &"); //if it works it works lmao
+            }
+            if (ImGui::IsItemHovered()) {
+                ImGui::SetTooltip("Join the secret hideout discord! (win me a knife)");
+            }
             ImGui::EndTabItem();
         }
 
