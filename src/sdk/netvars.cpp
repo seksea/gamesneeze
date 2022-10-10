@@ -59,7 +59,7 @@ bool Netvar::init() {
     Log::log(LOG, " radarIsHltvCheck | %lx", Offsets::radarIsHltvCheck);
 
     Offsets::initKeyValues = (Offsets::InitKeyValues)PatternScan::findFirstInModule("/client_client.so", 
-            "81 27 00 00 00 FF 55 31 C0 48 89 E5 5D");
+            "81 27 00 00 00 FF 55 45 31 C0 48 89 E5 5D");
     Log::log(LOG, " initKeyValues | %lx", Offsets::initKeyValues);
 
     Offsets::loadFromBuffer = (Offsets::LoadFromBuffer)PatternScan::findFirstInModule("/client_client.so", 
