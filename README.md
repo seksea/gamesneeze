@@ -31,7 +31,7 @@ www.buymeacoffee.com/sekc
 ```
 
 ### Donators
- - moke#9091/github.com/mokeWe - 0.19XMR (~$30)
+ - [moke#9091](https://github.com/mokeWe) - 0.19XMR (~$30)
  - hx#5185 - 0.2XMR (~$30)
 
 ## Current Features
