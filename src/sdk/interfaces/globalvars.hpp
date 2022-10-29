@@ -16,7 +16,7 @@ public:
 	//
 	// On the client, this (along with tickcount) takes a different meaning based on what
 	// piece of code you're in:
-	// 
+	//table, prop, func, type
 	//   - While receiving network packets (like in PreDataUpdate/PostDataUpdate and proxies),
 	//     this is set to the SERVER TICKCOUNT for that packet. There is no interval between
 	//     the server ticks.

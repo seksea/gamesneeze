@@ -24,11 +24,11 @@ void Features::SkinChanger::frameStageNotify(FrameStage frame) {
 
                 player_info_t info;
                 Interfaces::engine->GetPlayerInfo(Interfaces::engine->GetLocalPlayer(), &info);
-                *weapon->accountID_ptr() = info.xuid;
-                *weapon->itemIDHigh_ptr() = -1;
-                *weapon->paintKit_ptr() = paintkit;
-                *weapon->wear_ptr() = wear;
-                *weapon->statTrack_ptr() = statTrack;
+                weapon->accountID_set(info.xuid);
+                weapon->itemIDHigh_set(-1);
+                weapon->paintKit_set(paintkit);
+                weapon->wear_set(wear);
+                weapon->statTrack_set(statTrack);
             }
         } catch (std::out_of_range& e) {
             //Log::log(WARN, "itemDefinitionIndex %d not found!", ((Weapon*)ent)->itemIndex());
