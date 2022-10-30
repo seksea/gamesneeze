@@ -123,7 +123,7 @@ namespace Offsets {
         if (CONFIGBOOL("Misc>Misc>Misc>Disable Setting Netvars") && !warned) {                  \
             warned = true;                                                                      \
             std::cout << "Setting netvars is disabled, but i'm making a pointer to"             \
-              << prop "anyway, you better know what you're doing";                              \
+              << prop << "anyway, you better know what you're doing";                           \
         }                                                                                       \
         return reinterpret_cast<type*>(uintptr_t(this) + GETNETVAROFFSET(table, prop));         \
     }
