@@ -2,6 +2,7 @@
 #include "interfaces/ibaseclientdll.hpp"
 #include "interfaces/iprediction.hpp"
 #include <map>
+#include <mutex>
 #include <utility>
 
 namespace Netvar {
@@ -119,11 +120,12 @@ namespace Offsets {
             *(reinterpret_cast<type*>(uintptr_t(this) + GETNETVAROFFSET(table, prop))) = value; \
     }                                                                                           \
     type* func##_ptr() {                                                                        \
-        static bool warned = false;                                                             \
-        if (CONFIGBOOL("Misc>Misc>Misc>Disable Setting Netvars") && !warned) {                  \
-            warned = true;                                                                      \
-            std::cout << "Setting netvars is disabled, but i'm making a pointer to"             \
-              << prop << "anyway, you better know what you're doing";                           \
+        static std::once_flag warned;                                                           \
+        if (CONFIGBOOL("Misc>Misc>Misc>Disable Setting Netvars")) {                             \
+            std::call_once(warned, [](){                                                        \
+                Log::log(ERR,"Setting netvars is disabled, but i'm making a pointer to "        \
+                    prop " anyway, you better know what you're doing");                         \
+            });                                                                                 \
         }                                                                                       \
         return reinterpret_cast<type*>(uintptr_t(this) + GETNETVAROFFSET(table, prop));         \
     }
