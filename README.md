@@ -11,7 +11,7 @@
 
 An open source training utility for Counter-Strike: Global Offensive on Linux.
 
-## :warning: :warning: THIS IS FOR LINUX, IT WILL NOT INJECT IF YOU ARE ON WINDOWS, AND I'M NOT PLANNING ON PORTING ANYTIME SOON, DO NOT JOIN THE DISCORD ASKING FOR DLL :warning: :warning:
+## If you have an issue injecting gamesneeze, ask on the [Common Issues](#Common-Issues) section, if your issue is still not fixed, ask on the `#support` channel on the Discord.
 
 ## Donations
 
@@ -104,6 +104,24 @@ chmod +x toolbox.sh
 | -h (--help)        | Show help                                 |
 
 All args are executed in the order they are written in, for example, "-u -b -l" would unload the cheat, build it, and then load it back into csgo.
+
+
+## Common Issues
+
+### This trainer will not work with Windows systems, it only supports Linux.
+
+### Gamesneeze not injecting but successfully building?
+
+Solution 1 - Steam is installed via snap or flatpak, uninstall steam through 
+```
+snap uninstall steam
+```
+or
+```
+flatpak uninstall steam
+```
+
+and then reinstall it through your *actual* package manager (pacman/apt/etc)
 
 
 ## Found a bug or want to contribute to the project?
