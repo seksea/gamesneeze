@@ -110,6 +110,8 @@ All args are executed in the order they are written in, for example, "-u -b -l" 
 
 ### This trainer will not work with Windows systems, it only supports Linux.
 
+#
+
 ### Gamesneeze not injecting but successfully building?
 
 Solution 1 - Steam is installed via snap or flatpak, uninstall steam through 
