@@ -44,7 +44,7 @@ bool Interfaces::init() {
 
     /* Get input (for thirdperson) */
     uintptr_t activateMouse = reinterpret_cast<uintptr_t>(getVTable(client)[16]);
-	input = **reinterpret_cast<CInput***>(getAbsoluteAddress(activateMouse, 3, 7));
+	input = *reinterpret_cast<CInput**>(getAbsoluteAddress(activateMouse, 3, 7));
     Log::log(LOG, " Input %lx", (uintptr_t)input);
 
     /* Get PlayerResource */
