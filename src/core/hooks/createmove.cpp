@@ -63,6 +63,12 @@ bool Hooks::CreateMove::hook(void* thisptr, float flInputSampleTime, CUserCmd* c
         cmd->viewangles.z = 0.0f;
 
         Globals::oldViewangles = cmd->viewangles;
+
+        cmd->viewanglesBackup.x = cmd->viewangles.x;
+        cmd->viewanglesBackup.y = cmd->viewangles.y;
+        cmd->viewanglesBackup.z = cmd->viewangles.z;
+
+        cmd->buttonsBackup = cmd->buttons;
     }
 
     return !(CONFIGBOOL("Rage>Enabled")); // return false when we want to do silent angles for rb

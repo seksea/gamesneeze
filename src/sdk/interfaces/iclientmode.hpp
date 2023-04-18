@@ -19,8 +19,8 @@ struct CUserCmd
 	short mousedx;
 	short mousedy;
 	bool hasbeenpredicted;
-	QAngle headangles;
-	Vector headoffset;
+    Vector viewanglesBackup;
+    int buttonsBackup;
 };
 
 struct ViewSetup {
