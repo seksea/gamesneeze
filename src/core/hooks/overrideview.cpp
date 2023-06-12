@@ -21,7 +21,7 @@ void Hooks::OverrideView::hook(void* thisptr, ViewSetup* setup) {
         Interfaces::trace->TraceRay(traceRay, 0x1, &traceFilter, &tr);
 
         if (CONFIGBOOL("Visuals>World>World>Third Person"))
-        Interfaces::input->m_vecCameraOffset = Vector(viewAngles.x, viewAngles.y, 100 * ((tr.fraction < 1.0f) ? tr.fraction : 1.0f) );
+            Interfaces::input->m_vecCameraOffset = Vector(viewAngles.x, viewAngles.y, 100 * ((tr.fraction < 1.0f) ? tr.fraction : 1.0f) );
         Interfaces::input->m_fCameraInThirdPerson = CONFIGBOOL("Visuals>World>World>Third Person");
 
 

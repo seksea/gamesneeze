@@ -44,7 +44,7 @@ bool Interfaces::init() {
 
     /* Get input (for thirdperson) */
     uintptr_t activateMouse = reinterpret_cast<uintptr_t>(getVTable(client)[16]);
-	input = **reinterpret_cast<CInput***>(getAbsoluteAddress(activateMouse, 3, 7));
+	input = *reinterpret_cast<CInput**>(getAbsoluteAddress(activateMouse, 3, 7));
     Log::log(LOG, " Input %lx", (uintptr_t)input);
 
     /* Get PlayerResource */
@@ -52,7 +52,7 @@ bool Interfaces::init() {
 	_playerResource = reinterpret_cast<PlayerResource**>(getAbsoluteAddress(instructionAddr, 3, 7));
     Log::log(LOG, " PlayerResource %lx", (uintptr_t)_playerResource);
 
-    renderBeams = **relativeToAbsolute<ViewRenderBeams***>(PatternScan::findFirstInModule("/client_client.so", "4C 89 F6 4C 8B 25 ? ? ? ? 48 8D 05") + 6); // Credit: danielkrupinski
+    renderBeams = *relativeToAbsolute<ViewRenderBeams**>(PatternScan::findFirstInModule("/client_client.so", "48 8D 05 ? ? ? ? 48 8B 38 48 8B 07 FF 10 48 8D 05 ? ? ? ? 48 8B 38") + 3); // Credit: danielkrupinski
     Log::log(LOG, " renderBeams %lx", (uintptr_t)renderBeams);
 
     Log::log(LOG, "Initialised interfaces!");
