@@ -2,6 +2,7 @@
 #include "interfaces/ibaseclientdll.hpp"
 #include "interfaces/iprediction.hpp"
 #include <map>
+#include <mutex>
 #include <utility>
 
 namespace Netvar {
@@ -111,4 +112,20 @@ namespace Offsets {
 }
 
 #define GETNETVAROFFSET(table, prop) Netvar::offsets.at({table, prop})
-#define NETVAR( table, prop, func, type ) type& func() {return *reinterpret_cast<type*>(uintptr_t(this) + GETNETVAROFFSET(table, prop));}; type* func##_ptr() {return reinterpret_cast<type*>(uintptr_t(this) + GETNETVAROFFSET(table, prop));}
+#define NETVAR(table, prop, func, type) type& func() {                                          \
+        return *reinterpret_cast<type*>(uintptr_t(this) + GETNETVAROFFSET(table, prop));        \
+    }                                                                                           \
+    void func##_set(type value) {                                                               \
+        if (!CONFIGBOOL("Misc>Misc>Misc>Disable Setting Netvars"))                              \
+            *(reinterpret_cast<type*>(uintptr_t(this) + GETNETVAROFFSET(table, prop))) = value; \
+    }                                                                                           \
+    type* func##_ptr() {                                                                        \
+        static std::once_flag warned;                                                           \
+        if (CONFIGBOOL("Misc>Misc>Misc>Disable Setting Netvars")) {                             \
+            std::call_once(warned, [](){                                                        \
+                Log::log(ERR,"Setting netvars is disabled, but i'm making a pointer to "        \
+                    prop " anyway, you better know what you're doing");                         \
+            });                                                                                 \
+        }                                                                                       \
+        return reinterpret_cast<type*>(uintptr_t(this) + GETNETVAROFFSET(table, prop));         \
+    }

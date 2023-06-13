@@ -285,12 +285,12 @@ void Features::ESP::draw() {
                         }
 
                         else if (clientClass->m_ClassID == EClassIds::CFogController && CONFIGBOOL("Visuals>World>World>Override Fog")) {
-                            *((FogController*)ent)->enable_ptr() = true;
-                            *((FogController*)ent)->start_ptr() = (float)CONFIGINT("Visuals>World>World>Fog Start");
-                            *((FogController*)ent)->end_ptr() = (float)CONFIGINT("Visuals>World>World>Fog End");
-                            *((FogController*)ent)->maxDensity_ptr() = ((float)CONFIGINT("Visuals>World>World>Fog Density"))/1000;
-                            *((FogController*)ent)->farz_ptr() = (float)CONFIGINT("Visuals>World>World>Fog Farz");
-                            *((FogController*)ent)->colorPrimary_ptr() = ImGui::ColorConvertFloat4ToU32(CONFIGCOL("Visuals>World>World>Fog Color").Value);
+                            ((FogController*)ent)->enable_set(true);
+                            ((FogController*)ent)->start_set((float)CONFIGINT("Visuals>World>World>Fog Start"));
+                            ((FogController*)ent)->end_set((float)CONFIGINT("Visuals>World>World>Fog End"));
+                            ((FogController*)ent)->maxDensity_set(((float)CONFIGINT("Visuals>World>World>Fog Density"))/1000);
+                            ((FogController*)ent)->farz_set((float)CONFIGINT("Visuals>World>World>Fog Farz"));
+                            ((FogController*)ent)->colorPrimary_set(ImGui::ColorConvertFloat4ToU32(CONFIGCOL("Visuals>World>World>Fog Color").Value));
                         }
 
                         /* Debug ESP Everything*/
