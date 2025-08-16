@@ -4,6 +4,7 @@ const char* antiAimTypes[] = {"None", "Static", "Jitter", "Fake Jitter", "Real J
 
 void Menu::drawRageTab() {
     ImGui::Checkbox("Enabled", &CONFIGBOOL("Rage>Enabled"));
+    ImGui::Checkbox("Autoshoot", &CONFIGBOOL("Rage>Autoshoot"));
     ImGui::SameLine();
     ImGui::TextDisabled("?");
     if (ImGui::IsItemHovered())

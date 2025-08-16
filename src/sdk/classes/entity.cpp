@@ -1,6 +1,7 @@
 #include "../../includes.hpp"
 #include "entity.hpp"
 #include "vector.h"
+#include <sys/types.h>
 #include <vector>
 
 bool Player::isEnemy() { // team check that accounts for dangerzone teams
@@ -34,8 +35,51 @@ bool visCheck(Player* player) {
     return false;
 }
 
+
+bool hitCheck(Player* player) {
+    matrix3x4_t boneMatrix[128];
+    if (!player->getAnythingBones(boneMatrix))
+        return false;
+
+    TraceFilter filter;
+    filter.pSkip = Globals::localPlayer;
+
+    Vector start = Globals::localPlayer->eyePos();
+    Vector bones[] = { player->getBonePos(8), player->getBonePos(6) }; // head & upper spine
+
+    for (auto& target : bones) {
+        Trace trace;
+        Ray ray;
+        ray.Init(start, target);
+
+        Interfaces::trace->TraceRay(ray, (0x1 | 0x80 | 0x4000 | 0x2000), &filter, &trace);
+
+        // Direct hit
+        if (trace.m_pEntityHit == player)
+            return true;
+
+        // Ignore invalid traces
+        if (trace.allsolid || trace.startsolid)
+            continue;
+
+        // Check surface material
+        surfacedata_t* enterSurface = Interfaces::physProps->GetSurfaceData(trace.surface.surfaceProps);
+        if (!enterSurface)
+            continue;
+
+        if (enterSurface->physics.density <= 1600) {
+            return true;
+        }
+
+    }
+
+    return false;
+}
+
+
 struct PlayerCache {
     bool visible;
+    bool hittable;
     matrix3x4_t boneMatrixHitbox[128];
     matrix3x4_t boneMatrixAnything[128];
 };
@@ -56,6 +100,7 @@ void cachePlayers() {
                             if (p->setupBones(player.boneMatrixHitbox, 128, BONE_USED_BY_HITBOX, Interfaces::globals->curtime)) {
                                 if (p->setupBones(player.boneMatrixAnything, 128, BONE_USED_BY_ANYTHING, Interfaces::globals->curtime)) {
                                     player.visible = visCheck(p);
+                                    player.hittable = hitCheck(p);
                                     if (playerCache.find(i) != playerCache.end()) {
                                         playerCache[i] = player;
                                     }
@@ -127,6 +172,13 @@ bool Player::getAnythingBones(matrix3x4_t* boneMatrix) {
 bool Player::visible() {
     if (playerCache.find(index()) != playerCache.end()) {
         return playerCache[index()].visible;
+    }
+    return false;
+}
+
+bool Player::hittable() {
+    if (playerCache.find(index()) != playerCache.end()) {
+        return playerCache[index()].hittable;
     }
     return false;
 }

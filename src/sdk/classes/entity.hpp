@@ -131,6 +131,7 @@ public:
 	bool getAnythingBones(matrix3x4_t* boneMatrix);
 	Vector getBonePos(int bone);
 	bool visible();
+	bool hittable();
 };
 
 class Item : public Entity{

@@ -144,6 +144,7 @@ namespace Config {
         // RageBot {
             // Default {
                 CONFIGITEM("Rage>Enabled", false),
+                CONFIGITEM("Rage>Autoshoot", false),
                 CONFIGITEM("Rage>RageBot>Default>Resolver", false),
                 CONFIGITEM("Rage>RageBot>Default>FOV", 0),
                 CONFIGITEM("Rage>RageBot>Default>ForceBaim", false),
