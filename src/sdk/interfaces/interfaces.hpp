@@ -5,6 +5,7 @@
 #include <string>
 
 #include "ibaseclientdll.hpp"
+#include "iphysicssurfaceprops.hpp"
 #include "ivengineclient.hpp"
 #include "ipanel.hpp"
 #include "icliententitylist.hpp"
@@ -40,6 +41,7 @@ namespace Interfaces {
     inline IMaterialSystem* materialSystem;
     inline IEngineSound* sound;
     inline IEngineTrace* trace;
+    inline IPhysicsSurfaceProps* physProps;
     inline IGameMovement* movement;
     inline IMoveHelper* moveHelper;
     inline IPrediction* prediction;
